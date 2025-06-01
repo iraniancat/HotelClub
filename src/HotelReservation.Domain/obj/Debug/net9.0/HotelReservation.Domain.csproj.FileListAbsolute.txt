@@ -1,0 +1,11 @@
+C:\Project\HotelClub\src\HotelReservation.Domain\bin\Debug\net9.0\HotelReservation.Domain.deps.json
+C:\Project\HotelClub\src\HotelReservation.Domain\bin\Debug\net9.0\HotelReservation.Domain.dll
+C:\Project\HotelClub\src\HotelReservation.Domain\bin\Debug\net9.0\HotelReservation.Domain.pdb
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.AssemblyInfoInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.AssemblyInfo.cs
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.csproj.CoreCompileInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.dll
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\refint\HotelReservation.Domain.dll
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\HotelReservation.Domain.pdb
+C:\Project\HotelClub\src\HotelReservation.Domain\obj\Debug\net9.0\ref\HotelReservation.Domain.dll
