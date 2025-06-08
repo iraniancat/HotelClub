@@ -15,7 +15,7 @@ public class CreateBookingRequestDto
 
     [Required(ErrorMessage = "دوره زمانی رزرو الزامی است (مثلاً 'بهار ۱۴۰۴').")]
     [MaxLength(100)]
-    public string BookingPeriod { get; set; }
+    public Guid BookingPeriodId { get; set; }
 
     [Required(ErrorMessage = "تاریخ ورود الزامی است.")]
     public DateTime? CheckInDate { get; set; } // <<-- اصلاح شد

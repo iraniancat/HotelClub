@@ -110,7 +110,7 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
             Id = bookingRequest.Id,
             TrackingCode = bookingRequest.TrackingCode,
             RequestingEmployeeNationalCode = bookingRequest.RequestingEmployeeNationalCode,
-            BookingPeriod = bookingRequest.BookingPeriod,
+            BookingPeriodId = bookingRequest.BookingPeriodId,
             CheckInDate = bookingRequest.CheckInDate,
             CheckOutDate = bookingRequest.CheckOutDate,
             NumberOfNights = bookingRequest.NumberOfNights,

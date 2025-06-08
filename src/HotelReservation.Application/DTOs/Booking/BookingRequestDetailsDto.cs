@@ -20,7 +20,7 @@ public class BookingRequestDetailsDto
     public Guid Id { get; set; }
     public string TrackingCode { get; set; }
     public string RequestingEmployeeNationalCode { get; set; }
-    public string BookingPeriod { get; set; }
+    public Guid BookingPeriodId { get; set; }
     public DateTime CheckInDate { get; set; }
     public DateTime CheckOutDate { get; set; }
     public int NumberOfNights { get; set; }

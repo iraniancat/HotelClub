@@ -18,9 +18,9 @@ public class CreateBookingRequestCommandValidator : AbstractValidator<CreateBook
             .Length(10).WithMessage("کد ملی کارمند درخواست‌دهنده باید ۱۰ رقم باشد.")
             .Matches("^[0-9]*$").WithMessage("کد ملی کارمند درخواست‌دهنده فقط می‌تواند شامل ارقام باشد.");
 
-        RuleFor(p => p.BookingPeriod)
-            .NotEmpty().WithMessage("دوره زمانی رزرو الزامی است.")
-            .MaximumLength(100).WithMessage("دوره زمانی رزرو نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد.");
+        // RuleFor(p => p.BookingPeriodId)
+        //     .NotEmpty().WithMessage("دوره زمانی رزرو الزامی است.")
+        //     .MaximumLength(100).WithMessage("دوره زمانی رزرو نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد.");
 
         RuleFor(p => p.CheckInDate)
             .NotEmpty().WithMessage("تاریخ ورود الزامی است.")

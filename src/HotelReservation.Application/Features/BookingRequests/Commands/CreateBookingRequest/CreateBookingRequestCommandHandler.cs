@@ -40,18 +40,31 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
 
     public async Task<CreateBookingRequestResponseDto> Handle(CreateBookingRequestCommand request, CancellationToken cancellationToken)
     {
-        // ۱. دریافت شناسه کاربر ثبت کننده از ICurrentUserService
+        // ... بررسی currentUserId ...
         var submitterUserId = _currentUserService.UserId;
         if (!submitterUserId.HasValue)
         {
             throw new UnauthorizedAccessException("اطلاعات کاربر ثبت کننده برای این عملیات در دسترس نیست.");
         }
-        
-        var submitterUser = await _unitOfWork.UserRepository.GetUserWithFullDetailsAsync(submitterUserId.Value);
+
+        // <<-- تغییر در فراخوانی: asNoTracking: false -->>
+        var submitterUser = await _unitOfWork.UserRepository.GetUserWithFullDetailsAsync(submitterUserId.Value, asNoTracking: false);
         if (submitterUser == null)
         {
             throw new BadRequestException($"کاربر ثبت کننده با شناسه '{submitterUserId.Value}' یافت نشد.");
         }
+        var bookingPeriod = await _unitOfWork.BookingPeriodRepository.GetByIdAsync(request.BookingPeriodId);
+        if (bookingPeriod == null || !bookingPeriod.IsActive)
+        {
+            throw new BadRequestException($"دوره زمانی انتخاب شده معتبر یا فعال نیست.");
+        }
+
+        // <<-- اعتبارسنجی جدید برای تاریخ‌ها -->>
+        if (request.CheckInDate < bookingPeriod.StartDate || request.CheckOutDate > bookingPeriod.EndDate)
+        {
+            throw new BadRequestException($"تاریخ ورود و خروج باید در بازه دوره زمانی انتخاب شده ({bookingPeriod.StartDate:yyyy/MM/dd} تا {bookingPeriod.EndDate:yyyy/MM/dd}) باشد.");
+        }
+
 
         // ۲. بررسی نقش کاربر ثبت کننده
         if (submitterUser.Role?.Name != SuperAdminRoleName && submitterUser.Role?.Name != ProvinceUserRoleName)
@@ -71,16 +84,16 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             throw new NotFoundException(nameof(Hotel), request.HotelId);
         }
-        
+
         var bookingRequestEntity = new BookingRequest(
             request.RequestingEmployeeNationalCode,
-            request.BookingPeriod,
+            request.BookingPeriodId, bookingPeriod, // <<-- پاس دادن شناسه و موجودیت
             request.CheckInDate,
             request.CheckOutDate,
             request.Guests.Count,
             request.HotelId,
             hotel,
-            submitterUserId.Value, // استفاده از شناسه کاربر از ICurrentUserService
+            submitterUserId.Value,
             submitterUser,
             request.Notes
         );
@@ -110,7 +123,7 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             try
             {
-                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber, 
+                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber,
                      $"درخواست رزرو شما با کد رهگیری {bookingRequestEntity.TrackingCode} برای هتل {hotel.Name} در تاریخ {request.CheckInDate:yyyy/MM/dd} ثبت شد.");
             }
             catch (Exception ex)
@@ -118,11 +131,11 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
                 _logger.LogError(ex, "Failed to send SMS for booking {TrackingCode}.", bookingRequestEntity.TrackingCode);
             }
         }
-        
-        return new CreateBookingRequestResponseDto 
-        { 
-            Id = bookingRequestEntity.Id, 
-            TrackingCode = bookingRequestEntity.TrackingCode 
+
+        return new CreateBookingRequestResponseDto
+        {
+            Id = bookingRequestEntity.Id,
+            TrackingCode = bookingRequestEntity.TrackingCode
         };
     }
 }

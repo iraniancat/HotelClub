@@ -11,8 +11,8 @@ public interface IUnitOfWork : IDisposable
     IRoomRepository RoomRepository { get; }
     IBookingRequestRepository BookingRequestRepository { get; }
     IDependentDataRepository DependentDataRepository { get; }
-    IGenericRepository<BookingFile> BookingFileRepository { get; } // <<-- اضافه شد (استفاده از Generic)
-    // یا اگر IBookingFileRepository اختصاصی ساختید:
+    IGenericRepository<BookingFile> BookingFileRepository { get; }
+    IBookingPeriodRepository BookingPeriodRepository { get; } // <<-- اضافه شد
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

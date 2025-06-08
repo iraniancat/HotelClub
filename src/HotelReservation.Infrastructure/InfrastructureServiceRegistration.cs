@@ -26,7 +26,7 @@ public static class InfrastructureServiceRegistration
         // IUnitOfWork به عنوان Scoped ثبت می‌شود چون DbContext هم معمولاً Scoped است.
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-        services.AddScoped<IPasswordHasherService, PasswordHasherService>(); // یا AddTransient
+        services.AddTransient<IPasswordHasherService, PasswordHasherService>(); // یا AddTransient
                                                                              // ...
         services.AddTransient<ISmsService, SmsService>(); // <<-- ثبت سرویس SMS
 

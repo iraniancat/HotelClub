@@ -87,6 +87,34 @@ namespace HotelReservation.Infrastructure.Migrations
                     b.ToTable("BookingGuests");
                 });
 
+            modelBuilder.Entity("HotelReservation.Domain.Entities.BookingPeriod", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("BookingPeriods");
+                });
+
             modelBuilder.Entity("HotelReservation.Domain.Entities.BookingRequest", b =>
                 {
                     b.Property<Guid>("Id")
@@ -96,9 +124,8 @@ namespace HotelReservation.Infrastructure.Migrations
                     b.Property<Guid?>("AssignedRoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BookingPeriod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("BookingPeriodId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CheckInDate")
                         .HasColumnType("datetime2");
@@ -142,6 +169,8 @@ namespace HotelReservation.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AssignedRoomId");
+
+                    b.HasIndex("BookingPeriodId");
 
                     b.HasIndex("HotelId");
 
@@ -429,6 +458,12 @@ namespace HotelReservation.Infrastructure.Migrations
                         .HasForeignKey("AssignedRoomId")
                         .OnDelete(DeleteBehavior.SetNull);
 
+                    b.HasOne("HotelReservation.Domain.Entities.BookingPeriod", "BookingPeriod")
+                        .WithMany()
+                        .HasForeignKey("BookingPeriodId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("HotelReservation.Domain.Entities.Hotel", "Hotel")
                         .WithMany("BookingRequests")
                         .HasForeignKey("HotelId")
@@ -442,6 +477,8 @@ namespace HotelReservation.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("AssignedRoom");
+
+                    b.Navigation("BookingPeriod");
 
                     b.Navigation("Hotel");
 

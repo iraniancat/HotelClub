@@ -11,7 +11,7 @@ namespace HotelReservation.Application.Features.BookingRequests.Commands.CreateB
 public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponseDto>
 {
     public string RequestingEmployeeNationalCode { get; set; }
-    public string BookingPeriod { get; set; }
+    public Guid BookingPeriodId { get; set; }
     public DateTime CheckInDate { get; set; }
     public DateTime CheckOutDate { get; set; }
     public Guid HotelId { get; set; }
@@ -20,7 +20,7 @@ public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponse
 
     public CreateBookingRequestCommand(
         string requestingEmployeeNationalCode,
-        string bookingPeriod,
+        Guid bookingPeriodId,
         DateTime checkInDate,
         DateTime checkOutDate,
         Guid hotelId,
@@ -28,7 +28,7 @@ public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponse
         string? notes)
     {
         RequestingEmployeeNationalCode = requestingEmployeeNationalCode;
-        BookingPeriod = bookingPeriod;
+        BookingPeriodId = bookingPeriodId;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
         HotelId = hotelId;

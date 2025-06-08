@@ -10,7 +10,8 @@ public class BookingRequest
     public Guid Id { get; private set; }
     public string TrackingCode { get; private set; } // کد رهگیری، Unique
     public string RequestingEmployeeNationalCode { get; private set; } // کد ملی کارمند اصلی درخواست‌دهنده
-    public string BookingPeriod { get; private set; } // مثلا "بهار 1404"
+    public Guid BookingPeriodId { get; private set; } // <<-- جایگزین می‌شود
+    public virtual BookingPeriod BookingPeriod { get; private set; }
     public DateTime CheckInDate { get; private set; }
     public DateTime CheckOutDate { get; private set; }
     public int NumberOfNights => (CheckOutDate - CheckInDate).Days; // محاسبه شده
@@ -29,7 +30,7 @@ public class BookingRequest
     public DateTime LastStatusUpdateDate { get; private set; }
     public string? Notes { get; private set; } // توضیحات اضافی
 
-      // --- فیلدهای جدید برای ارتباط با اتاق تخصیص داده شده ---
+    // --- فیلدهای جدید برای ارتباط با اتاق تخصیص داده شده ---
     public Guid? AssignedRoomId { get; private set; } // Nullable، چون فقط پس از تایید اتاق تخصیص داده می‌شود
     public virtual Room? AssignedRoom { get; private set; } // Navigation Property
     // --- پایان فیلدهای جدید ---
@@ -39,11 +40,11 @@ public class BookingRequest
     public virtual ICollection<BookingFile> Files { get; private set; } = new List<BookingFile>();
     public virtual ICollection<BookingStatusHistory> StatusHistory { get; private set; } = new List<BookingStatusHistory>();
 
-    private BookingRequest() {} // برای EF Core
+    private BookingRequest() { } // برای EF Core
 
     public BookingRequest(
         string requestingEmployeeNationalCode,
-        string bookingPeriod,
+        Guid bookingPeriodId, BookingPeriod bookingPeriod,
         DateTime checkInDate,
         DateTime checkOutDate,
         int totalGuests,
@@ -63,6 +64,7 @@ public class BookingRequest
         Id = Guid.NewGuid();
         TrackingCode = GenerateTrackingCode(); // متد کمکی برای تولید کد رهگیری
         RequestingEmployeeNationalCode = requestingEmployeeNationalCode;
+        BookingPeriodId = bookingPeriodId;
         BookingPeriod = bookingPeriod;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
@@ -87,7 +89,7 @@ public class BookingRequest
         return $"HR-{DateTime.UtcNow.Ticks.ToString().Substring(10)}";
     }
 
-// متدهای جدید برای مدیریت اتاق تخصیص داده شده
+    // متدهای جدید برای مدیریت اتاق تخصیص داده شده
     public void AssignRoom(Guid roomId, Room room)
     {
         if (Status != BookingStatus.HotelApproved && Status != BookingStatus.SubmittedToHotel) // فقط در این وضعیت‌ها می‌توان اتاق تخصیص داد قبل از نهایی شدن تایید
@@ -114,11 +116,11 @@ public class BookingRequest
         LastStatusUpdateDate = DateTime.UtcNow;
         AddStatusHistory(oldStatus, newStatus, changedByUserId, changedByUser, comments);
 
-         // اگر وضعیت به چیزی غیر از HotelApproved تغییر کرد، اتاق تخصیص داده شده را آزاد می‌کنیم
-         if (newStatus != BookingStatus.HotelApproved)
-         {
-             ClearAssignedRoom();
-         }
+        // اگر وضعیت به چیزی غیر از HotelApproved تغییر کرد، اتاق تخصیص داده شده را آزاد می‌کنیم
+        if (newStatus != BookingStatus.HotelApproved)
+        {
+            ClearAssignedRoom();
+        }
     }
 
     public void AddGuest(string fullName, string nationalCode, string relationshipToEmployee, decimal discountPercentage)
@@ -133,22 +135,22 @@ public class BookingRequest
         var file = new BookingFile(this.Id, this, fileName, filePathOrContent, contentType);
         Files.Add(file);
     }
-    
+
     private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, User changedByUser, string? comments)
     {
         var historyEntry = new BookingStatusHistory(this.Id, this, newStatus, changedByUserId, changedByUser, comments, oldStatus);
         StatusHistory.Add(historyEntry);
     }
 
-    public void UpdateBookingDetails(string bookingPeriod, DateTime checkInDate, DateTime checkOutDate, int totalGuests, string? notes)
+    public void UpdateBookingDetails(Guid bookingPeriodId, DateTime checkInDate, DateTime checkOutDate, int totalGuests, string? notes)
     {
         // اعتبارسنجی‌ها
         if (checkOutDate <= checkInDate)
             throw new ArgumentException("تاریخ خروج باید بعد از تاریخ ورود باشد.");
         if (totalGuests <= 0)
             throw new ArgumentException("تعداد مهمانان باید حداقل یک نفر باشد.", nameof(totalGuests));
-        
-        BookingPeriod = bookingPeriod;
+
+        BookingPeriodId = bookingPeriodId;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
         TotalGuests = totalGuests;

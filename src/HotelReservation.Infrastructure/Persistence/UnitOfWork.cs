@@ -9,9 +9,9 @@ namespace HotelReservation.Infrastructure.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly AppDbContext _context;
-    private readonly ILogger<UnitOfWork> _logger; // <<-- اضافه کردن لاگر
-    // از Lazy<T> استفاده می‌کنیم تا Repositoryها فقط در صورت نیاز نمونه‌سازی شوند
+private readonly AppDbContext _context;
+    private readonly ILogger<UnitOfWork> _logger;
+
     private Lazy<IUserRepository> _userRepository;
     private Lazy<IRoleRepository> _roleRepository;
     private Lazy<IProvinceRepository> _provinceRepository;
@@ -19,15 +19,16 @@ public class UnitOfWork : IUnitOfWork
     private Lazy<IHotelRepository> _hotelRepository;
     private Lazy<IRoomRepository> _roomRepository;
     private Lazy<IBookingRequestRepository> _bookingRequestRepository;
-    private Lazy<IDependentDataRepository> _dependentDataRepository; // <<-- اضافه/تایید شود
+    private Lazy<IDependentDataRepository> _dependentDataRepository;
     private Lazy<IGenericRepository<BookingFile>> _bookingFileRepository;
+    private Lazy<IBookingPeriodRepository> _bookingPeriodRepository; // <<-- اضافه شد
 
-    public UnitOfWork(AppDbContext context,ILogger<UnitOfWork> logger)
+    public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
-         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-        // نمونه‌سازی Lazy برای هر Repository
+        // مقداردهی Lazy برای تمام ریپازیتوری‌ها
         _userRepository = new Lazy<IUserRepository>(() => new UserRepository(_context));
         _roleRepository = new Lazy<IRoleRepository>(() => new RoleRepository(_context));
         _provinceRepository = new Lazy<IProvinceRepository>(() => new ProvinceRepository(_context));
@@ -35,9 +36,9 @@ public class UnitOfWork : IUnitOfWork
         _hotelRepository = new Lazy<IHotelRepository>(() => new HotelRepository(_context));
         _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_context));
         _bookingRequestRepository = new Lazy<IBookingRequestRepository>(() => new BookingRequestRepository(_context));
-        _dependentDataRepository = new Lazy<IDependentDataRepository>(() => new DependentDataRepository(_context)); // <<-- اضافه/تایید شود
-         _bookingFileRepository = new Lazy<IGenericRepository<BookingFile>>(() => new GenericRepository<BookingFile>(_context));
-        // یا _bookingFileRepository = new Lazy<IBookingFileRepository>(() => new BookingFileRepository(_context));
+        _dependentDataRepository = new Lazy<IDependentDataRepository>(() => new DependentDataRepository(_context));
+        _bookingFileRepository = new Lazy<IGenericRepository<BookingFile>>(() => new GenericRepository<BookingFile>(_context));
+        _bookingPeriodRepository = new Lazy<IBookingPeriodRepository>(() => new BookingPeriodRepository(_context)); // <<-- اضافه شد
     }
 
     public IUserRepository UserRepository => _userRepository.Value;
@@ -47,12 +48,9 @@ public class UnitOfWork : IUnitOfWork
     public IHotelRepository HotelRepository => _hotelRepository.Value;
     public IRoomRepository RoomRepository => _roomRepository.Value;
     public IBookingRequestRepository BookingRequestRepository => _bookingRequestRepository.Value;
-
-
-    public IDependentDataRepository DependentDataRepository => _dependentDataRepository.Value; 
-     public IGenericRepository<BookingFile> BookingFileRepository => _bookingFileRepository.Value;
-    // یا public IBookingFileRepository BookingFileRepository => _bookingFileRepository.Value;
-
+    public IDependentDataRepository DependentDataRepository => _dependentDataRepository.Value;
+    public IGenericRepository<BookingFile> BookingFileRepository => _bookingFileRepository.Value;
+    public IBookingPeriodRepository BookingPeriodRepository => _bookingPeriodRepository.Value;
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         // لاگ کردن وضعیت ChangeTracker قبل از ذخیره

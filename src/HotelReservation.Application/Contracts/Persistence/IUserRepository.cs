@@ -13,6 +13,6 @@ public interface IUserRepository : IGenericRepository<User>
     Task<IReadOnlyList<User>> GetUsersByDepartmentCodeAsync(string departmentCode);
     Task<IReadOnlyList<User>> GetUsersByHotelIdAsync(Guid hotelId); // برای کاربران هتل
     Task<User?> GetUserWithDependentsAsync(Guid userId);
-    Task<User?> GetUserWithFullDetailsAsync(Guid userId); // با نقش، استان، دپارتمان، هتل (در صورت وجود)
+    Task<User?> GetUserWithFullDetailsAsync(Guid userId, bool asNoTracking = true); // با نقش، استان، دپارتمان، هتل (در صورت وجود)
     Task<User?> GetBySystemUserIdWithDetailsAsync(string systemUserId); // <<-- متد جدید
 }

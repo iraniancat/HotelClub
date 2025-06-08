@@ -81,14 +81,20 @@ public class UserRepository : GenericRepository<User>, IUserRepository
             .FirstOrDefaultAsync(u => u.Id == userId);
     }
 
-    public async Task<User?> GetUserWithFullDetailsAsync(Guid userId)
+   public async Task<User?> GetUserWithFullDetailsAsync(Guid userId, bool asNoTracking = true)
     {
-        return await _dbContext.Users
-            .AsNoTracking()
+        IQueryable<User> query = _dbContext.Users;
+
+        if (asNoTracking)
+        {
+            query = query.AsNoTracking(); // <<-- فقط در صورت نیاز، بدون ردیابی می‌خوانیم
+        }
+
+        return await query
             .Include(u => u.Role)
             .Include(u => u.Province)
             .Include(u => u.Department)
-            .Include(u => u.AssignedHotel) // هتل ممکن است null باشد
+            .Include(u => u.AssignedHotel)
             .Include(u => u.Dependents)
             .FirstOrDefaultAsync(u => u.Id == userId);
     }

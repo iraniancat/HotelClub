@@ -69,7 +69,7 @@ public class BookingRequestsController : ControllerBase
         // Handler مسئول خواندن شناسه کاربر از ICurrentUserService است.
         var createBookingCommand = new CreateBookingRequestCommand(
             actualDto.RequestingEmployeeNationalCode, 
-            actualDto.BookingPeriod, 
+            actualDto.BookingPeriodId, 
             actualDto.CheckInDate.Value,
             actualDto.CheckOutDate.Value,
             actualDto.HotelId, 

@@ -32,6 +32,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5EYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/BookingPeriodManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQm9va2luZ1BlcmlvZE1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/HotelManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cSG90ZWxNYW5hZ2VtZW50LnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -60,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdmluY2VcQ3JlYXRlQm9va2luZ1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Province/ProvinceBookings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdmluY2VcUHJvdmluY2VCb29raW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Weather.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -72,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbmZpcm1EaWFsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateBookingPeriodDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZUJvb2tpbmdQZXJpb2REaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateHotelDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZUhvdGVsRGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -82,6 +94,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateRoleDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZVJvbGVEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditBookingPeriodDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVkaXRCb29raW5nUGVyaW9kRGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditHotelDialog.razor]

@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
     public DbSet<BookingGuest> BookingGuests { get; set; }
     public DbSet<BookingFile> BookingFiles { get; set; }
     public DbSet<BookingStatusHistory> BookingStatusHistories { get; set; }
-
+    public DbSet<BookingPeriod> BookingPeriods { get; set; }
 
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
@@ -42,7 +42,7 @@ public class AppDbContext : DbContext
         ConfigureBookingRequest(modelBuilder.Entity<BookingRequest>());
         ConfigureBookingStatusHistory(modelBuilder.Entity<BookingStatusHistory>());
         ConfigureBookingFile(modelBuilder.Entity<BookingFile>());
-
+        ConfigureBookingPeriod(modelBuilder.Entity<BookingPeriod>());
         // ... (پیکربندی تبدیل Enum ها همانند قبل) ...
         modelBuilder.Entity<BookingRequest>()
             .Property(br => br.Status)
@@ -137,37 +137,37 @@ public class AppDbContext : DbContext
         builder.Property(u => u.PhoneNumber)
             .HasMaxLength(20) // یا هر طول مناسب دیگر
             .IsRequired(false); // شماره تلفن می‌تواند اختیاری باشد
-            
-     //string superAdminPasswordHashForSeed = "YOUR_PRE_COMPUTED_HASH_FOR_DEFAULT_PASSWORD"; 
-    // // هشدار: مقدار بالا را با هش واقعی یک رمز عبور قوی جایگزین کنید.
-    // // برای مثال، اگر از پیاده‌سازی SHA256 ساده (بدون salt) استفاده کرده بودیم:
-    // // SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("!AdminPa$$w0rd")) -> BitConverter.ToString(...).Replace("-","").ToLower()
 
-    // // برای استان و دپارتمان مدیر ارشد، می‌توانیم مقادیر پیش‌فرض یا null در نظر بگیریم
-    // // یا اگر استان/دپارتمان خاصی برای "ستاد" دارید، کد آن را استفاده کنید.
-    // // فرض می‌کنیم یک استان و دپارتمان "ستادی" با کدهای "HQ_PROV" و "HQ_DEPT" داریم (که باید آنها را هم Seed کنید).
-    // // اگر استان و دپارتمان برای SuperAdmin لازم نیست، می‌توانید null پاس دهید (چون فیلدها Nullable هستند)
+        //string superAdminPasswordHashForSeed = "YOUR_PRE_COMPUTED_HASH_FOR_DEFAULT_PASSWORD"; 
+        // // هشدار: مقدار بالا را با هش واقعی یک رمز عبور قوی جایگزین کنید.
+        // // برای مثال، اگر از پیاده‌سازی SHA256 ساده (بدون salt) استفاده کرده بودیم:
+        // // SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("!AdminPa$$w0rd")) -> BitConverter.ToString(...).Replace("-","").ToLower()
 
-    // builder.HasData(
-    //     new {
-    //         Id = Guid.Parse("E0E2C45A-B935-4C7A-9A9A-4A5B6C7D8E9F"), // یک Guid ثابت برای SuperAdmin
-    //         SystemUserId = "superadmin",
-    //         FullName = "مدیر ارشد سیستم",
-    //         NationalCode = (string?)null, // یا یک مقدار نمونه
-    //         PasswordHash = superAdminPasswordHashForSeed, // <<-- هش رمز عبور
-    //         IsActive = true,
-    //         RoleId = RoleConstants.SuperAdminRoleId, // شناسه نقش SuperAdmin
-    //         // اطلاعات سازمانی نمونه یا null اگر برای SuperAdmin عمومی کاربرد ندارد
-    //         ProvinceCode = (string?)"00", // کد استان نمونه برای ستاد (باید در جدول استان‌ها Seed شود)
-    //         ProvinceName = "ستاد مرکزی",
-    //         DepartmentCode = (string?)"000", // کد دپارتمان نمونه برای ستاد (باید در جدول دپارتمان‌ها Seed شود)
-    //         DepartmentName = "مدیریت کل",
-    //         PhoneNumber = (string?)"02100000000", // شماره تلفن نمونه
-    //         HotelId = (Guid?)null, // SuperAdmin به هتل خاصی منتسب نیست
-    //         // AssignedHotel = null // Navigation property در HasData ست نمی‌شود
-    //         // Province = null, Department = null // Navigation properties
-    //     }
-    // );
+        // // برای استان و دپارتمان مدیر ارشد، می‌توانیم مقادیر پیش‌فرض یا null در نظر بگیریم
+        // // یا اگر استان/دپارتمان خاصی برای "ستاد" دارید، کد آن را استفاده کنید.
+        // // فرض می‌کنیم یک استان و دپارتمان "ستادی" با کدهای "HQ_PROV" و "HQ_DEPT" داریم (که باید آنها را هم Seed کنید).
+        // // اگر استان و دپارتمان برای SuperAdmin لازم نیست، می‌توانید null پاس دهید (چون فیلدها Nullable هستند)
+
+        // builder.HasData(
+        //     new {
+        //         Id = Guid.Parse("E0E2C45A-B935-4C7A-9A9A-4A5B6C7D8E9F"), // یک Guid ثابت برای SuperAdmin
+        //         SystemUserId = "superadmin",
+        //         FullName = "مدیر ارشد سیستم",
+        //         NationalCode = (string?)null, // یا یک مقدار نمونه
+        //         PasswordHash = superAdminPasswordHashForSeed, // <<-- هش رمز عبور
+        //         IsActive = true,
+        //         RoleId = RoleConstants.SuperAdminRoleId, // شناسه نقش SuperAdmin
+        //         // اطلاعات سازمانی نمونه یا null اگر برای SuperAdmin عمومی کاربرد ندارد
+        //         ProvinceCode = (string?)"00", // کد استان نمونه برای ستاد (باید در جدول استان‌ها Seed شود)
+        //         ProvinceName = "ستاد مرکزی",
+        //         DepartmentCode = (string?)"000", // کد دپارتمان نمونه برای ستاد (باید در جدول دپارتمان‌ها Seed شود)
+        //         DepartmentName = "مدیریت کل",
+        //         PhoneNumber = (string?)"02100000000", // شماره تلفن نمونه
+        //         HotelId = (Guid?)null, // SuperAdmin به هتل خاصی منتسب نیست
+        //         // AssignedHotel = null // Navigation property در HasData ست نمی‌شود
+        //         // Province = null, Department = null // Navigation properties
+        //     }
+        // );
     }
 
     // ... (متدهای ConfigureRole, ConfigureProvince, ConfigureDepartment و سایر متدهای پیکربندی بدون تغییر باقی می‌مانند مگر اینکه نیاز به اصلاح داشته باشند) ...
@@ -184,12 +184,12 @@ public class AppDbContext : DbContext
             .IsUnique();
         builder.Property(r => r.Description).HasMaxLength(250);
         // Seed کردن نقش‌های پیش‌فرض
-    // builder.HasData(
-    // new { Id = RoleConstants.SuperAdminRoleId, Name = RoleConstants.SuperAdminRoleName, Description = "دسترسی کامل به سیستم" },
-    // new { Id = RoleConstants.ProvinceUserRoleId, Name = RoleConstants.ProvinceUserRoleName, Description = "کاربر با دسترسی در سطح استان" },
-    // new { Id = RoleConstants.HotelUserRoleId, Name = RoleConstants.HotelUserRoleName, Description = "کاربر با دسترسی در سطح هتل" },
-    // new { Id = RoleConstants.EmployeeRoleId, Name = RoleConstants.EmployeeRoleName, Description = "کارمند عادی سازمان (برای فازهای آتی)" }
-//);
+        // builder.HasData(
+        // new { Id = RoleConstants.SuperAdminRoleId, Name = RoleConstants.SuperAdminRoleName, Description = "دسترسی کامل به سیستم" },
+        // new { Id = RoleConstants.ProvinceUserRoleId, Name = RoleConstants.ProvinceUserRoleName, Description = "کاربر با دسترسی در سطح استان" },
+        // new { Id = RoleConstants.HotelUserRoleId, Name = RoleConstants.HotelUserRoleName, Description = "کاربر با دسترسی در سطح هتل" },
+        // new { Id = RoleConstants.EmployeeRoleId, Name = RoleConstants.EmployeeRoleName, Description = "کارمند عادی سازمان (برای فازهای آتی)" }
+        //);
     }
 
     private void ConfigureProvince(EntityTypeBuilder<Province> builder) // بدون تغییر
@@ -274,12 +274,15 @@ public class AppDbContext : DbContext
             .WithOne(bsh => bsh.BookingRequest)
             .HasForeignKey(bsh => bsh.BookingRequestId)
             .OnDelete(DeleteBehavior.Cascade);
-
+        builder.HasOne(br => br.BookingPeriod)
+                    .WithMany() // یک دوره می‌تواند چندین رزرو داشته باشد
+                    .HasForeignKey(br => br.BookingPeriodId)
+                    .OnDelete(DeleteBehavior.Restrict); // اگر دوره‌ای رزرو دارد، قابل حذف نیست
         // --- پیکربندی رابطه جدید با Room ---
         builder.HasOne(br => br.AssignedRoom)              // هر درخواست رزرو می‌تواند به یک اتاق تخصیص داده شود
-            .WithMany()                                  // یک اتاق می‌تواند به چندین درخواست رزرو تخصیص داده شود (در زمان‌های مختلف)
-                                                         // اگر نمی‌خواهید Navigation Property از Room به BookingRequests داشته باشید، WithMany() خالی بگذارید.
-                                                         // اگر می‌خواهید، باید ICollection<BookingRequest> Bookings را به Room اضافه کنید و اینجا WithMany(r => r.Bookings) بنویسید.
+            .WithMany()                                // یک اتاق می‌تواند به چندین درخواست رزرو تخصیص داده شود (در زمان‌های مختلف)
+                                                       // اگر نمی‌خواهید Navigation Property از Room به BookingRequests داشته باشید، WithMany() خالی بگذارید.
+                                                       // اگر می‌خواهید، باید ICollection<BookingRequest> Bookings را به Room اضافه کنید و اینجا WithMany(r => r.Bookings) بنویسید.
             .HasForeignKey(br => br.AssignedRoomId)        // کلید خارجی در BookingRequest
             .IsRequired(false)                           // این رابطه اختیاری است (AssignedRoomId می‌تواند null باشد)
             .OnDelete(DeleteBehavior.SetNull);            // اگر اتاق حذف شد، AssignedRoomId در رزرو null شود (یا Restrict اگر نمی‌خواهید اتاق دارای رزرو حذف شود)
@@ -305,5 +308,12 @@ public class AppDbContext : DbContext
         // رابطه با BookingRequest قبلاً از طریق Navigation Property در BookingRequest
         // و HasMany(br => br.Files).WithOne(bf => bf.BookingRequest)...OnDelete(DeleteBehavior.Cascade)
         // پیکربندی شده است. اگر نشده، اینجا اضافه کنید.
+    }
+    private void ConfigureBookingPeriod(EntityTypeBuilder<BookingPeriod> builder)
+    {
+        builder.HasKey(bp => bp.Id);
+        builder.Property(bp => bp.Name).IsRequired().HasMaxLength(150);
+        builder.HasIndex(bp => bp.Name).IsUnique(); // نام دوره باید یکتا باشد
+        builder.Property(bp => bp.IsActive).IsRequired();
     }
 }
