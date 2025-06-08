@@ -1,0 +1,6 @@
+{
+  "HotelReservation.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Project\\HotelClub\\src\\HotelReservation.Api",
+  "HotelReservation.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Project\\HotelClub\\src\\HotelReservation.Application",
+  "HotelReservation.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Project\\HotelClub\\src\\HotelReservation.Domain",
+  "HotelReservation.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Project\\HotelClub\\src\\HotelReservation.Infrastructure"
+}

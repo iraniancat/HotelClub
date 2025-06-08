@@ -11,6 +11,7 @@ C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelR
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelReservation.Infrastructure.AssemblyInfoInputs.cache
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelReservation.Infrastructure.AssemblyInfo.cs
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelReservation.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelReservation.Infrastructure.sourcelink.json
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelRes.1C1E1872.Up2Date
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\HotelReservation.Infrastructure.dll
 C:\Project\HotelClub\src\HotelReservation.Infrastructure\obj\Debug\net9.0\refint\HotelReservation.Infrastructure.dll

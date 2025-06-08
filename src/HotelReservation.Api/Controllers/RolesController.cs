@@ -119,7 +119,5 @@ public class RolesController : ControllerBase
         
         return NoContent(); // پاسخ 204 No Content برای موفقیت‌آمیز بودن عملیات حذف
     }
-    // TODO: Endpoints برای GetRoleById, GetAllRoles, UpdateRole, DeleteRole در اینجا اضافه خواهند شد.
-    // [HttpGet("{id:guid}", Name = "GetRoleById")]
-    // public async Task<IActionResult> GetRoleById(Guid id) { /* ... */ return Ok(); }
+    
 }

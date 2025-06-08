@@ -22,26 +22,43 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
     private readonly IUnitOfWork _unitOfWork;
     private readonly IAuthorizationService _authorizationService;
     private readonly ILogger<GetBookingRequestDetailsQueryHandler> _logger;
+    private readonly ICurrentUserService _currentUserService;
 
     public GetBookingRequestDetailsQueryHandler(
-        IUnitOfWork unitOfWork, 
+        IUnitOfWork unitOfWork,
+        ICurrentUserService currentUserService,
         IAuthorizationService authorizationService,
         ILogger<GetBookingRequestDetailsQueryHandler> logger)
     {
+        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService));
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _authorizationService = authorizationService ?? throw new ArgumentNullException(nameof(authorizationService));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
     }
 
     public async Task<BookingRequestDetailsDto?> Handle(GetBookingRequestDetailsQuery request, CancellationToken cancellationToken)
     {
         var bookingRequest = await _unitOfWork.BookingRequestRepository.GetBookingRequestWithDetailsAsync(request.BookingRequestId);
-
+       
         if (bookingRequest == null)
         {
             _logger.LogWarning("BookingRequest with ID {BookingRequestId} not found.", request.BookingRequestId);
             throw new NotFoundException(nameof(BookingRequest), request.BookingRequestId);
         }
+        var userPrincipal = _currentUserService.GetUserPrincipal(); // <<-- استفاده از سرویس
+        if (userPrincipal == null || !_currentUserService.IsAuthenticated) {
+            throw new UnauthorizedAccessException("کاربر برای این عملیات احراز هویت نشده است.");
+        }
+
+        var authorizationResult = await _authorizationService.AuthorizeAsync(
+            userPrincipal,
+            bookingRequest,
+            "CanViewBookingRequest"
+        );
+        if (!authorizationResult.Succeeded) {throw new ForbiddenAccessException("شما مجاز به مشاهده این درخواست رزرو نیستید.");}
+        
+
 
         // --- ساخت ClaimsPrincipal از اطلاعات کاربر در Query ---
         // این روش برای انتقال اطلاعات کاربر به AuthorizationHandler است.
@@ -56,14 +73,9 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
         if (request.AuthenticatedUserHotelId.HasValue)
             claims.Add(new Claim(CustomClaimTypes.HotelId, request.AuthenticatedUserHotelId.Value.ToString()));
         
-        var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, "CustomAuthForHandler")); // نوع احراز هویت می‌تواند هر چیزی باشد
+        
 
-        // --- استفاده از IAuthorizationService برای بررسی مجوز ---
-        var authorizationResult = await _authorizationService.AuthorizeAsync(
-            userPrincipal,
-            bookingRequest, // منبعی که می‌خواهیم به آن دسترسی پیدا کنیم
-            "CanViewBookingRequest" // نام Policy
-        );
+        
 
         if (!authorizationResult.Succeeded)
         {

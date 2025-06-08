@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xHjcQ8eZHP8=",
+  "dgSpecHash": "c2au6K2nupE=",
   "success": true,
   "projectFilePath": "C:\\Project\\HotelClub\\src\\HotelReservation.Infrastructure\\HotelReservation.Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -60,7 +60,7 @@
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.caching.memory\\9.0.5\\microsoft.extensions.caching.memory.9.0.5.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.5\\microsoft.extensions.configuration.abstractions.9.0.5.nupkg.sha512",
-    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.binder\\9.0.0-preview.5.24306.7\\microsoft.extensions.configuration.binder.9.0.0-preview.5.24306.7.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.binder\\9.0.5\\microsoft.extensions.configuration.binder.9.0.5.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.commandline\\8.0.0\\microsoft.extensions.configuration.commandline.8.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.environmentvariables\\8.0.0\\microsoft.extensions.configuration.environmentvariables.8.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.extensions.configuration.fileextensions\\8.0.1\\microsoft.extensions.configuration.fileextensions.8.0.1.nupkg.sha512",

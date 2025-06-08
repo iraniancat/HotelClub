@@ -41,16 +41,26 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        var claims = new List<Claim>
-        {
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),      // Token ID
-            new Claim(JwtRegisteredClaimNames.Sub, user.SystemUserId),              // Subject (Username)
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),             // User's unique ID
-            new Claim(ClaimTypes.Name, user.SystemUserId),                        // Username (can also be FullName)
-            new Claim(JwtRegisteredClaimNames.GivenName, user.FullName ?? string.Empty), // FullName
-            // سایر Claimهای استاندارد مانند Email اگر وجود دارد:
-            // new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-        };
+        // var claims = new List<Claim>
+        // {
+        //     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),      // Token ID
+        //     new Claim(JwtRegisteredClaimNames.Sub, user.SystemUserId),              // Subject (Username)
+        //     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),             // User's unique ID
+        //     new Claim(ClaimTypes.Name, user.SystemUserId),                        // Username (can also be FullName)
+        //     new Claim(JwtRegisteredClaimNames.GivenName, user.FullName ?? string.Empty), // FullName
+        //     // سایر Claimهای استاندارد مانند Email اگر وجود دارد:
+        //     // new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+        // };
+          var claims = new List<Claim>
+           {
+               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+               // User.Id (Guid PK) را به عنوان NameIdentifier اصلی قرار دهید
+               new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
+               // SystemUserId (نام کاربری برای ورود) را به عنوان Subject و Name قرار دهید
+               new Claim(JwtRegisteredClaimNames.Sub, user.SystemUserId), 
+               new Claim(ClaimTypes.Name, user.SystemUserId), // این معمولاً برای User.Identity.Name استفاده می‌شود
+               new Claim(JwtRegisteredClaimNames.GivenName, user.FullName ?? string.Empty),
+           };
 
         if (user.Role != null && !string.IsNullOrEmpty(user.Role.Name))
         {

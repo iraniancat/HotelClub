@@ -1,0 +1,97 @@
+@* src/HotelReservation.Client/Shared/MainLayout.razor *@
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject IAuthService AuthService
+@* اطمینان حاصل کنید که using مربوط به فضای نام IAuthService در _Imports.razor وجود دارد *@
+@* مثال: @using HotelReservation.Client.Services.Authentication *@
+
+<MudThemeProvider Theme="_myCustomTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        @* ... (کد MudAppBar همانند قبل) ... *@
+         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.End" OnClick="@((e) => DrawerToggle())" />
+        <AuthorizeView>
+            <Authorized Context="authContext">
+                <MudText Class="mr-2" Typo="Typo.body1">سلام، @authContext.User.FindFirstValue(ClaimTypes.GivenName)
+                </MudText>
+                <MudMenu Icon="@Icons.Material.Filled.Person" Color="Color.Inherit" Dense="true"
+                    AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
+                    <MudMenuItem OnClick="GoToProfile">پروفایل من</MudMenuItem>
+                    <MudMenuItem OnClick="HandleLogout">خروج</MudMenuItem> @* <<-- فراخوانی HandleLogout *@
+                </MudMenu>
+            </Authorized>
+            <NotAuthorized>
+                <MudButton Href="login" Variant="Variant.Text" Color="Color.Inherit"
+                    StartIcon="@Icons.Material.Filled.Login">ورود</MudButton>
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudAppBar>
+
+    @* ... (کد MudDrawer و MudMainContent همانند قبل) ... *@
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2"
+        Variant="@DrawerVariant.Persistent" Anchor="Anchor.End">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h5" Class="mt-2 mb-2">منوی اصلی</MudText>
+        </MudDrawerHeader>
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent Class="pt-16 px-4">
+        <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    bool _drawerOpen = true;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    // این متد باید یک متد نمونه (instance method) باشد
+    private async Task HandleLogout()
+    {
+        // AuthService باید نمونه تزریق شده باشد
+        if (AuthService != null)
+        {
+            await AuthService.LogoutAsync();
+        }
+        else
+        {
+            // این حالت نباید اتفاق بیفتد اگر DI به درستی کار کند
+            Console.WriteLine("خطا: سرویس AuthService در MainLayout به درستی تزریق نشده است.");
+        }
+    }
+
+    private void GoToProfile()
+    {
+        NavigationManager.NavigateTo("/user-profile");
+    }
+
+    private MudTheme _myCustomTheme = new MudTheme()
+    { /* ... تنظیمات تم ... */
+        Typography = new Typography()
+        {
+            Default = new Default() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H1 = new H1() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H2 = new H2() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H3 = new H3() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H4 = new H4() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H5 = new H5() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            H6 = new H6() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Subtitle1 = new Subtitle1() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Subtitle2 = new Subtitle2() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Body1 = new Body1() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Body2 = new Body2() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Button = new Button() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Caption = new Caption() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } },
+            Overline = new Overline() { FontFamily = new[] { "Vazirmatn", "Roboto", "sans-serif" } }
+        }
+    };
+}

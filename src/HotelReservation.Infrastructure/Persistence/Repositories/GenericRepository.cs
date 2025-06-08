@@ -56,11 +56,56 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
     }
 
     // ... (متدهای AddAsync, UpdateAsync, DeleteAsync, DeleteByIdAsync, DeleteByStringIdAsync بدون تغییر) ...
-    public virtual async Task<T> AddAsync(T entity) { /*...*/ return entity; }
-    public virtual Task UpdateAsync(T entity) { /*...*/ return Task.CompletedTask; }
-    public virtual Task DeleteAsync(T entity) { /*...*/ return Task.CompletedTask; }
-    public virtual async Task DeleteByIdAsync(Guid id) { /*...*/ }
-    public virtual async Task DeleteByStringIdAsync(string id) { /*...*/ }
+     public virtual async Task<T> AddAsync(T entity)
+    {
+        if (entity == null)
+        {
+            Console.WriteLine($"[DEBUG] GenericRepository.AddAsync for {typeof(T).Name}: Received a null entity.");
+            throw new ArgumentNullException(nameof(entity));
+        }
+
+        var entityType = typeof(T).Name;
+        var entryStateBeforeAdd = _dbContext.Entry(entity).State;
+        Console.WriteLine($"[DEBUG] GenericRepository.AddAsync for {entityType}. DbContext HashCode: {_dbContext.GetHashCode()}. Entity State BEFORE _dbContext.Set<T>().AddAsync(entity): {entryStateBeforeAdd}");
+        
+        await _dbContext.Set<T>().AddAsync(entity); // این خط باید وضعیت را به Added تغییر دهد
+        
+        var entryStateAfterAdd = _dbContext.Entry(entity).State;
+        Console.WriteLine($"[DEBUG] GenericRepository.AddAsync for {entityType}. DbContext HashCode: {_dbContext.GetHashCode()}. Entity State AFTER _dbContext.Set<T>().AddAsync(entity): {entryStateAfterAdd}");
+        
+        // یک بررسی اضافی برای اطمینان
+        if (entryStateAfterAdd != EntityState.Added)
+        {
+            Console.WriteLine($"[ERROR_DEBUG] GenericRepository.AddAsync for {entityType}: Entity state is NOT Added after AddAsync call. It is {entryStateAfterAdd}. This is a problem!");
+        }
+        
+        return entity;
+    }
+
+      public virtual Task UpdateAsync(T entity)
+    {
+        // برای اطمینان، وضعیت را صریحاً Modified می‌کنیم
+        _dbContext.Entry(entity).State = EntityState.Modified;
+        Console.WriteLine($"[DEBUG] GenericRepository.UpdateAsync for {typeof(T).Name}. DbContext HashCode: {_dbContext.GetHashCode()}. Entity State set to Modified.");
+        return Task.CompletedTask;
+    }
+
+    public virtual Task DeleteAsync(T entity)
+    {
+        _dbContext.Set<T>().Remove(entity);
+        Console.WriteLine($"[DEBUG] GenericRepository.DeleteAsync for {typeof(T).Name}. DbContext HashCode: {_dbContext.GetHashCode()}. Entity State after Remove: {_dbContext.Entry(entity).State}"); // باید Deleted باشد
+        return Task.CompletedTask;
+    }
+    public virtual async Task DeleteByIdAsync(Guid id) 
+    {
+        var entity = await GetByIdAsync(id);
+        if (entity != null) await DeleteAsync(entity);
+    }
+    public virtual async Task DeleteByStringIdAsync(string id) 
+    {
+        var entity = await GetByStringIdAsync(id);
+        if (entity != null) await DeleteAsync(entity);
+    }
 
   
 }

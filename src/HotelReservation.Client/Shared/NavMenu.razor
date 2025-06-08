@@ -1,0 +1,81 @@
+@* src/HotelReservation.Client/Shared/NavMenu.razor *@
+@inject NavigationManager NavigationManager 
+@* // برای دسترسی به وضعیت احراز هویت و نقش‌ها، می‌توانیم AuthenticationStateProvider را تزریق کنیم
+   // یا از کامپوننت AuthorizeView استفاده کنیم *@
+
+<MudNavMenu Rounded="true" Margin="Margin.Normal" Color="Color.Primary" Class="pa-2">
+    <MudNavLink Href="" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">صفحه اصلی</MudNavLink>
+    
+    @* لینک‌های عمومی برای همه کاربران احراز هویت شده *@
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="my-bookings" Icon="@Icons.Material.Filled.BookOnline">رزروهای من</MudNavLink> @* TODO: صفحه رزروهای من *@
+        </Authorized>
+    </AuthorizeView>
+
+    @* لینک‌های مخصوص مدیر ارشد *@
+    <AuthorizeView Roles="SuperAdmin"> @* // نام نقش باید با Claim نقش در توکن مطابقت داشته باشد *@
+        <Authorized>
+            <MudListSubheader>مدیریت سیستم</MudListSubheader>
+            <MudNavLink Href="admin/dashboard" Icon="@Icons.Material.Filled.Dashboard">داشبورد مدیر</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/users" Icon="@Icons.Material.Filled.People">مدیریت کاربران</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/roles" Icon="@Icons.Material.Filled.AdminPanelSettings">مدیریت نقش‌ها</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/hotels" Icon="@Icons.Material.Filled.Hotel">مدیریت هتل‌ها</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/provinces" Icon="@Icons.Material.Filled.Map">استان‌ها (مشاهده)</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/departments" Icon="@Icons.Material.Filled.Business">ادارات (مشاهده)</MudNavLink> @* TODO *@
+        </Authorized>
+    </AuthorizeView>
+
+    @* لینک‌های مخصوص کاربر استان *@
+    <AuthorizeView Roles="ProvinceUser,SuperAdmin"> @* // مدیر ارشد هم می‌تواند این بخش را ببیند *@
+        <Authorized>
+            <MudListSubheader>عملیات استان</MudListSubheader>
+            <MudNavLink Href="province/create-booking" Icon="@Icons.Material.Filled.AddCircleOutline">ثبت رزرو جدید</MudNavLink> @* TODO *@
+            <MudNavLink Href="province/bookings" Icon="@Icons.Material.Filled.ListAlt">لیست رزروهای استان</MudNavLink> @* TODO *@
+        </Authorized>
+    </AuthorizeView>
+
+    @* لینک‌های مخصوص کاربر هتل *@
+    <AuthorizeView Roles="HotelUser,SuperAdmin"> @* // مدیر ارشد هم می‌تواند این بخش را ببیند *@
+        <Authorized>
+            <MudListSubheader>مدیریت هتل</MudListSubheader>
+            <MudNavLink Href="hotel/dashboard" Icon="@Icons.Material.Filled.DashboardCustomize">داشبورد هتل</MudNavLink> @* TODO *@
+            <MudNavLink Href="hotel/pending-bookings" Icon="@Icons.Material.Filled.PendingActions">رزروهای در انتظار</MudNavLink> @* TODO *@
+        </Authorized>
+    </AuthorizeView>
+
+    @* لینک‌های مخصوص کارمند عادی (برای فاز آتی) *@
+    @*
+    <AuthorizeView Roles="Employee">
+        <Authorized>
+            <MudListSubheader>امور کارمندی</MudListSubheader>
+            <MudNavLink Href="employee/create-booking" Icon="@Icons.Material.Filled.NoteAdd">ثبت درخواست شخصی</MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+    *@
+
+    <MudDivider Class="my-2" />
+    
+    <AuthorizeView>
+        <NotAuthorized>
+             <MudNavLink Href="login" Icon="@Icons.Material.Filled.Login">ورود به سامانه</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudNavMenu>
+
+@code {
+    // در صورت نیاز به منطق بیشتر، می‌توانید اینجا کد C# اضافه کنید.
+    // مثلاً اگر می‌خواهید به AuthenticationStateProvider دسترسی داشته باشید:
+    // [CascadingParameter]
+    // private Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     if (AuthenticationState != null)
+    //     {
+    //         var authState = await AuthenticationState;
+    //         var user = authState.User;
+    //         // حالا می‌توانید از user.IsInRole(...) یا user.Claims استفاده کنید
+    //     }
+    // }
+}

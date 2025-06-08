@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HotelReservation.Application.DTOs.Booking;
 
+
 public class CreateBookingRequestDto
 {
     [Required(ErrorMessage = "کد ملی کارمند درخواست‌دهنده اصلی الزامی است.")]
@@ -17,10 +18,10 @@ public class CreateBookingRequestDto
     public string BookingPeriod { get; set; }
 
     [Required(ErrorMessage = "تاریخ ورود الزامی است.")]
-    public DateTime CheckInDate { get; set; }
+    public DateTime? CheckInDate { get; set; } // <<-- اصلاح شد
 
     [Required(ErrorMessage = "تاریخ خروج الزامی است.")]
-    public DateTime CheckOutDate { get; set; }
+    public DateTime? CheckOutDate { get; set; } // <<-- اصلاح شد
 
     [Required(ErrorMessage = "شناسه هتل الزامی است.")]
     public Guid HotelId { get; set; }
@@ -31,9 +32,5 @@ public class CreateBookingRequestDto
     [Required(ErrorMessage = "لیست مهمانان الزامی است.")]
     [MinLength(1, ErrorMessage = "حداقل یک مهمان باید در درخواست وجود داشته باشد.")]
     public List<BookingGuestInputDto> Guests { get; set; } = new List<BookingGuestInputDto>();
-
-    // RequestSubmitterUserId از کاربر احراز هویت شده در Controller خوانده می‌شود و به Command پاس داده می‌شود.
-    // نیازی نیست در DTO ورودی از کلاینت باشد.
-    // فایل‌ها نیز معمولاً در یک درخواست جداگانه یا به صورت multipart/form-data آپلود می‌شوند
-    // و به این DTO اولیه اضافه نمی‌شوند تا پیچیدگی کم شود. فعلاً فایل را در نظر نمی‌گیریم.
 }
+

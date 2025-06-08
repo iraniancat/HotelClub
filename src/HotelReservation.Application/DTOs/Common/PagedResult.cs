@@ -13,12 +13,19 @@ public class PagedResult<T> where T : class
     public bool HasPreviousPage => CurrentPage > 1;
     public bool HasNextPage => CurrentPage < TotalPages;
     public List<T> Items { get; set; } = new List<T>();
-
-    public PagedResult(List<T> items, int count, int pageNumber, int pageSize)
+ 
+    // <<-- سازنده بدون پارامتر عمومی برای دی‌سریالایزر JSON -->>
+    public PagedResult()
     {
-        TotalCount = count;
-        PageSize = pageSize;
+        Items = new List<T>(); // مقداردهی اولیه لیست برای جلوگیری از null بودن
+    }
+
+    // سازنده قبلی شما برای استفاده در سمت سرور همچنان می‌تواند وجود داشته باشد
+    public PagedResult(List<T> items, int totalCount, int pageNumber, int pageSize)
+    {
         CurrentPage = pageNumber;
-        Items = items;
+        PageSize = pageSize;
+        TotalCount = totalCount;
+        Items = items ?? new List<T>();
     }
 }

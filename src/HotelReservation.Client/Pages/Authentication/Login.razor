@@ -1,0 +1,80 @@
+@page "/login"
+@attribute [Microsoft.AspNetCore.Authorization.AllowAnonymous] 
+@using HotelReservation.Client.Services.Authentication
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthService AuthService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>ورود به سامانه</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudText Typo="Typo.h4" GutterBottom="true" Align="MudBlazor.Align.Center">ورود به سامانه رزرو هتل</MudText>
+        <EditForm Model="@_loginModel" OnValidSubmit="HandleLoginAsync">
+            <DataAnnotationsValidator /> @* برای فعال کردن اعتبارسنجی DataAnnotations مدل *@
+            
+            <MudTextField T="string"
+                          Label="شناسه کاربری سیستم"
+                          Variant="Variant.Outlined"
+                          For="@(() => _loginModel.SystemUserId)"
+                          @bind-Value="_loginModel.SystemUserId" 
+                          Adornment="Adornment.Start" 
+                          AdornmentIcon="@Icons.Material.Filled.Person" />
+            <MudValidationMessage For="@(() => _loginModel.SystemUserId)" />
+
+            <MudTextField T="string"
+                          Label="رمز عبور"
+                          Variant="Variant.Outlined"
+                          InputType="InputType.Password"
+                          For="@(() => _loginModel.Password)"
+                          @bind-Value="_loginModel.Password"
+                          Adornment="Adornment.Start" 
+                          AdornmentIcon="@Icons.Material.Filled.Lock" />
+            <MudValidationMessage For="@(() => _loginModel.Password)" />
+
+            <MudButton ButtonType="ButtonType.Submit"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Disabled="_isProcessing"
+                       FullWidth="true"
+                       Class="mt-4">
+                @if (_isProcessing)
+                {
+                    <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                    <MudText Class="ml-2">در حال بررسی...</MudText>
+                }
+                else
+                {
+                    <MudText>ورود</MudText>
+                }
+            </MudButton>
+        </EditForm>
+    </MudPaper>
+    @if (!string.IsNullOrEmpty(_errorMessage))
+    {
+        <MudAlert Severity="Severity.Error" Class="mt-4">@_errorMessage</MudAlert>
+    }
+</MudContainer>
+
+@code {
+    private LoginModel _loginModel = new LoginModel();
+    private bool _isProcessing = false;
+    private string? _errorMessage;
+
+    private async Task HandleLoginAsync()
+    {
+        _isProcessing = true;
+        _errorMessage = null; // پاک کردن خطای قبلی
+        var success = await AuthService.LoginAsync(_loginModel);
+        if (!success)
+        {
+            // AuthService خودش Snackbar خطا را نشان می‌دهد.
+            // اگر بخواهیم اینجا هم پیامی نشان دهیم:
+            // _errorMessage = "نام کاربری یا رمز عبور نامعتبر است، یا خطایی رخ داده.";
+        }
+        // در صورت موفقیت، AuthService کاربر را به صفحه دیگر هدایت می‌کند.
+        _isProcessing = false;
+        StateHasChanged(); // برای به‌روزرسانی UI
+    }
+}

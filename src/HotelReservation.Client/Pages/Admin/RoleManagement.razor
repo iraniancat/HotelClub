@@ -1,0 +1,159 @@
+@page "/admin/roles"
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject ILogger<RoleManagement> Logger
+
+<PageTitle>مدیریت نقش‌ها</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudToolBar Class="mb-4">
+            <MudText Typo="Typo.h5">لیست نقش‌های سیستم</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateRoleDialog" StartIcon="@Icons.Material.Filled.Add" Disabled="_isLoading">
+                ایجاد نقش جدید
+            </MudButton>
+        </MudToolBar>
+
+        <MudTable Items="@_roles" Dense="true" Hover="true" Striped="true" @ref="_table"
+                  Loading="@_isLoading" LoadingProgressColor="Color.Primary" Filter="new Func<RoleDto, bool>(FilterRole)">
+            <ToolBarContent>
+                <MudTextField @bind-Value="_searchString" Placeholder="جستجو" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>نام نقش</MudTh>
+                <MudTh>توضیحات</MudTh>
+                <MudTh Style="text-align:center; width:150px;">عملیات</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="نام نقش">@context.Name</MudTd>
+                <MudTd DataLabel="توضیحات">@context.Description</MudTd>
+                <MudTd Style="text-align:center">
+                    <span @onclick:stopPropagation="true"> 
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => OpenEditRoleDialog(context))" Title="ویرایش" />
+                    </span>
+                    <span @onclick:stopPropagation="true" class="mr-2">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="@(() => ConfirmDeleteRole(context))" Title="حذف" />
+                    </span>
+                </MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText>نقشی برای نمایش یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </LoadingContent>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<RoleDto> _table = new();
+    private bool _isLoading = true;
+    private string _searchString = "";
+    private List<RoleDto> _roles = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadRolesAsync();
+    }
+
+    private async Task LoadRolesAsync()
+    {
+        _isLoading = true;
+        try
+        {
+            var result = await ApiClient.GetListAsync<RoleDto>("api/roles");
+            if (result != null)
+            {
+                _roles = result.ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات نقش‌ها: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private bool FilterRole(RoleDto role)
+    {
+        if (string.IsNullOrWhiteSpace(_searchString))
+            return true;
+        if (role.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (role.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            return true;
+        return false;
+    }
+
+    private async Task OpenCreateRoleDialog()
+    {
+        var dialog = DialogService.Show<CreateRoleDialog>("ایجاد نقش جدید");
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("نقش با موفقیت ایجاد شد.", Severity.Success);
+            await LoadRolesAsync(); // بارگذاری مجدد لیست
+        }
+    }
+
+    private async Task OpenEditRoleDialog(RoleDto roleToEdit)
+    {
+        var parameters = new DialogParameters { ["RoleToEdit"] = roleToEdit };
+        var dialog = DialogService.Show<EditRoleDialog>($"ویرایش نقش: {roleToEdit.Name}", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("نقش با موفقیت ویرایش شد.", Severity.Success);
+            await LoadRolesAsync();
+        }
+    }
+
+    private async Task ConfirmDeleteRole(RoleDto roleToDelete)
+    {
+        var parameters = new DialogParameters
+        {
+            ["Title"] = "تأیید حذف نقش",
+            ["ContentText"] = $"آیا از حذف نقش '{roleToDelete.Name}' مطمئن هستید؟ این عملیات قابل بازگشت نیست.",
+            ["ButtonText"] = "حذف",
+            ["Color"] = Color.Error,
+            ["Icon"] = Icons.Material.Filled.DeleteForever
+        };
+
+        var dialog = DialogService.Show<ConfirmDialog>("تأیید حذف", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            _isLoading = true; 
+            try
+            {
+                await ApiClient.DeleteAsync($"api/roles/{roleToDelete.Id}");
+                Snackbar.Add("نقش با موفقیت حذف شد.", Severity.Success);
+                await LoadRolesAsync();
+            }
+            catch (ApplicationException ex)
+            {
+                Snackbar.Add($"خطا در حذف نقش: {ex.Message}", Severity.Error);
+            }
+            finally
+            {
+                _isLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+}
+

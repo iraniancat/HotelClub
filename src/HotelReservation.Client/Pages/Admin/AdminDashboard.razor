@@ -1,0 +1,14 @@
+@* src/HotelReservation.Client/Pages/Admin/AdminDashboard.razor *@
+@page "/admin/dashboard"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize(Roles = "SuperAdmin")] 
+<PageTitle>داشبورد مدیر ارشد</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">داشبورد مدیر ارشد</MudText>
+<MudText>به پنل مدیریت خوش آمدید.</MudText>
+
+@* در اینجا کامپوننت‌ها و اطلاعات مربوط به داشبورد مدیر ارشد قرار خواهند گرفت *@
+
+@code {
+    // منطق صفحه در صورت نیاز
+}

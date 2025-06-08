@@ -1,0 +1,28 @@
+﻿<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData"> @* <<-- اطمینان از وجود Context="routeData" *@
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    @if (context.User.Identity?.IsAuthenticated != true) // <<-- اینجا هم از context استفاده می‌شود
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <PageTitle>دسترسی غیرمجاز</PageTitle>
+                        <LayoutView Layout="@typeof(MainLayout)">
+                            <MudAlert Severity="Severity.Error" Class="ma-4">شما برای دسترسی به این صفحه مجوز ندارید.</MudAlert>
+                        </LayoutView>
+                    }
+                </NotAuthorized>
+                <Authorizing>
+                    @* ... *@
+                </Authorizing>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            @* ... *@
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

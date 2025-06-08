@@ -1,0 +1,193 @@
+@page "/admin/hotels"
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject ILogger<HotelManagement> Logger
+
+<PageTitle>مدیریت هتل‌ها</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudToolBar Class="mb-4">
+            <MudText Typo="Typo.h5">لیست هتل‌ها</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateHotelDialog" StartIcon="@Icons.Material.Filled.Add" Disabled="_isLoading">
+                ایجاد هتل جدید
+            </MudButton>
+        </MudToolBar>
+
+        <MudTable ServerData="@(new Func<TableState, Task<TableData<HotelDto>>>(ServerReload))"
+                  Dense="true" Hover="true" Striped="true" @ref="_table"
+                  Loading="@_isLoading" LoadingProgressColor="Color.Primary"
+                  OnRowClick="@((TableRowClickEventArgs<HotelDto> args) => OnRowClickHandler(args))"
+                  RowClassFunc="@((item, index) => "cursor-pointer")">
+            <ToolBarContent>
+                <MudTextField T="string" ValueChanged="OnSearch" Placeholder="جستجو در هتل‌ها..." Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0 mb-2" DebounceInterval="500"></MudTextField>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh><MudTableSortLabel SortLabel="name_field" T="HotelDto">نام هتل</MudTableSortLabel></MudTh>
+                <MudTh>آدرس</MudTh>
+                <MudTh>فرد رابط</MudTh>
+                <MudTh>شماره تلفن</MudTh>
+                <MudTh Style="text-align:center; width:150px;">عملیات</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="نام هتل">@context.Name</MudTd>
+                <MudTd DataLabel="آدرس">@context.Address</MudTd>
+                <MudTd DataLabel="فرد رابط">@context.ContactPerson</MudTd>
+                <MudTd DataLabel="شماره تلفن">@context.PhoneNumber</MudTd>
+                <MudTd Style="text-align:center">
+                    <span @onclick:stopPropagation="true"> 
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => OpenEditHotelDialog(context))" Title="ویرایش" />
+                    </span>
+                    <span @onclick:stopPropagation="true" class="ml-2"> 
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="@(() => ConfirmDeleteHotel(context))" Title="حذف" />
+                    </span>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{5, 10, 20, 50}" />
+            </PagerContent>
+            <NoRecordsContent>
+                <MudText>هتلی برای نمایش یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                <MudText Class="ml-2">در حال بارگذاری اطلاعات هتل‌ها...</MudText>
+            </LoadingContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<HotelDto> _table = new();
+    private bool _isLoading = true;
+    private string? _searchTerm;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Logger.LogInformation("HotelManagement page initialized. Initial data load will be triggered by MudTable.");
+        await base.OnInitializedAsync();
+    }
+
+    private async Task<TableData<HotelDto>> ServerReload(TableState state)
+    {
+        _isLoading = true;
+        Logger.LogInformation("ServerReload called. Page: {Page}, PageSize: {PageSize}, SearchTerm: {SearchTerm}",
+            state.Page, state.PageSize, _searchTerm);
+        try
+        {
+            var requestUri = $"api/hotels?pageNumber={state.Page + 1}&pageSize={state.PageSize}";
+            if (!string.IsNullOrWhiteSpace(_searchTerm))
+            {
+                requestUri += $"&searchTerm={Uri.EscapeDataString(_searchTerm)}";
+            }
+            var pagedResult = await ApiClient.GetAsync<PagedResult<HotelDto>>(requestUri);
+            if (pagedResult != null)
+            {
+                Logger.LogInformation("Data reloaded successfully. TotalItems: {TotalItems}, Items in current page: {CurrentPageItemsCount}", pagedResult.TotalCount, pagedResult.Items.Count());
+                return new TableData<HotelDto>() { TotalItems = pagedResult.TotalCount, Items = pagedResult.Items };
+            }
+            else
+            {
+                Logger.LogWarning("ServerReload: ApiClient.GetAsync returned null for URI: {RequestUri}", requestUri);
+                Snackbar.Add("خطا در دریافت اطلاعات هتل‌ها از سرور.", Severity.Error);
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "ServerReload: Unexpected error occurred while fetching hotels from URI: (see exception for URI)");
+            Snackbar.Add("خطای پیش‌بینی نشده در دریافت اطلاعات هتل‌ها.", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+            // StateHasChanged(); // MudTable معمولاً خودش UI را آپدیت می‌کند پس از ServerReload
+            Logger.LogInformation("ServerReload finished. _isLoading set to false.");
+        }
+        return new TableData<HotelDto>() { TotalItems = 0, Items = new List<HotelDto>() }; // بازگشت لیست خالی در صورت خطا
+    }
+
+    private void OnSearch(string text)
+    {
+        _searchTerm = text;
+        _table.ReloadServerData(); 
+        Logger.LogInformation("Search term changed to: '{SearchTerm}'. Requesting table reload.", _searchTerm);
+    }
+
+    private async Task OpenCreateHotelDialog()
+    {
+        var parameters = new DialogParameters();
+        var dialog = DialogService.Show<CreateHotelDialog>("ایجاد هتل جدید", parameters);
+        var result = await dialog.Result;
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("هتل با موفقیت ایجاد شد.", Severity.Success);
+            await _table.ReloadServerData();
+        }
+    }
+
+    // متد OnRowClickHandler شما باید async Task باشد
+    private async Task OnRowClickHandler(TableRowClickEventArgs<HotelDto> args)
+    {
+        Logger.LogInformation("Row clicked for Hotel ID: {HotelId}, Name: {HotelName}.", args.Item.Id, args.Item.Name);
+        await OpenEditHotelDialog(args.Item); // فراخوانی با await
+    }
+
+    private async Task OpenEditHotelDialog(HotelDto hotelToEdit)
+    {
+        Logger.LogInformation("Opening edit dialog for Hotel ID: {HotelId}, Name: {HotelName}", hotelToEdit.Id, hotelToEdit.Name);
+        var parameters = new DialogParameters { ["HotelToEdit"] = hotelToEdit };
+        var dialog = DialogService.Show<EditHotelDialog>($"ویرایش هتل: {hotelToEdit.Name}", parameters);
+        var result = await dialog.Result;
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("هتل با موفقیت ویرایش شد.", Severity.Success);
+            await _table.ReloadServerData();
+        }
+    }
+
+    private async Task ConfirmDeleteHotel(HotelDto hotelToDelete)
+    {
+        Logger.LogInformation("Opening confirm delete dialog for Hotel ID: {HotelId}, Name: {HotelName}", hotelToDelete.Id, hotelToDelete.Name);
+        var parameters = new DialogParameters
+        {
+            ["Title"] = "تأیید حذف هتل",
+            ["ContentText"] = $"آیا از حذف هتل '{hotelToDelete.Name}' مطمئن هستید؟ این عملیات قابل بازگشت نیست.",
+            ["ButtonText"] = "حذف",
+            ["Color"] = Color.Error,
+            ["Icon"] = Icons.Material.Filled.DeleteForever
+        };
+        var dialog = DialogService.Show<ConfirmDialog>("تأیید حذف", parameters);
+        var result = await dialog.Result;
+        if (result != null && !result.Cancelled)
+        {
+            _isLoading = true; 
+            StateHasChanged();
+            try
+            {
+                await ApiClient.DeleteAsync($"api/hotels/{hotelToDelete.Id}");
+                Snackbar.Add("هتل با موفقیت حذف شد.", Severity.Success);
+                await _table.ReloadServerData();
+            }
+            catch (ApplicationException ex)
+            {
+                Snackbar.Add($"خطا در حذف هتل: {ex.Message}", Severity.Error);
+            }
+            catch (Exception ex)
+            {
+                Snackbar.Add($"خطای پیش‌بینی نشده در حذف هتل: {ex.Message}", Severity.Error);
+                Logger.LogError(ex, "Unexpected error deleting hotel ID: {HotelId}", hotelToDelete.Id);
+            }
+            finally
+            {
+                _isLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+@* src/HotelReservation.Client/Shared/RedirectToLogin.razor *@
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override void OnInitialized()
+    {
+        NavigationManager.NavigateTo("login");
+    }
+}

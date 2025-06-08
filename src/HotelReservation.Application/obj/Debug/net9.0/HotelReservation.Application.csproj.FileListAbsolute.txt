@@ -8,6 +8,7 @@ C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelRese
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelReservation.Application.AssemblyInfoInputs.cache
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelReservation.Application.AssemblyInfo.cs
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelReservation.Application.csproj.CoreCompileInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelReservation.Application.sourcelink.json
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelRes.D39C8119.Up2Date
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\HotelReservation.Application.dll
 C:\Project\HotelClub\src\HotelReservation.Application\obj\Debug\net9.0\refint\HotelReservation.Application.dll

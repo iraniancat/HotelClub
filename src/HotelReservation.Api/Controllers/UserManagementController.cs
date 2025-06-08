@@ -14,7 +14,8 @@ using HotelReservation.Application.Features.UserManagement.Commands.CreateNonEmp
 using HotelReservation.Application.Features.UserManagement.Commands.UpdateUser;
 using HotelReservation.Application.Features.UserManagement.Commands.SetUserPassword;
 using Microsoft.AspNetCore.Authorization;
-using HotelReservation.Application.DTOs.Common; // برای StatusCodes
+using HotelReservation.Application.DTOs.Common;
+using HotelReservation.Application.Features.UserManagement.Queries.SearchUsers; // برای StatusCodes
 
 namespace HotelReservation.Api.Controllers;
 
@@ -24,24 +25,29 @@ namespace HotelReservation.Api.Controllers;
 public class UserManagementController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<DepartmentsController> _logger;
 
-    public UserManagementController(IMediator mediator)
+
+
+    public UserManagementController(IMediator mediator, ILogger<DepartmentsController> logger)
+
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     // GET: api/management/users
-     [HttpGet]
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<UserManagementListDto>))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     // [Authorize(Roles = "SuperAdmin")] // این از کلاس به ارث می‌رسد
     public async Task<IActionResult> GetAllUsers(
-        [FromQuery] string? searchTerm = null,
-        [FromQuery] Guid? roleIdFilter = null, // <<-- اضافه شد
-        [FromQuery] bool? isActiveFilter = null, // <<-- اضافه شد
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 10)
+       [FromQuery] string? searchTerm = null,
+       [FromQuery] Guid? roleIdFilter = null, // <<-- اضافه شد
+       [FromQuery] bool? isActiveFilter = null, // <<-- اضافه شد
+       [FromQuery] int pageNumber = 1,
+       [FromQuery] int pageSize = 10)
     {
         // شناسه کاربر لاگین کرده برای این Query خاص لازم نیست، چون مدیر ارشد همه را می‌بیند
         // اما اگر در آینده نیاز به فیلتر بر اساس دسترسی‌های خاص مدیر ارشد بود، می‌توان آن را اضافه کرد.
@@ -82,7 +88,6 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
-    // TODO (Authorization): [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> SetUserActivationStatus(Guid id, [FromBody] SetUserActivationDto dto)
     {
         var command = new SetUserActivationCommand(id, dto.IsActive);
@@ -94,7 +99,6 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی و BadRequestException
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
-    // TODO (Authorization): [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> AssignRoleToUser(Guid id, [FromBody] AssignRoleToUserDto dto)
     {
         if (dto == null)
@@ -102,7 +106,7 @@ public class UserManagementController : ControllerBase
             return BadRequest("اطلاعات تخصیص نقش ارسال نشده است.");
         }
 
-        var command = new AssignRoleToUserCommand(id, dto.RoleId, dto.HotelId);
+        var command = new AssignRoleToUserCommand(id, dto.RoleId, dto.HotelId, dto.ProvinceCode);
         await _mediator.Send(command); // Exceptionها توسط Middleware مدیریت می‌شوند
 
         return NoContent();
@@ -111,7 +115,6 @@ public class UserManagementController : ControllerBase
     [HttpPost] // POST api/management/users
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(object))] // بازگشت شناسه کاربر جدید
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی و BadRequestException
-    // TODO (Authorization): [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> CreateNonEmployeeUser([FromBody] CreateNonEmployeeUserDto dto)
     {
         if (dto == null)
@@ -135,7 +138,6 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    // TODO (Authorization): [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> UpdateUser(Guid id, [FromBody] UpdateUserDto dto)
     {
         if (dto == null)
@@ -164,7 +166,6 @@ public class UserManagementController : ControllerBase
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی DTO و Command
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
-    // TODO (Authorization): [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> SetUserPassword(Guid id, [FromBody] SetUserPasswordDto dto)
     {
         if (dto == null) // بررسی اولیه DTO
@@ -178,5 +179,18 @@ public class UserManagementController : ControllerBase
         await _mediator.Send(command); // Exception‌ها توسط Middleware و ValidationBehavior مدیریت می‌شوند
 
         return NoContent();
+    }
+     [HttpGet("search")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserWithDependentsDto>))]
+    public async Task<IActionResult> SearchUsers([FromQuery] string term)
+    {
+        if (string.IsNullOrWhiteSpace(term))
+        {
+            return Ok(new List<UserWithDependentsDto>());
+        }
+        
+        var query = new SearchUsersQuery(term);
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 }

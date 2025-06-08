@@ -1,0 +1,401 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\icon-192.png",
+      "PackagePath": "staticwebassets\\icon-192.png"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Black-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Black-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Black-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Black-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Black-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Black-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Black-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Black-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Bold-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Bold-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Bold-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Bold-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Bold-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Bold-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Bold-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Bold-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Light-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Light-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Light-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Light-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Light-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Light-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Light-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Light-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Medium-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Medium-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Medium-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Medium-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Medium-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Medium-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Medium-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Medium-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Thin-FD.eot",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Thin-FD.eot"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Thin-FD.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Thin-FD.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Thin-FD.woff",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Thin-FD.woff"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Thin-FD.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Thin-FD.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Black.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Black.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Bold.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Bold.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-ExtraBold.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-ExtraBold.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-ExtraLight.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-ExtraLight.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Light.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Light.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Medium.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Medium.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Regular.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Regular.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-SemiBold.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-SemiBold.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Thin.ttf",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\ttf\\Vazirmatn-FD-Thin.ttf"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Black.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Black.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Bold.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Bold.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-ExtraBold.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-ExtraBold.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-ExtraLight.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-ExtraLight.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Light.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Light.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Medium.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Medium.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Regular.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Regular.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-SemiBold.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-SemiBold.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Thin.woff2",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazir\\webfonts\\Vazirmatn-FD-Thin.woff2"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\Vazirmatn-FD-font-face.css",
+      "PackagePath": "staticwebassets\\lib\\Font\\Vazirmatn-FD-font-face.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\sample-data\\weather.json",
+      "PackagePath": "staticwebassets\\sample-data\\weather.json"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.HotelReservation.Client.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.HotelReservation.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.HotelReservation.Client.props",
+      "PackagePath": "build\\HotelReservation.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.HotelReservation.Client.props",
+      "PackagePath": "buildMultiTargeting\\HotelReservation.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.HotelReservation.Client.props",
+      "PackagePath": "buildTransitive\\HotelReservation.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,242 @@
+@page "/admin/users"
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject ILogger<UserManagement> Logger
+
+<PageTitle>مدیریت کاربران</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudToolBar Class="mb-4">
+            <MudText Typo="Typo.h5">لیست کاربران سیستم</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateUserDialog" StartIcon="@Icons.Material.Filled.PersonAdd" Disabled="_isLoading">
+                ایجاد کاربر غیرسازمانی
+            </MudButton>
+        </MudToolBar>
+
+        <MudTable ServerData="@(new Func<TableState, Task<TableData<UserManagementListDto>>>(ServerReload))"
+                  Dense="true" Hover="true" Striped="true" @ref="_table"
+                  Loading="@_isLoading" LoadingProgressColor="Color.Primary">
+            <ToolBarContent>
+                <MudGrid Spacing="2" Justify="Justify.FlexEnd">
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudTextField T="string" ValueChanged="OnSearch" Placeholder="جستجو (نام، کد کاربری، کد ملی...)" Adornment="Adornment.Start"
+                                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" DebounceInterval="500" Clearable="true"></MudTextField>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudSelect T="Guid?" Label="فیلتر بر اساس نقش" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" ValueChanged="OnRoleFilterChanged" Clearable="true">
+                            @foreach (var role in _roles)
+                            {
+                                <MudSelectItem Value="@((Guid?)role.Id)">@role.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" sm="6" md="3">
+                        <MudSelect T="bool?" Label="فیلتر بر اساس وضعیت" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter" ValueChanged="OnStatusFilterChanged" Clearable="true">
+                            <MudSelectItem Value="@((bool?)true)">فعال</MudSelectItem>
+                            <MudSelectItem Value="@((bool?)false)">غیرفعال</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>نام کامل</MudTh>
+                <MudTh>شناسه کاربری</MudTh>
+                <MudTh>نقش</MudTh>
+                <MudTh>استان / اداره</MudTh>
+                <MudTh>هتل</MudTh>
+                <MudTh>وضعیت</MudTh>
+                <MudTh Style="text-align:center; width:150px;">عملیات</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="نام کامل">@context.FullName</MudTd>
+                <MudTd DataLabel="شناسه کاربری">@context.SystemUserId</MudTd>
+                <MudTd DataLabel="نقش">@context.RoleName</MudTd>
+                <MudTd DataLabel="استان / اداره">
+                    @if (!string.IsNullOrWhiteSpace(context.ProvinceName))
+                    {
+                        <MudChip Size="Size.Small">@context.ProvinceName</MudChip>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(context.DepartmentName))
+                    {
+                        <MudChip Size="Size.Small" Color="Color.Info">@context.DepartmentName</MudChip>
+                    }
+                </MudTd>
+                <MudTd DataLabel="هتل">@context.AssignedHotelName</MudTd>
+                <MudTd DataLabel="وضعیت">
+                    @if (context.IsActive)
+                    {
+                        <MudChip Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small">فعال</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" Size="Size.Small">غیرفعال</MudChip>
+                    }
+                </MudTd>
+                <MudTd Style="text-align:center">
+                     <MudMenu Icon="@Icons.Material.Filled.MoreVert" Dense="true" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight">
+                        <MudMenuItem OnClick="@(() => OpenEditUserDialog(context.Id))">ویرایش</MudMenuItem>
+                        <MudMenuItem OnClick="@(() => OpenAssignRoleDialog(context.Id))">تخصیص نقش</MudMenuItem>
+                        <MudMenuItem OnClick="@(() => OpenSetPasswordDialog(context.Id))">تغییر رمز عبور</MudMenuItem>
+                     </MudMenu>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[]{5, 10, 20, 50}" />
+            </PagerContent>
+            <NoRecordsContent>
+                <MudText>کاربری برای نمایش یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </LoadingContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<UserManagementListDto> _table = new();
+    private bool _isLoading = true;
+    
+    // فیلترها
+    private string? _searchTerm;
+    private Guid? _roleIdFilter;
+    private bool? _isActiveFilter;
+
+    private List<RoleDto> _roles = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // بارگذاری لیست نقش‌ها برای استفاده در فیلتر
+        try
+        {
+            var rolesResult = await ApiClient.GetListAsync<RoleDto>("api/roles");
+            if (rolesResult != null)
+            {
+                _roles = rolesResult.ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست نقش‌ها: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task<TableData<UserManagementListDto>> ServerReload(TableState state)
+    {
+        _isLoading = true;
+        try
+        {
+            var requestUri = $"api/management/users?pageNumber={state.Page + 1}&pageSize={state.PageSize}";
+            if (!string.IsNullOrWhiteSpace(_searchTerm))
+                requestUri += $"&searchTerm={Uri.EscapeDataString(_searchTerm)}";
+            if (_roleIdFilter.HasValue)
+                requestUri += $"&roleIdFilter={_roleIdFilter.Value}";
+            if (_isActiveFilter.HasValue)
+                requestUri += $"&isActiveFilter={_isActiveFilter.Value}";
+            
+            // TODO: افزودن مرتب‌سازی سمت سرور (Server-side Sorting)
+
+            var pagedResult = await ApiClient.GetAsync<PagedResult<UserManagementListDto>>(requestUri);
+            if (pagedResult != null)
+            {
+                return new TableData<UserManagementListDto>() { TotalItems = pagedResult.TotalCount, Items = pagedResult.Items };
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات کاربران: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+        return new TableData<UserManagementListDto>() { TotalItems = 0, Items = new List<UserManagementListDto>() };
+    }
+
+    // Event Handlers برای فیلترها
+    private void OnSearch(string text)
+    {
+        _searchTerm = text;
+        _table.ReloadServerData(); 
+    }
+
+    private Task OnRoleFilterChanged(Guid? selectedRoleId)
+    {
+        _roleIdFilter = selectedRoleId;
+        return _table.ReloadServerData();
+    }
+    
+    private Task OnStatusFilterChanged(bool? selectedStatus)
+    {
+        _isActiveFilter = selectedStatus;
+        return _table.ReloadServerData();
+    }
+    
+    // متدهای مربوط به باز کردن دیالوگ‌ها
+    private async Task OpenCreateUserDialog()
+    {
+        var dialog = DialogService.Show<CreateNonEmployeeUserDialog>("ایجاد کاربر غیرسازمانی جدید");
+        var result = await dialog.Result;
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("کاربر با موفقیت ایجاد شد.", Severity.Success);
+            await _table.ReloadServerData();
+        }
+    }
+    
+    private async Task OpenEditUserDialog(Guid userId)
+    {
+        var userDetails = await ApiClient.GetAsync<UserManagementDetailsDto>($"api/management/users/{userId}");
+        if (userDetails != null)
+        {
+            var parameters = new DialogParameters { ["UserToEdit"] = userDetails };
+            var dialog = DialogService.Show<EditUserDialog>($"ویرایش کاربر: {userDetails.FullName}", parameters);
+            var result = await dialog.Result;
+            if (result != null && !result.Cancelled)
+            {
+                Snackbar.Add("کاربر با موفقیت ویرایش شد.", Severity.Success);
+                await _table.ReloadServerData();
+            }
+        }
+        else
+        {
+            Snackbar.Add("خطا در دریافت اطلاعات کاربر برای ویرایش.", Severity.Error);
+        }
+    }
+    
+    private async Task OpenAssignRoleDialog(Guid userId)
+    {
+        var userDetails = await ApiClient.GetAsync<UserManagementDetailsDto>($"api/management/users/{userId}");
+        if (userDetails != null)
+        {
+            var parameters = new DialogParameters { ["UserToUpdate"] = userDetails };
+            var dialog = DialogService.Show<AssignRoleDialog>($"تخصیص نقش به: {userDetails.FullName}", parameters);
+            var result = await dialog.Result;
+            if (result != null && !result.Cancelled)
+            {
+                Snackbar.Add("نقش کاربر با موفقیت تغییر یافت.", Severity.Success);
+                await _table.ReloadServerData();
+            }
+        }
+        else
+        {
+            Snackbar.Add("خطا در دریافت اطلاعات کاربر.", Severity.Error);
+        }
+    }
+
+    private async Task OpenSetPasswordDialog(Guid userId)
+    {
+        var parameters = new DialogParameters { ["UserId"] = userId };
+        var dialog = DialogService.Show<SetUserPasswordDialog>("تغییر رمز عبور", parameters);
+        var result = await dialog.Result;
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("رمز عبور کاربر با موفقیت تغییر یافت.", Severity.Success);
+        }
+    }
+}

@@ -1,0 +1,204 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/EditUserDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject ILogger<EditUserDialog> Logger
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.EditNote" Class="me-3"/> ویرایش کاربر: @UserToEdit?.FullName
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (_isLoading)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            <MudText Class="ml-2">در حال بارگذاری اطلاعات اولیه...</MudText>
+        }
+        else if (_updateUserModel != null)
+        {
+            <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_updateUserModel">
+                <DataAnnotationsValidator />
+                <MudGrid Spacing="2">
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="نام کامل" @bind-Value="_updateUserModel.FullName"
+                                      For="@(() => _updateUserModel.FullName)" Required="true" RequiredError="نام کامل الزامی است." />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudTextField T="string" Label="کد ملی (اختیاری)" @bind-Value="_updateUserModel.NationalCode"
+                                      For="@(() => _updateUserModel.NationalCode)" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudTextField T="string" Label="شماره تلفن (اختیاری)" @bind-Value="_updateUserModel.PhoneNumber"
+                                      For="@(() => _updateUserModel.PhoneNumber)" InputType="InputType.Telephone" />
+                    </MudItem>
+                     <MudItem xs="12" sm="6">
+                        <MudSelect T="Guid" Label="نقش"
+                                   Value="_updateUserModel.RoleId"
+                                   ValueChanged="OnRoleSelectionChanged"
+                                   For="@(() => _updateUserModel.RoleId)"
+                                   Required="true" RequiredError="انتخاب نقش الزامی است.">
+                            @foreach (var role in _roles)
+                            {
+                                <MudSelectItem Value="@role.Id">@role.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    @if (_showHotelSelection)
+                    {
+                        <MudItem xs="12" sm="6">
+                            <MudSelect T="Guid?" Label="هتل" @bind-Value="_updateUserModel.HotelId" For="@(() => _updateUserModel.HotelId)"
+                                       Required="true" RequiredError="برای نقش کاربر هتل، انتخاب هتل الزامی است.">
+                                @foreach (var hotel in _hotels)
+                                {
+                                    <MudSelectItem Value="@((Guid?)hotel.Id)">@hotel.Name</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                    }
+                    <MudItem xs="12">
+                        <MudSwitch @bind-Checked="_updateUserModel.IsActive" Color="Color.Primary">وضعیت فعال باشد</MudSwitch>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing || _isLoading">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ms-2">در حال ذخیره تغییرات...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره تغییرات</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public UserManagementDetailsDto UserToEdit { get; set; } = default!;
+
+    private UpdateUserDto _updateUserModel = new UpdateUserDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+    private bool _isLoading = true;
+
+    private List<RoleDto> _roles = new();
+    private List<HotelDto> _hotels = new();
+    private bool _showHotelSelection = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (UserToEdit != null)
+            {
+                _updateUserModel = new UpdateUserDto
+                {
+                    FullName = UserToEdit.FullName,
+                    IsActive = UserToEdit.IsActive,
+                    RoleId = UserToEdit.RoleId,
+                    NationalCode = UserToEdit.NationalCode,
+                   // PhoneNumber = UserToEdit.PhoneNumber,
+                    ProvinceCode = UserToEdit.ProvinceCode,
+                    DepartmentCode = UserToEdit.DepartmentCode,
+                    HotelId = UserToEdit.HotelId
+                };
+            }
+            
+            await LoadInitialDataAsync();
+
+            OnRoleChanged(_updateUserModel.RoleId); 
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطا در بارگذاری اطلاعات اولیه برای فرم ویرایش.", Severity.Error);
+            Logger.LogError(ex, "Failed to load initial data for EditUserDialog.");
+            Cancel(); 
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private async Task LoadInitialDataAsync()
+    {
+        var rolesTask = ApiClient.GetListAsync<RoleDto>("api/roles");
+        var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+
+        await Task.WhenAll(rolesTask, hotelsTask);
+
+        var rolesResult = await rolesTask;
+        if (rolesResult != null)
+        {
+            _roles = rolesResult.Where(r => r.Name != "Employee").ToList();
+        }
+
+        var hotelsResult = await hotelsTask;
+        if (hotelsResult != null)
+        {
+            _hotels = hotelsResult.ToList();
+        }
+    }
+
+    private void OnRoleSelectionChanged(Guid selectedRoleId)
+    {
+        _updateUserModel.RoleId = selectedRoleId;
+        OnRoleChanged(selectedRoleId);
+    }
+    
+    private void OnRoleChanged(Guid selectedRoleId)
+    {
+        var selectedRole = _roles.FirstOrDefault(r => r.Id == selectedRoleId);
+        if (selectedRole != null && selectedRole.Name.Equals("HotelUser", StringComparison.OrdinalIgnoreCase))
+        {
+            _showHotelSelection = true;
+        }
+        else
+        {
+            _showHotelSelection = false;
+            _updateUserModel.HotelId = null;
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid)
+        {
+            Snackbar.Add("لطفاً خطاهای فرم را برطرف نمایید.", Severity.Warning);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PutAsync($"api/management/users/{UserToEdit.Id}", _updateUserModel);
+            
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده در هنگام ویرایش کاربر رخ داد.", Severity.Error);
+            Logger.LogError(ex, "Unexpected error updating user.");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

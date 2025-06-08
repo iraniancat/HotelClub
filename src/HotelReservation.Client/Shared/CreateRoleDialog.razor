@@ -1,0 +1,77 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/CreateRoleDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="me-3" /> ایجاد نقش جدید
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_createRoleModel">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="نام نقش" @bind-Value="_createRoleModel.Name"
+                                  For="@(() => _createRoleModel.Name)" Required="true" RequiredError="نام نقش الزامی است." />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="توضیحات (اختیاری)" @bind-Value="_createRoleModel.Description"
+                                  For="@(() => _createRoleModel.Description)" Lines="3" />
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ms-2">در حال ذخیره...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private CreateRoleDto _createRoleModel = new CreateRoleDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid) return;
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PostAsync("api/roles", _createRoleModel);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده رخ داد.", Severity.Error);
+            Console.WriteLine($"Error creating role: {ex}");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

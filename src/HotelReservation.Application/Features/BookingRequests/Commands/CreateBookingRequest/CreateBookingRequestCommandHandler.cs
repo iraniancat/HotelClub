@@ -1,11 +1,11 @@
-// src/HotelReservation.Application/Features/BookingRequests/Commands/CreateBookingRequest/CreateBookingRequestCommandHandler.cs
 using HotelReservation.Application.Contracts.Persistence;
 using HotelReservation.Application.Contracts.Infrastructure;
-using HotelReservation.Application.DTOs.Booking; // مهم: برای CreateBookingRequestResponseDto
+using HotelReservation.Application.Contracts.Security; // <<-- برای ICurrentUserService
+using HotelReservation.Application.DTOs.Booking;
 using HotelReservation.Application.Exceptions;
 using HotelReservation.Domain.Entities;
 using HotelReservation.Domain.Enums;
-using MediatR; // مهم: برای IRequestHandler
+using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -14,54 +14,64 @@ using System.Threading.Tasks;
 
 namespace HotelReservation.Application.Features.BookingRequests.Commands.CreateBookingRequest;
 
-// این خط بسیار مهم است vv                          vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingRequestCommand, CreateBookingRequestResponseDto>
 {
-    // ... بدنه Handler که قبلاً تعریف کردیم ...
     private readonly IUnitOfWork _unitOfWork;
     private readonly ISmsService _smsService;
     private readonly ILogger<CreateBookingRequestCommandHandler> _logger;
+    private readonly ICurrentUserService _currentUserService; // <<-- اضافه شد
+
     private const decimal EmployeeAndDependentDiscount = 0.80m;
     private const decimal CompanionDiscount = 0.65m;
-    private const string HotelUserRoleName = "HotelUser"; 
     private const string SuperAdminRoleName = "SuperAdmin";
     private const string ProvinceUserRoleName = "ProvinceUser";
 
-
-     public CreateBookingRequestCommandHandler(
+    public CreateBookingRequestCommandHandler(
         IUnitOfWork unitOfWork,
         ISmsService smsService,
-        ILogger<CreateBookingRequestCommandHandler> logger)
+        ILogger<CreateBookingRequestCommandHandler> logger,
+        ICurrentUserService currentUserService) // <<-- اضافه شد
     {
         _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         _smsService = smsService ?? throw new ArgumentNullException(nameof(smsService));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _currentUserService = currentUserService ?? throw new ArgumentNullException(nameof(currentUserService)); // <<-- اضافه شد
     }
 
     public async Task<CreateBookingRequestResponseDto> Handle(CreateBookingRequestCommand request, CancellationToken cancellationToken)
     {
-         var submitterUser = await _unitOfWork.UserRepository.GetUserWithFullDetailsAsync(request.RequestSubmitterUserId);
-         if (submitterUser == null)
-         {
-             throw new BadRequestException($"کاربر ثبت کننده با شناسه '{request.RequestSubmitterUserId}' یافت نشد.");
-         }
-         if (submitterUser.Role?.Name != SuperAdminRoleName && submitterUser.Role?.Name != ProvinceUserRoleName)
-         {
-             throw new BadRequestException("کاربر فعلی مجاز به ثبت درخواست رزرو برای دیگران نیست.");
-         }
+        // ۱. دریافت شناسه کاربر ثبت کننده از ICurrentUserService
+        var submitterUserId = _currentUserService.UserId;
+        if (!submitterUserId.HasValue)
+        {
+            throw new UnauthorizedAccessException("اطلاعات کاربر ثبت کننده برای این عملیات در دسترس نیست.");
+        }
+        
+        var submitterUser = await _unitOfWork.UserRepository.GetUserWithFullDetailsAsync(submitterUserId.Value);
+        if (submitterUser == null)
+        {
+            throw new BadRequestException($"کاربر ثبت کننده با شناسه '{submitterUserId.Value}' یافت نشد.");
+        }
 
-         var mainEmployeeUser = await _unitOfWork.UserRepository.GetByNationalCodeAsync(request.RequestingEmployeeNationalCode);
-         if (mainEmployeeUser == null)
-         {
-             throw new BadRequestException($"کارمندی با کد ملی '{request.RequestingEmployeeNationalCode}' در سیستم یافت نشد.");
-         }
+        // ۲. بررسی نقش کاربر ثبت کننده
+        if (submitterUser.Role?.Name != SuperAdminRoleName && submitterUser.Role?.Name != ProvinceUserRoleName)
+        {
+            throw new ForbiddenAccessException("کاربر فعلی مجاز به ثبت درخواست رزرو برای دیگران نیست.");
+        }
 
-         var hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId);
-         if (hotel == null)
-         {
-             throw new NotFoundException(nameof(Hotel), request.HotelId);
-         }
+        // ... بقیه منطق Handler که قبلاً داشتیم و حالا از submitterUserId.Value و submitterUser استفاده می‌کند ...
+        var mainEmployeeUser = await _unitOfWork.UserRepository.GetByNationalCodeAsync(request.RequestingEmployeeNationalCode);
+        if (mainEmployeeUser == null)
+        {
+            throw new BadRequestException($"کارمندی با کد ملی '{request.RequestingEmployeeNationalCode}' در سیستم یافت نشد.");
+        }
 
+        var hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId);
+        if (hotel == null)
+        {
+            throw new NotFoundException(nameof(Hotel), request.HotelId);
+        }
+        
         var bookingRequestEntity = new BookingRequest(
             request.RequestingEmployeeNationalCode,
             request.BookingPeriod,
@@ -70,12 +80,13 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
             request.Guests.Count,
             request.HotelId,
             hotel,
-            request.RequestSubmitterUserId,
+            submitterUserId.Value, // استفاده از شناسه کاربر از ICurrentUserService
             submitterUser,
             request.Notes
         );
-        bookingRequestEntity.UpdateStatus(BookingStatus.SubmittedToHotel, submitterUser.Id, submitterUser, "درخواست توسط مدیر/کاربر استان ثبت شد");
+        bookingRequestEntity.UpdateStatus(BookingStatus.SubmittedToHotel, submitterUserId.Value, submitterUser, "درخواست توسط مدیر/کاربر استان ثبت شد");
 
+        // پردازش مهمانان و محاسبه تخفیف...
         foreach (var guestDto in request.Guests)
         {
             decimal discountPercentage;
@@ -85,46 +96,29 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
             }
             else
             {
-                var dependent = await _unitOfWork.DependentDataRepository
-                                      .GetByEmployeeDataIdAndNationalCodeAsync(mainEmployeeUser.Id, guestDto.NationalCode);
-                if (dependent != null)
-                {
-                    discountPercentage = EmployeeAndDependentDiscount;
-                }
-                else
-                {
-                    discountPercentage = CompanionDiscount;
-                }
+                var dependent = await _unitOfWork.DependentDataRepository.GetByEmployeeDataIdAndNationalCodeAsync(mainEmployeeUser.Id, guestDto.NationalCode);
+                discountPercentage = (dependent != null) ? EmployeeAndDependentDiscount : CompanionDiscount;
             }
-            bookingRequestEntity.AddGuest(
-                guestDto.FullName,
-                guestDto.NationalCode,
-                guestDto.RelationshipToEmployee,
-                discountPercentage * 100 
-            );
+            bookingRequestEntity.AddGuest(guestDto.FullName, guestDto.NationalCode, guestDto.RelationshipToEmployee, discountPercentage * 100);
         }
 
         await _unitOfWork.BookingRequestRepository.AddAsync(bookingRequestEntity);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
+        // ارسال SMS...
         if (!string.IsNullOrEmpty(mainEmployeeUser.PhoneNumber))
         {
             try
             {
-               await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber, 
-                    $"درخواست رزرو شما با کد رهگیری {bookingRequestEntity.TrackingCode} برای هتل {hotel.Name} در تاریخ {request.CheckInDate:yyyy/MM/dd} ثبت شد.");
-               _logger.LogInformation($"Booking confirmation SMS sent to {mainEmployeeUser.PhoneNumber} for tracking code {bookingRequestEntity.TrackingCode}.");
+                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber, 
+                     $"درخواست رزرو شما با کد رهگیری {bookingRequestEntity.TrackingCode} برای هتل {hotel.Name} در تاریخ {request.CheckInDate:yyyy/MM/dd} ثبت شد.");
             }
             catch (Exception ex)
             {
-                 _logger.LogError(ex, $"Failed to send SMS for booking {bookingRequestEntity.TrackingCode} to {mainEmployeeUser.PhoneNumber}.");
+                _logger.LogError(ex, "Failed to send SMS for booking {TrackingCode}.", bookingRequestEntity.TrackingCode);
             }
         }
-        else
-        {
-            _logger.LogWarning($"Phone number not found for employee (NationalCode: {mainEmployeeUser.NationalCode}) to send booking confirmation SMS for tracking code {bookingRequestEntity.TrackingCode}.");
-        }
-
+        
         return new CreateBookingRequestResponseDto 
         { 
             Id = bookingRequestEntity.Id, 

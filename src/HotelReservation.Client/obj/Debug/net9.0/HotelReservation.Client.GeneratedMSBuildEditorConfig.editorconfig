@@ -1,0 +1,117 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = HotelReservation.Client
+build_property.RootNamespace = HotelReservation.Client
+build_property.ProjectDir = C:\Project\HotelClub\src\HotelReservation.Client\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Project\HotelClub\src\HotelReservation.Client
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/AdminDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5EYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/HotelManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cSG90ZWxNYW5hZ2VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/RoleManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZU1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/UserManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlck1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Authentication/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Province/CreateBookingPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdmluY2VcQ3JlYXRlQm9va2luZ1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/AssignRoleDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFzc2lnblJvbGVEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbmZpcm1EaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateHotelDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZUhvdGVsRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateNonEmployeeUserDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZU5vbkVtcGxveWVlVXNlckRpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateRoleDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZVJvbGVEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditHotelDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVkaXRIb3RlbERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditRoleDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVkaXRSb2xlRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditUserDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVkaXRVc2VyRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/SetUserPasswordDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNldFVzZXJQYXNzd29yZERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

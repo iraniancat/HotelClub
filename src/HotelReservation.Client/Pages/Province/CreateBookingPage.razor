@@ -1,0 +1,394 @@
+@page "/province/create-booking"
+@attribute [Authorize(Roles = "SuperAdmin, ProvinceUser")]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject ILogger<CreateBookingPage> Logger
+@using System.Text.Json
+@using Blazor.PersianDatePicker
+@* @using Blazor.PersianDatePicker.Utils
+@using Blazor.PersianDatePicker.Enums *@
+
+<PageTitle>ثبت درخواست رزرو جدید</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <EditForm Model="_bookingModel" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <MudPaper Class="pa-4" Elevation="3">
+            <MudText Typo="Typo.h4" GutterBottom="true">فرم ثبت درخواست رزرو</MudText>
+
+            <MudGrid Spacing="3">
+                <MudItem xs="12">
+                    <MudAutocomplete T="UserWithDependentsDto"
+                        Label="جستجو و انتخاب کارمند اصلی (بر اساس شماره پرسنلی یا نام)"
+                        SearchFunc="SearchEmployeesAsync" @bind-value="_selectedEmployee" ShowProgressIndicator="true"
+                        Required="true" RequiredError="انتخاب کارمند الزامی است." DebounceInterval="300"
+                        ResetValueOnEmptyText="true" Variant="Variant.Outlined"
+                        HelperText="حداقل ۲ کاراکتر برای جستجو وارد کنید." />
+                </MudItem>
+                @if (_selectedEmployee != null)
+                {
+                    <MudItem xs="12">
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
+                            کارمند انتخاب شده: <strong>@_selectedEmployee.FullName</strong> | کد ملی:
+                            <strong>@_selectedEmployee.NationalCode</strong>
+                        </MudAlert>
+                    </MudItem>
+                }
+
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSelect T="Guid" Label="انتخاب هتل" @bind-value="_bookingModel.HotelId"
+                        For="@(() => _bookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است.">
+                        @if (_hotels.Any())
+                        {
+                            @foreach (var hotel in _hotels)
+                            {
+                                <MudSelectItem Value="hotel.Id">@hotel.Name</MudSelectItem>
+                            }
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSelect T="string" Label="دوره زمانی رزرو" @bind-value="_bookingModel.BookingPeriod"
+                        For="@(() => _bookingModel.BookingPeriod)" Required="true"
+                        RequiredError="دوره زمانی الزامی است.">
+                        @foreach (var period in _bookingPeriods)
+                        {
+                            <MudSelectItem Value="period">@period</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField T="string" Label="توضیحات (اختیاری)" @bind-value="_bookingModel.Notes" Lines="1" />
+                </MudItem>
+
+                <MudItem xs="12" sm="6">
+                    <div class="d-flex align-center">
+                        <span class="me-4">تاریخ ورود:</span>
+                        <InputPersianDatePicker @bind-Value="_bookingModel.CheckInDate" IsModal="true"
+                            Theme="PickerTheme.Default" />
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                    <div class="d-flex align-center">
+                        <span class="me-4">تاریخ خروج:</span>
+                        <InputPersianDatePicker @bind-Value="_bookingModel.CheckOutDate" @* IsModal="true" *@
+                            Theme="PickerTheme.Default" />
+                    </div>
+                    @* <InputPersianDatePicker Id="myInputDatePicker" @bind-Value="_myComponentField" Name="myInputName" 
+                    Visible="true"
+                         Disabled="false" ReadOnly="true"  PickerAlign="Align.Right"
+                       ShowCalendarIcon="true" CalendarIconPosition="IconPosition.BasedOnAlign"
+                        //Default: IconPosition.BasedOnAlign // Can be used in changing the vertical position of the
+                        picker popup relative to the input PickerOffsetTopPositionInPixels="2" //Default: 2 // Initial
+                        value for the input set today InitialValueSetOnToday="false" //Default: false // Calendar type
+                        for date picker including Dual, Single, etc // Options: Calendar.DualModeJalaliDefault |
+                        Calendar.DualModeMiladiDefault | Calendar.SingleModeJalali | Calendar.SingleModeMiladi
+                        CalendarType="Calendar.DualModeJalaliDefault" //Default: Calendar.DualModeJalaliDefault //
+                        Control the digit type showing in the input after selecting by the picker // Options:
+                        DigitType.BasedOnCalendar | DigitType.Persian | DigitType.English
+                        DigitType="DigitType.BasedOnCalendar" //Default: DigitType.BasedOnCalendar // Format of date to
+                        show in the input after selecting by picker, e.g. 1400/01/01 or 1400-01-01 // Options:
+                        DateFormat.yyyy_slash_MM_slash_dd | DateFormat.yyyy_dash_MM_dash_dd
+                        DateFormat="DateFormat.yyyy_slash_MM_slash_dd" //Default: DateFormat.yyyy_slash_MM_slash_dd //
+                        Prevent the user from selecting a date before today MinDateSetOnToday="true" 
+                        Input placeholder Placeholder="Select date" CssClass="form-control"
+                        Style="border:1px solid red; width:50%" Theme="PickerTheme.Default" MarkHolidays="true"
+                        MarkedDates="@(["1403-06-25", "1403/06/27", "1403/06/28"])"
+                        OnChange="@(() => Console.WriteLine("OK"))" OnClear="@(() => Console.WriteLine("Cleared"))" /> *@
+                </MudItem>
+
+
+                <MudItem xs="12">
+                    <MudDivider Class="my-4" />
+                    <MudText Typo="Typo.h6">اطلاعات مهمانان</MudText>
+
+                    @if (_selectedEmployee != null && _selectedEmployee.Dependents.Any())
+                    {
+                        <MudText Class="mt-2 mb-2"><strong>افراد تحت تکفل (تخفیف ۸۰٪):</strong></MudText>
+                        <MudPaper Class="pa-3" Outlined="true">
+                            <MudGrid>
+                                @foreach (var dependent in _selectedEmployee.Dependents)
+                                {
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudCheckBox T="bool" Label="@($"{dependent.FullName} ({dependent.Relationship})")"
+                                            ValueChanged="@((bool isChecked) => OnDependentSelectionChanged(isChecked, dependent))" />
+                                    </MudItem>
+                                }
+                            </MudGrid>
+                        </MudPaper>
+                    }
+
+                    <MudText Class="mt-4 mb-2"><strong>سایر همراهان (تخفیف ۶۵٪):</strong></MudText>
+                    @foreach (var guest in _otherGuests)
+                    {
+                        <MudPaper Class="pa-3 mt-4" Outlined="true">
+                            <MudGrid Spacing="2" AlignItems="AlignItems.Center">
+                                <MudItem xs="12" sm="4">
+                                    <MudTextField T="string" Label="نام کامل همراه" @bind-value="guest.FullName"
+                                        Required="true" Dense="true" Margin="Margin.Dense" />
+                                </MudItem>
+                                <MudItem xs="12" sm="3">
+                                    <MudTextField T="string" Label="کد ملی همراه" @bind-value="guest.NationalCode"
+                                        Required="true" Dense="true" Margin="Margin.Dense" />
+                                </MudItem>
+                                <MudItem xs="12" sm="4">
+                                    <MudTextField T="string" Label="نسبت با کارمند"
+                                        @bind-value="guest.RelationshipToEmployee" Required="true" Dense="true"
+                                        Margin="Margin.Dense" HelperText="مثال: پدر، مادر، دوست" />
+                                </MudItem>
+                                <MudItem xs="12" sm="1">
+                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error"
+                                        OnClick="@(() => RemoveOtherGuest(guest))" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>
+                    }
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="AddOtherGuest"
+                        StartIcon="@Icons.Material.Filled.Add" Class="mt-4">افزودن همراه</MudButton>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider Class="my-4" />
+                    <MudText Typo="Typo.h6">پیوست فایل (اختیاری)</MudText>
+                    <MudFileUpload T="IBrowserFile" OnFilesChanged="OnFileChanged" Accept=".pdf,.doc,.docx"
+                        MaximumFileCount="1">
+                        <ButtonTemplate Context="another_name">
+                            <MudButton HtmlTag="label" Variant="Variant.Filled" Color="Color.Primary"
+                                StartIcon="@Icons.Material.Filled.AttachFile" for="@($"file-upload-{_fileUploadId}")">
+                                انتخاب فایل
+                            </MudButton>
+                        </ButtonTemplate>
+                        <SelectedTemplate Context="fileContext">
+                            @if (fileContext != null)
+                            {
+                                <MudText>@fileContext.Name (@((fileContext.Size / 1024.0).ToString("F1")) KB)</MudText>
+                            }
+                        </SelectedTemplate>
+                    </MudFileUpload>
+                </MudItem>
+
+            </MudGrid>
+
+            <MudToolBar Class="mt-8">
+                <MudSpacer />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit"
+                    Disabled="_isProcessing" Class="ms-2">
+                    @if (_isProcessing)
+                    {
+                        <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                        <MudText Class="ms-2">در حال ثبت درخواست...</MudText>
+                    }
+                    else
+                    {
+                        <MudText>ثبت درخواست رزرو</MudText>
+                    }
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" OnClick="@(() => NavigationManager.NavigateTo("/"))">انصراف
+                </MudButton>
+            </MudToolBar>
+        </MudPaper>
+    </EditForm>
+</MudContainer>
+
+@code {
+    // مدل UI که تاریخ‌ها را به صورت رشته شمسی نگه می‌دارد
+    private class CreateBookingModel
+    {
+        public string RequestingEmployeeNationalCode { get; set; } = string.Empty;
+        public string BookingPeriod { get; set; } = string.Empty;
+        public string? CheckInDate { get; set; }
+        public string? CheckOutDate { get; set; }
+        public Guid HotelId { get; set; }
+        public string? Notes { get; set; }
+        public List<BookingGuestInputDto> Guests { get; set; } = new List<BookingGuestInputDto>();
+    }
+
+    private CreateBookingModel _bookingModel = new();
+    private UserWithDependentsDto? _selectedEmployee;
+    private List<BookingGuestInputDto> _otherGuests = new();
+    private List<DependentSlimDto> _selectedDependents = new();
+
+    private bool _isProcessing = false;
+    private List<HotelDto> _hotels = new();
+    private List<string> _bookingPeriods = new() { "بهار ۱۴۰۴", "تابستان ۱۴۰۴", "پاییز ۱۴۰۴", "زمستان ۱۴۰۴" };
+    private IBrowserFile? _selectedFile;
+    private readonly string _fileUploadId = $"file-upload-{Guid.NewGuid()}";
+
+    protected override async Task OnInitializedAsync()
+    {
+        // _bookingModel.CheckInDate = PersianDatePickerUtils.ToPersianDateString(DateTime.Now);
+        // _bookingModel.CheckOutDate = PersianDatePickerUtils.ToPersianDateString(DateTime.Now.AddDays(1));
+
+        try
+        {
+            var hotelsResult = await ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+            if (hotelsResult != null) _hotels = hotelsResult.ToList();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست هتل‌ها: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private async Task<IEnumerable<UserWithDependentsDto>> SearchEmployeesAsync(string value)
+    {
+        if (string.IsNullOrEmpty(value) || value.Length < 2)
+            return new List<UserWithDependentsDto>();
+
+        var result = await
+        ApiClient.GetListAsync<UserWithDependentsDto>($"api/management/users/search?term={Uri.EscapeDataString(value)}");
+        return result ?? new List<UserWithDependentsDto>();
+    }
+
+    private void AddOtherGuest()
+    {
+        _otherGuests.Add(new BookingGuestInputDto { RelationshipToEmployee = "همراه" });
+        UpdateFinalGuestList();
+    }
+
+    private void RemoveOtherGuest(BookingGuestInputDto guest)
+    {
+        _otherGuests.Remove(guest);
+        UpdateFinalGuestList();
+    }
+
+    private void OnDependentSelectionChanged(bool isChecked, DependentSlimDto dependent)
+    {
+        if (isChecked)
+        {
+            if (!_selectedDependents.Contains(dependent))
+                _selectedDependents.Add(dependent);
+        }
+        else
+        {
+            _selectedDependents.Remove(dependent);
+        }
+        UpdateFinalGuestList();
+    }
+
+    private void UpdateFinalGuestList()
+    {
+        if (_selectedEmployee == null) return;
+
+        _bookingModel.Guests.Clear();
+        _bookingModel.Guests.Add(new BookingGuestInputDto
+        {
+            FullName = _selectedEmployee.FullName,
+            NationalCode = _selectedEmployee.NationalCode,
+            RelationshipToEmployee = "خود کارمند"
+        });
+        _bookingModel.Guests.AddRange(_selectedDependents.Select(d => new BookingGuestInputDto
+        {
+            FullName = d.FullName,
+            NationalCode = d.NationalCode,
+            RelationshipToEmployee = d.Relationship
+        }));
+        _bookingModel.Guests.AddRange(_otherGuests);
+
+        StateHasChanged();
+    }
+
+    private void OnFileChanged(InputFileChangeEventArgs e)
+    {
+        _selectedFile = e.File;
+    }
+
+    private async Task HandleValidSubmit(EditContext context)
+    {
+        if (_selectedEmployee == null)
+        {
+            Snackbar.Add("لطفاً کارمند اصلی را انتخاب کنید.", Severity.Error);
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(_bookingModel.CheckInDate) || string.IsNullOrWhiteSpace(_bookingModel.CheckOutDate))
+        {
+            Snackbar.Add("تاریخ ورود و خروج نمی‌تواند خالی باشد.", Severity.Error);
+            return;
+        }
+
+        DateTime checkInDateTime, checkOutDateTime;
+        try
+        {
+            checkInDateTime = Convert.ToDateTime(_bookingModel.CheckInDate);//
+                                                                            // PersianDatePickerUtils.ToGregorianDate(_bookingModel.CheckInDate);
+            checkOutDateTime = Convert.ToDateTime(_bookingModel.CheckOutDate);
+            //PersianDatePickerUtils.ToGregorianDate(_bookingModel.CheckOutDate);
+        }
+        catch (Exception)
+        {
+            Snackbar.Add("فرمت تاریخ شمسی وارد شده نامعتبر است.", Severity.Error);
+            return;
+        }
+
+        if (checkOutDateTime <= checkInDateTime)
+        {
+            Snackbar.Add("تاریخ خروج باید بعد از تاریخ ورود باشد.", Severity.Error);
+            return;
+        }
+
+        UpdateFinalGuestList();
+        if (!_bookingModel.Guests.Any())
+        {
+            Snackbar.Add("حداقل یک مهمان باید در درخواست وجود داشته باشد.", Severity.Error);
+            return;
+        }
+
+        _isProcessing = true;
+
+        using var content = new MultipartFormDataContent();
+
+        var dtoToSend = new CreateBookingRequestDto
+        {
+            RequestingEmployeeNationalCode = _selectedEmployee.NationalCode,
+            BookingPeriod = _bookingModel.BookingPeriod,
+            CheckInDate = checkInDateTime,
+            CheckOutDate = checkOutDateTime,
+            HotelId = _bookingModel.HotelId,
+            Notes = _bookingModel.Notes,
+            Guests = _bookingModel.Guests
+        };
+        var bookingDataJson = JsonSerializer.Serialize(dtoToSend, new JsonSerializerOptions
+        {
+            PropertyNamingPolicy =
+        JsonNamingPolicy.CamelCase
+        });
+        content.Add(new StringContent(bookingDataJson), "bookingData");
+
+        if (_selectedFile != null)
+        {
+            const long maxFileSize = 5 * 1024 * 1024;
+            if (_selectedFile.Size > maxFileSize)
+            {
+                Snackbar.Add($"اندازه فایل نباید بیشتر از {maxFileSize / 1024 / 1024} مگابایت باشد.", Severity.Error);
+                _isProcessing = false;
+                return;
+            }
+            var fileContent = new StreamContent(_selectedFile.OpenReadStream(maxFileSize));
+            fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(_selectedFile.ContentType);
+            content.Add(fileContent, "file", _selectedFile.Name);
+        }
+
+        try
+        {
+            var response = await ApiClient.PostAsMultipartAsync<CreateBookingRequestResponseDto>("api/booking-requests", content);
+            if (response != null)
+            {
+                Snackbar.Add($"درخواست با موفقیت ثبت شد. کد رهگیری: {response.TrackingCode}", Severity.Success);
+                NavigationManager.NavigateTo("/");
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطای پیش‌بینی نشده: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+}

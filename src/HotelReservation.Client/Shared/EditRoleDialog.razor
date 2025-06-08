@@ -1,0 +1,98 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/EditRoleDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="me-3"/> ویرایش نقش: @RoleToEdit?.Name
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (RoleToEdit == null)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+        }
+        else
+        {
+            <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_updateRoleModel">
+                <DataAnnotationsValidator />
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="نام نقش" @bind-Value="_updateRoleModel.Name"
+                                      For="@(() => _updateRoleModel.Name)" Required="true" RequiredError="نام نقش الزامی است." />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="توضیحات (اختیاری)" @bind-Value="_updateRoleModel.Description"
+                                      For="@(() => _updateRoleModel.Description)" Lines="3" />
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ms-2">در حال ذخیره...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره تغییرات</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public RoleDto RoleToEdit { get; set; } = default!;
+
+    private UpdateRoleDto _updateRoleModel = new UpdateRoleDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+
+    protected override void OnInitialized()
+    {
+        if (RoleToEdit != null)
+        {
+            _updateRoleModel = new UpdateRoleDto
+            {
+                Name = RoleToEdit.Name,
+                Description = RoleToEdit.Description
+            };
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid) return;
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PutAsync($"api/roles/{RoleToEdit.Id}", _updateRoleModel);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده رخ داد.", Severity.Error);
+            Console.WriteLine($"Error updating role: {ex}");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

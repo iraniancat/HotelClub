@@ -12,7 +12,8 @@ using HotelReservation.Application.Exceptions;
 using HotelReservation.Application.Features.Hotels.Commands.DeleteHotel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
-using HotelReservation.Application.DTOs.Common; // برای StatusCodes
+using HotelReservation.Application.DTOs.Common;
+using HotelReservation.Application.Features.Hotels.Queries.GetAllHotelsSimple; // برای StatusCodes
 
 namespace HotelReservation.Api.Controllers;
 
@@ -22,10 +23,12 @@ namespace HotelReservation.Api.Controllers;
 public class HotelsController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<HotelsController> _logger;
 
-    public HotelsController(IMediator mediator)
+    public HotelsController(IMediator mediator, ILogger<HotelsController> logger)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     [HttpPost]
@@ -68,8 +71,17 @@ public class HotelsController : ControllerBase
 
         return Ok(hotelDto);
     }
-    [HttpGet]
+    
+     // GET: api/hotels/all  <<-- Endpoint جدید برای لیست ساده
+    [HttpGet("all")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<HotelDto>))]
+    public async Task<IActionResult> GetAllHotelsSimple()
+    {
+        var query = new GetAllHotelsSimpleQuery();
+        var hotels = await _mediator.Send(query);
+        return Ok(hotels);
+    }
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<HotelDto>))] // <<-- نوع پاسخ تغییر کرد
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]

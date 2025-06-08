@@ -17,10 +17,12 @@ namespace HotelReservation.Api.Controllers;
 public class ProvincesController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ILogger<DepartmentsController> _logger;
 
-    public ProvincesController(IMediator mediator)
+    public ProvincesController(IMediator mediator, ILogger<DepartmentsController> logger)
     {
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
     // GET: api/provinces

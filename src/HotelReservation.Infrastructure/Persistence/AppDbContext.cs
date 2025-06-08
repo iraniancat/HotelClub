@@ -1,4 +1,5 @@
 // src/HotelReservation.Infrastructure/Persistence/AppDbContext.cs
+using HotelReservation.Domain.Constants;
 using HotelReservation.Domain.Entities;
 using HotelReservation.Domain.Enums; // برای BookingStatus
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,7 @@ public class AppDbContext : DbContext
         ConfigureDependentData(modelBuilder.Entity<DependentData>());
         ConfigureBookingRequest(modelBuilder.Entity<BookingRequest>());
         ConfigureBookingStatusHistory(modelBuilder.Entity<BookingStatusHistory>());
+        ConfigureBookingFile(modelBuilder.Entity<BookingFile>());
 
         // ... (پیکربندی تبدیل Enum ها همانند قبل) ...
         modelBuilder.Entity<BookingRequest>()
@@ -135,6 +137,37 @@ public class AppDbContext : DbContext
         builder.Property(u => u.PhoneNumber)
             .HasMaxLength(20) // یا هر طول مناسب دیگر
             .IsRequired(false); // شماره تلفن می‌تواند اختیاری باشد
+            
+     //string superAdminPasswordHashForSeed = "YOUR_PRE_COMPUTED_HASH_FOR_DEFAULT_PASSWORD"; 
+    // // هشدار: مقدار بالا را با هش واقعی یک رمز عبور قوی جایگزین کنید.
+    // // برای مثال، اگر از پیاده‌سازی SHA256 ساده (بدون salt) استفاده کرده بودیم:
+    // // SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes("!AdminPa$$w0rd")) -> BitConverter.ToString(...).Replace("-","").ToLower()
+
+    // // برای استان و دپارتمان مدیر ارشد، می‌توانیم مقادیر پیش‌فرض یا null در نظر بگیریم
+    // // یا اگر استان/دپارتمان خاصی برای "ستاد" دارید، کد آن را استفاده کنید.
+    // // فرض می‌کنیم یک استان و دپارتمان "ستادی" با کدهای "HQ_PROV" و "HQ_DEPT" داریم (که باید آنها را هم Seed کنید).
+    // // اگر استان و دپارتمان برای SuperAdmin لازم نیست، می‌توانید null پاس دهید (چون فیلدها Nullable هستند)
+
+    // builder.HasData(
+    //     new {
+    //         Id = Guid.Parse("E0E2C45A-B935-4C7A-9A9A-4A5B6C7D8E9F"), // یک Guid ثابت برای SuperAdmin
+    //         SystemUserId = "superadmin",
+    //         FullName = "مدیر ارشد سیستم",
+    //         NationalCode = (string?)null, // یا یک مقدار نمونه
+    //         PasswordHash = superAdminPasswordHashForSeed, // <<-- هش رمز عبور
+    //         IsActive = true,
+    //         RoleId = RoleConstants.SuperAdminRoleId, // شناسه نقش SuperAdmin
+    //         // اطلاعات سازمانی نمونه یا null اگر برای SuperAdmin عمومی کاربرد ندارد
+    //         ProvinceCode = (string?)"00", // کد استان نمونه برای ستاد (باید در جدول استان‌ها Seed شود)
+    //         ProvinceName = "ستاد مرکزی",
+    //         DepartmentCode = (string?)"000", // کد دپارتمان نمونه برای ستاد (باید در جدول دپارتمان‌ها Seed شود)
+    //         DepartmentName = "مدیریت کل",
+    //         PhoneNumber = (string?)"02100000000", // شماره تلفن نمونه
+    //         HotelId = (Guid?)null, // SuperAdmin به هتل خاصی منتسب نیست
+    //         // AssignedHotel = null // Navigation property در HasData ست نمی‌شود
+    //         // Province = null, Department = null // Navigation properties
+    //     }
+    // );
     }
 
     // ... (متدهای ConfigureRole, ConfigureProvince, ConfigureDepartment و سایر متدهای پیکربندی بدون تغییر باقی می‌مانند مگر اینکه نیاز به اصلاح داشته باشند) ...
@@ -150,6 +183,13 @@ public class AppDbContext : DbContext
         builder.HasIndex(r => r.Name)
             .IsUnique();
         builder.Property(r => r.Description).HasMaxLength(250);
+        // Seed کردن نقش‌های پیش‌فرض
+    // builder.HasData(
+    // new { Id = RoleConstants.SuperAdminRoleId, Name = RoleConstants.SuperAdminRoleName, Description = "دسترسی کامل به سیستم" },
+    // new { Id = RoleConstants.ProvinceUserRoleId, Name = RoleConstants.ProvinceUserRoleName, Description = "کاربر با دسترسی در سطح استان" },
+    // new { Id = RoleConstants.HotelUserRoleId, Name = RoleConstants.HotelUserRoleName, Description = "کاربر با دسترسی در سطح هتل" },
+    // new { Id = RoleConstants.EmployeeRoleId, Name = RoleConstants.EmployeeRoleName, Description = "کارمند عادی سازمان (برای فازهای آتی)" }
+//);
     }
 
     private void ConfigureProvince(EntityTypeBuilder<Province> builder) // بدون تغییر

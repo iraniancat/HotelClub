@@ -1,0 +1,213 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/AssignRoleDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject ILogger<AssignRoleDialog> Logger
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.AdminPanelSettings" Class="me-3"/> تخصیص نقش به کاربر: @UserToUpdate?.FullName
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (_isLoading)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            <MudText Class="ml-2">در حال بارگذاری اطلاعات اولیه...</MudText>
+        }
+        else if (_assignRoleModel != null)
+        {
+            <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_assignRoleModel">
+                <DataAnnotationsValidator />
+                <MudGrid Spacing="2">
+                    <MudItem xs="12">
+                        <MudSelect T="Guid" Label="نقش جدید" 
+                                   Value="_assignRoleModel.RoleId" 
+                                   ValueChanged="OnRoleSelectionChanged"
+                                   For="@(() => _assignRoleModel.RoleId)"
+                                   Required="true" RequiredError="انتخاب نقش الزامی است.">
+                            @foreach (var role in _roles)
+                            {
+                                <MudSelectItem Value="@role.Id">@role.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+
+                    @* نمایش شرطی فیلد انتخاب استان *@
+                    @if (_showProvinceSelection)
+                    {
+                        <MudItem xs="12">
+                            <MudSelect T="string" Label="انتخاب استان" @bind-Value="_assignRoleModel.ProvinceCode" 
+                                       For="@(() => _assignRoleModel.ProvinceCode)" Required="true" RequiredError="برای نقش کاربر استان، انتخاب استان الزامی است.">
+                                @foreach (var province in _provinces)
+                                {
+                                    <MudSelectItem Value="@province.Code">@province.Name</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                    }
+
+                    @* نمایش شرطی فیلد انتخاب هتل *@
+                    @if (_showHotelSelection)
+                    {
+                        <MudItem xs="12">
+                            <MudSelect T="Guid?" Label="انتخاب هتل" @bind-Value="_assignRoleModel.HotelId" For="@(() => _assignRoleModel.HotelId)"
+                                       Required="true" RequiredError="برای نقش کاربر هتل، انتخاب هتل الزامی است."
+                                       Placeholder="یک هتل را انتخاب کنید">
+                                @foreach (var hotel in _hotels)
+                                {
+                                    <MudSelectItem Value="@((Guid?)hotel.Id)">@hotel.Name</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing || _isLoading">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ms-2">در حال تخصیص نقش...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره تغییرات</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public UserManagementDetailsDto UserToUpdate { get; set; } = default!;
+
+    private AssignRoleToUserDto _assignRoleModel = new AssignRoleToUserDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+    private bool _isLoading = true;
+
+    private List<RoleDto> _roles = new();
+    private List<HotelDto> _hotels = new();
+    private List<ProvinceDto> _provinces = new();
+    private bool _showHotelSelection = false;
+    private bool _showProvinceSelection = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (UserToUpdate != null)
+            {
+                _assignRoleModel = new AssignRoleToUserDto
+                {
+                    RoleId = UserToUpdate.RoleId,
+                    HotelId = UserToUpdate.HotelId,
+                    ProvinceCode = UserToUpdate.ProvinceCode
+                };
+            }
+
+            await LoadInitialDataAsync();
+
+            OnRoleChanged(_assignRoleModel.RoleId); 
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطا در بارگذاری اطلاعات اولیه برای فرم.", Severity.Error);
+            Logger.LogError(ex, "Failed to load initial data for AssignRoleDialog.");
+            Cancel(); 
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private async Task LoadInitialDataAsync()
+    {
+        var rolesTask = ApiClient.GetListAsync<RoleDto>("api/roles");
+        var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all"); // استفاده از Endpoint لیست ساده
+        var provincesTask = ApiClient.GetListAsync<ProvinceDto>("api/provinces");
+
+        await Task.WhenAll(rolesTask, hotelsTask, provincesTask);
+
+        var rolesResult = await rolesTask;
+        if (rolesResult != null)
+        {
+            _roles = rolesResult.Where(r => r.Name != "Employee").ToList();
+        }
+
+        var hotelsResult = await hotelsTask;
+        if (hotelsResult != null)
+        {
+            _hotels = hotelsResult.ToList();
+        }
+        
+        var provincesResult = await provincesTask;
+        if (provincesResult != null)
+        {
+            _provinces = provincesResult.ToList();
+        }
+    }
+
+    private void OnRoleSelectionChanged(Guid selectedRoleId)
+    {
+        _assignRoleModel.RoleId = selectedRoleId;
+        OnRoleChanged(selectedRoleId);
+    }
+
+    private void OnRoleChanged(Guid selectedRoleId)
+    {
+        var selectedRole = _roles.FirstOrDefault(r => r.Id == selectedRoleId);
+        
+        _showHotelSelection = selectedRole?.Name.Equals("HotelUser", StringComparison.OrdinalIgnoreCase) ?? false;
+        _showProvinceSelection = selectedRole?.Name.Equals("ProvinceUser", StringComparison.OrdinalIgnoreCase) ?? false;
+
+        if (!_showHotelSelection)
+        {
+            _assignRoleModel.HotelId = null;
+        }
+        if (!_showProvinceSelection)
+        {
+            _assignRoleModel.ProvinceCode = null;
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid)
+        {
+            Snackbar.Add("لطفاً خطاهای فرم را برطرف نمایید.", Severity.Warning);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PutAsync($"api/management/users/{UserToUpdate.Id}/role", _assignRoleModel);
+            
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده در هنگام تخصیص نقش رخ داد.", Severity.Error);
+            Logger.LogError(ex, "Unexpected error assigning role to user.");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

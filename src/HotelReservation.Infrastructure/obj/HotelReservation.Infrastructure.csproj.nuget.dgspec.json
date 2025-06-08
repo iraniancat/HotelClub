@@ -216,7 +216,7 @@
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
-              "version": "[9.0.0-preview.5.24306.7, )"
+              "version": "[9.0.5, )"
             },
             "Microsoft.Extensions.Logging": {
               "target": "Package",

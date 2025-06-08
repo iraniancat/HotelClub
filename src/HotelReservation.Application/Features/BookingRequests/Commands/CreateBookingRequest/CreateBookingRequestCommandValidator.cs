@@ -1,6 +1,6 @@
 // src/HotelReservation.Application/Features/BookingRequests/Commands/CreateBookingRequest/CreateBookingRequestCommandValidator.cs
+
 using FluentValidation;
-using HotelReservation.Application.DTOs.Booking.Validators; // برای BookingGuestInputDtoValidator
 using System;
 
 namespace HotelReservation.Application.Features.BookingRequests.Commands.CreateBookingRequest;
@@ -9,9 +9,9 @@ public class CreateBookingRequestCommandValidator : AbstractValidator<CreateBook
 {
     public CreateBookingRequestCommandValidator()
     {
-        RuleFor(p => p.RequestSubmitterUserId)
-            .NotEmpty().WithMessage("شناسه کاربر ثبت کننده درخواست الزامی است.")
-            .NotEqual(Guid.Empty).WithMessage("شناسه کاربر ثبت کننده درخواست معتبر نیست.");
+        // RuleFor(p => p.RequestSubmitterUserId) // <<-- این قانون حذف شده است
+        //     .NotEmpty().WithMessage("شناسه کاربر ثبت کننده درخواست الزامی است.")
+        //     .NotEqual(Guid.Empty).WithMessage("شناسه کاربر ثبت کننده درخواست معتبر نیست.");
 
         RuleFor(p => p.RequestingEmployeeNationalCode)
             .NotEmpty().WithMessage("کد ملی کارمند درخواست‌دهنده اصلی الزامی است.")
@@ -24,7 +24,7 @@ public class CreateBookingRequestCommandValidator : AbstractValidator<CreateBook
 
         RuleFor(p => p.CheckInDate)
             .NotEmpty().WithMessage("تاریخ ورود الزامی است.")
-            .GreaterThanOrEqualTo(DateTime.Today).WithMessage("تاریخ ورود نمی‌تواند مربوط به گذشته باشد."); // تاریخ ورود باید امروز یا در آینده باشد
+            .GreaterThanOrEqualTo(DateTime.Today).WithMessage("تاریخ ورود نمی‌تواند مربوط به گذشته باشد.");
 
         RuleFor(p => p.CheckOutDate)
             .NotEmpty().WithMessage("تاریخ خروج الزامی است.")
@@ -42,8 +42,7 @@ public class CreateBookingRequestCommandValidator : AbstractValidator<CreateBook
             .NotEmpty().WithMessage("لیست مهمانان نمی‌تواند خالی باشد.")
             .Must(guests => guests.Count >= 1).WithMessage("حداقل یک مهمان باید در درخواست وجود داشته باشد.");
 
-        // اعتبارسنجی هر آیتم در لیست مهمانان
         RuleForEach(p => p.Guests)
-            .SetValidator(new BookingGuestInputDtoValidator());
+            .SetValidator(new HotelReservation.Application.DTOs.Booking.Validators.BookingGuestInputDtoValidator());
     }
 }

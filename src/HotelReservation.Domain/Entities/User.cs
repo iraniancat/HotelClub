@@ -104,21 +104,47 @@ public class User
     public void ChangePassword(string newPasswordHash) { /* ... */ PasswordHash = newPasswordHash; }
     public void Activate() => IsActive = true;
     public void Deactivate() => IsActive = false;
-    // ... متدهای ChangeRole و AssignToHotel و ClearHotelAssignment ...
-    public void ChangeRole(Guid newRoleId, Role newRole)
+   public void ChangeRole(Guid newRoleId, Role newRole)
     {
         if (newRoleId == Guid.Empty) throw new ArgumentNullException(nameof(newRoleId));
         if (newRole == null) throw new ArgumentNullException(nameof(newRole));
 
         RoleId = newRoleId;
         Role = newRole;
-
+        
+        // اگر نقش جدید "کاربر هتل" نیست، تخصیص هتل را پاک کن
         if (newRole.Name != "HotelUser") // فرض بر نام نقش
         {
             ClearHotelAssignment();
         }
+        // اگر نقش جدید "کاربر استان" نیست، تخصیص استان را پاک کن
+        if (newRole.Name != "ProvinceUser") // فرض بر نام نقش
+        {
+            ClearProvinceAssignment();
+        }
     }
 
+    // متد جدید برای تخصیص استان
+    public void AssignToProvince(string provinceCode, Province province, string provinceName)
+    {
+        // در Handler بررسی می‌کنیم که نقش کاربر حتما "ProvinceUser" باشد
+        if (string.IsNullOrWhiteSpace(provinceCode)) throw new ArgumentNullException(nameof(provinceCode));
+        if (province == null) throw new ArgumentNullException(nameof(province));
+
+        ProvinceCode = provinceCode;
+        Province = province;
+        ProvinceName = provinceName;
+        // هنگام تخصیص به استان، تخصیص هتل باید پاک شود
+        ClearHotelAssignment();
+    }
+
+    // متد جدید برای پاک کردن تخصیص استان
+    public void ClearProvinceAssignment()
+    {
+        ProvinceCode = null;
+        Province = null;
+        ProvinceName = null;
+    }
     public void AssignToHotel(Guid hotelId, Hotel hotel)
     {
         if (this.Role?.Name != "HotelUser") // بررسی نقش فعلی کاربر

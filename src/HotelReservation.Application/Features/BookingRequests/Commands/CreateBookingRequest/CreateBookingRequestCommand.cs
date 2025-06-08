@@ -1,12 +1,14 @@
 // src/HotelReservation.Application/Features/BookingRequests/Commands/CreateBookingRequest/CreateBookingRequestCommand.cs
-using HotelReservation.Application.DTOs.Booking; // مهم: برای CreateBookingRequestResponseDto و BookingGuestInputDto
-using MediatR; // مهم: برای IRequest
+
+
+using HotelReservation.Application.DTOs.Booking;
+using MediatR;
 using System;
 using System.Collections.Generic;
 
 namespace HotelReservation.Application.Features.BookingRequests.Commands.CreateBookingRequest;
 
-public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponseDto> // <<<--- این خط بسیار حیاتی است
+public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponseDto>
 {
     public string RequestingEmployeeNationalCode { get; set; }
     public string BookingPeriod { get; set; }
@@ -15,7 +17,6 @@ public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponse
     public Guid HotelId { get; set; }
     public string? Notes { get; set; }
     public List<BookingGuestInputDto> Guests { get; set; } = new List<BookingGuestInputDto>();
-    public Guid RequestSubmitterUserId { get; set; }
 
     public CreateBookingRequestCommand(
         string requestingEmployeeNationalCode,
@@ -24,7 +25,6 @@ public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponse
         DateTime checkOutDate,
         Guid hotelId,
         List<BookingGuestInputDto> guests,
-        Guid requestSubmitterUserId,
         string? notes)
     {
         RequestingEmployeeNationalCode = requestingEmployeeNationalCode;
@@ -33,7 +33,6 @@ public class CreateBookingRequestCommand : IRequest<CreateBookingRequestResponse
         CheckOutDate = checkOutDate;
         HotelId = hotelId;
         Guests = guests ?? new List<BookingGuestInputDto>();
-        RequestSubmitterUserId = requestSubmitterUserId;
         Notes = notes;
     }
 }

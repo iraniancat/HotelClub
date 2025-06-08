@@ -13,9 +13,9 @@ public class PasswordHasherService : IPasswordHasherService
     {
         if (string.IsNullOrEmpty(password)) return string.Empty;
 
-        using (var sha256 = SHA256.Create())
+        using (var md5 = MD5.Create())
         {
-            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            var hashedBytes = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
             // تبدیل بایت‌ها به رشته هگزادسیمال
             return BitConverter.ToString(hashedBytes).Replace("-", "").ToLowerInvariant();
         }

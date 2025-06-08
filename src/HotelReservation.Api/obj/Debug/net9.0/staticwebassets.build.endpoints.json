@@ -1,5 +1,354 @@
 {
   "Version": 1,
   "ManifestType": "Build",
-  "Endpoints": []
+  "Endpoints": [
+    {
+      "Route": "_content/Blazor.PersianDatePicker/calendar_icon.png",
+      "AssetFile": "_content/Blazor.PersianDatePicker/calendar_icon.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "578"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2Foa482vfu/M/iu7/HapmfJccFkgbXfcmYtE3sOgQEo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 15 Apr 2022 08:19:16 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2Foa482vfu/M/iu7/HapmfJccFkgbXfcmYtE3sOgQEo="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.css",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.css.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000205973223"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4854"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP7cwNPhhSSE6IrmvlYteuUi4D23zQiBJXhcLnomYBM=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"oC5OTcpFaAm5EUE2uM1RSpm9YJF+KD5J89wYDzOoKow=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Feb 2025 13:15:06 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oC5OTcpFaAm5EUE2uM1RSpm9YJF+KD5J89wYDzOoKow="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.css",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87955"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oC5OTcpFaAm5EUE2uM1RSpm9YJF+KD5J89wYDzOoKow=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Feb 2025 13:15:06 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oC5OTcpFaAm5EUE2uM1RSpm9YJF+KD5J89wYDzOoKow="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.css.gz",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.css.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4854"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mP7cwNPhhSSE6IrmvlYteuUi4D23zQiBJXhcLnomYBM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Feb 2025 13:15:06 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-mP7cwNPhhSSE6IrmvlYteuUi4D23zQiBJXhcLnomYBM="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.min.js",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.min.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000024725546"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40443"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IE4BnPnkO009pKlDH367tR3bjM393D8DWQKbQLfPZXM=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"K40H464XYE+y2yQcSI2VfqE5zTJpQRYmiZsmznte4uY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Sep 2024 16:38:36 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-K40H464XYE+y2yQcSI2VfqE5zTJpQRYmiZsmznte4uY="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.min.js",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "228884"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"K40H464XYE+y2yQcSI2VfqE5zTJpQRYmiZsmznte4uY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Sep 2024 16:38:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-K40H464XYE+y2yQcSI2VfqE5zTJpQRYmiZsmznte4uY="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.min.js.gz",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.min.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40443"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IE4BnPnkO009pKlDH367tR3bjM393D8DWQKbQLfPZXM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 13 Sep 2024 16:38:36 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IE4BnPnkO009pKlDH367tR3bjM393D8DWQKbQLfPZXM="
+        }
+      ]
+    },
+    {
+      "Route": "_content/Blazor.PersianDatePicker/datepicker.scss",
+      "AssetFile": "_content/Blazor.PersianDatePicker/datepicker.scss",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87989"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jKbiq+ZOrjOQDThrUfuNW1Omxe3i9drosC2xgd2xKvA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 05 Mar 2024 07:12:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jKbiq+ZOrjOQDThrUfuNW1Omxe3i9drosC2xgd2xKvA="
+        }
+      ]
+    }
+  ]
 }

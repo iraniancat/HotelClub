@@ -1,0 +1,121 @@
+@* مسیر: src/HotelReservation.Client/Shared/EditHotelDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-2"/> ویرایش هتل
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (HotelToEdit == null)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            <MudText Class="ml-2">در حال بارگذاری اطلاعات هتل...</MudText>
+        }
+        else
+        {
+            <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_updateHotelModel">
+                <DataAnnotationsValidator />
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="نام هتل" @bind-Value="_updateHotelModel.Name"
+                                      For="@(() => _updateHotelModel.Name)" Required="true" RequiredError="نام هتل الزامی است." />
+                    </MudItem>
+                    <MudItem xs="12">
+                         <MudTextField T="string" Label="آدرس" @bind-Value="_updateHotelModel.Address"
+                                      For="@(() => _updateHotelModel.Address)" Required="true" RequiredError="آدرس هتل الزامی است."
+                                      Lines="3" />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                         <MudTextField T="string" Label="فرد رابط (اختیاری)" @bind-Value="_updateHotelModel.ContactPerson"
+                                      For="@(() => _updateHotelModel.ContactPerson)" />
+                    </MudItem>
+                     <MudItem xs="12" sm="6">
+                         <MudTextField T="string" Label="شماره تلفن (اختیاری)" @bind-Value="_updateHotelModel.PhoneNumber"
+                                      For="@(() => _updateHotelModel.PhoneNumber)" InputType="InputType.Telephone" />
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ml-2">در حال ذخیره تغییرات...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره تغییرات</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    [Parameter] public HotelDto HotelToEdit { get; set; } = default!;
+
+    private UpdateHotelDto _updateHotelModel = new UpdateHotelDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+
+    protected override void OnInitialized()
+    {
+        // پر کردن مدل ویرایش با اطلاعات هتل انتخاب شده که به عنوان پارامتر پاس داده شده
+        if (HotelToEdit != null)
+        {
+            _updateHotelModel = new UpdateHotelDto
+            {
+                Name = HotelToEdit.Name,
+                Address = HotelToEdit.Address,
+                ContactPerson = HotelToEdit.ContactPerson,
+                PhoneNumber = HotelToEdit.PhoneNumber
+            };
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid)
+        {
+            Snackbar.Add("لطفاً خطاهای فرم را برطرف نمایید.", Severity.Warning);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            // ارسال درخواست PUT به API بک‌اند برای به‌روزرسانی هتل
+            await ApiClient.PutAsync($"api/hotels/{HotelToEdit.Id}", _updateHotelModel);
+            
+            // PutAsync باید در صورت عدم موفقیت، Exception پرتاب کند که در بلوک catch گرفته می‌شود
+            
+            MudDialog.Close(DialogResult.Ok(true)); // دیالوگ را با نتیجه موفقیت‌آمیز می‌بندیم
+        }
+        catch (ApplicationException ex) // خطاهای مورد انتظار از ApiClientService
+        {
+            Snackbar.Add($"خطا در ویرایش: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده در هنگام ویرایش هتل رخ داد.", Severity.Error);
+            Console.WriteLine($"Unexpected error updating hotel: {ex}");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}
+
+

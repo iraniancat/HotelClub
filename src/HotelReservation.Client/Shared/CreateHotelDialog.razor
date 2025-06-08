@@ -1,0 +1,115 @@
+@* src/HotelReservation.Client/Shared/CreateHotelDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.AddBusiness" Class="mr-2"/> ایجاد هتل جدید
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form" @bind-IsValid="_isFormValid" @bind-Errors="_formErrors">
+            <MudTextField T="string" Label="نام هتل" @bind-Value="_createHotelModel.Name"
+                          For="@(() => _createHotelModel.Name)" Required="true" RequiredError="نام هتل الزامی است."
+                          Validation="@(new Func<string, IEnumerable<string>>(ValidateHotelName))" />
+            
+            <MudTextField T="string" Label="آدرس" @bind-Value="_createHotelModel.Address"
+                          For="@(() => _createHotelModel.Address)" Required="true" RequiredError="آدرس هتل الزامی است."
+                          Lines="3" />
+
+            <MudTextField T="string" Label="فرد رابط (اختیاری)" @bind-Value="_createHotelModel.ContactPerson"
+                          For="@(() => _createHotelModel.ContactPerson)" />
+            
+            <MudTextField T="string" Label="شماره تلفن (اختیاری)" @bind-Value="_createHotelModel.PhoneNumber"
+                          For="@(() => _createHotelModel.PhoneNumber)" InputType="InputType.Telephone" />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                <MudText Class="ml-2">در حال ذخیره...</MudText>
+            }
+            else
+            {
+                <MudText>ذخیره</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private CreateHotelDto _createHotelModel = new CreateHotelDto();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private string[] _formErrors = {};
+    private bool _isProcessing = false;
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate(); // اجرای اعتبارسنجی فرم MudBlazor
+        if (!_isFormValid)
+        {
+            Snackbar.Add("لطفاً تمام فیلدهای الزامی را پر کنید و خطاها را برطرف نمایید.", Severity.Warning);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            // از ApiClientService برای ارسال درخواست به بک‌اند استفاده می‌کنیم
+            // PostAsync باید طوری طراحی شده باشد که در صورت بروز خطای 400 از سمت سرور (مثلاً خطای اعتبارسنجی)،
+            // Exception پرتاب کند یا یک نتیجه ناموفق برگرداند.
+            // فرض می‌کنیم ApiClientService.PostAsync<CreateHotelDto, HotelDto> یک HotelDto یا null/exception برمی‌گرداند.
+            var createdHotel = await ApiClient.PostAsync<CreateHotelDto, HotelDto>("api/hotels", _createHotelModel);
+
+            if (createdHotel != null)
+            {
+                // Snackbar.Add("هتل با موفقیت ایجاد شد.", Severity.Success); // این پیام در صفحه اصلی نمایش داده می‌شود
+                MudDialog.Close(DialogResult.Ok(createdHotel.Id)); // دیالوگ را با نتیجه موفقیت‌آمیز می‌بندیم
+            }
+            else
+            {
+                // این حالت زمانی رخ می‌دهد که PostAsync در صورت خطای API (مثلاً 400) null برگرداند
+                // اگر PostAsync در صورت خطا Exception پرتاب کند، این بخش اجرا نمی‌شود.
+                Snackbar.Add("خطا در ایجاد هتل. لطفاً ورودی خود را بررسی کنید یا با پشتیبانی تماس بگیرید.", Severity.Error);
+            }
+        }
+        catch (ApplicationException ex) // برای خطاهایی که ApiClientService ممکن است پرتاب کند
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+            // می‌توان جزئیات بیشتری از خطا را از ex.InnerException یا پاسخ خطا خواند
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطای پیش‌بینی نشده در هنگام ایجاد هتل رخ داد.", Severity.Error);
+            Console.WriteLine($"Unexpected error creating hotel: {ex}");
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+
+    // نمونه اعتبارسنجی سفارشی برای نام هتل (اگر نیاز به چیزی فراتر از Required دارید)
+    private IEnumerable<string> ValidateHotelName(string name)
+    {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            yield return "نام هتل نمی‌تواند خالی باشد.";
+            yield break; // اگر خالی است، سایر بررسی‌ها لازم نیست
+        }
+        if (name.Length < 3)
+            yield return "نام هتل باید حداقل ۳ کاراکتر باشد.";
+        if (name.Length > 150)
+            yield return "نام هتل نمی‌تواند بیشتر از ۱۵۰ کاراکتر باشد.";
+        // در آینده می‌توان بررسی یکتایی نام هتل را هم اینجا (با فراخوانی API) اضافه کرد، اما پیچیده‌تر است.
+    }
+}
