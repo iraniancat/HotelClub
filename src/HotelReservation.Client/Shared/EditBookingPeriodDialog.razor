@@ -1,0 +1,169 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/EditBookingPeriodDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@using Blazor.PersianDatePicker
+@using System.Globalization
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.EditCalendar" Class="me-3"/> ویرایش دوره زمانی: @PeriodToEdit?.Name
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        @if (_updateModel == null)
+        {
+            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+        }
+        else
+        {
+            <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_updateModel">
+                <DataAnnotationsValidator />
+                <MudGrid Spacing="2">
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="نام دوره" @bind-value="_updateModel.Name"
+                                      For="@(() => _updateModel.Name)" Required="true" RequiredError="نام دوره الزامی است." />
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                         <div class="d-flex align-center">
+                            <span class="me-4">تاریخ شروع:</span>
+                            <InputPersianDatePicker @bind-Value="_startDateString" />
+                        </div>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                         <div class="d-flex align-center">
+                            <span class="me-4">تاریخ پایان:</span>
+                            <InputPersianDatePicker @bind-Value="_endDateString" />
+                        </div>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudSwitch @bind-Checked="_updateModel.IsActive" Color="Color.Primary">فعال برای رزرو</MudSwitch>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+            }
+            else
+            {
+                <MudText>ذخیره تغییرات</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public BookingPeriodDto PeriodToEdit { get; set; } = default!;
+
+    private UpdateBookingPeriodDto _updateModel = new();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+    
+    private string _startDateString = "";
+    private string _endDateString = "";
+
+    protected override void OnInitialized()
+    {
+        if (PeriodToEdit != null)
+        {
+            _updateModel = new UpdateBookingPeriodDto
+            {
+                Name = PeriodToEdit.Name,
+                StartDate = PeriodToEdit.StartDate,
+                EndDate = PeriodToEdit.EndDate,
+                IsActive = PeriodToEdit.IsActive
+            };
+            _startDateString = ToPersianDateString(PeriodToEdit.StartDate);
+            _endDateString = ToPersianDateString(PeriodToEdit.EndDate);
+        }
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid) return;
+
+        try
+        {
+            _updateModel.StartDate = ToGregorianDateTime(_startDateString);
+            _updateModel.EndDate = ToGregorianDateTime(_endDateString);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در فرمت تاریخ: {ex.Message}", Severity.Error);
+            return;
+        }
+
+        if (_updateModel.EndDate <= _updateModel.StartDate)
+        {
+            Snackbar.Add("تاریخ پایان باید بعد از تاریخ شروع باشد.", Severity.Error);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PutAsync($"api/booking-periods/{PeriodToEdit.Id}", _updateModel);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+    
+    private static string ToPersianDateString(DateTime dt)
+    {
+        var pc = new PersianCalendar();
+        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
+    }
+
+    private static string ConvertPersianToEnglishNumerals(string persianStr)
+    {
+        if (string.IsNullOrWhiteSpace(persianStr))
+            return persianStr;
+
+        return persianStr.Replace('۰', '0').Replace('۱', '1').Replace('۲', '2').Replace('۳', '3').Replace('۴', '4')
+                         .Replace('۵', '5').Replace('۶', '6').Replace('۷', '7').Replace('۸', '8').Replace('۹', '9')
+                         .Replace('٠', '0').Replace('١', '1').Replace('٢', '2').Replace('٣', '3').Replace('٤', '4')
+                         .Replace('٥', '5').Replace('٦', '6').Replace('٧', '7').Replace('٨', '8').Replace('٩', '9');
+    }
+
+    private static DateTime ToGregorianDateTime(string persianDate)
+    {
+        if (string.IsNullOrWhiteSpace(persianDate))
+        {
+            throw new ArgumentNullException(nameof(persianDate), "رشته تاریخ شمسی نمی‌تواند خالی باشد.");
+        }
+        
+        string englishNumeralsDate = ConvertPersianToEnglishNumerals(persianDate);
+
+        var persianCulture = new CultureInfo("fa-IR")
+        {
+            DateTimeFormat = { Calendar = new PersianCalendar() }
+        };
+        
+        try
+        {
+            return DateTime.Parse(englishNumeralsDate, persianCulture);
+        }
+        catch (FormatException ex)
+        {
+             throw new FormatException("فرمت تاریخ شمسی وارد شده نامعتبر است.", ex);
+        }
+    }
+}

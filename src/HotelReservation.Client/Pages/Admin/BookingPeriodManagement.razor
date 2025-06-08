@@ -1,0 +1,178 @@
+@page "/admin/booking-periods"
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject ILogger<BookingPeriodManagement> Logger
+
+<PageTitle>مدیریت دوره‌های زمانی</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudToolBar Class="mb-4">
+            <MudText Typo="Typo.h5">لیست دوره‌های زمانی رزرو</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateDialog" StartIcon="@Icons.Material.Filled.Add" Disabled="_isLoading">
+                ایجاد دوره جدید
+            </MudButton>
+        </MudToolBar>
+
+        <MudTable Items="@_periods" Dense="true" Hover="true" Striped="true" @ref="_table"
+                  Loading="@_isLoading" LoadingProgressColor="Color.Primary" Filter="new Func<BookingPeriodDto, bool>(FilterPeriod)">
+            <ToolBarContent>
+                <MudTextField @bind-Value="_searchString" Placeholder="جستجو در نام دوره..." Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>نام دوره</MudTh>
+                <MudTh>تاریخ شروع</MudTh>
+                <MudTh>تاریخ پایان</MudTh>
+                <MudTh>وضعیت</MudTh>
+                <MudTh Style="text-align:center; width:150px;">عملیات</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="نام دوره">@context.Name</MudTd>
+                <MudTd DataLabel="تاریخ شروع">@ToPersianDateString(context.StartDate)</MudTd>
+                <MudTd DataLabel="تاریخ پایان">@ToPersianDateString(context.EndDate)</MudTd>
+                <MudTd DataLabel="وضعیت">
+                    @if (context.IsActive)
+                    {
+                        <MudChip Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Small">فعال</MudChip>
+                    }
+                    else
+                    {
+                        <MudChip Icon="@Icons.Material.Filled.Cancel" Color="Color.Error" Size="Size.Small">غیرفعال</MudChip>
+                    }
+                </MudTd>
+                <MudTd Style="text-align:center">
+                    <span @onclick:stopPropagation="true"> 
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => OpenEditDialog(context))" Title="ویرایش" />
+                    </span>
+                    <span @onclick:stopPropagation="true" class="mr-2">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="@(() => ConfirmDeleteDialog(context))" Title="حذف" />
+                    </span>
+                </MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText>دوره‌ای برای نمایش یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </LoadingContent>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<BookingPeriodDto> _table = new();
+    private bool _isLoading = true;
+    private string _searchString = "";
+    private List<BookingPeriodDto> _periods = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        _isLoading = true;
+        try
+        {
+            var result = await ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods");
+            if (result != null)
+            {
+                _periods = result.ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private bool FilterPeriod(BookingPeriodDto period)
+    {
+        if (string.IsNullOrWhiteSpace(_searchString))
+            return true;
+        if (period.Name.Contains(_searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        @* if (period.Description?.Contains(_searchString, StringComparison.OrdinalIgnoreCase) == true)
+            return true; *@
+        return false;
+    }
+
+    private async Task OpenCreateDialog()
+    {
+        var dialog = DialogService.Show<CreateBookingPeriodDialog>("ایجاد دوره زمانی جدید");
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("دوره زمانی با موفقیت ایجاد شد.", Severity.Success);
+            await LoadDataAsync();
+        }
+    }
+
+    private async Task OpenEditDialog(BookingPeriodDto periodToEdit)
+    {
+        var parameters = new DialogParameters { ["PeriodToEdit"] = periodToEdit };
+        var dialog = DialogService.Show<EditBookingPeriodDialog>($"ویرایش دوره: {periodToEdit.Name}", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("دوره زمانی با موفقیت ویرایش شد.", Severity.Success);
+            await LoadDataAsync();
+        }
+    }
+
+    private async Task ConfirmDeleteDialog(BookingPeriodDto periodToDelete)
+    {
+        var parameters = new DialogParameters
+        {
+            ["Title"] = "تأیید حذف دوره زمانی",
+            ["ContentText"] = $"آیا از حذف دوره '{periodToDelete.Name}' مطمئن هستید؟ این عملیات قابل بازگشت نیست.",
+            ["ButtonText"] = "حذف",
+            ["Color"] = Color.Error,
+            ["Icon"] = Icons.Material.Filled.DeleteForever
+        };
+
+        var dialog = DialogService.Show<ConfirmDialog>("تأیید حذف", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            _isLoading = true; 
+            try
+            {
+                await ApiClient.DeleteAsync($"api/booking-periods/{periodToDelete.Id}");
+                Snackbar.Add("دوره زمانی با موفقیت حذف شد.", Severity.Success);
+                await LoadDataAsync();
+            }
+            catch (ApplicationException ex)
+            {
+                Snackbar.Add($"خطا در حذف: {ex.Message}", Severity.Error);
+            }
+            finally
+            {
+                _isLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+    
+    private string ToPersianDateString(DateTime dt)
+    {
+        if (dt == default) return string.Empty;
+        var pc = new System.Globalization.PersianCalendar();
+        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
+    }
+}

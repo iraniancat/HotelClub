@@ -1,0 +1,149 @@
+@* مسیر پیشنهادی: src/HotelReservation.Client/Shared/CreateBookingPeriodDialog.razor *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@using Blazor.PersianDatePicker
+@using System.Globalization
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.DateRange" Class="me-3" /> ایجاد دوره زمانی جدید
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form" @bind-IsValid="_isFormValid" Model="@_createModel">
+            <DataAnnotationsValidator />
+            <MudGrid Spacing="2">
+                <MudItem xs="12">
+                    <MudTextField T="string" Label="نام دوره" @bind-value="_createModel.Name"
+                                  For="@(() => _createModel.Name)" Required="true" RequiredError="نام دوره الزامی است." />
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                     <div class="d-flex align-center">
+                        <span class="me-4">تاریخ شروع:</span>
+                        <InputPersianDatePicker @bind-Value="_startDateString" />
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                     <div class="d-flex align-center">
+                        <span class="me-4">تاریخ پایان:</span>
+                        <InputPersianDatePicker @bind-Value="_endDateString" />
+                    </div>
+                </MudItem>
+                <MudItem xs="12">
+                    <MudSwitch @bind-Checked="_createModel.IsActive" Color="Color.Primary">فعال برای رزرو</MudSwitch>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isFormValid || _isProcessing">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+            }
+            else
+            {
+                <MudText>ذخیره</MudText>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+
+    private CreateBookingPeriodDto _createModel = new();
+    private MudForm? _form;
+    private bool _isFormValid;
+    private bool _isProcessing = false;
+    
+    private string _startDateString = ToPersianDateString(DateTime.Now);
+    private string _endDateString = ToPersianDateString(DateTime.Now.AddMonths(1));
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isFormValid) return;
+
+        try
+        {
+            _createModel.StartDate = ToGregorianDateTime(_startDateString);
+            _createModel.EndDate = ToGregorianDateTime(_endDateString);
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در فرمت تاریخ: {ex.Message}", Severity.Error);
+            return;
+        }
+
+        if (_createModel.EndDate <= _createModel.StartDate)
+        {
+            Snackbar.Add("تاریخ پایان باید بعد از تاریخ شروع باشد.", Severity.Error);
+            return;
+        }
+
+        _isProcessing = true;
+        try
+        {
+            await ApiClient.PostAsync("api/booking-periods", _createModel);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+    
+    private static string ToPersianDateString(DateTime dt)
+    {
+        var pc = new PersianCalendar();
+        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
+    }
+
+    // متد کمکی جدید برای تبدیل اعداد فارسی/عربی به انگلیسی
+    private static string ConvertPersianToEnglishNumerals(string persianStr)
+    {
+        if (string.IsNullOrWhiteSpace(persianStr))
+            return persianStr;
+
+        return persianStr.Replace('۰', '0').Replace('۱', '1').Replace('۲', '2').Replace('۳', '3').Replace('۴', '4')
+                         .Replace('۵', '5').Replace('۶', '6').Replace('۷', '7').Replace('۸', '8').Replace('۹', '9')
+                         // همچنین اعداد عربی
+                         .Replace('٠', '0').Replace('١', '1').Replace('٢', '2').Replace('٣', '3').Replace('٤', '4')
+                         .Replace('٥', '5').Replace('٦', '6').Replace('٧', '7').Replace('٨', '8').Replace('٩', '9');
+    }
+
+    private static DateTime ToGregorianDateTime(string persianDate)
+    {
+        if (string.IsNullOrWhiteSpace(persianDate))
+        {
+            throw new ArgumentNullException(nameof(persianDate), "رشته تاریخ شمسی نمی‌تواند خالی باشد.");
+        }
+        
+        // ابتدا اعداد فارسی را به انگلیسی تبدیل می‌کنیم
+        string englishNumeralsDate = ConvertPersianToEnglishNumerals(persianDate);
+
+        var persianCulture = new CultureInfo("fa-IR")
+        {
+            DateTimeFormat = { Calendar = new PersianCalendar() }
+        };
+        
+        try
+        {
+            // استفاده از DateTime.Parse با CultureInfo برای تبدیل رشته شمسی به میلادی
+            return DateTime.Parse(englishNumeralsDate, persianCulture);
+        }
+        catch (FormatException ex)
+        {
+             throw new FormatException("فرمت تاریخ شمسی وارد شده نامعتبر است.", ex);
+        }
+    }
+}
