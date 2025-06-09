@@ -8,6 +8,7 @@ using HotelReservation.Client.Services.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using HotelReservation.Client.Auth;
 using Blazor.PersianDatePicker.Extensions;
+using HotelReservation.Application.Contracts.Security;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -44,5 +45,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 
 // ثبت CustomAuthenticationStateProvider
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>(); // <<-- اضافه شد
+
+// <<-- ثبت پیاده‌سازی کلاینت برای ICurrentUserService -->>
+builder.Services.AddScoped<ICurrentUserService, ClientCurrentUserService>();
 //builder.Services.AddPersianDatePicker();
 await builder.Build().RunAsync();

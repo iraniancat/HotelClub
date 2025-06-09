@@ -60,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Hotel/HotelBookings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG90ZWxcSG90ZWxCb29raW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Province/CreateBookingPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvdmluY2VcQ3JlYXRlQm9va2luZ1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -72,8 +76,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/ApproveBookingRequestDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFwcHJvdmVCb29raW5nUmVxdWVzdERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/AssignRoleDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFzc2lnblJvbGVEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/BookingRequestDetailsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJvb2tpbmdSZXF1ZXN0RGV0YWlsc1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/ConfirmDialog.razor]
@@ -122,6 +134,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/RedirectToLogin.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/RejectBookingRequestDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFJlamVjdEJvb2tpbmdSZXF1ZXN0RGlhbG9nLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/SetUserPasswordDialog.razor]

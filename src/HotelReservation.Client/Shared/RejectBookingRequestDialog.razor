@@ -1,0 +1,28 @@
+@inject ISnackbar Snackbar
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">رد کردن درخواست رزرو</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form" @bind-IsValid="_isValid" Model="@_rejectDto">
+             <DataAnnotationsValidator />
+             <MudTextField T="string" Label="دلیل رد" @bind-value="_rejectDto.RejectionReason"
+                          For="@(() => _rejectDto.RejectionReason)" Lines="3" Required="true" RequiredError="دلیل رد الزامی است."/>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Error" Variant="Variant.Filled" OnClick="Submit" Disabled="!_isValid">ثبت دلیل و رد کردن</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+    private RejectBookingRequestDto _rejectDto = new();
+    private MudForm? _form;
+    private bool _isValid;
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(_rejectDto));
+    void Cancel() => MudDialog.Cancel();
+}

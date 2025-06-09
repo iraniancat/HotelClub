@@ -1,0 +1,316 @@
+@page "/booking-requests/details/{BookingId:guid}"
+@attribute [Authorize(Roles = "SuperAdmin, ProvinceUser, HotelUser, Employee")]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject IDialogService DialogService
+@inject ILogger<BookingRequestDetailsPage> Logger
+@inject IAuthorizationService AuthorizationService
+@inject ICurrentUserService CurrentUserService
+@using System.Globalization
+@using HotelReservation.Application.Contracts.Security
+
+<PageTitle>جزئیات درخواست رزرو</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    @if (_isLoading)
+    {
+        <MudPaper Class="pa-4 d-flex justify-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+        </MudPaper>
+    }
+    else if (_bookingDetails != null)
+    {
+        <MudPaper Class="pa-4" Elevation="3">
+            <MudToolBar>
+                <MudText Typo="Typo.h5">جزئیات درخواست: <MudChip Color="Color.Primary">@_bookingDetails.TrackingCode</MudChip></MudText>
+                <MudSpacer />
+                <MudChip Color="@GetStatusColor(_bookingDetails.Status)" Size="Size.Large">@GetPersianStatus(_bookingDetails.Status)</MudChip>
+            </MudToolBar>
+            <MudDivider Class="my-4"/>
+
+            <MudGrid Spacing="3">
+                <MudItem xs="12" md="6">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6">اطلاعات کلی رزرو</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudSimpleTable Dense="true" Hover="true">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>هتل:</strong></td>
+                                        <td>@_bookingDetails.Hotel?.Name</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>کارمند اصلی:</strong></td>
+                                        <td>@_bookingDetails.RequestingEmployeeFullName (@_bookingDetails.RequestingEmployeeNationalCode)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>تاریخ ورود:</strong></td>
+                                        <td>@ToPersianDateString(_bookingDetails.CheckInDate)</td>
+                                    </tr>
+                                     <tr>
+                                        <td><strong>تاریخ خروج:</strong></td>
+                                        <td>@ToPersianDateString(_bookingDetails.CheckOutDate)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>تعداد شب:</strong></td>
+                                        <td>@_bookingDetails.NumberOfNights</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>تعداد کل مهمانان:</strong></td>
+                                        <td>@_bookingDetails.TotalGuests نفر</td>
+                                    </tr>
+                                     <tr>
+                                        <td><strong>ثبت کننده درخواست:</strong></td>
+                                        <td>@_bookingDetails.RequestSubmitterUser?.FullName (@_bookingDetails.RequestSubmitterUser?.SystemUserId)</td>
+                                    </tr>
+                                </tbody>
+                            </MudSimpleTable>
+                            @if(!string.IsNullOrWhiteSpace(_bookingDetails.Notes))
+                            {
+                                <MudText Class="mt-4"><strong>توضیحات:</strong> @_bookingDetails.Notes</MudText>
+                            }
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+
+                <MudItem xs="12" md="6">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h6">لیست مهمانان</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudList Clickable="false">
+                                @foreach(var guest in _bookingDetails.Guests)
+                                {
+                                    <MudListItem>
+                                        <div class="d-flex justify-space-between w-100">
+                                            <MudText>@guest.FullName (@guest.RelationshipToEmployee)</MudText>
+                                            <MudChip Color="@(guest.DiscountPercentage > 65 ? Color.Success : Color.Info)" Size="Size.Small">@guest.DiscountPercentage % تخفیف</MudChip>
+                                        </div>
+                                    </MudListItem>
+                                }
+                            </MudList>
+                        </MudCardContent>
+                    </MudCard>
+                    
+                    <MudCard Class="mt-4">
+                        <MudCardHeader>
+                             <CardHeaderContent>
+                                <MudText Typo="Typo.h6">فایل‌های پیوست</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                             <MudList Clickable="true">
+                                @if(_bookingDetails.Files != null && _bookingDetails.Files.Any())
+                                {
+                                    @foreach(var file in _bookingDetails.Files)
+                                    {
+                                        <MudListItem Href="@GetFileDownloadUrl(file.Id)" Target="_blank">
+                                            <div class="d-flex justify-space-between w-100">
+                                                <MudText>@file.FileName</MudText>
+                                                <MudIcon Icon="@Icons.Material.Filled.Download" />
+                                            </div>
+                                        </MudListItem>
+                                    }
+                                }
+                                else
+                                {
+                                    <MudListItem>فایلی پیوست نشده است.</MudListItem>
+                                }
+                             </MudList>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            </MudGrid>
+            
+            <AuthorizeView Roles="HotelUser">
+                <Authorized>
+                    @if (_bookingDetails.Status == "SubmittedToHotel")
+                    {
+                        <MudCardActions Class="d-flex justify-end mt-4">
+                            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Cancel" OnClick="OpenRejectDialog" Disabled="_isProcessing">رد کردن</MudButton>
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.CheckCircle" OnClick="OpenApproveDialog" Disabled="_isProcessing">تأیید کردن</MudButton>
+                        </MudCardActions>
+                    }
+                </Authorized>
+            </AuthorizeView>
+            
+            <AuthorizeView Roles="SuperAdmin, ProvinceUser">
+                <Authorized>
+                     @if (_bookingDetails.Status == "SubmittedToHotel" || _bookingDetails.Status == "HotelApproved")
+                    {
+                        <MudCardActions Class="d-flex justify-end mt-4">
+                            <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.CancelPresentation" OnClick="OpenCancelBookingDialog" Disabled="_isProcessing">لغو درخواست</MudButton>
+                        </MudCardActions>
+                    }
+                </Authorized>
+            </AuthorizeView>
+            
+        </MudPaper>
+    }
+    else
+    {
+         <MudAlert Severity="Severity.Error">اطلاعات درخواست رزرو یافت نشد یا شما مجاز به مشاهده آن نیستید.</MudAlert>
+    }
+</MudContainer>
+
+@code {
+    [Parameter]
+    public Guid BookingId { get; set; }
+
+    private bool _isLoading = true;
+    private BookingRequestDetailsDto? _bookingDetails;
+    private bool _isProcessing = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDataAsync();
+    }
+
+    private async Task LoadDataAsync()
+    {
+        _isLoading = true;
+        try
+        {
+            _bookingDetails = await ApiClient.GetAsync<BookingRequestDetailsDto>($"api/booking-requests/details/{BookingId}");
+            if (_bookingDetails == null)
+            {
+                Snackbar.Add("درخواست رزرو یافت نشد یا شما دسترسی لازم را ندارید.", Severity.Warning);
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات: {ex.Message}", Severity.Error);
+            Logger.LogError(ex, "Failed to load booking request details for ID {BookingId}", BookingId);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private string GetFileDownloadUrl(Guid fileId)
+    {
+        // ساخت URL نسبی برای دانلود فایل
+        return $"api/booking-requests/{BookingId}/files/{fileId}/download";
+    }
+
+    private async Task OpenApproveDialog()
+    {
+        var parameters = new DialogParameters();
+        var dialog = DialogService.Show<ApproveBookingRequestDialog>("تأیید درخواست رزرو", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            _isProcessing = true;
+            try
+            {
+                await ApiClient.PutAsync($"api/booking-requests/{BookingId}/approve", result.Data as ApproveBookingRequestDto);
+                Snackbar.Add("درخواست با موفقیت تأیید شد.", Severity.Success);
+                await LoadDataAsync();
+            }
+            catch (Exception ex) { Snackbar.Add($"خطا: {ex.Message}", Severity.Error); }
+            finally { _isProcessing = false; StateHasChanged(); }
+        }
+    }
+    
+    private async Task OpenRejectDialog()
+    {
+        var parameters = new DialogParameters();
+        var dialog = DialogService.Show<RejectBookingRequestDialog>("رد درخواست رزرو", parameters);
+        var result = await dialog.Result;
+        
+        if (result != null && !result.Cancelled)
+        {
+            _isProcessing = true;
+            try
+            {
+                await ApiClient.PutAsync($"api/booking-requests/{BookingId}/reject", result.Data as RejectBookingRequestDto);
+                Snackbar.Add("درخواست با موفقیت رد شد.", Severity.Success);
+                await LoadDataAsync();
+            }
+            catch (Exception ex) { Snackbar.Add($"خطا: {ex.Message}", Severity.Error); }
+            finally { _isProcessing = false; StateHasChanged(); }
+        }
+    }
+    
+    private async Task OpenCancelBookingDialog()
+    {
+        var parameters = new DialogParameters
+        {
+            ["Title"] = "تأیید لغو رزرو",
+            ["ContentText"] = $"آیا از لغو این درخواست رزرو با کد رهگیری '{_bookingDetails?.TrackingCode}' مطمئن هستید؟",
+            ["ButtonText"] = "لغو رزرو",
+            ["Color"] = Color.Warning,
+            ["Icon"] = Icons.Material.Filled.CancelPresentation
+        };
+        var dialog = DialogService.Show<ConfirmDialog>("تأیید لغو", parameters);
+        var result = await dialog.Result;
+        
+        if (result != null && !result.Cancelled)
+        {
+             _isProcessing = true;
+            try
+            {
+                await ApiClient.PutAsync($"api/booking-requests/{BookingId}/cancel", new { CancellationReason = "لغو شده توسط مدیر" });
+                Snackbar.Add("درخواست با موفقیت لغو شد.", Severity.Success);
+                await LoadDataAsync();
+            }
+            catch (Exception ex) { Snackbar.Add($"خطا: {ex.Message}", Severity.Error); }
+            finally { _isProcessing = false; StateHasChanged(); }
+        }
+    }
+    
+    private string ToPersianDateString(DateTime dt)
+    {
+        if (dt == default) return string.Empty;
+        var pc = new PersianCalendar();
+        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
+    }
+    
+    // <<-- متدهای کمکی اضافه شده -->>
+    private string GetPersianStatus(string status)
+    {
+        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
+        {
+            return statusEnum switch
+            {
+                HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
+                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
+                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
+                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
+                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
+                HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
+                HotelReservation.Domain.Enums.BookingStatus.AwaitingEmployeeApproval => "در انتظار تایید کارمند",
+                HotelReservation.Domain.Enums.BookingStatus.PaymentPending => "در انتظار پرداخت",
+                _ => status
+            };
+        }
+        return status;
+    }
+
+    private Color GetStatusColor(string status)
+    {
+        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
+        {
+            return statusEnum switch
+            {
+                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => Color.Success,
+                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => Color.Error,
+                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => Color.Warning,
+                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => Color.Info,
+                _ => Color.Default
+            };
+        }
+        return Color.Default;
+    }
+}
