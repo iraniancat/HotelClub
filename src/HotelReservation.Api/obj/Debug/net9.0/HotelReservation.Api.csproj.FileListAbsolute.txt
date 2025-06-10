@@ -1,3 +1,11 @@
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.csproj.AssemblyReference.cache
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.AssemblyInfoInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.AssemblyInfo.cs
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.csproj.CoreCompileInputs.cache
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.sourcelink.json
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\appsettings.Development.json
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\appsettings.json
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\HotelReservation.Api.staticwebassets.runtime.json
@@ -159,14 +167,6 @@ C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\HotelReservation.
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\HotelReservation.Application.pdb
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\HotelReservation.Infrastructure.pdb
 C:\Project\HotelClub\src\HotelReservation.Api\bin\Debug\net9.0\HotelReservation.Domain.pdb
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.csproj.AssemblyReference.cache
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.GeneratedMSBuildEditorConfig.editorconfig
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.AssemblyInfoInputs.cache
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.AssemblyInfo.cs
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.csproj.CoreCompileInputs.cache
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.MvcApplicationPartsAssemblyInfo.cache
-C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\HotelReservation.Api.sourcelink.json
 C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\scopedcss\bundle\HotelReservation.Api.styles.css
 C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\compressed\rh570c1wr7-gglb8uprg9.gz
 C:\Project\HotelClub\src\HotelReservation.Api\obj\Debug\net9.0\compressed\ipz4bbll4i-5orj4v86s0.gz

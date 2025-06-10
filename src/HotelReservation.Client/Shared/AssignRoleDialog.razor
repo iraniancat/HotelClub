@@ -128,33 +128,39 @@
         }
     }
 
-    private async Task LoadInitialDataAsync()
+   private async Task LoadInitialDataAsync()
+{
+    try
     {
-        var rolesTask = ApiClient.GetListAsync<RoleDto>("api/roles");
-        var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all"); // استفاده از Endpoint لیست ساده
-        var provincesTask = ApiClient.GetListAsync<ProvinceDto>("api/provinces");
-
-        await Task.WhenAll(rolesTask, hotelsTask, provincesTask);
-
-        var rolesResult = await rolesTask;
+        // بارگذاری داده‌ها به صورت متوالی به جای همزمان
+        var rolesResult = await ApiClient.GetListAsync<RoleDto>("api/roles");
         if (rolesResult != null)
         {
+            // نقش کارمند عادی را از لیست حذف می‌کنیم چون نباید به صورت دستی تخصیص داده شود
             _roles = rolesResult.Where(r => r.Name != "Employee").ToList();
         }
 
-        var hotelsResult = await hotelsTask;
+        var hotelsResult = await ApiClient.GetListAsync<HotelDto>("api/hotels/all");
         if (hotelsResult != null)
         {
             _hotels = hotelsResult.ToList();
         }
-        
-        var provincesResult = await provincesTask;
-        if (provincesResult != null)
-        {
-            _provinces = provincesResult.ToList();
-        }
-    }
 
+        // فقط برای دیالوگ تخصیص نقش و ویرایش کاربر (اگر از استان‌ها استفاده می‌کند)
+        // var provincesResult = await ApiClient.GetListAsync<ProvinceDto>("api/provinces");
+        // if (provincesResult != null)
+        // {
+        //     _provinces = provincesResult.ToList();
+        // }
+    }
+    catch (Exception ex)
+    {
+        // این بخش لاگ خطا را بدون تغییر نگه می‌داریم
+        Snackbar.Add("خطا در بارگذاری اطلاعات اولیه برای فرم.", Severity.Error);
+        Logger.LogError(ex, "Failed to load initial data for the dialog.");
+        Cancel(); // بستن دیالوگ در صورت بروز خطای جدی
+    }
+}
     private void OnRoleSelectionChanged(Guid selectedRoleId)
     {
         _assignRoleModel.RoleId = selectedRoleId;

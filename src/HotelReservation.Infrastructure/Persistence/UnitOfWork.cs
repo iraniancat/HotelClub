@@ -23,8 +23,8 @@ public class UnitOfWork : IUnitOfWork
     private Lazy<IGenericRepository<BookingFile>> _bookingFileRepository;
     private Lazy<IBookingPeriodRepository> _bookingPeriodRepository; // <<-- اضافه شد
 
-
-    public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger,ILoggerFactory loggerFactory)
+    private Lazy<IGenericRepository<BookingStatusHistory>> _bookingStatusHistoryRepository;
+    public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger, ILoggerFactory loggerFactory)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -43,6 +43,7 @@ public class UnitOfWork : IUnitOfWork
         _dependentDataRepository = new Lazy<IDependentDataRepository>(() => new DependentDataRepository(_context));
         _bookingFileRepository = new Lazy<IGenericRepository<BookingFile>>(() => new GenericRepository<BookingFile>(_context));
         _bookingPeriodRepository = new Lazy<IBookingPeriodRepository>(() => new BookingPeriodRepository(_context)); // <<-- اضافه شد
+        _bookingStatusHistoryRepository = new Lazy<IGenericRepository<BookingStatusHistory>>(() => new GenericRepository<BookingStatusHistory>(_context));
     }
 
     public IUserRepository UserRepository => _userRepository.Value;
@@ -55,6 +56,8 @@ public class UnitOfWork : IUnitOfWork
     public IDependentDataRepository DependentDataRepository => _dependentDataRepository.Value;
     public IGenericRepository<BookingFile> BookingFileRepository => _bookingFileRepository.Value;
     public IBookingPeriodRepository BookingPeriodRepository => _bookingPeriodRepository.Value;
+    public IGenericRepository<BookingStatusHistory> BookingStatusHistoryRepository => _bookingStatusHistoryRepository.Value;
+
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         // لاگ کردن وضعیت ChangeTracker قبل از ذخیره

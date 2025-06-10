@@ -31,10 +31,10 @@ public class BookingRequest
     public virtual ICollection<BookingFile> Files { get; private set; } = new List<BookingFile>();
     public virtual ICollection<BookingStatusHistory> StatusHistory { get; private set; } = new List<BookingStatusHistory>();
 
-// <<-- خصوصیت جدید برای مدیریت همزمانی -->>
+    // <<-- خصوصیت جدید برای مدیریت همزمانی -->>
     [Timestamp]
     public byte[] RowVersion { get; private set; }
-    
+
     private BookingRequest() { } // برای EF Core
 
     public BookingRequest(
@@ -75,7 +75,7 @@ public class BookingRequest
         // AssignedRoomId و AssignedRoom در ابتدا null هستند
 
         // اولین رکورد تاریخچه وضعیت
-        AddStatusHistory(null, BookingStatus.Draft, requestSubmitterUserId, requestSubmitterUser, "ایجاد درخواست اولیه");
+        AddStatusHistory(null, BookingStatus.Draft, requestSubmitterUserId, "ایجاد درخواست اولیه");
     }
 
     private string GenerateTrackingCode()
@@ -102,31 +102,37 @@ public class BookingRequest
         AssignedRoom = null;
     }
 
-   public void UpdateStatus(BookingStatus newStatus, Guid changedByUserId, string? comments)
+    public BookingStatusHistory UpdateStatus(BookingStatus newStatus, Guid changedByUserId, string? comments)
     {
-        if (Status == newStatus) return; 
+        if (Status == newStatus)
+        {
+            // اگر وضعیت تغییر نکرده، یک تاریخچه خالی یا null برمی‌گردانیم تا در Handler پردازش نشود
+            return null; // یا یک Exception پرتاب شود
+        }
 
         var oldStatus = Status;
         Status = newStatus;
         LastStatusUpdateDate = DateTime.UtcNow;
-        AddStatusHistory(oldStatus, newStatus, changedByUserId, comments);
 
         if (newStatus != BookingStatus.HotelApproved)
         {
             ClearAssignedRoom();
         }
+
+        // ایجاد و بازگرداندن موجودیت تاریخچه جدید
+        return new BookingStatusHistory(this.Id, newStatus, changedByUserId, comments, oldStatus);
     }
-     private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, string? comments)
+    private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, string? comments)
     {
         // ما دیگر شیء کامل User را اینجا پاس نمی‌دهیم، فقط شناسه آن را.
         // EF Core به طور خودکار رابطه را بر اساس کلید خارجی برقرار می‌کند.
         var historyEntry = new BookingStatusHistory(
-            this.Id, 
-            newStatus, 
-            changedByUserId, 
-            comments, 
+            this.Id,
+            newStatus,
+            changedByUserId,
+            comments,
             oldStatus);
-            
+
         StatusHistory.Add(historyEntry);
     }
 
@@ -143,9 +149,8 @@ public class BookingRequest
         Files.Add(file);
     }
 
-    private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, User changedByUser, string? comments)
+    private void AddStatusHistory(BookingStatusHistory historyEntry)
     {
-        var historyEntry = new BookingStatusHistory(this.Id, newStatus, changedByUserId, comments, oldStatus);
         StatusHistory.Add(historyEntry);
     }
 

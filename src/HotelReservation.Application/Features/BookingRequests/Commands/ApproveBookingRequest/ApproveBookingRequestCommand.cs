@@ -6,14 +6,12 @@ namespace HotelReservation.Application.Features.BookingRequests.Commands.Approve
 
 public class ApproveBookingRequestCommand : IRequest // یا IRequest<Unit>
 {
-    public Guid BookingRequestId { get; } // از مسیر URL
-    public Guid HotelUserId { get; }      // از کاربر احراز هویت شده هتل
-    public string? Comments { get; }      // از DTO (اختیاری)
+     public Guid BookingRequestId { get; }
+    public string? Comments { get; }
 
-    public ApproveBookingRequestCommand(Guid bookingRequestId, Guid hotelUserId, string? comments)
+    public ApproveBookingRequestCommand(Guid bookingRequestId, string? comments)
     {
         BookingRequestId = bookingRequestId;
-        HotelUserId = hotelUserId;
         Comments = comments;
     }
 }

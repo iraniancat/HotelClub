@@ -59,7 +59,7 @@ builder.Services.AddCors(options =>
         policyBuilder.WithOrigins(allowedOrigin) // <<-- استفاده از مبدأ خوانده شده از تنظیمات
                      .AllowAnyHeader()
                      .AllowAnyMethod();
-                     // .AllowCredentials(); // اگر از کوکی یا Credentialهای خاصی استفاده می‌کنید (برای JWT معمولاً لازم نیست)
+        // .AllowCredentials(); // اگر از کوکی یا Credentialهای خاصی استفاده می‌کنید (برای JWT معمولاً لازم نیست)
     });
 });
 // --- پایان پیکربندی سرویس CORS ---

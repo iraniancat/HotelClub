@@ -1,0 +1,235 @@
+@page "/admin/rooms"
+@using HotelReservation.Application.Contracts.Security
+@using HotelReservation.Application.DTOs.Room
+@attribute [Authorize(Roles = "SuperAdmin, HotelUser")]
+
+@inject IApiClientService ApiClient
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject ICurrentUserService CurrentUserService
+@inject ILogger<RoomManagement> Logger
+
+<PageTitle>مدیریت اتاق‌ها</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudToolBar Class="mb-4">
+            <MudIcon Icon="@Icons.Material.Filled.MeetingRoom" Class="me-3" Size="Size.Large" Color="Color.Primary"/>
+            <MudText Typo="Typo.h5">مدیریت اتاق‌ها</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="OpenCreateDialog" StartIcon="@Icons.Material.Filled.Add" Disabled="_isLoading || _selectedHotelId == null">
+                ایجاد اتاق جدید
+            </MudButton>
+        </MudToolBar>
+
+        @* استفاده از AuthorizeView برای نمایش شرطی رابط کاربری بر اساس نقش *@
+        <AuthorizeView Roles="SuperAdmin">
+            <Authorized>
+                <MudSelect T="Guid?" Label="ابتدا یک هتل را انتخاب کنید" Variant="Variant.Outlined" Class="mb-4"
+                           ValueChanged="OnHotelSelected" Value="_selectedHotelId">
+                    @if (!_hotels.Any() && _superAdminInitialLoad)
+                    {
+                        <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                    }
+                    @foreach (var hotel in _hotels)
+                    {
+                        <MudSelectItem Value="@((Guid?)hotel.Id)">@hotel.Name</MudSelectItem>
+                    }
+                </MudSelect>
+            </Authorized>
+        </AuthorizeView>
+
+        @if (_selectedHotelId != null)
+        {
+            <MudTable Items="@_rooms" Dense="true" Hover="true" Striped="true" @ref="_table"
+                      Loading="@_isLoading" LoadingProgressColor="Color.Primary">
+                <HeaderContent>
+                    <MudTh>شماره اتاق</MudTh>
+                    <MudTh>ظرفیت (نفر)</MudTh>
+                    <MudTh>قیمت هر شب (تومان)</MudTh>
+                    <MudTh>وضعیت</MudTh>
+                    <MudTh Style="text-align:center;">عملیات</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="شماره اتاق">@context.RoomNumber</MudTd>
+                    <MudTd DataLabel="ظرفیت">@context.Capacity</MudTd>
+                    <MudTd DataLabel="قیمت">@context.PricePerNight.ToString("N0")</MudTd>
+                    <MudTd DataLabel="وضعیت">
+                        <MudChip Icon="@(context.IsActive ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Cancel)" 
+                                 Color="@(context.IsActive ? Color.Success : Color.Error)" Size="Size.Small">
+                            @(context.IsActive ? "فعال" : "غیرفعال")
+                        </MudChip>
+                    </MudTd>
+                    <MudTd Style="text-align:center">
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => OpenEditDialog(context))" Title="ویرایش" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Filled" Color="Color.Error" Size="Size.Small" OnClick="@(() => ConfirmDeleteDialog(context))" Title="حذف" Class="mr-2" />
+                    </MudTd>
+                </RowTemplate>
+                <NoRecordsContent>
+                    <MudText>اتاقی برای این هتل یافت نشد.</MudText>
+                </NoRecordsContent>
+                <LoadingContent>
+                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                </LoadingContent>
+            </MudTable>
+        }
+        else
+        {
+            <AuthorizeView Roles="SuperAdmin">
+                 <MudAlert Severity="Severity.Info">برای مشاهده و مدیریت اتاق‌ها، لطفاً ابتدا یک هتل را از لیست بالا انتخاب کنید.</MudAlert>
+            </AuthorizeView>
+        }
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<RoomDto> _table = new();
+    private bool _isLoading = true;
+    private bool _superAdminInitialLoad = false;
+    
+    private Guid? _selectedHotelId;
+    private List<HotelDto> _hotels = new();
+    private List<RoomDto> _rooms = new();
+
+    // از CascadingParameter برای دریافت وضعیت احراز هویت استفاده می‌کنیم
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        _isLoading = true;
+        try
+        {
+            if (user.IsInRole("SuperAdmin"))
+            {
+                _superAdminInitialLoad = true;
+                var hotelsResult = await ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+                if (hotelsResult != null) _hotels = hotelsResult.ToList();
+                _isLoading = false; // برای مدیر، لودینگ تمام می‌شود چون باید یک هتل انتخاب کند
+            }
+            else if (user.IsInRole("HotelUser"))
+            {
+                _selectedHotelId = CurrentUserService.HotelId;
+                if (_selectedHotelId.HasValue)
+                {
+                    await LoadRoomsAsync(_selectedHotelId.Value);
+                }
+                else
+                {
+                    Snackbar.Add("خطا: شناسه هتل برای این کاربر یافت نشد.", Severity.Error);
+                    _isLoading = false;
+                }
+            }
+            else
+            {
+                _isLoading = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در بارگذاری اطلاعات اولیه: {ex.Message}", Severity.Error);
+            _isLoading = false;
+        }
+        StateHasChanged();
+    }
+
+    private async Task OnHotelSelected(Guid? hotelId)
+    {
+        _selectedHotelId = hotelId;
+        if (_selectedHotelId.HasValue)
+        {
+            await LoadRoomsAsync(_selectedHotelId.Value);
+        }
+        else
+        {
+            _rooms.Clear();
+        }
+    }
+
+    private async Task LoadRoomsAsync(Guid hotelId)
+    {
+        _isLoading = true;
+        StateHasChanged();
+        try
+        {
+            var result = await ApiClient.GetListAsync<RoomDto>($"api/rooms/by-hotel/{hotelId}");
+            _rooms = result?.ToList() ?? new List<RoomDto>();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست اتاق‌ها: {ex.Message}", Severity.Error);
+            _rooms = new List<RoomDto>();
+        }
+        finally
+        {
+            _isLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task OpenCreateDialog()
+    {
+        if (!_selectedHotelId.HasValue) return;
+
+        var parameters = new DialogParameters { ["HotelId"] = _selectedHotelId.Value };
+        var dialog = DialogService.Show<CreateOrUpdateRoomDialog>("ایجاد اتاق جدید", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("اتاق با موفقیت ایجاد شد.", Severity.Success);
+            await LoadRoomsAsync(_selectedHotelId.Value);
+        }
+    }
+
+    private async Task OpenEditDialog(RoomDto roomToEdit)
+    {
+        var parameters = new DialogParameters { ["RoomToEdit"] = roomToEdit };
+        var dialog = DialogService.Show<CreateOrUpdateRoomDialog>($"ویرایش اتاق: {roomToEdit.RoomNumber}", parameters);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Cancelled)
+        {
+            Snackbar.Add("اتاق با موفقیت ویرایش شد.", Severity.Success);
+            await LoadRoomsAsync(roomToEdit.HotelId);
+        }
+    }
+
+    private async Task ConfirmDeleteDialog(RoomDto roomToDelete)
+    {
+        var parameters = new DialogParameters
+        {
+            ["Title"] = "تأیید حذف اتاق",
+            ["ContentText"] = $"آیا از حذف اتاق شماره '{roomToDelete.RoomNumber}' مطمئن هستید؟",
+            ["ButtonText"] = "حذف",
+            ["Color"] = Color.Error,
+            ["Icon"] = Icons.Material.Filled.DeleteForever
+        };
+
+        var dialog = DialogService.Show<ConfirmDialog>("تأیید حذف", parameters);
+        var result = await dialog.Result;
+        
+        if (result != null && !result.Cancelled)
+        {
+            _isLoading = true;
+            try
+            {
+                await ApiClient.DeleteAsync($"api/rooms/{roomToDelete.Id}");
+                Snackbar.Add("اتاق با موفقیت حذف شد.", Severity.Success);
+                await LoadRoomsAsync(roomToDelete.HotelId);
+            }
+            catch (ApplicationException ex)
+            {
+                Snackbar.Add($"خطا در حذف اتاق: {ex.Message}", Severity.Error);
+            }
+            finally
+            {
+                _isLoading = false;
+                StateHasChanged();
+            }
+        }
+    }
+}

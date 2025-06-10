@@ -27,4 +27,6 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
             .Where(h => h.Name.Contains(name)) // جستجوی ساده بر اساس نام
             .ToListAsync();
     }
+
+   
 }

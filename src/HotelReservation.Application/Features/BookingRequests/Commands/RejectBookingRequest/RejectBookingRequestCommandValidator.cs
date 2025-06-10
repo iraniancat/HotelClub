@@ -12,9 +12,7 @@ public class RejectBookingRequestCommandValidator : AbstractValidator<RejectBook
             .NotEmpty().WithMessage("شناسه درخواست رزرو الزامی است.")
             .NotEqual(Guid.Empty).WithMessage("شناسه درخواست رزرو معتبر نیست.");
 
-        RuleFor(p => p.HotelUserId)
-            .NotEmpty().WithMessage("شناسه کاربر هتل الزامی است.")
-            .NotEqual(Guid.Empty).WithMessage("شناسه کاربر هتل معتبر نیست.");
+        
 
         RuleFor(p => p.RejectionReason)
             .NotEmpty().WithMessage("دلیل رد درخواست الزامی است.")

@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZU1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/RoomManagement.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9vbU1hbmFnZW1lbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/UserManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlck1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,6 +106,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateNonEmployeeUserDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZU5vbkVtcGxveWVlVXNlckRpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateOrUpdateRoomDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENyZWF0ZU9yVXBkYXRlUm9vbURpYWxvZy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/CreateRoleDialog.razor]

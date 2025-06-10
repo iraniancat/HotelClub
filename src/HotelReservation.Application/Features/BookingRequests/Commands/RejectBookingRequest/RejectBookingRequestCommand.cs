@@ -4,16 +4,14 @@ using System;
 
 namespace HotelReservation.Application.Features.BookingRequests.Commands.RejectBookingRequest;
 
-public class RejectBookingRequestCommand : IRequest // یا IRequest<Unit>
+public class RejectBookingRequestCommand : IRequest
 {
-    public Guid BookingRequestId { get; } // از مسیر URL
-    public Guid HotelUserId { get; }      // از کاربر احراز هویت شده هتل
-    public string RejectionReason { get; } // از DTO
+    public Guid BookingRequestId { get; }
+    public string RejectionReason { get; }
 
-    public RejectBookingRequestCommand(Guid bookingRequestId, Guid hotelUserId, string rejectionReason)
+    public RejectBookingRequestCommand(Guid bookingRequestId, string rejectionReason)
     {
         BookingRequestId = bookingRequestId;
-        HotelUserId = hotelUserId;
         RejectionReason = rejectionReason;
     }
 }

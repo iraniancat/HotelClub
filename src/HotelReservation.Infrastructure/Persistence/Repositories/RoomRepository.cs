@@ -1,23 +1,22 @@
-// src/HotelReservation.Infrastructure/Persistence/Repositories/RoomRepository.cs
 using HotelReservation.Application.Contracts.Persistence;
 using HotelReservation.Domain.Entities;
-using Microsoft.EntityFrameworkCore; // برای استفاده از متدهای EF خاص اگر لازم باشد
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservation.Infrastructure.Persistence.Repositories;
-
 public class RoomRepository : GenericRepository<Room>, IRoomRepository
 {
-    public RoomRepository(AppDbContext dbContext) : base(dbContext)
-    {
-    }
+    public RoomRepository(AppDbContext dbContext) : base(dbContext) { }
 
-    // پیاده‌سازی متدهای خاص IRoomRepository در صورت وجود
-    // public async Task<IReadOnlyList<Room>> GetAvailableRoomsAsync(Guid hotelId, DateTime checkIn, DateTime checkOut, int requiredCapacity)
-    // {
-    //     // منطق پیچیده‌تر برای یافتن اتاق‌های کاملاً آزاد در بازه زمانی با ظرفیت مشخص
-    // }
+    public async Task<bool> IsRoomNumberUniqueAsync(Guid hotelId, string roomNumber, Guid? roomIdToExclude = null)
+    {
+        var query = _dbContext.Rooms
+            .Where(r => r.HotelId == hotelId && r.RoomNumber.ToLower() == roomNumber.ToLower());
+        
+        if (roomIdToExclude.HasValue)
+        {
+            query = query.Where(r => r.Id != roomIdToExclude.Value);
+        }
+
+        return !await query.AnyAsync();
+    }
 }

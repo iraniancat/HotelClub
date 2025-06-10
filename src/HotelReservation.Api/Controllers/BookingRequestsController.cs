@@ -17,6 +17,8 @@ using HotelReservation.Application.Features.BookingRequests.Queries.GetAllBookin
 using HotelReservation.Application.DTOs.Common;
 using HotelReservation.Application.Features.BookingRequests.Queries.GetBookingFile;
 using HotelReservation.Application.Features.BookingRequests.Commands.CancelBookingRequest; // برای PagedResult
+using HotelReservation.Application.Features.BookingRequests.Commands.ApproveBookingRequest;
+using HotelReservation.Application.Features.BookingRequests.Commands.RejectBookingRequest;
 
 namespace HotelReservation.Api.Controllers;
 
@@ -184,6 +186,25 @@ public class BookingRequestsController : ControllerBase
     public async Task<IActionResult> CancelBookingRequest(Guid id, [FromBody] CancelBookingRequestDto dto)
     {
         var command = new CancelBookingRequestCommand(id, dto.CancellationReason);
+        await _mediator.Send(command);
+        return NoContent();
+    }
+     [HttpPut("{id:guid}/approve")]
+    [Authorize(Roles = "HotelUser")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> ApproveBookingRequest(Guid id, [FromBody] ApproveBookingRequestDto dto)
+    {
+        var command = new ApproveBookingRequestCommand(id, dto.Comments);
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}/reject")]
+    [Authorize(Roles = "HotelUser")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> RejectBookingRequest(Guid id, [FromBody] RejectBookingRequestDto dto)
+    {
+        var command = new RejectBookingRequestCommand(id, dto.RejectionReason);
         await _mediator.Send(command);
         return NoContent();
     }

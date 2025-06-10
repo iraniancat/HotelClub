@@ -157,20 +157,10 @@ public class ApiClientService : IApiClientService
 
     public async Task PutAsync<TRequest>(string requestUri, TRequest data)
     {
-        try
+        var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+        if (!response.IsSuccessStatusCode)
         {
-            var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"API PUT (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-            }
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"API PUT (no response) Error: {ex.Message} on {requestUri}");
-            throw;
+            await HandleErrorResponse(response);
         }
     }
 
@@ -237,4 +227,28 @@ public class ApiClientService : IApiClientService
     {
         _httpClient.DefaultRequestHeaders.Authorization = null;
     }
+
+    private async Task HandleErrorResponse(HttpResponseMessage response)
+    {
+        // تلاش برای خواندن بدنه خطا به عنوان یک شیء با جزئیات
+        var errorContent = await response.Content.ReadAsStringAsync();
+        try
+        {
+            var errorDto = JsonSerializer.Deserialize<ErrorResponseDto>(errorContent, _jsonSerializerOptions);
+            // اگر پیام detail وجود دارد، آن را نمایش بده، در غیر این صورت یک پیام عمومی
+            throw new ApplicationException(errorDto?.Detail ?? errorDto?.Title ?? "خطایی از سمت سرور رخ داد.");
+        }
+        catch (JsonException)
+        {
+            // اگر پاسخ خطا JSON معتبر نبود، خود پاسخ را نمایش بده
+            throw new ApplicationException($"خطا از API: {response.StatusCode}. {errorContent}");
+        }
+    }
+}
+public class ErrorResponseDto
+{
+    public string? Title { get; set; }
+    public int Status { get; set; }
+    public string? Detail { get; set; }
+    // می‌توانید پراپرتی errors را هم اضافه کنید اگر لازم است
 }

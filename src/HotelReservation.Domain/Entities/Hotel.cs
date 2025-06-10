@@ -48,10 +48,5 @@ public class Hotel
         PhoneNumber = phoneNumber;
     }
 
-    public void AddRoom(string roomNumber, int capacity, string roomType)
-    {
-        // سازنده Room دیگر Province را به عنوان ورودی از Hotel نمی‌گیرد
-        var room = new Room(this.Id, this, roomNumber, capacity, roomType);
-        Rooms.Add(room);
-    }
+  
 }
