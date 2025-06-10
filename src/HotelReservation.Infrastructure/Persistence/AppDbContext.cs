@@ -287,6 +287,7 @@ public class AppDbContext : DbContext
             .IsRequired(false)                           // این رابطه اختیاری است (AssignedRoomId می‌تواند null باشد)
             .OnDelete(DeleteBehavior.SetNull);            // اگر اتاق حذف شد، AssignedRoomId در رزرو null شود (یا Restrict اگر نمی‌خواهید اتاق دارای رزرو حذف شود)
                                                           // --- پایان پیکربندی رابطه با Room ---
+        builder.Property(b => b.RowVersion).IsRowVersion();
     }
 
     private void ConfigureBookingStatusHistory(EntityTypeBuilder<BookingStatusHistory> builder) // بدون تغییر

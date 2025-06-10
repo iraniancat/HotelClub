@@ -1,3 +1,5 @@
+// 1. فایل جدید: src/HotelReservation.Client/Services/Authentication/ClientCurrentUserService.cs
+//    این کلاس، پیاده‌سازی مخصوص کلاینت برای ICurrentUserService است.
 using HotelReservation.Application.Contracts.Security;
 using Microsoft.AspNetCore.Components.Authorization;
 using System;
@@ -14,7 +16,6 @@ public class ClientCurrentUserService : ICurrentUserService
     public ClientCurrentUserService(AuthenticationStateProvider authenticationStateProvider)
     {
         _authenticationStateProvider = authenticationStateProvider;
-        // به تغییرات وضعیت احراز هویت گوش می‌دهیم تا کاربر فعلی را به‌روز کنیم
         _authenticationStateProvider.AuthenticationStateChanged += async (authStateTask) =>
         {
             var authState = await authStateTask;
@@ -23,7 +24,7 @@ public class ClientCurrentUserService : ICurrentUserService
     }
 
     // یک متد برای مقداردهی اولیه، چون سازنده نمی‌تواند async باشد
-    public async Task InitializeAsync()
+    private async Task InitializeAsync()
     {
         if (_currentUser == null)
         {
@@ -32,7 +33,21 @@ public class ClientCurrentUserService : ICurrentUserService
         }
     }
 
-    private ClaimsPrincipal User => _currentUser ?? new ClaimsPrincipal(new ClaimsIdentity());
+    private ClaimsPrincipal User
+    {
+        get
+        {
+            // اگر _currentUser مقدار نداشت، سعی کن دوباره آن را بگیری
+            if (_currentUser == null)
+            {
+                // این بخش به صورت sync اجرا می‌شود تا در constructorهای دیگر مشکلی پیش نیاید
+                // اما بهترین حالت این است که از قبل Initialize شده باشد.
+                var authStateTask = _authenticationStateProvider.GetAuthenticationStateAsync();
+                _currentUser = authStateTask.GetAwaiter().GetResult().User;
+            }
+            return _currentUser ?? new ClaimsPrincipal(new ClaimsIdentity());
+        }
+    }
 
     public bool IsAuthenticated => User.Identity?.IsAuthenticated ?? false;
 

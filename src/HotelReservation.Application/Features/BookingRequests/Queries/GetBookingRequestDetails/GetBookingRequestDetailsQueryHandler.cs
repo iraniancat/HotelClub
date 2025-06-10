@@ -1,12 +1,20 @@
-using HotelReservation.Application.Contracts.Security;
+// مسیر: src/HotelReservation.Application/Features/BookingRequests/Queries/GetBookingRequestDetails/GetBookingRequestDetailsQueryHandler.cs
+using HotelReservation.Application.Contracts.Persistence;
+using HotelReservation.Application.Contracts.Security; // برای ICurrentUserService
 using HotelReservation.Application.DTOs.Booking;
+using HotelReservation.Application.DTOs.Hotel;
 using HotelReservation.Application.DTOs.UserManagement;
 using HotelReservation.Application.Exceptions;
-using HotelReservation.Application.Features.BookingRequests.Queries.GetBookingRequestDetails;
 using HotelReservation.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization; // برای IAuthorizationService
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace HotelReservation.Application.Features.BookingRequests.Queries.GetBookingRequestDetails;
 
 public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRequestDetailsQuery, BookingRequestDetailsDto?>
 {
@@ -35,18 +43,32 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
             throw new NotFoundException(nameof(BookingRequest), request.BookingRequestId);
         }
 
-        // بررسی مجوز دسترسی (با فرض اینکه ICurrentUserService و Policy به درستی کار می‌کنند)
+        // --- استفاده مستقیم از ICurrentUserService برای بررسی مجوز ---
         var userPrincipal = _currentUserService.GetUserPrincipal();
-        if (userPrincipal == null) throw new UnauthorizedAccessException();
+        if (userPrincipal == null || !_currentUserService.IsAuthenticated)
+        {
+            throw new UnauthorizedAccessException("کاربر برای این عملیات احراز هویت نشده است.");
+        }
 
-        var authorizationResult = await _authorizationService.AuthorizeAsync(userPrincipal, bookingRequest, "CanViewBookingRequest");
+        var authorizationResult = await _authorizationService.AuthorizeAsync(
+            userPrincipal,
+            bookingRequest, // منبع
+            "CanViewBookingRequest" // نام Policy
+        );
+
         if (!authorizationResult.Succeeded)
         {
+            _logger.LogWarning("User {UserId} (Role: {UserRole}) failed authorization for policy 'CanViewBookingRequest' on BookingRequest {BookingId}.", 
+                _currentUserService.UserId, _currentUserService.UserRole, request.BookingRequestId);
             throw new ForbiddenAccessException("شما مجاز به مشاهده این درخواست رزرو نیستید.");
         }
+        _logger.LogInformation("User {UserId} authorized to view BookingRequest {BookingId}.", _currentUserService.UserId, request.BookingRequestId);
 
         // واکشی نام کارمند اصلی
         var requestingEmployee = await _unitOfWork.UserRepository.GetByNationalCodeAsync(bookingRequest.RequestingEmployeeNationalCode);
+        
+        // واکشی نام دوره زمانی
+        var period = await _unitOfWork.BookingPeriodRepository.GetByIdAsync(bookingRequest.BookingPeriodId);
 
         // نگاشت به DTO
         var detailsDto = new BookingRequestDetailsDto
@@ -54,8 +76,8 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
             Id = bookingRequest.Id,
             TrackingCode = bookingRequest.TrackingCode,
             RequestingEmployeeNationalCode = bookingRequest.RequestingEmployeeNationalCode,
-            RequestingEmployeeFullName = requestingEmployee?.FullName, // <<-- پر کردن نام کامل کارمند
-            // BookingPeriodId = bookingRequest.BookingPeriodId, // <<-- این خط حذف شد چون در DTO وجود ندارد
+            RequestingEmployeeFullName = requestingEmployee?.FullName,
+            BookingPeriod = period?.Name ?? "نامشخص",
             CheckInDate = bookingRequest.CheckInDate,
             CheckOutDate = bookingRequest.CheckOutDate,
             NumberOfNights = bookingRequest.NumberOfNights,
@@ -65,7 +87,11 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
             LastStatusUpdateDate = bookingRequest.LastStatusUpdateDate,
             Notes = bookingRequest.Notes,
             Hotel = bookingRequest.Hotel == null ? null : new HotelSlimDto { Id = bookingRequest.Hotel.Id, Name = bookingRequest.Hotel.Name },
-            RequestSubmitterUser = bookingRequest.RequestSubmitterUser == null ? null : new UserManagementListDto { Id = bookingRequest.RequestSubmitterUser.Id, FullName = bookingRequest.RequestSubmitterUser.FullName, SystemUserId = bookingRequest.RequestSubmitterUser.SystemUserId },
+            RequestSubmitterUser = bookingRequest.RequestSubmitterUser == null ? null : new UserManagementListDto { 
+                Id = bookingRequest.RequestSubmitterUser.Id, 
+                FullName = bookingRequest.RequestSubmitterUser.FullName, 
+                SystemUserId = bookingRequest.RequestSubmitterUser.SystemUserId 
+            },
             Guests = bookingRequest.Guests.Select(g => new BookingGuestDetailsDto
             {
                 Id = g.Id,
@@ -74,17 +100,14 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
                 RelationshipToEmployee = g.RelationshipToEmployee,
                 DiscountPercentage = g.DiscountPercentage
             }).ToList(),
-            Files = bookingRequest.Files.Select(f => new BookingFileDto // <<-- پر کردن لیست فایل‌ها
+            Files = bookingRequest.Files.Select(f => new BookingFileDto
             {
                 Id = f.Id,
                 FileName = f.FileName,
-                ContentType = f.ContentType
+                ContentType = f.ContentType,
+                UploadedDate = f.UploadedDate
             }).ToList()
         };
-        // واکشی و تنظیم نام دوره زمانی
-        var period = await _unitOfWork.BookingPeriodRepository.GetByIdAsync(bookingRequest.BookingPeriodId);
-        detailsDto.BookingPeriod = period?.Name ?? "نامشخص";
-
 
         return detailsDto;
     }

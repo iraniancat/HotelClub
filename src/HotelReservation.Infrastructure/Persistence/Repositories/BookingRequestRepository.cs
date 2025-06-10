@@ -3,25 +3,49 @@ using HotelReservation.Application.Contracts.Persistence;
 using HotelReservation.Domain.Entities;
 using HotelReservation.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HotelReservation.Infrastructure.Persistence.Repositories;
 
 public class BookingRequestRepository : GenericRepository<BookingRequest>, IBookingRequestRepository
 {
-    public BookingRequestRepository(AppDbContext dbContext) : base(dbContext)
+    private readonly ILogger<BookingRequestRepository> _logger; // <<-- اضافه شد
+
+    // سازنده اصلاح شده برای تزریق لاگر
+    public BookingRequestRepository(AppDbContext dbContext, ILogger<BookingRequestRepository> logger) : base(dbContext)
     {
+        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
-    public async Task<BookingRequest?> GetBookingRequestWithDetailsAsync(Guid id)
+    public async Task<BookingRequest?> GetBookingRequestWithDetailsAsync(Guid id, bool asNoTracking = true)
     {
-        return await _dbContext.BookingRequests
-            .AsNoTracking()
+        _logger.LogInformation("Repository: Attempting to find BookingRequest with ID: {BookingRequestId} (AsNoTracking: {AsNoTracking})", id, asNoTracking);
+
+        IQueryable<BookingRequest> query = _dbContext.BookingRequests;
+
+        if (asNoTracking)
+        {
+            query = query.AsNoTracking(); // <<-- فقط در صورت نیاز، بدون ردیابی می‌خوانیم
+        }
+
+        var bookingRequest = await query
             .Include(br => br.Hotel)
-            .Include(br => br.RequestSubmitterUser).ThenInclude(u => u.Role) // برای نمایش نقش کاربر ثبت کننده
+            .Include(br => br.RequestSubmitterUser).ThenInclude(u => u.Role)
             .Include(br => br.Guests)
             .Include(br => br.Files)
-            .Include(br => br.StatusHistory).ThenInclude(sh => sh.ChangedByUser) // کاربر تغییر دهنده تاریخچه
+            .Include(br => br.StatusHistory).ThenInclude(sh => sh.ChangedByUser)
             .FirstOrDefaultAsync(br => br.Id == id);
+
+        if (bookingRequest == null)
+        {
+            _logger.LogWarning("Repository: BookingRequest with ID: {BookingRequestId} was NOT FOUND.", id);
+        }
+        else
+        {
+            _logger.LogInformation("Repository: BookingRequest with ID: {BookingRequestId} FOUND successfully.", id);
+        }
+
+        return bookingRequest;
     }
 
     public async Task<IReadOnlyList<BookingRequest>> GetBookingRequestsByHotelIdAsync(Guid hotelId, BookingStatus? status = null)
@@ -37,7 +61,7 @@ public class BookingRequestRepository : GenericRepository<BookingRequest>, IBook
 
         return await query.Include(br => br.RequestSubmitterUser).ToListAsync(); // شامل کردن اطلاعات کاربر ثبت کننده
     }
-    
+
     public async Task<IReadOnlyList<BookingRequest>> GetBookingRequestsBySubmitterSystemUserIdAsync(string systemUserId)
     {
         return await _dbContext.BookingRequests

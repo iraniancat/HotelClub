@@ -43,6 +43,28 @@ public class ApiClientService : IApiClientService
         }
     }
 
+    public async Task<byte[]?> GetFileAsByteArrayAsync(string requestUri)
+    {
+        try
+        {
+            var response = await _httpClient.GetAsync(requestUri);
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsByteArrayAsync();
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API GET File Error: {response.StatusCode} - {errorContent} on {requestUri}");
+                throw new ApplicationException($"خطا از API: {response.StatusCode}");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API GET File Error: {ex.Message} on {requestUri}");
+            throw;
+        }
+    }
     public async Task<IEnumerable<TResponse>?> GetListAsync<TResponse>(string requestUri)
     {
         try
@@ -66,7 +88,7 @@ public class ApiClientService : IApiClientService
             {
                 if (response.Content.Headers.ContentLength > 0) // بررسی اینکه آیا محتوایی برای خواندن وجود دارد
                 {
-                     return await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
+                    return await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
                 }
                 return default; // برای پاسخ‌های 201 Created بدون بدنه یا پاسخ‌هایی که TResponse یک نوع ساده است
             }
@@ -86,92 +108,92 @@ public class ApiClientService : IApiClientService
             return default;
         }
     }
-     public async Task PostAsync<TRequest>(string requestUri, TRequest data)
-     {
-         try
-         {
-             var response = await _httpClient.PostAsJsonAsync(requestUri, data, _jsonSerializerOptions);
-             if (!response.IsSuccessStatusCode)
-             {
-                 var errorContent = await response.Content.ReadAsStringAsync();
-                 Console.WriteLine($"API POST (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                 throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-             }
-         }
-         catch (HttpRequestException ex)
-         {
-             Console.WriteLine($"API POST (no response) Error: {ex.Message} on {requestUri}");
-             throw;
-         }
-     }
+    public async Task PostAsync<TRequest>(string requestUri, TRequest data)
+    {
+        try
+        {
+            var response = await _httpClient.PostAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API POST (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
+                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API POST (no response) Error: {ex.Message} on {requestUri}");
+            throw;
+        }
+    }
 
 
     public async Task<TResponse?> PutAsync<TRequest, TResponse>(string requestUri, TRequest data)
     {
-         try
-         {
-             var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
-             if (response.IsSuccessStatusCode)
-             {
-                 if (response.Content.Headers.ContentLength > 0)
-                 {
-                     return await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
-                 }
-                 return default; 
-             }
-             else
-             {
-                 var errorContent = await response.Content.ReadAsStringAsync();
-                 Console.WriteLine($"API PUT Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                 throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-             }
-         }
-         catch (HttpRequestException ex)
-         {
-             Console.WriteLine($"API PUT Error: {ex.Message} on {requestUri}");
-             throw;
-         }
+        try
+        {
+            var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+            if (response.IsSuccessStatusCode)
+            {
+                if (response.Content.Headers.ContentLength > 0)
+                {
+                    return await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
+                }
+                return default;
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API PUT Error: {response.StatusCode} - {errorContent} on {requestUri}");
+                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API PUT Error: {ex.Message} on {requestUri}");
+            throw;
+        }
     }
 
     public async Task PutAsync<TRequest>(string requestUri, TRequest data)
     {
-         try
-         {
-             var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
-             if (!response.IsSuccessStatusCode)
-             {
-                 var errorContent = await response.Content.ReadAsStringAsync();
-                 Console.WriteLine($"API PUT (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                 throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-             }
-         }
-         catch (HttpRequestException ex)
-         {
-             Console.WriteLine($"API PUT (no response) Error: {ex.Message} on {requestUri}");
-             throw;
-         }
+        try
+        {
+            var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API PUT (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
+                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API PUT (no response) Error: {ex.Message} on {requestUri}");
+            throw;
+        }
     }
 
     public async Task DeleteAsync(string requestUri)
     {
-         try
-         {
-             var response = await _httpClient.DeleteAsync(requestUri);
-             if (!response.IsSuccessStatusCode)
-             {
-                 var errorContent = await response.Content.ReadAsStringAsync();
-                 Console.WriteLine($"API DELETE Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                 throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-             }
-         }
-         catch (HttpRequestException ex)
-         {
-             Console.WriteLine($"API DELETE Error: {ex.Message} on {requestUri}");
-             throw;
-         }
+        try
+        {
+            var response = await _httpClient.DeleteAsync(requestUri);
+            if (!response.IsSuccessStatusCode)
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"API DELETE Error: {response.StatusCode} - {errorContent} on {requestUri}");
+                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
+            }
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine($"API DELETE Error: {ex.Message} on {requestUri}");
+            throw;
+        }
     }
-    
-     public async Task<TResponse?> PostAsMultipartAsync<TResponse>(string requestUri, MultipartFormDataContent content)
+
+    public async Task<TResponse?> PostAsMultipartAsync<TResponse>(string requestUri, MultipartFormDataContent content)
     {
         try
         {

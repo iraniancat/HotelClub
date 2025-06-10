@@ -34,19 +34,25 @@ builder.Services.AddScoped(sp =>
     return new HttpClient { BaseAddress = new Uri(apiBaseUrl) };
 });
 
+// ثبت سرویس‌های MudBlazor
+builder.Services.AddMudServices();
+
+// ثبت سرویس‌های سفارشی برنامه
 builder.Services.AddScoped<IApiClientService, ApiClientService>();
-
-builder.Services.AddMudServices(); // <<-- سرویس‌های MudBlazor را اضافه کنید
-
-builder.Services.AddBlazoredLocalStorage(); // <<-- سرویس LocalStorage را اضافه کنید
-builder.Services.AddAuthorizationCore(); // <<-- سرویس‌های پایه مجوزدهی Blazor را اضافه کنید
-
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// ثبت CustomAuthenticationStateProvider
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>(); // <<-- اضافه شد
+// ثبت سرویس‌های احراز هویت و مجوزدهی Blazor
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+
+// ثبت سرویس تقویم شمسی
+builder.Services.AddPersianDatePicker();
+
+// ثبت لاگینگ برای استفاده در کلاینت
+builder.Services.AddLogging(logging => logging.SetMinimumLevel(LogLevel.Debug));
 
 // <<-- ثبت پیاده‌سازی کلاینت برای ICurrentUserService -->>
 builder.Services.AddScoped<ICurrentUserService, ClientCurrentUserService>();
-//builder.Services.AddPersianDatePicker();
+
 await builder.Build().RunAsync();

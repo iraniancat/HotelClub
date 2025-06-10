@@ -100,7 +100,7 @@ public class RejectBookingRequestCommandHandler : IRequestHandler<RejectBookingR
               throw new ApplicationException("خطا در واکشی اطلاعات کاربر رد کننده.");
          }
 
-        bookingRequestToReject.UpdateStatus(BookingStatus.HotelRejected, request.HotelUserId, userWhoRejected, request.RejectionReason);
+        bookingRequestToReject.UpdateStatus(BookingStatus.HotelRejected, request.HotelUserId, request.RejectionReason);
         
         await _unitOfWork.SaveChangesAsync(cancellationToken);
          _logger.LogInformation(

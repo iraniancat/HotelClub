@@ -9,9 +9,9 @@ namespace HotelReservation.Infrastructure.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {
-private readonly AppDbContext _context;
+    private readonly AppDbContext _context;
     private readonly ILogger<UnitOfWork> _logger;
-
+    private readonly ILoggerFactory _loggerFactory;
     private Lazy<IUserRepository> _userRepository;
     private Lazy<IRoleRepository> _roleRepository;
     private Lazy<IProvinceRepository> _provinceRepository;
@@ -23,10 +23,12 @@ private readonly AppDbContext _context;
     private Lazy<IGenericRepository<BookingFile>> _bookingFileRepository;
     private Lazy<IBookingPeriodRepository> _bookingPeriodRepository; // <<-- اضافه شد
 
-    public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger)
+
+    public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger,ILoggerFactory loggerFactory)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        _loggerFactory = loggerFactory;
 
         // مقداردهی Lazy برای تمام ریپازیتوری‌ها
         _userRepository = new Lazy<IUserRepository>(() => new UserRepository(_context));
@@ -35,7 +37,9 @@ private readonly AppDbContext _context;
         _departmentRepository = new Lazy<IDepartmentRepository>(() => new DepartmentRepository(_context));
         _hotelRepository = new Lazy<IHotelRepository>(() => new HotelRepository(_context));
         _roomRepository = new Lazy<IRoomRepository>(() => new RoomRepository(_context));
-        _bookingRequestRepository = new Lazy<IBookingRequestRepository>(() => new BookingRequestRepository(_context));
+        _bookingRequestRepository = new Lazy<IBookingRequestRepository>(
+            () => new BookingRequestRepository(_context, _loggerFactory.CreateLogger<BookingRequestRepository>()) // <<-- پاس دادن لاگر
+        );
         _dependentDataRepository = new Lazy<IDependentDataRepository>(() => new DependentDataRepository(_context));
         _bookingFileRepository = new Lazy<IGenericRepository<BookingFile>>(() => new GenericRepository<BookingFile>(_context));
         _bookingPeriodRepository = new Lazy<IBookingPeriodRepository>(() => new BookingPeriodRepository(_context)); // <<-- اضافه شد
@@ -51,7 +55,7 @@ private readonly AppDbContext _context;
     public IDependentDataRepository DependentDataRepository => _dependentDataRepository.Value;
     public IGenericRepository<BookingFile> BookingFileRepository => _bookingFileRepository.Value;
     public IBookingPeriodRepository BookingPeriodRepository => _bookingPeriodRepository.Value;
-        public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         // لاگ کردن وضعیت ChangeTracker قبل از ذخیره
         var trackedEntries = _context.ChangeTracker.Entries().ToList();
@@ -59,19 +63,19 @@ private readonly AppDbContext _context;
         {
             _logger.LogWarning("UnitOfWork.SaveChangesAsync: No changes detected by ChangeTracker before saving. Total tracked entries: {TrackedCount}", trackedEntries.Count);
             // لاگ کردن جزئیات تمام Entityهای Track شده و وضعیت آنها
-             foreach (var entry in trackedEntries)
-             {
-                 _logger.LogDebug("Tracked Entity: {EntityType}, State: {EntityState}, ID (if available): {EntityId}", 
-                     entry.Entity.GetType().Name, 
-                     entry.State,
-                     entry.Metadata.FindPrimaryKey()?.Properties.Select(p => entry.Property(p.Name).CurrentValue).FirstOrDefault() ?? "N/A"
-                     );
-             }
+            foreach (var entry in trackedEntries)
+            {
+                _logger.LogDebug("Tracked Entity: {EntityType}, State: {EntityState}, ID (if available): {EntityId}",
+                    entry.Entity.GetType().Name,
+                    entry.State,
+                    entry.Metadata.FindPrimaryKey()?.Properties.Select(p => entry.Property(p.Name).CurrentValue).FirstOrDefault() ?? "N/A"
+                    );
+            }
         }
         else
         {
             _logger.LogInformation("UnitOfWork.SaveChangesAsync: Detected {Count} changed entries. States: {States}",
-                trackedEntries.Count(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted), 
+                trackedEntries.Count(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted),
                 string.Join(", ", trackedEntries
                                      .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified || e.State == EntityState.Deleted)
                                      .Select(e => $"{e.Entity.GetType().Name}:{e.State}")));

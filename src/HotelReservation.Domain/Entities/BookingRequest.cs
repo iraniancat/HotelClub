@@ -1,6 +1,7 @@
 // src/HotelReservation.Domain/Entities/BookingRequest.cs
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using HotelReservation.Domain.Enums; // برای BookingStatus
 
 namespace HotelReservation.Domain.Entities;
@@ -8,38 +9,32 @@ namespace HotelReservation.Domain.Entities;
 public class BookingRequest
 {
     public Guid Id { get; private set; }
-    public string TrackingCode { get; private set; } // کد رهگیری، Unique
-    public string RequestingEmployeeNationalCode { get; private set; } // کد ملی کارمند اصلی درخواست‌دهنده
-    public Guid BookingPeriodId { get; private set; } // <<-- جایگزین می‌شود
+    public string TrackingCode { get; private set; }
+    public string RequestingEmployeeNationalCode { get; private set; }
+    public Guid BookingPeriodId { get; private set; }
     public virtual BookingPeriod BookingPeriod { get; private set; }
     public DateTime CheckInDate { get; private set; }
     public DateTime CheckOutDate { get; private set; }
-    public int NumberOfNights => (CheckOutDate - CheckInDate).Days; // محاسبه شده
-    public int TotalGuests { get; private set; } // مجموع کارمند و همراهان
-
-    // ارتباط با هتل
+    public int NumberOfNights => (CheckOutDate - CheckInDate).Days;
+    public int TotalGuests { get; private set; }
     public Guid HotelId { get; private set; }
     public virtual Hotel Hotel { get; private set; }
-
-    // ارتباط با کاربری که درخواست را ثبت کرده
     public Guid RequestSubmitterUserId { get; private set; }
     public virtual User RequestSubmitterUser { get; private set; }
-
     public BookingStatus Status { get; private set; }
     public DateTime SubmissionDate { get; private set; }
     public DateTime LastStatusUpdateDate { get; private set; }
-    public string? Notes { get; private set; } // توضیحات اضافی
-
-    // --- فیلدهای جدید برای ارتباط با اتاق تخصیص داده شده ---
-    public Guid? AssignedRoomId { get; private set; } // Nullable، چون فقط پس از تایید اتاق تخصیص داده می‌شود
-    public virtual Room? AssignedRoom { get; private set; } // Navigation Property
-    // --- پایان فیلدهای جدید ---
-
-    // Navigation Properties
+    public string? Notes { get; private set; }
+    public Guid? AssignedRoomId { get; private set; }
+    public virtual Room? AssignedRoom { get; private set; }
     public virtual ICollection<BookingGuest> Guests { get; private set; } = new List<BookingGuest>();
     public virtual ICollection<BookingFile> Files { get; private set; } = new List<BookingFile>();
     public virtual ICollection<BookingStatusHistory> StatusHistory { get; private set; } = new List<BookingStatusHistory>();
 
+// <<-- خصوصیت جدید برای مدیریت همزمانی -->>
+    [Timestamp]
+    public byte[] RowVersion { get; private set; }
+    
     private BookingRequest() { } // برای EF Core
 
     public BookingRequest(
@@ -107,20 +102,32 @@ public class BookingRequest
         AssignedRoom = null;
     }
 
-    public void UpdateStatus(BookingStatus newStatus, Guid changedByUserId, User changedByUser, string? comments = null)
+   public void UpdateStatus(BookingStatus newStatus, Guid changedByUserId, string? comments)
     {
-        if (Status == newStatus) return; // وضعیت تکراری نیست
+        if (Status == newStatus) return; 
 
         var oldStatus = Status;
         Status = newStatus;
         LastStatusUpdateDate = DateTime.UtcNow;
-        AddStatusHistory(oldStatus, newStatus, changedByUserId, changedByUser, comments);
+        AddStatusHistory(oldStatus, newStatus, changedByUserId, comments);
 
-        // اگر وضعیت به چیزی غیر از HotelApproved تغییر کرد، اتاق تخصیص داده شده را آزاد می‌کنیم
         if (newStatus != BookingStatus.HotelApproved)
         {
             ClearAssignedRoom();
         }
+    }
+     private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, string? comments)
+    {
+        // ما دیگر شیء کامل User را اینجا پاس نمی‌دهیم، فقط شناسه آن را.
+        // EF Core به طور خودکار رابطه را بر اساس کلید خارجی برقرار می‌کند.
+        var historyEntry = new BookingStatusHistory(
+            this.Id, 
+            newStatus, 
+            changedByUserId, 
+            comments, 
+            oldStatus);
+            
+        StatusHistory.Add(historyEntry);
     }
 
     public void AddGuest(string fullName, string nationalCode, string relationshipToEmployee, decimal discountPercentage)
@@ -138,7 +145,7 @@ public class BookingRequest
 
     private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, User changedByUser, string? comments)
     {
-        var historyEntry = new BookingStatusHistory(this.Id, this, newStatus, changedByUserId, changedByUser, comments, oldStatus);
+        var historyEntry = new BookingStatusHistory(this.Id, newStatus, changedByUserId, comments, oldStatus);
         StatusHistory.Add(historyEntry);
     }
 

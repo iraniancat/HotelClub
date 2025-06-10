@@ -23,13 +23,15 @@ public class UserRepository : GenericRepository<User>, IUserRepository
         return await _dbContext.Users.AnyAsync(u => u.SystemUserId == systemUserId);
     }
 
-    public async Task<User?> GetByNationalCodeAsync(string nationalCode)
+     public async Task<User?> GetByNationalCodeAsync(string nationalCode, bool asNoTracking = true)
     {
-        return await _dbContext.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(u => u.NationalCode == nationalCode);
+        IQueryable<User> query = _dbContext.Users;
+        if (asNoTracking)
+        {
+            query = query.AsNoTracking();
+        }
+        return await query.FirstOrDefaultAsync(u => u.NationalCode == nationalCode);
     }
-
     public async Task<bool> ExistsByNationalCodeAsync(string nationalCode)
     {
         return await _dbContext.Users.AnyAsync(u => u.NationalCode == nationalCode);

@@ -14,7 +14,9 @@ using FluentValidation;
 using HotelReservation.Application.Features.BookingRequests.Queries.GetBookingRequestDetails;
 using HotelReservation.Application.Contracts.Security; // برای CustomClaimTypes
 using HotelReservation.Application.Features.BookingRequests.Queries.GetAllBookingRequests; // برای PagedResult
-using HotelReservation.Application.DTOs.Common; // برای PagedResult
+using HotelReservation.Application.DTOs.Common;
+using HotelReservation.Application.Features.BookingRequests.Queries.GetBookingFile;
+using HotelReservation.Application.Features.BookingRequests.Commands.CancelBookingRequest; // برای PagedResult
 
 namespace HotelReservation.Api.Controllers;
 
@@ -57,7 +59,7 @@ public class BookingRequestsController : ControllerBase
             // بررسی می‌کنیم که تاریخ‌ها مقدار داشته باشند
             if (!actualDto.CheckInDate.HasValue || !actualDto.CheckOutDate.HasValue)
             {
-                 return BadRequest(new { message = "تاریخ ورود و خروج الزامی است." });
+                return BadRequest(new { message = "تاریخ ورود و خروج الزامی است." });
             }
         }
         catch (JsonException ex)
@@ -65,33 +67,33 @@ public class BookingRequestsController : ControllerBase
             _logger.LogError(ex, "Failed to deserialize bookingData JSON string: {JsonString}", bookingDataJson);
             return BadRequest(new { message = "فرمت داده‌های ارسالی درخواست رزرو نامعتبر است." });
         }
-        
+
         // Handler مسئول خواندن شناسه کاربر از ICurrentUserService است.
         var createBookingCommand = new CreateBookingRequestCommand(
-            actualDto.RequestingEmployeeNationalCode, 
-            actualDto.BookingPeriodId, 
+            actualDto.RequestingEmployeeNationalCode,
+            actualDto.BookingPeriodId,
             actualDto.CheckInDate.Value,
             actualDto.CheckOutDate.Value,
-            actualDto.HotelId, 
-            actualDto.Guests, 
+            actualDto.HotelId,
+            actualDto.Guests,
             actualDto.Notes
         );
-        
+
         var createResponse = await _mediator.Send(createBookingCommand);
-        
+
         if (createResponse == null)
         {
-             _logger.LogError("CreateBookingRequestCommandHandler returned a null response for DTO: {BookingDto}", bookingDataJson);
-            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "خطایی در پردازش درخواست رزرو رخ داد."});
+            _logger.LogError("CreateBookingRequestCommandHandler returned a null response for DTO: {BookingDto}", bookingDataJson);
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = "خطایی در پردازش درخواست رزرو رخ داد." });
         }
-        
+
         // اگر فایل وجود داشت و رزرو با موفقیت ایجاد شد، فایل را به آن پیوست می‌کنیم
         if (file != null && createResponse.Id != Guid.Empty)
         {
             var submitterUserIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!Guid.TryParse(submitterUserIdString, out Guid submitterUserId))
             {
-                 _logger.LogWarning("File upload for booking {BookingId} skipped: could not retrieve a valid SubmitterUserId from claims.", createResponse.Id);
+                _logger.LogWarning("File upload for booking {BookingId} skipped: could not retrieve a valid SubmitterUserId from claims.", createResponse.Id);
             }
             else
             {
@@ -117,7 +119,7 @@ public class BookingRequestsController : ControllerBase
 
         return CreatedAtAction(nameof(GetBookingRequestById), new { id = createResponse.Id }, createResponse);
     }
-    
+
     [HttpGet("{id:guid}", Name = "GetBookingRequestById")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookingRequestDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -126,38 +128,11 @@ public class BookingRequestsController : ControllerBase
     [Authorize]
     public async Task<IActionResult> GetBookingRequestById(Guid id)
     {
-        // این بخش نیاز به بازبینی دارد تا از ICurrentUserService استفاده کند
-        var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        var userRole = User.FindFirstValue(ClaimTypes.Role);
+        // دیگر نیازی به خواندن Claimها در اینجا نیست
+        var query = new GetBookingRequestDetailsQuery(id);
 
-        if (string.IsNullOrEmpty(userIdString) || !Guid.TryParse(userIdString, out Guid authenticatedUserId) || string.IsNullOrEmpty(userRole))
-        {
-            _logger.LogWarning("GetBookingRequestById (ID: {BookingId}): User ID or Role claim not found or invalid in token.", id);
-            return Unauthorized(new { message = "اطلاعات احراز هویت کاربر ناقص یا نامعتبر است." });
-        }
-
-        string? provinceCodeClaim = User.FindFirstValue(CustomClaimTypes.ProvinceCode);
-        Guid? hotelIdClaim = null;
-        var hotelIdString = User.FindFirstValue(CustomClaimTypes.HotelId);
-        if (!string.IsNullOrEmpty(hotelIdString) && Guid.TryParse(hotelIdString, out Guid parsedHotelId))
-        {
-            hotelIdClaim = parsedHotelId;
-        }
-
-        var query = new GetBookingRequestDetailsQuery(
-            id,
-            authenticatedUserId,
-            userRole,
-            provinceCodeClaim,
-            hotelIdClaim
-        );
-        
+        // NotFoundException و ForbiddenAccessException توسط Middleware مدیریت می‌شوند
         var details = await _mediator.Send(query);
-        
-        if (details == null)
-        {
-            return NotFound();
-        }
 
         return Ok(details);
     }
@@ -177,5 +152,39 @@ public class BookingRequestsController : ControllerBase
         };
         var result = await _mediator.Send(query);
         return Ok(result);
+    }
+    [HttpGet("{bookingRequestId:guid}/files/{fileId:guid}/download", Name = "DownloadBookingFile")]
+    [ProducesResponseType(typeof(FileContentResult), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [Authorize] // مجوز اولیه، جزئیات دقیق‌تر در Handler بررسی می‌شود
+    public async Task<IActionResult> DownloadBookingFile(Guid bookingRequestId, Guid fileId)
+    {
+        if (bookingRequestId == Guid.Empty || fileId == Guid.Empty)
+        {
+            return BadRequest(new { message = "شناسه درخواست رزرو و شناسه فایل الزامی است." });
+        }
+
+        var query = new GetBookingFileQuery(bookingRequestId, fileId);
+
+        // NotFoundException و ForbiddenAccessException توسط Middleware مدیریت می‌شوند
+        var fileToDownload = await _mediator.Send(query);
+
+        // بازگرداندن فایل به کلاینت
+        // این متد به طور خودکار هدرهای لازم برای دانلود را تنظیم می‌کند.
+        return File(fileToDownload.FileContent, fileToDownload.ContentType, fileToDownload.FileName);
+    }
+    [HttpPut("{id:guid}/cancel")]
+    [Authorize(Roles = "SuperAdmin,ProvinceUser")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> CancelBookingRequest(Guid id, [FromBody] CancelBookingRequestDto dto)
+    {
+        var command = new CancelBookingRequestCommand(id, dto.CancellationReason);
+        await _mediator.Send(command);
+        return NoContent();
     }
 }

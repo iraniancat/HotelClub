@@ -6,40 +6,31 @@ namespace HotelReservation.Domain.Entities;
 
 public class BookingStatusHistory
 {
-    public Guid Id { get; private set; }
-    public BookingStatus? OldStatus { get; private set; } // وضعیت قبلی (می‌تواند null باشد برای اولین وضعیت)
-    public BookingStatus NewStatus { get; private set; }   // وضعیت جدید
-    public DateTime ChangeDate { get; private set; }
-    public string? Comments { get; private set; }         // توضیحات مربوط به تغییر وضعیت
-
-    // کلید خارجی و Navigation Property برای درخواست رزرو
+     public Guid Id { get; private set; }
     public Guid BookingRequestId { get; private set; }
     public virtual BookingRequest BookingRequest { get; private set; }
-
-    // کلید خارجی و Navigation Property برای کاربری که وضعیت را تغییر داده
+    public BookingStatus NewStatus { get; private set; }
+    public BookingStatus? OldStatus { get; private set; }
+    public DateTime ChangeDate { get; private set; }
     public Guid ChangedByUserId { get; private set; }
     public virtual User ChangedByUser { get; private set; }
+    public string? Comments { get; private set; }
 
     private BookingStatusHistory() {} // برای EF Core
 
     public BookingStatusHistory(
-        Guid bookingRequestId,
-        BookingRequest bookingRequest,
-        BookingStatus newStatus,
-        Guid changedByUserId,
-        User changedByUser,
-        string? comments = null,
-        BookingStatus? oldStatus = null)
+        Guid bookingRequestId, 
+        BookingStatus newStatus, 
+        Guid changedByUserId, 
+        string? comments, 
+        BookingStatus? oldStatus)
     {
-        // اعتبارسنجی ...
         Id = Guid.NewGuid();
         BookingRequestId = bookingRequestId;
-        BookingRequest = bookingRequest;
-        OldStatus = oldStatus;
         NewStatus = newStatus;
-        ChangedByUserId = changedByUserId;
-        ChangedByUser = changedByUser;
+        ChangedByUserId = changedByUserId; // فقط شناسه را ست می‌کنیم
         Comments = comments;
+        OldStatus = oldStatus;
         ChangeDate = DateTime.UtcNow;
     }
 }

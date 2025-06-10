@@ -172,7 +172,7 @@ public class ApproveBookingRequestCommandHandler : IRequestHandler<ApproveBookin
               throw new ApplicationException("خطا در واکشی اطلاعات کاربر تأیید کننده.");
          }
 
-         bookingRequestToApprove.UpdateStatus(BookingStatus.HotelApproved, request.HotelUserId, userWhoApproved, approvalComments);
+         bookingRequestToApprove.UpdateStatus(BookingStatus.HotelApproved, request.HotelUserId, approvalComments);
          
          await _unitOfWork.SaveChangesAsync(cancellationToken);
          _logger.LogInformation(

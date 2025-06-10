@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\index.html"
     },
     {
+      "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\js\\fileUtils.js",
+      "PackagePath": "staticwebassets\\js\\fileUtils.js"
+    },
+    {
       "Id": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\wwwroot\\lib\\Font\\VazirFd\\Vazir-Black-FD.eot",
       "PackagePath": "staticwebassets\\lib\\Font\\VazirFd\\Vazir-Black-FD.eot"
     },

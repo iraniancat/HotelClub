@@ -14,7 +14,6 @@
         <MudToolBar Class="mb-4">
             <MudText Typo="Typo.h5">لیست درخواست‌های رزرو</MudText>
             <MudSpacer />
-            @* کاربران هتل قابلیت ایجاد رزرو ندارند، پس دکمه‌ای اینجا نیست *@
         </MudToolBar>
 
         <MudTable ServerData="@(new Func<TableState, Task<TableData<BookingRequestSummaryDto>>>(ServerReload))"
@@ -32,7 +31,7 @@
                                    ValueChanged="OnStatusFilterChanged" Clearable="true">
                             @foreach (var status in Enum.GetValues<HotelReservation.Domain.Enums.BookingStatus>())
                             {
-                                <MudSelectItem Value="@status.ToString()">@GetPersianStatus(status.ToString())</MudSelectItem>
+                                <MudSelectItem Value="@status.ToString()">@GetPersianStatus(status)</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>
@@ -80,7 +79,6 @@
     private MudTable<BookingRequestSummaryDto> _table = new();
     private bool _isLoading = true;
     
-    // فیلترها
     private string? _searchTerm;
     private string? _statusFilter;
 
@@ -89,7 +87,6 @@
         _isLoading = true;
         try
         {
-            // API ما با استفاده از ICurrentUserService در بک‌اند، به طور خودکار نتایج را بر اساس نقش کاربر (در اینجا کاربر هتل) فیلتر می‌کند.
             var requestUri = $"api/booking-requests?pageNumber={state.Page + 1}&pageSize={state.PageSize}";
             if (!string.IsNullOrWhiteSpace(_searchTerm))
                 requestUri += $"&searchTerm={Uri.EscapeDataString(_searchTerm)}";
@@ -127,8 +124,7 @@
     
     private void ViewDetails(Guid bookingId)
     {
-        // TODO: ایجاد صفحه جزئیات رزرو که شامل دکمه‌های تایید و رد باشد
-        NavigationManager.NavigateTo($"/booking-requests/details/{bookingId}"); 
+        NavigationManager.NavigateTo($"/booking-requests/details/{bookingId}");
     }
     
     private string ToPersianDateString(DateTime dt)
@@ -142,18 +138,23 @@
     {
         if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
         {
-            return statusEnum switch
-            {
-                HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
-                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
-                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
-                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
-                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
-                HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
-                _ => status
-            };
+            return GetPersianStatus(statusEnum);
         }
         return status;
+    }
+
+    private string GetPersianStatus(HotelReservation.Domain.Enums.BookingStatus status)
+    {
+        return status switch
+        {
+            HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
+            HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
+            HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
+            HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
+            HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
+            HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
+            _ => status.ToString()
+        };
     }
 
     private Color GetStatusColor(string status)
