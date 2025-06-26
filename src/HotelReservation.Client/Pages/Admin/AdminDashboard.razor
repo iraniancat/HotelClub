@@ -1,14 +1,93 @@
-@* src/HotelReservation.Client/Pages/Admin/AdminDashboard.razor *@
 @page "/admin/dashboard"
-@using Microsoft.AspNetCore.Authorization
-@attribute [Authorize(Roles = "SuperAdmin")] 
+@using HotelReservation.Application.Contracts.Security
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject ICurrentUserService CurrentUserService
+
 <PageTitle>داشبورد مدیر ارشد</PageTitle>
 
-<MudText Typo="Typo.h3" GutterBottom="true">داشبورد مدیر ارشد</MudText>
-<MudText>به پنل مدیریت خوش آمدید.</MudText>
-
-@* در اینجا کامپوننت‌ها و اطلاعات مربوط به داشبورد مدیر ارشد قرار خواهند گرفت *@
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudText Typo="Typo.h4" GutterBottom="true">سلام، @CurrentUserService.FullName</MudText>
+    <MudText Class="mb-8">به پنل مدیریت سامانه رزرو هتل خوش آمدید.</MudText>
+    
+    @if (_isLoading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-4" />
+    }
+    else if (_stats != null)
+    {
+        <MudGrid Spacing="3">
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="3" Class="pa-4 d-flex align-center justify-space-between" Style="height:100%;">
+                    <div>
+                        <MudText Typo="Typo.h5">@_stats.UserCount</MudText>
+                        <MudText Typo="Typo.body1">کاربران سیستم</MudText>
+                    </div>
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Size="Size.Large" />
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="3" Class="pa-4 d-flex align-center justify-space-between" Style="height:100%;">
+                    <div>
+                        <MudText Typo="Typo.h5">@_stats.HotelCount</MudText>
+                        <MudText Typo="Typo.body1">هتل‌های فعال</MudText>
+                    </div>
+                    <MudIcon Icon="@Icons.Material.Filled.Hotel" Color="Color.Secondary" Size="Size.Large" />
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="3" Class="pa-4 d-flex align-center justify-space-between" Style="height:100%;">
+                    <div>
+                        <MudText Typo="Typo.h5">@_stats.TotalBookings</MudText>
+                        <MudText Typo="Typo.body1">کل رزروها</MudText>
+                    </div>
+                    <MudIcon Icon="@Icons.Material.Filled.BookOnline" Color="Color.Success" Size="Size.Large" />
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="3" Class="pa-4 d-flex align-center justify-space-between" Style="height:100%;">
+                    <div>
+                        <MudText Typo="Typo.h5">@_stats.PendingBookings</MudText>
+                        <MudText Typo="Typo.body1">رزروهای در انتظار</MudText>
+                    </div>
+                    <MudIcon Icon="@Icons.Material.Filled.PendingActions" Color="Color.Warning" Size="Size.Large" />
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    }
+    else
+    {
+        <MudAlert Severity="Severity.Error">خطا در بارگذاری آمار داشبورد.</MudAlert>
+    }
+</MudContainer>
 
 @code {
-    // منطق صفحه در صورت نیاز
+    private bool _isLoading = true;
+    private DashboardStats? _stats;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _stats = await ApiClient.GetAsync<DashboardStats>("api/dashboard/stats");
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add("خطا در دریافت آمار داشبورد.", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    public class DashboardStats
+    {
+        public int UserCount { get; set; }
+        public int HotelCount { get; set; }
+        public int TotalBookings { get; set; }
+        public int PendingBookings { get; set; }
+    }
 }

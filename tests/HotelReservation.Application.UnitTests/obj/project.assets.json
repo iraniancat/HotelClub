@@ -48,6 +48,49 @@
           }
         }
       },
+      "Linq.PredicateBuilder/1.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Linq.PredicateBuilder.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Linq.PredicateBuilder.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "LinqKit.Core/1.2.8": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "LinqKit.Microsoft.EntityFrameworkCore/9.0.8": {
+        "type": "package",
+        "dependencies": {
+          "LinqKit.Core": "1.2.8",
+          "Microsoft.EntityFrameworkCore": "9.0.0"
+        },
+        "compile": {
+          "lib/net9.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net9.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "MediatR/12.3.0": {
         "type": "package",
         "dependencies": {
@@ -2045,6 +2088,8 @@
         "dependencies": {
           "FluentValidation.DependencyInjectionExtensions": "11.9.1",
           "HotelReservation.Domain": "1.0.0",
+          "Linq.PredicateBuilder": "1.1.0",
+          "LinqKit.Microsoft.EntityFrameworkCore": "9.0.8",
           "MediatR": "12.3.0",
           "Microsoft.AspNetCore": "2.3.0",
           "Microsoft.AspNetCore.Authorization": "9.0.5",
@@ -2136,6 +2181,65 @@
         "lib/netstandard2.0/FluentValidation.DependencyInjectionExtensions.xml",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll",
         "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.xml"
+      ]
+    },
+    "Linq.PredicateBuilder/1.1.0": {
+      "sha512": "Q5TgsyE6SPV0m/aI0Z0IbpbxGTKae7gK7/ic18fd3rziSIFLq5V86mKJpnPK0Kvycv0pJukPuGiyY4LXq5VYRA==",
+      "type": "package",
+      "path": "linq.predicatebuilder/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/netstandard2.0/Linq.PredicateBuilder.dll",
+        "lib/netstandard2.0/Linq.PredicateBuilder.xml",
+        "linq.predicatebuilder.1.1.0.nupkg.sha512",
+        "linq.predicatebuilder.nuspec"
+      ]
+    },
+    "LinqKit.Core/1.2.8": {
+      "sha512": "F/ZGutPdat2u+nevwACsp09fT1z+fazu0UlZGVeAPSaGCdf/PuOv4hAyJ+7zCmqpADQLtmw9jEfJVPmgQy/8Cg==",
+      "type": "package",
+      "path": "linqkit.core/1.2.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net35/LinqKit.Core.dll",
+        "lib/net35/LinqKit.Core.xml",
+        "lib/net40/LinqKit.Core.dll",
+        "lib/net40/LinqKit.Core.xml",
+        "lib/net45/LinqKit.Core.dll",
+        "lib/net45/LinqKit.Core.xml",
+        "lib/netstandard1.3/LinqKit.Core.dll",
+        "lib/netstandard1.3/LinqKit.Core.xml",
+        "lib/netstandard2.0/LinqKit.Core.dll",
+        "lib/netstandard2.0/LinqKit.Core.xml",
+        "lib/netstandard2.1/LinqKit.Core.dll",
+        "lib/netstandard2.1/LinqKit.Core.xml",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/LinqKit.Core.dll",
+        "lib/portable40-net40+sl5+win8+wp8+wpa81/LinqKit.Core.xml",
+        "lib/portable45-net45+win8+wp8+wpa81/LinqKit.Core.dll",
+        "lib/portable45-net45+win8+wp8+wpa81/LinqKit.Core.xml",
+        "lib/uap10.0.10240/LinqKit.Core.dll",
+        "lib/uap10.0.10240/LinqKit.Core.pri",
+        "lib/uap10.0.10240/LinqKit.Core.xml",
+        "linqkit.core.1.2.8.nupkg.sha512",
+        "linqkit.core.nuspec"
+      ]
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/9.0.8": {
+      "sha512": "9qVemq8r7eEih29EMTLCj68PeNq/+ZaLTXT9zPBhSdyOMNsdALzdExymKK3UqSMgJmUyOuzYww+kw2h7HlAvJQ==",
+      "type": "package",
+      "path": "linqkit.microsoft.entityframeworkcore/9.0.8",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net8.0/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/net8.0/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "lib/net9.0/LinqKit.Microsoft.EntityFrameworkCore.dll",
+        "lib/net9.0/LinqKit.Microsoft.EntityFrameworkCore.xml",
+        "linqkit.microsoft.entityframeworkcore.9.0.8.nupkg.sha512",
+        "linqkit.microsoft.entityframeworkcore.nuspec"
       ]
     },
     "MediatR/12.3.0": {

@@ -36,8 +36,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQm9va2luZ1BlcmlvZE1hbmFnZW1lbnQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/DepartmentsPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cRGVwYXJ0bWVudHNQYWdlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/HotelManagement.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cSG90ZWxNYW5hZ2VtZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/ProvincesPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUHJvdmluY2VzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Admin/RoleManagement.razor]
@@ -66,6 +74,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Hotel/HotelBookings.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG90ZWxcSG90ZWxCb29raW5ncy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/MyBookings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTXlCb29raW5ncy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Province/CreateBookingPage.razor]

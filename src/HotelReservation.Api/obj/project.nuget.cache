@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XshPdRdjIYU=",
+  "dgSpecHash": "k9RGrpC97KY=",
   "success": true,
   "projectFilePath": "C:\\Project\\HotelClub\\src\\HotelReservation.Api\\HotelReservation.Api.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,9 @@
     "C:\\Users\\BSI\\.nuget\\packages\\fluentvalidation\\11.9.1\\fluentvalidation.11.9.1.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.1\\fluentvalidation.dependencyinjectionextensions.11.9.1.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\linq.predicatebuilder\\1.1.0\\linq.predicatebuilder.1.1.0.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\linqkit.core\\1.2.8\\linqkit.core.1.2.8.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\linqkit.microsoft.entityframeworkcore\\9.0.8\\linqkit.microsoft.entityframeworkcore.9.0.8.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\mediatr\\12.3.0\\mediatr.12.3.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.aspnetcore\\2.3.0\\microsoft.aspnetcore.2.3.0.nupkg.sha512",

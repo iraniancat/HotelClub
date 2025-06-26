@@ -1,7 +1,63 @@
 ﻿@page "/"
+@using HotelReservation.Application.Contracts.Security
+@attribute [Authorize]
 
-<PageTitle>Home</PageTitle>
+@inject ICurrentUserService CurrentUserService
 
-<h1>Hello, world!</h1>
+<PageTitle>صفحه اصلی</PageTitle>
 
-Welcome to your new app.
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudText Typo="Typo.h4" GutterBottom="true">سلام، @CurrentUserService.FullName</MudText>
+    <MudText Class="mb-8">به سامانه یکپارچه رزرو هتل خوش آمدید.</MudText>
+
+    <AuthorizeView>
+        <Authorized>
+            <MudText Typo="Typo.h6" Class="mb-4">دسترسی‌های سریع شما:</MudText>
+            <MudGrid Spacing="3">
+                
+                @* لینک‌های عمومی برای همه *@
+                <MudItem xs="12" sm="6" md="4">
+                    <MudPaper Class="pa-4 d-flex flex-column align-center justify-center" Style="height:150px; cursor:pointer;" @onclick="@(() => Navigation.NavigateTo("/my-bookings"))">
+                        <MudIcon Icon="@Icons.Material.Filled.BookOnline" Color="Color.Primary" Size="Size.Large"/>
+                        <MudText Typo="Typo.h6" Class="mt-2">رزروهای من</MudText>
+                    </MudPaper>
+                </MudItem>
+
+                @* لینک‌های کاربر استان و مدیر ارشد *@
+                <AuthorizeView Roles="SuperAdmin, ProvinceUser" Context="authCtx1">
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudPaper Class="pa-4 d-flex flex-column align-center justify-center" Style="height:150px; cursor:pointer;" @onclick="@(() => Navigation.NavigateTo("/province/create-booking"))">
+                            <MudIcon Icon="@Icons.Material.Filled.AddCircleOutline" Color="Color.Success" Size="Size.Large"/>
+                            <MudText Typo="Typo.h6" Class="mt-2">ثبت رزرو جدید</MudText>
+                        </MudPaper>
+                    </MudItem>
+                </AuthorizeView>
+
+                @* لینک‌های مدیر ارشد *@
+                <AuthorizeView Roles="SuperAdmin" Context="authCtx2">
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudPaper Class="pa-4 d-flex flex-column align-center justify-center" Style="height:150px; cursor:pointer;" @onclick="@(() => Navigation.NavigateTo("/admin/users"))">
+                            <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Secondary" Size="Size.Large"/>
+                            <MudText Typo="Typo.h6" Class="mt-2">مدیریت کاربران</MudText>
+                        </MudPaper>
+                    </MudItem>
+                </AuthorizeView>
+                
+                @* لینک‌های کاربر هتل *@
+                <AuthorizeView Roles="HotelUser" Context="authCtx3">
+                    <MudItem xs="12" sm="6" md="4">
+                        <MudPaper Class="pa-4 d-flex flex-column align-center justify-center" Style="height:150px; cursor:pointer;" @onclick="@(() => Navigation.NavigateTo("/hotel/bookings"))">
+                            <MudIcon Icon="@Icons.Material.Filled.Business" Color="Color.Info" Size="Size.Large"/>
+                            <MudText Typo="Typo.h6" Class="mt-2">رزروهای ورودی هتل</MudText>
+                        </MudPaper>
+                    </MudItem>
+                </AuthorizeView>
+
+            </MudGrid>
+        </Authorized>
+    </AuthorizeView>
+</MudContainer>
+
+@code {
+    [Inject] private NavigationManager Navigation { get; set; } = default!;
+}

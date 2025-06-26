@@ -19,6 +19,7 @@ using HotelReservation.Application.Features.BookingRequests.Queries.GetBookingFi
 using HotelReservation.Application.Features.BookingRequests.Commands.CancelBookingRequest; // برای PagedResult
 using HotelReservation.Application.Features.BookingRequests.Commands.ApproveBookingRequest;
 using HotelReservation.Application.Features.BookingRequests.Commands.RejectBookingRequest;
+using HotelReservation.Application.Features.BookingRequests.Queries.GetMyBookings;
 
 namespace HotelReservation.Api.Controllers;
 
@@ -189,7 +190,7 @@ public class BookingRequestsController : ControllerBase
         await _mediator.Send(command);
         return NoContent();
     }
-     [HttpPut("{id:guid}/approve")]
+    [HttpPut("{id:guid}/approve")]
     [Authorize(Roles = "HotelUser")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> ApproveBookingRequest(Guid id, [FromBody] ApproveBookingRequestDto dto)
@@ -207,5 +208,12 @@ public class BookingRequestsController : ControllerBase
         var command = new RejectBookingRequestCommand(id, dto.RejectionReason);
         await _mediator.Send(command);
         return NoContent();
+    }
+    [HttpGet("my-bookings")]
+    [Authorize] // تمام کاربران احراز هویت شده می‌توانند رزروهای خود را ببینند
+    public async Task<IActionResult> GetMyBookings([FromQuery] GetMyBookingsQuery query)
+    {
+        var result = await _mediator.Send(query);
+        return Ok(result);
     }
 }

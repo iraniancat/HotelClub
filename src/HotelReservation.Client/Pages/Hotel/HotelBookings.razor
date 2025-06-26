@@ -12,7 +12,7 @@
 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
     <MudPaper Class="pa-4" Elevation="3">
         <MudToolBar Class="mb-4">
-            <MudText Typo="Typo.h5">لیست درخواست‌های رزرو</MudText>
+            <MudText Typo="Typo.h5">لیست درخواست‌های رزرو ورودی</MudText>
             <MudSpacer />
         </MudToolBar>
 
@@ -63,7 +63,9 @@
                 </MudTd>
             </RowTemplate>
             <PagerContent>
-                <MudTablePager PageSizeOptions="new int[]{10, 20, 50, 100}" />
+                <MudTablePager RowsPerPageString="ردیف در هر صفحه:" 
+                               InfoString="{first_item}-{last_item} از {all_items}"
+                               PageSizeOptions="new int[]{10, 20, 50, 100}" />
             </PagerContent>
             <NoRecordsContent>
                 <MudText>درخواستی برای نمایش یافت نشد.</MudText>

@@ -2,7 +2,7 @@
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData"> @* <<-- اطمینان از وجود Context="routeData" *@
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
-                <NotAuthorized>
+                <NotAuthorized >
                     @if (context.User.Identity?.IsAuthenticated != true) // <<-- اینجا هم از context استفاده می‌شود
                     {
                         <RedirectToLogin />

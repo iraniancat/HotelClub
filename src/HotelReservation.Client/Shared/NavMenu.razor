@@ -8,7 +8,7 @@
 
     @* لینک‌های عمومی برای همه کاربران احراز هویت شده *@
     <AuthorizeView>
-        <Authorized>
+        <Authorized >
             <MudNavLink Href="my-bookings" Icon="@Icons.Material.Filled.BookOnline">رزروهای من</MudNavLink> @* TODO: صفحه رزروهای من *@
         </Authorized>
     </AuthorizeView>
@@ -45,10 +45,7 @@
     <AuthorizeView Roles="HotelUser,SuperAdmin"> @* // مدیر ارشد هم می‌تواند این بخش را ببیند *@
         <Authorized>
             <MudListSubheader>مدیریت هتل</MudListSubheader>
-            <MudNavLink Href="hotel/bookings" Icon="@Icons.Material.Filled.DashboardCustomize">داشبورد هتل</MudNavLink>
-            @* TODO *@
-            <MudNavLink Href="hotel/pending-bookings" Icon="@Icons.Material.Filled.PendingActions">رزروهای در انتظار
-            </MudNavLink> @* TODO *@
+            <MudNavLink Href="hotel/bookings" Icon="@Icons.Material.Filled.DashboardCustomize">داشبورد هتل</MudNavLink>            
              <MudNavLink Href="admin/rooms" Icon="@Icons.Material.Filled.MeetingRoom">مدیریت اتاق‌ها</MudNavLink>
         </Authorized>
     </AuthorizeView>

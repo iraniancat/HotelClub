@@ -23,7 +23,7 @@
                     <MudMenuItem OnClick="HandleLogout">خروج</MudMenuItem> @* <<-- فراخوانی HandleLogout *@
                 </MudMenu>
             </Authorized>
-            <NotAuthorized>
+            <NotAuthorized Context="unauthCtx">
                 <MudButton Href="login" Variant="Variant.Text" Color="Color.Inherit"
                     StartIcon="@Icons.Material.Filled.Login">ورود</MudButton>
             </NotAuthorized>

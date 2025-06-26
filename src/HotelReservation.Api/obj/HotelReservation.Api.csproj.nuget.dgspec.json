@@ -55,6 +55,10 @@
               "target": "Package",
               "version": "[3.5.1, )"
             },
+            "Linq.PredicateBuilder": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[9.0.5, )"
@@ -152,6 +156,14 @@
             "FluentValidation.DependencyInjectionExtensions": {
               "target": "Package",
               "version": "[11.9.1, )"
+            },
+            "Linq.PredicateBuilder": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "LinqKit.Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.8, )"
             },
             "MediatR": {
               "target": "Package",

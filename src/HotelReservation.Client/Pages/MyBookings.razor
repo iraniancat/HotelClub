@@ -1,0 +1,134 @@
+@page "/my-bookings"
+@attribute [Authorize]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@using System.Globalization
+
+<PageTitle>رزروهای من</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudText Typo="Typo.h5" GutterBottom="true">لیست درخواست‌های رزرو من</MudText>
+        <MudText Class="mb-4">در این صفحه، درخواست‌هایی که شما ثبت کرده‌اید یا به نام شما ثبت شده‌اند، نمایش داده می‌شود.</MudText>
+        
+        <MudTable ServerData="@(new Func<TableState, Task<TableData<BookingRequestSummaryDto>>>(ServerReload))"
+                  Dense="true" Hover="true" Striped="true" @ref="_table"
+                  Loading="@_isLoading" LoadingProgressColor="Color.Primary">
+            <ToolBarContent>
+                @* می‌توانید فیلترها را اینجا نیز اضافه کنید *@
+            </ToolBarContent>
+            <HeaderContent>
+                <MudTh>کد رهگیری</MudTh>
+                <MudTh>هتل</MudTh>
+                <MudTh>تاریخ ورود</MudTh>
+                <MudTh>تاریخ خروج</MudTh>
+                <MudTh>وضعیت</MudTh>
+                <MudTh Style="text-align:center;">عملیات</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="کد رهگیری">@context.TrackingCode</MudTd>
+                <MudTd DataLabel="هتل">@context.HotelName</MudTd>
+                <MudTd DataLabel="تاریخ ورود">@ToPersianDateString(context.CheckInDate)</MudTd>
+                <MudTd DataLabel="تاریخ خروج">@ToPersianDateString(context.CheckOutDate)</MudTd>
+                <MudTd DataLabel="وضعیت">
+                    <MudChip Color="@GetStatusColor(context.Status)" Size="Size.Small">@GetPersianStatus(context.Status)</MudChip>
+                </MudTd>
+                <MudTd Style="text-align:center">
+                    <MudIconButton Icon="@Icons.Material.Filled.Visibility" Variant="Variant.Filled" Color="Color.Default" Size="Size.Small" 
+                                   OnClick="@(() => ViewDetails(context.Id))" Title="مشاهده جزئیات" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager RowsPerPageString="ردیف در هر صفحه:" 
+                               InfoString="{first_item}-{last_item} از {all_items}" />
+            </PagerContent>
+            <NoRecordsContent>
+                <MudText>هیچ درخواستی برای شما یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </LoadingContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private MudTable<BookingRequestSummaryDto> _table = new();
+    private bool _isLoading = true;
+    
+    private async Task<TableData<BookingRequestSummaryDto>> ServerReload(TableState state)
+    {
+        _isLoading = true;
+        try
+        {
+            var requestUri = $"api/booking-requests/my-bookings?pageNumber={state.Page + 1}&pageSize={state.PageSize}";
+            var pagedResult = await ApiClient.GetAsync<PagedResult<BookingRequestSummaryDto>>(requestUri);
+            if (pagedResult != null)
+            {
+                return new TableData<BookingRequestSummaryDto>() { TotalItems = pagedResult.TotalCount, Items = pagedResult.Items };
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+        return new TableData<BookingRequestSummaryDto>() { TotalItems = 0, Items = new List<BookingRequestSummaryDto>() };
+    }
+
+    private void ViewDetails(Guid bookingId)
+    {
+        NavigationManager.NavigateTo($"/booking-requests/details/{bookingId}");
+    }
+    
+    private string ToPersianDateString(DateTime dt)
+    {
+        if (dt == default) return string.Empty;
+        var pc = new PersianCalendar();
+        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
+    }
+    
+    private string GetPersianStatus(string status)
+    {
+        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
+        {
+            return GetPersianStatus(statusEnum);
+        }
+        return status;
+    }
+
+    private string GetPersianStatus(HotelReservation.Domain.Enums.BookingStatus status)
+    {
+        return status switch
+        {
+            HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
+            HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
+            HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
+            HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
+            HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
+            HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
+            _ => status.ToString()
+        };
+    }
+    
+    private Color GetStatusColor(string status)
+    {
+        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
+        {
+            return statusEnum switch
+            {
+                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => Color.Success,
+                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => Color.Error,
+                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => Color.Warning,
+                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => Color.Info,
+                _ => Color.Default
+            };
+        }
+        return Color.Default;
+    }
+}

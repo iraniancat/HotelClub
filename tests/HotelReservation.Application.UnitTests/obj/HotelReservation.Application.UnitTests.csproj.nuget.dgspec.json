@@ -52,6 +52,14 @@
               "target": "Package",
               "version": "[11.9.1, )"
             },
+            "Linq.PredicateBuilder": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "LinqKit.Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.8, )"
+            },
             "MediatR": {
               "target": "Package",
               "version": "[12.3.0, )"

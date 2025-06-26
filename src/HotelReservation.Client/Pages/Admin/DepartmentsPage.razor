@@ -1,0 +1,56 @@
+@page "/admin/departments"
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+
+<PageTitle>لیست ادارات و شعب</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudText Typo="Typo.h5" GutterBottom="true">لیست ادارات و شعب سیستم</MudText>
+        <MudText Class="mb-4">این داده‌ها توسط سیستم مرکزی به‌روزرسانی می‌شوند و در اینجا فقط قابل مشاهده هستند.</MudText>
+        
+        <MudTable Items="@_departments" Dense="true" Hover="true" Striped="true" Loading="@_isLoading">
+            <HeaderContent>
+                <MudTh>کد اداره/شعبه</MudTh>
+                <MudTh>نام اداره/شعبه</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="کد">@context.Code</MudTd>
+                <MudTd DataLabel="نام">@context.Name</MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText>اداره‌ای برای نمایش یافت نشد.</MudText>
+            </NoRecordsContent>
+            <LoadingContent>
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            </LoadingContent>
+        </MudTable>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private bool _isLoading = true;
+    private List<DepartmentDto> _departments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            var result = await ApiClient.GetListAsync<DepartmentDto>("api/departments");
+            if (result != null)
+            {
+                _departments = result.ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست ادارات: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+}
