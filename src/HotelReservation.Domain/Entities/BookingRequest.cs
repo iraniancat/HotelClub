@@ -40,7 +40,7 @@ public class BookingRequest
 
     public BookingRequest(
         string requestingEmployeeNationalCode,        
-        Guid bookingPeriodId, BookingPeriod bookingPeriod,
+        Guid bookingPeriodId, //BookingPeriod bookingPeriod,
         DateTime checkInDate,
         DateTime checkOutDate,
         int totalGuests,
@@ -61,7 +61,7 @@ public class BookingRequest
         TrackingCode = GenerateTrackingCode(); // متد کمکی برای تولید کد رهگیری
         RequestingEmployeeNationalCode = requestingEmployeeNationalCode;        
         BookingPeriodId = bookingPeriodId;
-        BookingPeriod = bookingPeriod;
+        //BookingPeriod = bookingPeriod;
         CheckInDate = checkInDate;
         CheckOutDate = checkOutDate;
         TotalGuests = totalGuests;

@@ -1,21 +1,31 @@
-namespace HotelReservation.Application.Features.UserManagement.Queries.SearchUsers;
-
+// مسیر: src/HotelReservation.Application/Features/UserManagement/Queries/SearchUsers/SearchUsersQueryHandler.cs
 using HotelReservation.Application.Contracts.Persistence;
+using HotelReservation.Application.Contracts.Security; // <<-- اضافه شد
 using HotelReservation.Application.DTOs.UserManagement;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging; // <<-- اضافه شد
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+namespace HotelReservation.Application.Features.UserManagement.Queries.SearchUsers;
+
 public class SearchUsersQueryHandler : IRequestHandler<SearchUsersQuery, IEnumerable<UserWithDependentsDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly ICurrentUserService _currentUserService; // <<-- اضافه شد
+    private readonly ILogger<SearchUsersQueryHandler> _logger; // <<-- اضافه شد
 
-    public SearchUsersQueryHandler(IUnitOfWork unitOfWork)
+    public SearchUsersQueryHandler(
+        IUnitOfWork unitOfWork,
+        ICurrentUserService currentUserService,
+        ILogger<SearchUsersQueryHandler> logger)
     {
         _unitOfWork = unitOfWork;
+        _currentUserService = currentUserService;
+        _logger = logger;
     }
 
     public async Task<IEnumerable<UserWithDependentsDto>> Handle(SearchUsersQuery request, CancellationToken cancellationToken)
@@ -26,12 +36,30 @@ public class SearchUsersQueryHandler : IRequestHandler<SearchUsersQuery, IEnumer
         }
 
         var searchTermLower = request.SearchTerm.ToLower().Trim();
-        
-        // جستجو بر اساس شماره پرسنلی یا نام کامل
-        var users = await _unitOfWork.UserRepository.GetQueryable()
-            .Where(u => u.SystemUserId.StartsWith(searchTermLower) || u.FullName.ToLower().Contains(searchTermLower))
-            .Include(u => u.Dependents) // واکشی وابستگان به همراه کاربر
-            .Take(10) // محدود کردن نتایج برای جلوگیری از ارسال داده زیاد
+
+        var query = _unitOfWork.UserRepository.GetQueryable()
+            .Where(u => u.SystemUserId.StartsWith(searchTermLower) || u.FullName.ToLower().Contains(searchTermLower));
+        _logger.LogWarning("ProvinceUser {UserId} has no ProvinceCode claim.");
+        // <<-- شروع منطق فیلترینگ بر اساس نقش کاربر -->>
+        if (_currentUserService.IsInRole("ProvinceUser"))
+        {
+            var currentUserProvinceCode = _currentUserService.ProvinceCode;
+            if (string.IsNullOrWhiteSpace(currentUserProvinceCode))
+            {
+                _logger.LogWarning("ProvinceUser {UserId} has no ProvinceCode claim. Returning empty search results.", _currentUserService.UserId);
+                return new List<UserWithDependentsDto>();
+            }
+
+            // فیلتر کردن نتایج برای کاربران همان استان
+            query = query.Where(u => u.ProvinceCode == currentUserProvinceCode);
+            _logger.LogInformation("SearchUsersQueryHandler: Filtering search results for ProvinceUser from Province {ProvinceCode}", currentUserProvinceCode);
+        }
+        // برای SuperAdmin، هیچ فیلتر اضافه‌ای اعمال نمی‌شود.
+        // <<-- پایان منطق فیلترینگ -->>
+
+        var users = await query
+            .Include(u => u.Dependents)
+            .Take(10)
             .AsNoTracking()
             .ToListAsync(cancellationToken);
 

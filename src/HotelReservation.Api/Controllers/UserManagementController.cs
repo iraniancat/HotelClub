@@ -21,7 +21,7 @@ namespace HotelReservation.Api.Controllers;
 
 [ApiController]
 [Route("api/management/users")] // مسیر پایه: api/management/users
-[Authorize(Roles = "SuperAdmin")] // <<-- تمام Actionهای این Controller فقط برای SuperAdmin
+
 public class UserManagementController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -38,6 +38,7 @@ public class UserManagementController : ControllerBase
 
     // GET: api/management/users
     [HttpGet]
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PagedResult<UserManagementListDto>))]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -67,6 +68,7 @@ public class UserManagementController : ControllerBase
 
     // GET: api/management/users/{id}
     [HttpGet("{id:guid}", Name = "GetUserForManagementById")]
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserManagementDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserById(Guid id)
@@ -85,6 +87,7 @@ public class UserManagementController : ControllerBase
     }
 
     [HttpPut("{id:guid}/activation")]
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
@@ -96,6 +99,7 @@ public class UserManagementController : ControllerBase
     }
 
     [HttpPut("{id:guid}/role")] // PUT api/management/users/{id}/role
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی و BadRequestException
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
@@ -113,6 +117,7 @@ public class UserManagementController : ControllerBase
     }
 
     [HttpPost] // POST api/management/users
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(object))] // بازگشت شناسه کاربر جدید
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی و BadRequestException
     public async Task<IActionResult> CreateNonEmployeeUser([FromBody] CreateNonEmployeeUserDto dto)
@@ -135,6 +140,7 @@ public class UserManagementController : ControllerBase
     }
 
     [HttpPut("{id:guid}")] // PUT api/management/users/{id}
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -163,6 +169,7 @@ public class UserManagementController : ControllerBase
     }
 
     [HttpPut("{id:guid}/set-password")]
+    [Authorize(Roles = "SuperAdmin")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)] // برای خطاهای اعتبارسنجی DTO و Command
     [ProducesResponseType(StatusCodes.Status404NotFound)]   // برای NotFoundException
@@ -181,6 +188,7 @@ public class UserManagementController : ControllerBase
         return NoContent();
     }
      [HttpGet("search")]
+     [Authorize(Roles = "SuperAdmin,ProvinceUser")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserWithDependentsDto>))]
     public async Task<IActionResult> SearchUsers([FromQuery] string term)
     {

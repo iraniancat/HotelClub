@@ -32,6 +32,8 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
         ConfigureUser(modelBuilder.Entity<User>());
         ConfigureRole(modelBuilder.Entity<Role>());
         ConfigureProvince(modelBuilder.Entity<Province>());
@@ -48,6 +50,15 @@ public class AppDbContext : DbContext
             .Property(br => br.Status)
             .HasConversion<string>()
             .HasMaxLength(50);
+        modelBuilder.Entity<BookingRequest>(builder =>
+    {
+        // ... سایر پیکربندی‌های BookingRequest ...
+
+        builder.HasMany(br => br.Guests) // یک BookingRequest دارای چندین BookingGuest است
+               .WithOne(g => g.BookingRequest) // هر BookingGuest به یک BookingRequest تعلق دارد
+               .HasForeignKey(g => g.BookingRequestId) // کلید خارجی
+               .OnDelete(DeleteBehavior.Cascade); // اگر یک رزرو حذف شد، مهمانان آن نیز حذف شوند
+    });
 
         modelBuilder.Entity<BookingStatusHistory>()
             .Property(bsh => bsh.NewStatus)
