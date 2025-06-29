@@ -22,7 +22,7 @@ public class AppDbContext : DbContext
     public DbSet<BookingFile> BookingFiles { get; set; }
     public DbSet<BookingStatusHistory> BookingStatusHistories { get; set; }
     public DbSet<BookingPeriod> BookingPeriods { get; set; }
-
+    public DbSet<ProvinceHotelQuota> ProvinceHotelQuotas { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -59,6 +59,23 @@ public class AppDbContext : DbContext
             .HasConversion<string>()
             .HasMaxLength(50)
             .IsRequired(false);
+
+        modelBuilder.Entity<ProvinceHotelQuota>(builder =>
+ {
+     builder.HasKey(q => q.Id);
+     // ایجاد یک ایندکس یکتا برای جلوگیری از ثبت رکورد تکراری برای یک استان و یک هتل
+     builder.HasIndex(q => new { q.ProvinceCode, q.HotelId }).IsUnique();
+
+     builder.HasOne(q => q.Province)
+         .WithMany()
+         .HasForeignKey(q => q.ProvinceCode)
+         .OnDelete(DeleteBehavior.Cascade);
+
+     builder.HasOne(q => q.Hotel)
+         .WithMany()
+         .HasForeignKey(q => q.HotelId)
+         .OnDelete(DeleteBehavior.Cascade);
+ });
     }
 
     private void ConfigureUser(EntityTypeBuilder<User> builder)
@@ -288,6 +305,11 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.SetNull);            // اگر اتاق حذف شد، AssignedRoomId در رزرو null شود (یا Restrict اگر نمی‌خواهید اتاق دارای رزرو حذف شود)
                                                           // --- پایان پیکربندی رابطه با Room ---
         builder.Property(b => b.RowVersion).IsRowVersion();
+        builder.HasOne(br => br.RequestingEmployee)
+                 .WithMany() // چون در User یک کالکشن برای رزروها نداریم، WithMany خالی می‌آید.
+                 .HasForeignKey(br => br.RequestingEmployeeNationalCode)
+                 .HasPrincipalKey(u => u.NationalCode) // به EF Core می‌گوییم که کلید اصلی در این رابطه، NationalCode در جدول Users است.
+                 .OnDelete(DeleteBehavior.Restrict);
     }
 
     private void ConfigureBookingStatusHistory(EntityTypeBuilder<BookingStatusHistory> builder) // بدون تغییر
@@ -317,4 +339,5 @@ public class AppDbContext : DbContext
         builder.HasIndex(bp => bp.Name).IsUnique(); // نام دوره باید یکتا باشد
         builder.Property(bp => bp.IsActive).IsRequired();
     }
+
 }

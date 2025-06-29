@@ -13,7 +13,9 @@ public interface IUnitOfWork : IDisposable
     IDependentDataRepository DependentDataRepository { get; }
     IGenericRepository<BookingFile> BookingFileRepository { get; }
     IBookingPeriodRepository BookingPeriodRepository { get; } // <<-- اضافه شد
+    IProvinceHotelQuotaRepository ProvinceHotelQuotaRepository { get; }
     IGenericRepository<BookingStatusHistory> BookingStatusHistoryRepository { get; }
+
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

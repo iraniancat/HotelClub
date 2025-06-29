@@ -1,0 +1,145 @@
+@page "/admin/hotel-quotas"
+@using HotelReservation.Application.DTOs.Quota
+@attribute [Authorize(Roles = "SuperAdmin")]
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject ILogger<HotelQuotaManagement> Logger
+
+<PageTitle>مدیریت سهمیه استان‌ها در هتل‌ها</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
+    <MudPaper Class="pa-4" Elevation="3">
+        <MudText Typo="Typo.h5" GutterBottom="true">مدیریت سهمیه استان‌ها</MudText>
+        <MudText Class="mb-4">در این بخش می‌توانید تعداد اتاق‌های قابل رزرو برای هر استان در یک هتل مشخص را تعیین کنید.</MudText>
+        
+        <MudSelect T="Guid?" Label="ابتدا یک هتل را برای مدیریت سهمیه‌ها انتخاب کنید" Variant="Variant.Outlined" Class="mb-4"
+                   ValueChanged="OnHotelSelected" Value="_selectedHotelId" Disabled="_isLoading">
+            @if (!_hotels.Any() && _isLoading)
+            {
+                <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+            }
+            @foreach (var hotel in _hotels)
+            {
+                <MudSelectItem Value="@((Guid?)hotel.Id)">@hotel.Name</MudSelectItem>
+            }
+        </MudSelect>
+
+        @if (_isLoadingQuotas)
+        {
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-4" />
+        }
+        else if (_selectedHotelId.HasValue)
+        {
+            <MudSimpleTable Dense="true" Hover="true" Class="mt-4">
+                <thead>
+                    <tr>
+                        <th>نام استان</th>
+                        <th style="width: 200px;">سهمیه (تعداد اتاق)</th>
+                        <th style="width: 150px; text-align:center;">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var quota in _quotas)
+                    {
+                        <tr>
+                            <td data-label="نام استان">@quota.ProvinceName</td>
+                            <td data-label="سهمیه">
+                                <MudNumericField @bind-Value="quota.RoomLimit" Min="0" Variant="Variant.Outlined" Margin="Margin.Dense" />
+                            </td>
+                            <td data-label="عملیات" style="text-align:center;">
+                                <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small" OnClick="@(() => SaveQuota(quota))">ذخیره</MudButton>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </MudSimpleTable>
+        }
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private bool _isLoading = true;
+    private bool _isLoadingQuotas = false;
+    
+    private Guid? _selectedHotelId;
+    private List<HotelDto> _hotels = new();
+    private List<ProvinceHotelQuotaDto> _quotas = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isLoading = true;
+        try
+        {
+            var hotelsResult = await ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+            if (hotelsResult != null) _hotels = hotelsResult.ToList();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست هتل‌ها: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isLoading = false;
+        }
+    }
+
+    private async Task OnHotelSelected(Guid? hotelId)
+    {
+        _selectedHotelId = hotelId;
+        if (_selectedHotelId.HasValue)
+        {
+            await LoadQuotasAsync(_selectedHotelId.Value);
+        }
+        else
+        {
+            _quotas.Clear(); // پاک کردن لیست اگر هتلی انتخاب نشده باشد
+        }
+    }
+
+    private async Task LoadQuotasAsync(Guid hotelId)
+    {
+        _isLoadingQuotas = true;
+        StateHasChanged();
+        try
+        {
+            var result = await ApiClient.GetListAsync<ProvinceHotelQuotaDto>($"api/province-hotel-quotas/by-hotel/{hotelId}");
+            _quotas = result?.ToList() ?? new List<ProvinceHotelQuotaDto>();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت لیست سهمیه‌ها: {ex.Message}", Severity.Error);
+            _quotas = new List<ProvinceHotelQuotaDto>();
+        }
+        finally
+        {
+            _isLoadingQuotas = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task SaveQuota(ProvinceHotelQuotaDto quota)
+    {
+        try
+        {
+            var dtoToSend = new SetQuotaDto
+            {
+                HotelId = quota.HotelId,
+                ProvinceCode = quota.ProvinceCode,
+                RoomLimit = quota.RoomLimit
+            };
+
+            await ApiClient.PostAsync<SetQuotaDto, object>("api/province-hotel-quotas", dtoToSend);
+            Snackbar.Add($"سهمیه استان '{quota.ProvinceName}' با موفقیت به‌روز شد.", Severity.Success);
+        }
+        catch (ApplicationException ex)
+        {
+            Snackbar.Add($"خطا در ذخیره‌سازی: {ex.Message}", Severity.Error);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to save quota for Province {ProvinceCode} and Hotel {HotelId}", quota.ProvinceCode, quota.HotelId);
+            Snackbar.Add("خطای پیش‌بینی نشده در هنگام ذخیره سهمیه.", Severity.Error);
+        }
+    }
+}

@@ -21,7 +21,8 @@ public class UnitOfWork : IUnitOfWork
     private Lazy<IBookingRequestRepository> _bookingRequestRepository;
     private Lazy<IDependentDataRepository> _dependentDataRepository;
     private Lazy<IGenericRepository<BookingFile>> _bookingFileRepository;
-    private Lazy<IBookingPeriodRepository> _bookingPeriodRepository; // <<-- اضافه شد
+    private Lazy<IBookingPeriodRepository> _bookingPeriodRepository;
+    private readonly Lazy<IProvinceHotelQuotaRepository> _provinceHotelQuotaRepository;
 
     private Lazy<IGenericRepository<BookingStatusHistory>> _bookingStatusHistoryRepository;
     public UnitOfWork(AppDbContext context, ILogger<UnitOfWork> logger, ILoggerFactory loggerFactory)
@@ -44,6 +45,7 @@ public class UnitOfWork : IUnitOfWork
         _bookingFileRepository = new Lazy<IGenericRepository<BookingFile>>(() => new GenericRepository<BookingFile>(_context));
         _bookingPeriodRepository = new Lazy<IBookingPeriodRepository>(() => new BookingPeriodRepository(_context)); // <<-- اضافه شد
         _bookingStatusHistoryRepository = new Lazy<IGenericRepository<BookingStatusHistory>>(() => new GenericRepository<BookingStatusHistory>(_context));
+        _provinceHotelQuotaRepository = new Lazy<IProvinceHotelQuotaRepository>(() => new ProvinceHotelQuotaRepository(_context));
     }
 
     public IUserRepository UserRepository => _userRepository.Value;
@@ -56,6 +58,7 @@ public class UnitOfWork : IUnitOfWork
     public IDependentDataRepository DependentDataRepository => _dependentDataRepository.Value;
     public IGenericRepository<BookingFile> BookingFileRepository => _bookingFileRepository.Value;
     public IBookingPeriodRepository BookingPeriodRepository => _bookingPeriodRepository.Value;
+    public IProvinceHotelQuotaRepository ProvinceHotelQuotaRepository => _provinceHotelQuotaRepository.Value;
     public IGenericRepository<BookingStatusHistory> BookingStatusHistoryRepository => _bookingStatusHistoryRepository.Value;
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

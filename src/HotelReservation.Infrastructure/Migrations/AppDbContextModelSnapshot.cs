@@ -182,6 +182,8 @@ namespace HotelReservation.Infrastructure.Migrations
 
                     b.HasIndex("RequestSubmitterUserId");
 
+                    b.HasIndex("RequestingEmployeeNationalCode");
+
                     b.HasIndex("TrackingCode")
                         .IsUnique();
 
@@ -312,6 +314,33 @@ namespace HotelReservation.Infrastructure.Migrations
                     b.ToTable("Provinces");
                 });
 
+            modelBuilder.Entity("HotelReservation.Domain.Entities.ProvinceHotelQuota", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("HotelId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProvinceCode")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("RoomLimit")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.HasIndex("ProvinceCode", "HotelId")
+                        .IsUnique();
+
+                    b.ToTable("ProvinceHotelQuotas");
+                });
+
             modelBuilder.Entity("HotelReservation.Domain.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -390,6 +419,7 @@ namespace HotelReservation.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("NationalCode")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
@@ -484,6 +514,13 @@ namespace HotelReservation.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("HotelReservation.Domain.Entities.User", "RequestingEmployee")
+                        .WithMany()
+                        .HasForeignKey("RequestingEmployeeNationalCode")
+                        .HasPrincipalKey("NationalCode")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("AssignedRoom");
 
                     b.Navigation("BookingPeriod");
@@ -491,6 +528,8 @@ namespace HotelReservation.Infrastructure.Migrations
                     b.Navigation("Hotel");
 
                     b.Navigation("RequestSubmitterUser");
+
+                    b.Navigation("RequestingEmployee");
                 });
 
             modelBuilder.Entity("HotelReservation.Domain.Entities.BookingStatusHistory", b =>
@@ -521,6 +560,25 @@ namespace HotelReservation.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("UserOwner");
+                });
+
+            modelBuilder.Entity("HotelReservation.Domain.Entities.ProvinceHotelQuota", b =>
+                {
+                    b.HasOne("HotelReservation.Domain.Entities.Hotel", "Hotel")
+                        .WithMany()
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelReservation.Domain.Entities.Province", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hotel");
+
+                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("HotelReservation.Domain.Entities.Room", b =>

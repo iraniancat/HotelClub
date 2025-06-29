@@ -28,5 +28,8 @@ public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
             .ToListAsync();
     }
 
-   
+    public async Task<bool> ExistsAsync(Guid hotelId)
+    {
+       return await _dbContext.Hotels.AnyAsync(p => p.Id == hotelId);
+    }
 }

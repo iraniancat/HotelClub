@@ -8,4 +8,5 @@ public interface IHotelRepository : IGenericRepository<Hotel>
     // << حذف شد: Task<IReadOnlyList<Hotel>> GetHotelsByProvinceCodeAsync(string provinceCode); >>
     // می‌توان متدهای جستجوی دیگری اضافه کرد، مثلاً بر اساس نام یا بخشی از آدرس
     Task<IReadOnlyList<Hotel>> FindByNameAsync(string name);
+    Task<bool> ExistsAsync(Guid hotelId);
 }

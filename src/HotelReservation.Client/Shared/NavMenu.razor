@@ -9,7 +9,7 @@
     @* لینک‌های عمومی برای همه کاربران احراز هویت شده *@
     <AuthorizeView>
         <Authorized >
-            <MudNavLink Href="my-bookings" Icon="@Icons.Material.Filled.BookOnline">رزروهای من</MudNavLink> @* TODO: صفحه رزروهای من *@
+            <MudNavLink Href="my-bookings" Icon="@Icons.Material.Filled.BookOnline">رزروهای من</MudNavLink> 
         </Authorized>
     </AuthorizeView>
 
@@ -17,15 +17,15 @@
     <AuthorizeView Roles="SuperAdmin"> @* // نام نقش باید با Claim نقش در توکن مطابقت داشته باشد *@
         <Authorized>
             <MudListSubheader>مدیریت سیستم</MudListSubheader>
-            <MudNavLink Href="admin/dashboard" Icon="@Icons.Material.Filled.Dashboard">داشبورد مدیر</MudNavLink> @* TODO *@
-            <MudNavLink Href="admin/users" Icon="@Icons.Material.Filled.People">مدیریت کاربران</MudNavLink> @* TODO *@
+            <MudNavLink Href="admin/dashboard" Icon="@Icons.Material.Filled.Dashboard">داشبورد مدیر</MudNavLink> 
+            <MudNavLink Href="admin/users" Icon="@Icons.Material.Filled.People">مدیریت کاربران</MudNavLink> 
             <MudNavLink Href="admin/roles" Icon="@Icons.Material.Filled.AdminPanelSettings">مدیریت نقش‌ها</MudNavLink>
-            @* TODO *@
-            <MudNavLink Href="admin/booking-periods" Icon="@Icons.Material.Filled.DateRange">مدیریت دوره‌های زمانی
-            </MudNavLink> @* <<-- این خط اضافه شده *@
-            <MudNavLink Href="admin/hotels" Icon="@Icons.Material.Filled.Hotel">مدیریت هتل‌ها</MudNavLink> @* TODO *@
-            <MudNavLink Href="admin/provinces" Icon="@Icons.Material.Filled.Map">استان‌ها (مشاهده)</MudNavLink> @* TODO *@
-            <MudNavLink Href="admin/departments" Icon="@Icons.Material.Filled.Business">ادارات (مشاهده)</MudNavLink> @* TODO *@
+            
+            <MudNavLink Href="admin/booking-periods" Icon="@Icons.Material.Filled.DateRange">مدیریت دوره‌های زمانی</MudNavLink> 
+            <MudNavLink Href="admin/hotel-quotas" Icon="@Icons.Material.Filled.DateRange">مدیریت سهمیه‌ها</MudNavLink> 
+            <MudNavLink Href="admin/hotels" Icon="@Icons.Material.Filled.Hotel">مدیریت هتل‌ها</MudNavLink> 
+            <MudNavLink Href="admin/provinces" Icon="@Icons.Material.Filled.Map">استان‌ها (مشاهده)</MudNavLink> 
+            <MudNavLink Href="admin/departments" Icon="@Icons.Material.Filled.Business">ادارات (مشاهده)</MudNavLink> 
         </Authorized>
     </AuthorizeView>
 
@@ -34,10 +34,10 @@
         <Authorized>
             <MudListSubheader>عملیات استان</MudListSubheader>
             <MudNavLink Href="province/create-booking" Icon="@Icons.Material.Filled.AddCircleOutline">ثبت رزرو جدید
-            </MudNavLink> @* TODO *@
+            </MudNavLink> 
             <MudNavLink Href="province/bookings" Icon="@Icons.Material.Filled.ListAlt">لیست رزروهای استان</MudNavLink>
             
-            @* TODO *@
+            
         </Authorized>
     </AuthorizeView>
 

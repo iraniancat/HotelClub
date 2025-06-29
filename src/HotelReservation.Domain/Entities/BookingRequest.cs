@@ -11,6 +11,7 @@ public class BookingRequest
     public Guid Id { get; private set; }
     public string TrackingCode { get; private set; }
     public string RequestingEmployeeNationalCode { get; private set; }
+    public virtual User RequestingEmployee { get; private set; }
     public Guid BookingPeriodId { get; private set; }
     public virtual BookingPeriod BookingPeriod { get; private set; }
     public DateTime CheckInDate { get; private set; }
@@ -38,7 +39,7 @@ public class BookingRequest
     private BookingRequest() { } // برای EF Core
 
     public BookingRequest(
-        string requestingEmployeeNationalCode,
+        string requestingEmployeeNationalCode,        
         Guid bookingPeriodId, BookingPeriod bookingPeriod,
         DateTime checkInDate,
         DateTime checkOutDate,
@@ -58,7 +59,7 @@ public class BookingRequest
 
         Id = Guid.NewGuid();
         TrackingCode = GenerateTrackingCode(); // متد کمکی برای تولید کد رهگیری
-        RequestingEmployeeNationalCode = requestingEmployeeNationalCode;
+        RequestingEmployeeNationalCode = requestingEmployeeNationalCode;        
         BookingPeriodId = bookingPeriodId;
         BookingPeriod = bookingPeriod;
         CheckInDate = checkInDate;

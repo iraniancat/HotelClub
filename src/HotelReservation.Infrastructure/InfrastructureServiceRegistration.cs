@@ -36,6 +36,7 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<IFileStorageService, FileSystemStorageService>();
         
          services.AddScoped<IBookingRequestRepository, BookingRequestRepository>();
+         services.AddScoped<IProvinceHotelQuotaRepository, ProvinceHotelQuotaRepository>();
         // Repositoryهای اختصاصی هم به عنوان Scoped ثبت می‌شوند
         // (اگر UnitOfWork آن‌ها را نمونه‌سازی می‌کند، شاید نیازی به ثبت تک تک آن‌ها نباشد،
         // اما برای صراحت یا اگر مستقیماً تزریق می‌شوند، ثبتشان می‌کنیم)
