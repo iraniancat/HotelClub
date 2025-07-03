@@ -60,4 +60,14 @@
 
 @code {
     [Inject] private NavigationManager Navigation { get; set; } = default!;
+
+     private string userFullName = "loading..."; // یک مقدار اولیه برای نمایش تا زمان بارگذاری داده‌ها
+
+    protected override async Task OnInitializedAsync()
+    {
+        // داده‌ها را به صورت آسنکرون در زمان مقداردهی اولیه کامپوننت بارگذاری کنید
+        userFullName =  @CurrentUserService.FullName??"";
+        
+        // نیازی به فراخوانی StateHasChanged() نیست، فریمورک این کار را به صورت خودکار انجام می‌دهد
+    }
 }

@@ -21,7 +21,7 @@
                 <MudGrid>
                     <MudItem xs="12">
                         <MudTextField T="string" Label="نام هتل" @bind-Value="_updateHotelModel.Name"
-                                      For="@(() => _updateHotelModel.Name)" Required="true" RequiredError="نام هتل الزامی است." />
+                                      For="@(() => _updateHotelModel.Name)" Required="true" RequiredError="نام هتل الزامی است." ReadOnly />
                     </MudItem>
                     <MudItem xs="12">
                          <MudTextField T="string" Label="آدرس" @bind-Value="_updateHotelModel.Address"
