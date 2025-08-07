@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using HotelReservation.Application.Contracts.Security
+
 @attribute [Authorize]
 
 @inject ICurrentUserService CurrentUserService
@@ -7,11 +8,13 @@
 <PageTitle>صفحه اصلی</PageTitle>
 
 <MudContainer MaxWidth="MaxWidth.False" Class="mt-4">
-    <MudText Typo="Typo.h4" GutterBottom="true">سلام، @CurrentUserService.FullName</MudText>
+    <AuthorizeView>
+        <Authorized Context="authContext">
+   <MudText Typo="Typo.h4" GutterBottom="true">سلام، @authContext.User.FindFirstValue(System.Security.Claims.ClaimTypes.GivenName)</MudText>
+   
     <MudText Class="mb-8">به سامانه یکپارچه رزرو هتل خوش آمدید.</MudText>
 
-    <AuthorizeView>
-        <Authorized>
+   
             <MudText Typo="Typo.h6" Class="mb-4">دسترسی‌های سریع شما:</MudText>
             <MudGrid Spacing="3">
                 
@@ -61,13 +64,13 @@
 @code {
     [Inject] private NavigationManager Navigation { get; set; } = default!;
 
-     private string userFullName = "loading..."; // یک مقدار اولیه برای نمایش تا زمان بارگذاری داده‌ها
+     @* private string userFullName = "loading..."; // یک مقدار اولیه برای نمایش تا زمان بارگذاری داده‌ها *@
 
-    protected override async Task OnInitializedAsync()
+    @* protected override async Task OnInitializedAsync()
     {
         // داده‌ها را به صورت آسنکرون در زمان مقداردهی اولیه کامپوننت بارگذاری کنید
         userFullName =  @CurrentUserService.FullName??"";
         
         // نیازی به فراخوانی StateHasChanged() نیست، فریمورک این کار را به صورت خودکار انجام می‌دهد
-    }
+    } *@
 }

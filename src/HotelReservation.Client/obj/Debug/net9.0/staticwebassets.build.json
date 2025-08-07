@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "equqnMm0jZlUD+7eoPY+LxOMetYocqQExAVGtOc5qAk=",
+  "Hash": "p6zbPjAyeb8GhhmWKm7NK8nUR1P4A9aAnKw8t5Sl2zs=",
   "Source": "HotelReservation.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -31,8 +31,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "manifest",
-      "Fingerprint": "2zsbxp3mak",
-      "Integrity": "btzwkB9OSnx2YFVeMZgOaETzHFMEvrFbAkH/Wu8UdLQ=",
+      "Fingerprint": "sz0ffusuhq",
+      "Integrity": "yJkUNeiHdLYmUyAFnp+JKvbTsFhMMsOocZNolQ1wdRE=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\blazor.boot.json"
@@ -283,8 +283,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "kbrnemil28",
-      "Integrity": "8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=",
+      "Fingerprint": "9wyr2uxi37",
+      "Integrity": "lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Application\\bin\\Debug\\net9.0\\HotelReservation.Application.pdb"
@@ -304,8 +304,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "k1lgh1bimp",
-      "Integrity": "iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=",
+      "Fingerprint": "0go7uczkod",
+      "Integrity": "gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\webcil\\HotelReservation.Application.wasm"
@@ -325,8 +325,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "rpsoz3z31r",
-      "Integrity": "X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks=",
+      "Fingerprint": "w3ssmvrltz",
+      "Integrity": "TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "obj\\Debug\\net9.0\\HotelReservation.Client.pdb"
@@ -346,8 +346,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "x28otu1ha8",
-      "Integrity": "6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8=",
+      "Fingerprint": "crrdq0g0ya",
+      "Integrity": "ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\webcil\\HotelReservation.Client.wasm"
@@ -367,8 +367,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "symbol",
-      "Fingerprint": "w9ups18zyj",
-      "Integrity": "fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=",
+      "Fingerprint": "15ixlu6ih5",
+      "Integrity": "69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Domain\\bin\\Debug\\net9.0\\HotelReservation.Domain.pdb"
@@ -388,8 +388,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "WasmResource",
       "AssetTraitValue": "runtime",
-      "Fingerprint": "uvnvbippjd",
-      "Integrity": "VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=",
+      "Fingerprint": "l23ql4no86",
+      "Integrity": "DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\webcil\\HotelReservation.Domain.wasm"
@@ -7598,12 +7598,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-kbrnemil28.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-9wyr2uxi37.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Application#[.{fingerprint=kbrnemil28}]!.pdb.gz",
+      "RelativePath": "_framework/HotelReservation.Application#[.{fingerprint=9wyr2uxi37}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -7612,8 +7612,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "s67z6yr05g",
-      "Integrity": "3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0=",
+      "Fingerprint": "ihnse6353t",
+      "Integrity": "5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.pdb"
@@ -8816,7 +8816,7 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\MediatR.Contracts.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-2zsbxp3mak.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-sz0ffusuhq.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
@@ -8830,8 +8830,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "tdyg9xpkaz",
-      "Integrity": "EW89XMSNeih0JkgR5qv9+zkosrp8Gtq7xWUyrUpt+EU=",
+      "Fingerprint": "v18cvix48j",
+      "Integrity": "PTV/gXbh/4e7OBS2dacXpNcTrkBb/jCd9F148az0L44=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\blazor.boot.json"
@@ -9551,12 +9551,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Drawing.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-w9ups18zyj.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-15ixlu6ih5.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Domain#[.{fingerprint=w9ups18zyj}]!.pdb.gz",
+      "RelativePath": "_framework/HotelReservation.Domain#[.{fingerprint=15ixlu6ih5}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -9565,8 +9565,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "fbnz0lp739",
-      "Integrity": "NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8=",
+      "Fingerprint": "ds0ylued5u",
+      "Integrity": "gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.pdb"
@@ -10244,12 +10244,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.IO.MemoryMappedFiles.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-uvnvbippjd.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-l23ql4no86.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Domain#[.{fingerprint=uvnvbippjd}]!.wasm.gz",
+      "RelativePath": "_framework/HotelReservation.Domain#[.{fingerprint=l23ql4no86}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10258,8 +10258,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "a1fpmxyre2",
-      "Integrity": "XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA=",
+      "Fingerprint": "xq9ta4a67t",
+      "Integrity": "mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.wasm"
@@ -10979,12 +10979,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Threading.Overlapped.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-x28otu1ha8.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-crrdq0g0ya.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Client#[.{fingerprint=x28otu1ha8}]!.wasm.gz",
+      "RelativePath": "_framework/HotelReservation.Client#[.{fingerprint=crrdq0g0ya}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -10993,8 +10993,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "f6wyqyicbz",
-      "Integrity": "ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A=",
+      "Fingerprint": "ucqw2x5rbg",
+      "Integrity": "bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.wasm"
@@ -11315,12 +11315,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Collections.Immutable.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-rpsoz3z31r.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-w3ssmvrltz.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Client#[.{fingerprint=rpsoz3z31r}]!.pdb.gz",
+      "RelativePath": "_framework/HotelReservation.Client#[.{fingerprint=w3ssmvrltz}]!.pdb.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -11329,8 +11329,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "mtnzb0c02m",
-      "Integrity": "pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs=",
+      "Fingerprint": "git7dajekq",
+      "Integrity": "2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb"
@@ -11840,12 +11840,12 @@
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\System.Diagnostics.Debug.wasm"
     },
     {
-      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-k1lgh1bimp.gz",
+      "Identity": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-0go7uczkod.gz",
       "SourceId": "HotelReservation.Client",
       "SourceType": "Computed",
       "ContentRoot": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "/",
-      "RelativePath": "_framework/HotelReservation.Application#[.{fingerprint=k1lgh1bimp}]!.wasm.gz",
+      "RelativePath": "_framework/HotelReservation.Application#[.{fingerprint=0go7uczkod}]!.wasm.gz",
       "AssetKind": "Build",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -11854,8 +11854,8 @@
       "RelatedAsset": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.wasm",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "mu9euma49h",
-      "Integrity": "Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE=",
+      "Fingerprint": "9aovbdsuum",
+      "Integrity": "T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc=",
       "CopyToOutputDirectory": "PreserveNewest",
       "CopyToPublishDirectory": "Never",
       "OriginalItemSpec": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.wasm"
@@ -15485,11 +15485,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"btzwkB9OSnx2YFVeMZgOaETzHFMEvrFbAkH/Wu8UdLQ=\""
+          "Value": "\"yJkUNeiHdLYmUyAFnp+JKvbTsFhMMsOocZNolQ1wdRE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:38 GMT"
+          "Value": "Thu, 07 Aug 2025 06:47:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15499,18 +15499,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-btzwkB9OSnx2YFVeMZgOaETzHFMEvrFbAkH/Wu8UdLQ="
+          "Value": "sha256-yJkUNeiHdLYmUyAFnp+JKvbTsFhMMsOocZNolQ1wdRE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-2zsbxp3mak.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-sz0ffusuhq.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000059712187"
+          "Quality": "0.000059719319"
         }
       ],
       "ResponseHeaders": [
@@ -15520,15 +15520,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16746"
+          "Value": "16744"
         },
         {
           "Name": "ETag",
-          "Value": "\"EW89XMSNeih0JkgR5qv9+zkosrp8Gtq7xWUyrUpt+EU=\""
+          "Value": "\"PTV/gXbh/4e7OBS2dacXpNcTrkBb/jCd9F148az0L44=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15548,19 +15548,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"btzwkB9OSnx2YFVeMZgOaETzHFMEvrFbAkH/Wu8UdLQ=\""
+          "Value": "W/\"yJkUNeiHdLYmUyAFnp+JKvbTsFhMMsOocZNolQ1wdRE=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-btzwkB9OSnx2YFVeMZgOaETzHFMEvrFbAkH/Wu8UdLQ="
+          "Value": "sha256-yJkUNeiHdLYmUyAFnp+JKvbTsFhMMsOocZNolQ1wdRE="
         }
       ]
     },
     {
       "Route": "_framework/blazor.boot.json.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-2zsbxp3mak.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\ghek3fwmit-sz0ffusuhq.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -15569,7 +15569,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16746"
+          "Value": "16744"
         },
         {
           "Name": "Content-Type",
@@ -15577,11 +15577,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EW89XMSNeih0JkgR5qv9+zkosrp8Gtq7xWUyrUpt+EU=\""
+          "Value": "\"PTV/gXbh/4e7OBS2dacXpNcTrkBb/jCd9F148az0L44=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -15599,7 +15599,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EW89XMSNeih0JkgR5qv9+zkosrp8Gtq7xWUyrUpt+EU="
+          "Value": "sha256-PTV/gXbh/4e7OBS2dacXpNcTrkBb/jCd9F148az0L44="
         }
       ]
     },
@@ -18721,7 +18721,7 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.k1lgh1bimp.wasm",
+      "Route": "_framework/HotelReservation.Application.0go7uczkod.wasm",
       "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.wasm",
       "Selectors": [],
       "ResponseHeaders": [
@@ -18731,7 +18731,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "233749"
+          "Value": "235285"
         },
         {
           "Name": "Content-Type",
@@ -18739,11 +18739,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=\""
+          "Value": "\"gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:50 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:40 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18753,7 +18753,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "k1lgh1bimp"
+          "Value": "0go7uczkod"
         },
         {
           "Name": "label",
@@ -18761,18 +18761,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40="
+          "Value": "sha256-gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.k1lgh1bimp.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-k1lgh1bimp.gz",
+      "Route": "_framework/HotelReservation.Application.0go7uczkod.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-0go7uczkod.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000012085030"
+          "Quality": "0.000012036736"
         }
       ],
       "ResponseHeaders": [
@@ -18782,15 +18782,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82746"
+          "Value": "83078"
         },
         {
           "Name": "ETag",
-          "Value": "\"Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE=\""
+          "Value": "\"T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18810,13 +18810,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=\""
+          "Value": "W/\"gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "k1lgh1bimp"
+          "Value": "0go7uczkod"
         },
         {
           "Name": "label",
@@ -18824,13 +18824,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40="
+          "Value": "sha256-gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.k1lgh1bimp.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-k1lgh1bimp.gz",
+      "Route": "_framework/HotelReservation.Application.0go7uczkod.wasm.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-0go7uczkod.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -18839,7 +18839,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82746"
+          "Value": "83078"
         },
         {
           "Name": "Content-Type",
@@ -18847,11 +18847,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE=\""
+          "Value": "\"T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18869,7 +18869,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "k1lgh1bimp"
+          "Value": "0go7uczkod"
         },
         {
           "Name": "label",
@@ -18877,12 +18877,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE="
+          "Value": "sha256-T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.kbrnemil28.pdb",
+      "Route": "_framework/HotelReservation.Application.9wyr2uxi37.pdb",
       "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Application.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -18892,7 +18892,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "77376"
+          "Value": "77452"
         },
         {
           "Name": "Content-Type",
@@ -18900,11 +18900,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=\""
+          "Value": "\"lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:22:51 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18914,7 +18914,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "kbrnemil28"
+          "Value": "9wyr2uxi37"
         },
         {
           "Name": "label",
@@ -18922,18 +18922,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ="
+          "Value": "sha256-lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.kbrnemil28.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-kbrnemil28.gz",
+      "Route": "_framework/HotelReservation.Application.9wyr2uxi37.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-9wyr2uxi37.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000025950435"
+          "Quality": "0.000025926886"
         }
       ],
       "ResponseHeaders": [
@@ -18943,15 +18943,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "38534"
+          "Value": "38569"
         },
         {
           "Name": "ETag",
-          "Value": "\"3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0=\""
+          "Value": "\"5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -18971,13 +18971,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=\""
+          "Value": "W/\"lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "kbrnemil28"
+          "Value": "9wyr2uxi37"
         },
         {
           "Name": "label",
@@ -18985,13 +18985,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ="
+          "Value": "sha256-lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.kbrnemil28.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-kbrnemil28.gz",
+      "Route": "_framework/HotelReservation.Application.9wyr2uxi37.pdb.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-9wyr2uxi37.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19000,7 +19000,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "38534"
+          "Value": "38569"
         },
         {
           "Name": "Content-Type",
@@ -19008,11 +19008,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0=\""
+          "Value": "\"5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19030,7 +19030,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "kbrnemil28"
+          "Value": "9wyr2uxi37"
         },
         {
           "Name": "label",
@@ -19038,7 +19038,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0="
+          "Value": "sha256-5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00="
         }
       ]
     },
@@ -19053,7 +19053,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "77376"
+          "Value": "77452"
         },
         {
           "Name": "Content-Type",
@@ -19061,11 +19061,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=\""
+          "Value": "\"lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:22:51 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:25 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19075,18 +19075,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ="
+          "Value": "sha256-lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Application.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-kbrnemil28.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-9wyr2uxi37.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000025950435"
+          "Quality": "0.000025926886"
         }
       ],
       "ResponseHeaders": [
@@ -19096,15 +19096,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "38534"
+          "Value": "38569"
         },
         {
           "Name": "ETag",
-          "Value": "\"3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0=\""
+          "Value": "\"5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19124,19 +19124,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=\""
+          "Value": "W/\"lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ="
+          "Value": "sha256-lwxJr8up9ZL8Fyg3EymE99hEuEJOWDgyPjDTwmtd9mw="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Application.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-kbrnemil28.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\9b4vjn6mvo-9wyr2uxi37.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19145,7 +19145,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "38534"
+          "Value": "38569"
         },
         {
           "Name": "Content-Type",
@@ -19153,11 +19153,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0=\""
+          "Value": "\"5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19175,7 +19175,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-3LK31N+rZ6zjeOBDLhgY7I3wvOp6tIkHaLIWvo2Wmt0="
+          "Value": "sha256-5nt2Tr+ceIoZySXmLKQHBcHhMjHSxuBkxAZUwHBeQ00="
         }
       ]
     },
@@ -19190,7 +19190,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "233749"
+          "Value": "235285"
         },
         {
           "Name": "Content-Type",
@@ -19198,11 +19198,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=\""
+          "Value": "\"gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:50 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:40 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19212,18 +19212,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40="
+          "Value": "sha256-gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Application.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-k1lgh1bimp.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-0go7uczkod.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000012085030"
+          "Quality": "0.000012036736"
         }
       ],
       "ResponseHeaders": [
@@ -19233,15 +19233,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82746"
+          "Value": "83078"
         },
         {
           "Name": "ETag",
-          "Value": "\"Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE=\""
+          "Value": "\"T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19261,19 +19261,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=\""
+          "Value": "W/\"gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40="
+          "Value": "sha256-gMoBbyUckKbPSFyBXvTIJyaA0VRzoS0ITOb5mHgrKyQ="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Application.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-k1lgh1bimp.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\w1j8gg7dj6-0go7uczkod.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19282,7 +19282,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "82746"
+          "Value": "83078"
         },
         {
           "Name": "Content-Type",
@@ -19290,11 +19290,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE=\""
+          "Value": "\"T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Wed, 06 Aug 2025 08:28:55 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19312,310 +19312,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Xr/xGPb9v50OnBwA8CQ0tJdEWumpX633ZqYBej0ZnbE="
+          "Value": "sha256-T/QN7mhMsYSNU6V7iOVU3dzIFDlJH3vMY7fTtdfmfnc="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "259316"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:35 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-rpsoz3z31r.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000004753145"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "210386"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-rpsoz3z31r.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "210386"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.rpsoz3z31r.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "259316"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:35 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "rpsoz3z31r"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.rpsoz3z31r.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-rpsoz3z31r.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000004753145"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "210386"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "rpsoz3z31r"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.rpsoz3z31r.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-rpsoz3z31r.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "210386"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:19:38 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "rpsoz3z31r"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-pvFtQkGMM+/SQJjX7ZAzFduQRxewz2cNXI9pmEEKKQs="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.wasm",
+      "Route": "_framework/HotelReservation.Client.crrdq0g0ya.wasm",
       "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.wasm",
       "Selectors": [],
       "ResponseHeaders": [
@@ -19625,7 +19327,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "380181"
+          "Value": "379157"
         },
         {
           "Name": "Content-Type",
@@ -19633,148 +19335,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8=\""
+          "Value": "\"ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:01 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-x28otu1ha8.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000008058148"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "124097"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-x28otu1ha8.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "124097"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.x28otu1ha8.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "380181"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:01 GMT"
+          "Value": "Thu, 07 Aug 2025 06:47:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19784,7 +19349,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x28otu1ha8"
+          "Value": "crrdq0g0ya"
         },
         {
           "Name": "label",
@@ -19792,18 +19357,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8="
+          "Value": "sha256-ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.x28otu1ha8.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-x28otu1ha8.gz",
+      "Route": "_framework/HotelReservation.Client.crrdq0g0ya.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-crrdq0g0ya.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000008058148"
+          "Quality": "0.000008065882"
         }
       ],
       "ResponseHeaders": [
@@ -19813,15 +19378,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "124097"
+          "Value": "123978"
         },
         {
           "Name": "ETag",
-          "Value": "\"ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A=\""
+          "Value": "\"bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19841,13 +19406,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8=\""
+          "Value": "W/\"ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x28otu1ha8"
+          "Value": "crrdq0g0ya"
         },
         {
           "Name": "label",
@@ -19855,13 +19420,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8="
+          "Value": "sha256-ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.x28otu1ha8.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-x28otu1ha8.gz",
+      "Route": "_framework/HotelReservation.Client.crrdq0g0ya.wasm.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-crrdq0g0ya.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -19870,7 +19435,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "124097"
+          "Value": "123978"
         },
         {
           "Name": "Content-Type",
@@ -19878,11 +19443,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A=\""
+          "Value": "\"bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 07 Aug 2025 05:16:06 GMT"
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -19900,7 +19465,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x28otu1ha8"
+          "Value": "crrdq0g0ya"
         },
         {
           "Name": "label",
@@ -19908,12 +19473,447 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZxmufLs8KuZ4/VJXJfCq6Rr8/nxARi6aumvE2C9r06A="
+          "Value": "sha256-bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.pdb",
+      "Route": "_framework/HotelReservation.Client.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "258780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-w3ssmvrltz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000004764355"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209891"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.pdb.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-w3ssmvrltz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209891"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.w3ssmvrltz.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "258780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w3ssmvrltz"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.w3ssmvrltz.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-w3ssmvrltz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000004764355"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209891"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w3ssmvrltz"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TB/NYMq40KZqk0RfO6K4v1HxU0m/ewuVQJ/AzJ2b7eY="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.w3ssmvrltz.pdb.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\tkdt5kzrcx-w3ssmvrltz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "209891"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "w3ssmvrltz"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2Cmxdqlw0A7QhAIsrMVZ/bdQcteYHOT2/oArg50D/Ro="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Client.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "379157"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-crrdq0g0ya.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000008065882"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "123978"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ONgQirqdPJS2U331WOYfcWieU3xopoGLkqs7g07qIms="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.wasm.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\s0z4dmsgf7-crrdq0g0ya.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "123978"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:47:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bsPgZz5dRJVMgc2u+7QSQGIFjrslnLkSCdiewLtNjnQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.15ixlu6ih5.pdb",
       "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.pdb",
       "Selectors": [],
       "ResponseHeaders": [
@@ -19931,27 +19931,35 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=\""
+          "Value": "\"69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:36:18 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:18 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "15ixlu6ih5"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Domain.pdb"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A="
+          "Value": "sha256-69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-w9ups18zyj.gz",
+      "Route": "_framework/HotelReservation.Domain.15ixlu6ih5.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-15ixlu6ih5.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -19970,15 +19978,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8=\""
+          "Value": "\"gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Encoding",
@@ -19994,256 +20002,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-w9ups18zyj.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11342"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.uvnvbippjd.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "32533"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:36:57 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "W/\"69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uvnvbippjd"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Domain.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.uvnvbippjd.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-uvnvbippjd.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000076178868"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13126"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "uvnvbippjd"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Domain.wasm"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.uvnvbippjd.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-uvnvbippjd.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "13126"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "uvnvbippjd"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Domain.wasm.gz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.w9ups18zyj.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21632"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:36:18 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "w9ups18zyj"
+          "Value": "15ixlu6ih5"
         },
         {
           "Name": "label",
@@ -20251,76 +20016,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A="
+          "Value": "sha256-69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.w9ups18zyj.pdb",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-w9ups18zyj.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000088160099"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "11342"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "w9ups18zyj"
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Domain.pdb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Domain.w9ups18zyj.pdb.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-w9ups18zyj.gz",
+      "Route": "_framework/HotelReservation.Domain.15ixlu6ih5.pdb.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-15ixlu6ih5.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -20337,11 +20039,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8=\""
+          "Value": "\"gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -20359,7 +20061,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "w9ups18zyj"
+          "Value": "15ixlu6ih5"
         },
         {
           "Name": "label",
@@ -20367,7 +20069,305 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-NdsTSvaHiLiZBRK4Hz7t4N4AbFV1aHr608luibc75C8="
+          "Value": "sha256-gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.l23ql4no86.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "32533"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:40 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l23ql4no86"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Domain.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.l23ql4no86.wasm",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-l23ql4no86.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000076138267"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13133"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l23ql4no86"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Domain.wasm"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.l23ql4no86.wasm.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-l23ql4no86.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "13133"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "l23ql4no86"
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Domain.wasm.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\bin\\Debug\\net9.0\\wwwroot\\_framework\\HotelReservation.Domain.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21632"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:18 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.pdb",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-15ixlu6ih5.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000088160099"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11342"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-69hux0cr4+HzAP5Knw0U9b5rcA0xWijcESn3h72AJIw="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Domain.pdb.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\k8p6ofkt69-15ixlu6ih5.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "11342"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gzrVv4IxBMHkqeh/Plh9Y7JEn9CZyZ9bwVtewbno/uk="
         }
       ]
     },
@@ -20390,11 +20390,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=\""
+          "Value": "\"DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:36:57 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:40 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -20404,18 +20404,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE="
+          "Value": "sha256-DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.wasm",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-uvnvbippjd.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-l23ql4no86.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000076178868"
+          "Quality": "0.000076138267"
         }
       ],
       "ResponseHeaders": [
@@ -20425,15 +20425,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13126"
+          "Value": "13133"
         },
         {
           "Name": "ETag",
-          "Value": "\"XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA=\""
+          "Value": "\"mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -20453,19 +20453,19 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=\""
+          "Value": "W/\"DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE="
+          "Value": "sha256-DcfnpKm7zRhBiIy9ekE8N3Swy/12PQ+wShOfdQ5CfGo="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.wasm.gz",
-      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-uvnvbippjd.gz",
+      "AssetFile": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\obj\\Debug\\net9.0\\compressed\\o8o74en4rf-l23ql4no86.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -20474,7 +20474,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13126"
+          "Value": "13133"
         },
         {
           "Name": "Content-Type",
@@ -20482,11 +20482,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA=\""
+          "Value": "\"mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 03 Jul 2025 08:37:04 GMT"
+          "Value": "Thu, 07 Aug 2025 06:28:43 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -20504,7 +20504,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XvLrje21MtIqhD+5DoWleWfEml4rSPO0d8a3Vk+uokA="
+          "Value": "sha256-mdB2NLcuERoNMOfsPqKSIjQyHPCqGJ3q6X09epLPC58="
         }
       ]
     },
