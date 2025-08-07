@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "HotelReservation.Client",
   "resources": {
-    "hash": "sha256-5SuMJtpRoRTh/j5pZP46jfLNAcjcWz/SGGXu6sL91t4=",
+    "hash": "sha256-q8uC7c5uzVNInhZ5++uKwiJK/axCfw/u3MRpwNwtvWc=",
     "fingerprinting": {
       "Blazor.PersianDatePicker.zabila2z7v.wasm": "Blazor.PersianDatePicker.wasm",
       "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
@@ -269,12 +269,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "HotelReservation.Application.cc7ymjsoi2.wasm": "HotelReservation.Application.wasm",
-      "HotelReservation.Domain.qessjdlyw3.wasm": "HotelReservation.Domain.wasm",
-      "HotelReservation.Application.lnjiz87jtf.pdb": "HotelReservation.Application.pdb",
-      "HotelReservation.Domain.m4qgx9p6np.pdb": "HotelReservation.Domain.pdb",
-      "HotelReservation.Client.2krx51ar0x.wasm": "HotelReservation.Client.wasm",
-      "HotelReservation.Client.o8rr9fxiyb.pdb": "HotelReservation.Client.pdb"
+      "HotelReservation.Application.k1lgh1bimp.wasm": "HotelReservation.Application.wasm",
+      "HotelReservation.Domain.uvnvbippjd.wasm": "HotelReservation.Domain.wasm",
+      "HotelReservation.Application.kbrnemil28.pdb": "HotelReservation.Application.pdb",
+      "HotelReservation.Domain.w9ups18zyj.pdb": "HotelReservation.Domain.pdb",
+      "HotelReservation.Client.x28otu1ha8.wasm": "HotelReservation.Client.wasm",
+      "HotelReservation.Client.rpsoz3z31r.pdb": "HotelReservation.Client.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.uhsveqo9bs.js": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
@@ -552,14 +552,14 @@
       "WindowsBase.pe1q66fox7.wasm": "sha256-X+jubl681x6U1UjhhKVz+cjOvMv1wDBWIyyFenqJnPc=",
       "mscorlib.ypkr78tz1c.wasm": "sha256-Wkc7KpMw/bTWNoLCRv9T8olIOmCpEiJSeUZsUQEnwrA=",
       "netstandard.ifx8vojh9u.wasm": "sha256-PqpRCbO73PFsE8ik5zmAuG1kKax3c7bGhjOOeuiUcyY=",
-      "HotelReservation.Application.cc7ymjsoi2.wasm": "sha256-VOQzI54DSG/MdImtlRgVoNCfNPLGKMiCx0vREhU4jiw=",
-      "HotelReservation.Domain.qessjdlyw3.wasm": "sha256-LmqdIWoyyvqNXn28n0+Tz2vF9DfskH3ek14Qcixa06w=",
-      "HotelReservation.Client.2krx51ar0x.wasm": "sha256-wjIeEPukMvdNm6g2x7lMB8igZ0VMNclEn3AoF5nf3Ps="
+      "HotelReservation.Application.k1lgh1bimp.wasm": "sha256-iFOaAcGYJtRo+V4Il5aw57SPPxUhyzP57VhEOB2DA40=",
+      "HotelReservation.Domain.uvnvbippjd.wasm": "sha256-VjLs0UXu8saJ+pNP3OJmwfApI/S0IIHl2RO1UDwVnEE=",
+      "HotelReservation.Client.x28otu1ha8.wasm": "sha256-6QOj5PVubS45sIl8wE+KifffQWXd4xxvCWxOwsi9Cn8="
     },
     "pdb": {
-      "HotelReservation.Application.lnjiz87jtf.pdb": "sha256-AYcEpFRZP59XyM8U597QoqnYVo1BzBaq8PshqLEXq8Y=",
-      "HotelReservation.Domain.m4qgx9p6np.pdb": "sha256-uoLtIXMeMJXFc7BtKaEly8UhX2iWmOr8QRtoG7jhwU8=",
-      "HotelReservation.Client.o8rr9fxiyb.pdb": "sha256-qJeJjuqRQZQl60yjmWPwzpODryj79A4G1nAuZaeLx7w="
+      "HotelReservation.Application.kbrnemil28.pdb": "sha256-8M+xcHmGvsqhGXD/dCv0Pvw9oMWJPN7eJ9ytzuYx3nQ=",
+      "HotelReservation.Domain.w9ups18zyj.pdb": "sha256-fBqsYpWp1+DNi2DZ39tlKS8ZMfzKIe2MMS+axCxpf4A=",
+      "HotelReservation.Client.rpsoz3z31r.pdb": "sha256-X4bJXPaN55JtTR6iAxVkuVrt6MftjmYSBzh+lkyCSks="
     }
   },
   "cacheBootResources": true,

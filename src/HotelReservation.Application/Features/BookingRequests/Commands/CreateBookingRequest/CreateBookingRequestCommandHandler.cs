@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelReservation.Application.Features.BookingRequests.Commands.CreateBookingRequest;
 
@@ -59,7 +60,39 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             throw new BadRequestException("اطلاعات استان برای کارمند اصلی درخواست یافت نشد.");
         }
+         var existingActiveBookings = await _unitOfWork.BookingRequestRepository.GetAsync(
+            b => b.RequestingEmployeeNationalCode == request.RequestingEmployeeNationalCode &&
+                 (b.Status == BookingStatus.SubmittedToHotel || b.Status == BookingStatus.HotelApproved) &&
+                 (b.CheckInDate < request.CheckOutDate && b.CheckOutDate > request.CheckInDate)
+        );
 
+        if (existingActiveBookings.Any())
+        {
+            _logger.LogWarning("Attempted to create a duplicate booking for employee {NationalCode} with overlapping dates.", request.RequestingEmployeeNationalCode);
+            throw new BadRequestException("برای این کارمند در بازه زمانی مشابه، یک رزرو فعال (در انتظار یا تایید شده) از قبل وجود دارد.");
+        }
+        // <<-- شروع منطق جدید بررسی محدودیت استان -->>
+        var employeeProvinceCode = mainEmployee.ProvinceCode;
+        var quota = (await _unitOfWork.ProvinceHotelQuotaRepository
+            .GetAsync(q => q.HotelId == request.HotelId && q.ProvinceCode == employeeProvinceCode))
+            .FirstOrDefault();
+
+        if (quota == null || quota.RoomLimit <= 0)
+        {
+            throw new BadRequestException($"هیچ سهمیه‌ای برای استان '{mainEmployee.ProvinceName}' در این هتل تعریف نشده است.");
+        }
+        var otherApprovedBookingsForProvince = await _unitOfWork.BookingRequestRepository.GetQueryable()
+            .CountAsync(br => 
+                br.HotelId == request.HotelId &&
+                br.Status == BookingStatus.HotelApproved &&
+                br.RequestingEmployee.ProvinceCode == employeeProvinceCode &&
+                (br.CheckInDate < request.CheckOutDate && br.CheckOutDate > request.CheckInDate),
+            cancellationToken);
+            
+        if (otherApprovedBookingsForProvince >= quota.RoomLimit)
+        {
+            throw new BadRequestException($"سهمیه رزرو اتاق برای استان شما ({quota.RoomLimit} اتاق) در این هتل و در تاریخ‌های درخواستی تکمیل شده است.");
+        }
         var hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId, asNoTracking: false);
         if (hotel == null) throw new NotFoundException(nameof(Hotel), request.HotelId);
 
@@ -89,7 +122,7 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
             throw new BadRequestException($"کارمندی با کد ملی '{request.RequestingEmployeeNationalCode}' در سیستم یافت نشد.");
         }
 
-        
+
 
         var bookingRequestEntity = new BookingRequest(
             request.RequestingEmployeeNationalCode,
@@ -122,10 +155,10 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         }
 
         await _unitOfWork.BookingRequestRepository.AddAsync(bookingRequestEntity);
-         _logger.LogInformation("BookingRequest entity (with its guests) marked as Added.");
-         
+        _logger.LogInformation("BookingRequest entity (with its guests) marked as Added.");
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        _logger.LogInformation("SaveChangesAsync called. Changes should be persisted.");        
+        _logger.LogInformation("SaveChangesAsync called. Changes should be persisted.");
 
         // ارسال SMS...
         if (!string.IsNullOrEmpty(mainEmployeeUser.PhoneNumber))

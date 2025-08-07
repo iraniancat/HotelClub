@@ -20,6 +20,7 @@ using HotelReservation.Application.Features.BookingRequests.Commands.CancelBooki
 using HotelReservation.Application.Features.BookingRequests.Commands.ApproveBookingRequest;
 using HotelReservation.Application.Features.BookingRequests.Commands.RejectBookingRequest;
 using HotelReservation.Application.Features.BookingRequests.Queries.GetMyBookings;
+using HotelReservation.Application.Features.BookingRequests.Queries.GetEmployeeLastBookings;
 
 namespace HotelReservation.Api.Controllers;
 
@@ -123,6 +124,15 @@ public class BookingRequestsController : ControllerBase
         return CreatedAtAction(nameof(GetBookingRequestById), new { id = createResponse.Id }, createResponse);
     }
 
+[HttpGet("history/{employeeNationalCode}/{hotelId:guid}")]
+    [Authorize(Roles = "SuperAdmin,ProvinceUser")] // فقط این نقش‌ها به این اطلاعات نیاز دارند
+    public async Task<IActionResult> GetEmployeeBookingHistory(string employeeNationalCode, Guid hotelId)
+    {
+        var query = new GetEmployeeLastBookingsQuery(employeeNationalCode, hotelId);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
+    
     [HttpGet("{id:guid}", Name = "GetBookingRequestById")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookingRequestDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
