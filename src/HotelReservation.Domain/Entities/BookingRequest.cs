@@ -120,8 +120,9 @@ public class BookingRequest
             ClearAssignedRoom();
         }
 
-        // ایجاد و بازگرداندن موجودیت تاریخچه جدید
-        return new BookingStatusHistory(this.Id, newStatus, changedByUserId, comments, oldStatus);
+        var historyEntry = new BookingStatusHistory(this.Id, newStatus, changedByUserId, comments, oldStatus);
+        StatusHistory.Add(historyEntry); // همچنان به کالکشن اضافه می‌کنیم برای حفظ یکپارچگی شیء
+        return historyEntry; // و آن را برمی‌گردانیم تا Handler آن را به صراحت Add کند
     }
     private void AddStatusHistory(BookingStatus? oldStatus, BookingStatus newStatus, Guid changedByUserId, string? comments)
     {

@@ -9,7 +9,8 @@ using Microsoft.Extensions.Configuration; // برای IConfiguration
 using Microsoft.Extensions.DependencyInjection; // برای IServiceCollection
 using HotelReservation.Application.Contracts.Infrastructure; // برای ISmsService
 using HotelReservation.Infrastructure.Services;
-using HotelReservation.Infrastructure.Authentication; // برای SmsService
+using HotelReservation.Infrastructure.Authentication;
+using HotelReservation.Infrastructure.Services.Sms; // برای SmsService
 
 namespace HotelReservation.Infrastructure;
 
@@ -54,7 +55,24 @@ public static class InfrastructureServiceRegistration
         // services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         // اما معمولاً از طریق UnitOfWork یا Repositoryهای اختصاصی به آن‌ها دسترسی پیدا می‌کنیم.
 
-        // سایر سرویس‌های Infrastructure (مانند EmailService, SmsService و ...) در اینجا ثبت می‌شوند.
+         // ۱. کلاس تنظیمات را ثبت می‌کنیم
+        var smsSettings = configuration.GetSection(SmsGatewaySettings.SectionName).Get<SmsGatewaySettings>() 
+                          ?? new SmsGatewaySettings();
+        services.Configure<SmsGatewaySettings>(configuration.GetSection(SmsGatewaySettings.SectionName));
+
+        // ۲. بر اساس تنظیمات، سرویس مناسب را ثبت می‌کنیم
+        if (smsSettings.UseFakeSmsService)
+        {
+            services.AddTransient<ISmsService, FakeSmsService>();
+            // لاگ می‌کنیم تا در محیط تست مشخص باشد
+            Console.WriteLine("INFO: Using FAKE SMS Service.");
+        }
+        else
+        {
+            services.AddHttpClient<ISmsService, AsmxSmsService>();
+            Console.WriteLine("INFO: Using REAL ASMX SMS Service.");
+        }
+
 
         return services;
     }

@@ -31,7 +31,7 @@
                                    ValueChanged="OnStatusFilterChanged" Clearable="true">
                             @foreach (var status in Enum.GetValues<HotelReservation.Domain.Enums.BookingStatus>())
                             {
-                                <MudSelectItem Value="@status.ToString()">@GetPersianStatus(status)</MudSelectItem>
+                                <MudSelectItem Value="@status.ToString()">@Helper.GetPersianStatus(status)</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>
@@ -51,11 +51,11 @@
                     <MudChip Size="Size.Small" Color="Color.Default">@context.TrackingCode</MudChip>
                 </MudTd>
                 <MudTd DataLabel="کارمند">@context.RequestingEmployeeFullName</MudTd>
-                <MudTd DataLabel="تاریخ ورود">@ToPersianDateString(context.CheckInDate)</MudTd>
-                <MudTd DataLabel="تاریخ خروج">@ToPersianDateString(context.CheckOutDate)</MudTd>
+                <MudTd DataLabel="تاریخ ورود">@Helper.ToPersianDateString(context.CheckInDate)</MudTd>
+                <MudTd DataLabel="تاریخ خروج">@Helper.ToPersianDateString(context.CheckOutDate)</MudTd>
                 <MudTd DataLabel="تعداد مهمانان">@context.TotalGuests</MudTd>
                 <MudTd DataLabel="وضعیت">
-                    <MudChip Color="@GetStatusColor(context.Status)" Size="Size.Small">@GetPersianStatus(context.Status)</MudChip>
+                    <MudChip Color="@Helper.GetStatusColor(context.Status)" Size="Size.Small">@Helper.GetPersianStatus(context.Status)</MudChip>
                 </MudTd>
                 <MudTd Style="text-align:center">
                     <MudIconButton Icon="@Icons.Material.Filled.Visibility" Variant="Variant.Filled" Color="Color.Default" Size="Size.Small" 
@@ -127,51 +127,5 @@
     private void ViewDetails(Guid bookingId)
     {
         NavigationManager.NavigateTo($"/booking-requests/details/{bookingId}");
-    }
-    
-    private string ToPersianDateString(DateTime dt)
-    {
-        if (dt == default) return string.Empty;
-        var pc = new PersianCalendar();
-        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
-    }
-    
-    private string GetPersianStatus(string status)
-    {
-        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
-        {
-            return GetPersianStatus(statusEnum);
-        }
-        return status;
-    }
-
-    private string GetPersianStatus(HotelReservation.Domain.Enums.BookingStatus status)
-    {
-        return status switch
-        {
-            HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
-            HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
-            HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
-            HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
-            HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
-            HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
-            _ => status.ToString()
-        };
-    }
-
-    private Color GetStatusColor(string status)
-    {
-        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
-        {
-            return statusEnum switch
-            {
-                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => Color.Success,
-                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => Color.Error,
-                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => Color.Warning,
-                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => Color.Info,
-                _ => Color.Default
-            };
-        }
-        return Color.Default;
-    }
+    } 
 }

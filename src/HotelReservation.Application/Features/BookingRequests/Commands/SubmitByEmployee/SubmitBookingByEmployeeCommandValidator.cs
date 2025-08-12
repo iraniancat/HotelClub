@@ -1,0 +1,45 @@
+using FluentValidation;
+
+namespace HotelReservation.Application.Features.BookingRequests.Commands.SubmitByEmployee;
+
+public class SubmitBookingByEmployeeCommandValidator : AbstractValidator<SubmitBookingByEmployeeCommand>
+{
+    public SubmitBookingByEmployeeCommandValidator()
+    {
+        // RuleFor(p => p.RequestSubmitterUserId) // <<-- این قانون حذف شده است
+        //     .NotEmpty().WithMessage("شناسه کاربر ثبت کننده درخواست الزامی است.")
+        //     .NotEqual(Guid.Empty).WithMessage("شناسه کاربر ثبت کننده درخواست معتبر نیست.");
+
+        RuleFor(p => p.RequestingEmployeeNationalCode)
+            .NotEmpty().WithMessage("کد ملی کارمند درخواست‌دهنده اصلی الزامی است.")
+            .Length(10).WithMessage("کد ملی کارمند درخواست‌دهنده باید ۱۰ رقم باشد.")
+            .Matches("^[0-9]*$").WithMessage("کد ملی کارمند درخواست‌دهنده فقط می‌تواند شامل ارقام باشد.");
+
+        // RuleFor(p => p.BookingPeriodId)
+        //     .NotEmpty().WithMessage("دوره زمانی رزرو الزامی است.")
+        //     .MaximumLength(100).WithMessage("دوره زمانی رزرو نمی‌تواند بیشتر از ۱۰۰ کاراکتر باشد.");
+
+        RuleFor(p => p.CheckInDate)
+            .NotEmpty().WithMessage("تاریخ ورود الزامی است.")
+            .GreaterThanOrEqualTo(DateTime.Today).WithMessage("تاریخ ورود نمی‌تواند مربوط به گذشته باشد.");
+
+        RuleFor(p => p.CheckOutDate)
+            .NotEmpty().WithMessage("تاریخ خروج الزامی است.")
+            .GreaterThan(p => p.CheckInDate).WithMessage("تاریخ خروج باید بعد از تاریخ ورود باشد.");
+
+        RuleFor(p => p.HotelId)
+            .NotEmpty().WithMessage("شناسه هتل الزامی است.")
+            .NotEqual(Guid.Empty).WithMessage("شناسه هتل معتبر نیست.");
+
+        RuleFor(p => p.Notes)
+            .MaximumLength(1000).WithMessage("توضیحات نمی‌تواند بیشتر از ۱۰۰۰ کاراکتر باشد.")
+            .When(p => !string.IsNullOrEmpty(p.Notes));
+
+        RuleFor(p => p.Guests)
+            .NotEmpty().WithMessage("لیست مهمانان نمی‌تواند خالی باشد.")
+            .Must(guests => guests.Count >= 1).WithMessage("حداقل یک مهمان باید در درخواست وجود داشته باشد.");
+
+        RuleForEach(p => p.Guests)
+            .SetValidator(new HotelReservation.Application.DTOs.Booking.Validators.BookingGuestInputDtoValidator());
+    }
+}

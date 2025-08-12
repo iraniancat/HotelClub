@@ -72,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Pages/Employee/CreateBookingPage.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVcQ3JlYXRlQm9va2luZ1BhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -146,6 +150,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/EditUserDialog.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVkaXRVc2VyRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/InitialRejectDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEluaXRpYWxSZWplY3REaWFsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/MainLayout.razor]

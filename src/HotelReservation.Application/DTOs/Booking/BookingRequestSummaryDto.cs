@@ -16,4 +16,5 @@ public class BookingRequestSummaryDto
     public DateTime SubmissionDate { get; set; }
     public string SubmitterUserFullName { get; set; } // نام کامل کاربر ثبت کننده
     public int TotalGuests { get; set; }
+    public string GuestNames { get; set; }
 }

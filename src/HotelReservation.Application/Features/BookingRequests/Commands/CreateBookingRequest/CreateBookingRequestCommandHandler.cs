@@ -41,6 +41,17 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
 
     public async Task<CreateBookingRequestResponseDto> Handle(CreateBookingRequestCommand request, CancellationToken cancellationToken)
     {
+        // ... (واکشی و اعتبارسنجی‌های اولیه) ...
+        var bookingPeriod = await _unitOfWork.BookingPeriodRepository.GetByIdAsync(request.BookingPeriodId);
+        if (bookingPeriod == null || !bookingPeriod.IsActive) throw new BadRequestException("دوره زمانی انتخاب شده معتبر نیست.");
+
+        // <<-- اعتبارسنجی جدید: تاریخ‌ها باید در بازه دوره زمانی باشند -->>
+        if (request.CheckInDate < bookingPeriod.StartDate || request.CheckOutDate > bookingPeriod.EndDate)
+        {
+            throw new BadRequestException($"تاریخ‌های انتخابی باید در بازه دوره زمانی '{bookingPeriod.Name}' باشند.");
+        }
+
+       
         // ... بررسی currentUserId ...
         var submitterUserId = _currentUserService.UserId;
         if (!submitterUserId.HasValue)
@@ -60,11 +71,11 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             throw new BadRequestException("اطلاعات استان برای کارمند اصلی درخواست یافت نشد.");
         }
-         var existingActiveBookings = await _unitOfWork.BookingRequestRepository.GetAsync(
-            b => b.RequestingEmployeeNationalCode == request.RequestingEmployeeNationalCode &&
-                 (b.Status == BookingStatus.SubmittedToHotel || b.Status == BookingStatus.HotelApproved) &&
-                 (b.CheckInDate < request.CheckOutDate && b.CheckOutDate > request.CheckInDate)
-        );
+        var existingActiveBookings = await _unitOfWork.BookingRequestRepository.GetAsync(
+           b => b.RequestingEmployeeNationalCode == request.RequestingEmployeeNationalCode &&
+                (b.Status == BookingStatus.SubmittedToHotel || b.Status == BookingStatus.HotelApproved) &&
+                (b.CheckInDate < request.CheckOutDate && b.CheckOutDate > request.CheckInDate)
+       );
 
         if (existingActiveBookings.Any())
         {
@@ -82,25 +93,20 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
             throw new BadRequestException($"هیچ سهمیه‌ای برای استان '{mainEmployee.ProvinceName}' در این هتل تعریف نشده است.");
         }
         var otherApprovedBookingsForProvince = await _unitOfWork.BookingRequestRepository.GetQueryable()
-            .CountAsync(br => 
+            .CountAsync(br =>
                 br.HotelId == request.HotelId &&
                 br.Status == BookingStatus.HotelApproved &&
                 br.RequestingEmployee.ProvinceCode == employeeProvinceCode &&
                 (br.CheckInDate < request.CheckOutDate && br.CheckOutDate > request.CheckInDate),
             cancellationToken);
-            
+
         if (otherApprovedBookingsForProvince >= quota.RoomLimit)
         {
             throw new BadRequestException($"سهمیه رزرو اتاق برای استان شما ({quota.RoomLimit} اتاق) در این هتل و در تاریخ‌های درخواستی تکمیل شده است.");
         }
         var hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId, asNoTracking: false);
         if (hotel == null) throw new NotFoundException(nameof(Hotel), request.HotelId);
-
-        var bookingPeriod = await _unitOfWork.BookingPeriodRepository.GetByIdAsync(request.BookingPeriodId);
-        if (bookingPeriod == null || !bookingPeriod.IsActive)
-        {
-            throw new BadRequestException($"دوره زمانی انتخاب شده معتبر یا فعال نیست.");
-        }
+        
 
         // <<-- اعتبارسنجی جدید برای تاریخ‌ها -->>
         if (request.CheckInDate < bookingPeriod.StartDate || request.CheckOutDate > bookingPeriod.EndDate)

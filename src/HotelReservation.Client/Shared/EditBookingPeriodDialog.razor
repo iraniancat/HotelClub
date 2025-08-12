@@ -81,8 +81,8 @@
                 EndDate = PeriodToEdit.EndDate,
                 IsActive = PeriodToEdit.IsActive
             };
-            _startDateString = ToPersianDateString(PeriodToEdit.StartDate);
-            _endDateString = ToPersianDateString(PeriodToEdit.EndDate);
+            _startDateString = Helper.ToPersianDateString(PeriodToEdit.StartDate);
+            _endDateString = Helper.ToPersianDateString(PeriodToEdit.EndDate);
         }
     }
 
@@ -93,8 +93,8 @@
 
         try
         {
-            _updateModel.StartDate = ToGregorianDateTime(_startDateString);
-            _updateModel.EndDate = ToGregorianDateTime(_endDateString);
+            _updateModel.StartDate = Helper.ToGregorianDateTime(_startDateString);
+            _updateModel.EndDate = Helper.ToGregorianDateTime(_endDateString);
         }
         catch (Exception ex)
         {
@@ -126,44 +126,5 @@
 
     void Cancel() => MudDialog.Cancel();
     
-    private static string ToPersianDateString(DateTime dt)
-    {
-        var pc = new PersianCalendar();
-        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
-    }
 
-    private static string ConvertPersianToEnglishNumerals(string persianStr)
-    {
-        if (string.IsNullOrWhiteSpace(persianStr))
-            return persianStr;
-
-        return persianStr.Replace('۰', '0').Replace('۱', '1').Replace('۲', '2').Replace('۳', '3').Replace('۴', '4')
-                         .Replace('۵', '5').Replace('۶', '6').Replace('۷', '7').Replace('۸', '8').Replace('۹', '9')
-                         .Replace('٠', '0').Replace('١', '1').Replace('٢', '2').Replace('٣', '3').Replace('٤', '4')
-                         .Replace('٥', '5').Replace('٦', '6').Replace('٧', '7').Replace('٨', '8').Replace('٩', '9');
-    }
-
-    private static DateTime ToGregorianDateTime(string persianDate)
-    {
-        if (string.IsNullOrWhiteSpace(persianDate))
-        {
-            throw new ArgumentNullException(nameof(persianDate), "رشته تاریخ شمسی نمی‌تواند خالی باشد.");
-        }
-        
-        string englishNumeralsDate = ConvertPersianToEnglishNumerals(persianDate);
-
-        var persianCulture = new CultureInfo("fa-IR")
-        {
-            DateTimeFormat = { Calendar = new PersianCalendar() }
-        };
-        
-        try
-        {
-            return DateTime.Parse(englishNumeralsDate, persianCulture);
-        }
-        catch (FormatException ex)
-        {
-             throw new FormatException("فرمت تاریخ شمسی وارد شده نامعتبر است.", ex);
-        }
-    }
 }

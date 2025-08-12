@@ -81,49 +81,30 @@ public class ApiClientService : IApiClientService
 
     public async Task<TResponse?> PostAsync<TRequest, TResponse>(string requestUri, TRequest data)
     {
-        try
+       try
         {
             var response = await _httpClient.PostAsJsonAsync(requestUri, data, _jsonSerializerOptions);
             if (response.IsSuccessStatusCode)
             {
-                if (response.Content.Headers.ContentLength > 0) // بررسی اینکه آیا محتوایی برای خواندن وجود دارد
-                {
+                if (response.Content.Headers.ContentLength > 0)
                     return await response.Content.ReadFromJsonAsync<TResponse>(_jsonSerializerOptions);
-                }
-                return default; // برای پاسخ‌های 201 Created بدون بدنه یا پاسخ‌هایی که TResponse یک نوع ساده است
-            }
-            else
-            {
-                // مدیریت خطاهای HTTP (4xx, 5xx)
-                var errorContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"API POST Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                // می‌توان یک Exception سفارشی پرتاب کرد یا یک نتیجه خطا برگرداند
-                // throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
                 return default;
             }
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"API POST Error: {ex.Message} on {requestUri}");
+            
+            await HandleErrorResponse(response);
             return default;
+        }
+        catch (Exception)
+        {
+            throw;
         }
     }
     public async Task PostAsync<TRequest>(string requestUri, TRequest data)
     {
-        try
+         var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+        if (!response.IsSuccessStatusCode)
         {
-            var response = await _httpClient.PostAsJsonAsync(requestUri, data, _jsonSerializerOptions);
-            if (!response.IsSuccessStatusCode)
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"API POST (no response) Error: {response.StatusCode} - {errorContent} on {requestUri}");
-                throw new ApplicationException($"Error from API: {response.StatusCode} - {errorContent}");
-            }
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine($"API POST (no response) Error: {ex.Message} on {requestUri}");
-            throw;
+            await HandleErrorResponse(response);
         }
     }
 
@@ -230,25 +211,67 @@ public class ApiClientService : IApiClientService
 
     private async Task HandleErrorResponse(HttpResponseMessage response)
     {
-        // تلاش برای خواندن بدنه خطا به عنوان یک شیء با جزئیات
         var errorContent = await response.Content.ReadAsStringAsync();
         try
         {
+             // ابتدا خطاهای اعتبارسنجی را بررسی می‌کنیم
+            // تلاش برای خواندن بدنه خطا به عنوان یک شیء با جزئیات
             var errorDto = JsonSerializer.Deserialize<ErrorResponseDto>(errorContent, _jsonSerializerOptions);
-            // اگر پیام detail وجود دارد، آن را نمایش بده، در غیر این صورت یک پیام عمومی
-            throw new ApplicationException(errorDto?.Detail ?? errorDto?.Title ?? "خطایی از سمت سرور رخ داد.");
+              // ابتدا خطاهای اعتبارسنجی پیش‌فرض ASP.NET Core را بررسی می‌کنیم
+            if (errorDto?.Errors != null && errorDto.Errors.Count > 0)
+            {
+                var combinedMessage = string.Join(" ", errorDto.Errors.Values.SelectMany(v => v));
+                var finalMessage = $"{errorDto.Title}: {combinedMessage}";
+                throw new ApplicationException(finalMessage);
+            }
+            
+            // سپس خطاهای اعتبارسنجی سفارشی FluentValidation را بررسی می‌کنیم
+            if (errorDto?.CustomErrors != null && errorDto.CustomErrors.Any())
+            {
+                var combinedMessage = string.Join(" ", errorDto.CustomErrors.Select(e => e.ErrorMessage));
+                var finalMessage = $"{errorDto.Title}: {combinedMessage}";
+                throw new ApplicationException(finalMessage);
+            }
+
+
+
+            // اگر پیام detail وجود دارد، آن را به عنوان خطا پرتاب کن
+            if (!string.IsNullOrWhiteSpace(errorDto?.Detail))
+            {
+                throw new ApplicationException(errorDto.Detail);
+            }
+            // در غیر این صورت، از title استفاده کن
+            if (!string.IsNullOrWhiteSpace(errorDto?.Title))
+            {
+                throw new ApplicationException(errorDto.Title);
+            }
         }
-        catch (JsonException)
+       catch (JsonException)
         {
             // اگر پاسخ خطا JSON معتبر نبود، خود پاسخ را نمایش بده
-            throw new ApplicationException($"خطا از API: {response.StatusCode}. {errorContent}");
+            throw new ApplicationException($"خطا از API: {response.StatusCode}. پاسخ سرور قابل خواندن نبود.");
         }
+        throw new ApplicationException($"خطایی از سمت سرور با کد {response.StatusCode} رخ داد.");
+      
     }
 }
+// کلاس کمکی برای خواندن پاسخ‌های خطای استاندارد از API
 public class ErrorResponseDto
 {
     public string? Title { get; set; }
     public int Status { get; set; }
     public string? Detail { get; set; }
-    // می‌توانید پراپرتی errors را هم اضافه کنید اگر لازم است
+
+    // این ساختار برای هماهنگی با پاسخ خطای پیش‌فرض ASP.NET Core است
+    public Dictionary<string, string[]>? Errors { get; set; }
+
+    // این ساختار برای هماهنگی با پاسخ خطای سفارشی FluentValidation ماست
+    public List<CustomValidationError>? CustomErrors { get; set; }
+}
+
+ // کلاس کمکی برای خواندن جزئیات یک خطای اعتبارسنجی (برای پاسخ‌های سفارشی FluentValidation)
+public class CustomValidationError
+{
+    public string PropertyName { get; set; }
+    public string ErrorMessage { get; set; }
 }

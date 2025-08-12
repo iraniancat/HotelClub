@@ -4,6 +4,8 @@ namespace HotelReservation.Domain.Enums;
 public enum BookingStatus
 {
     Draft,                  // پیش‌نویس (هنوز نهایی نشده یا توسط کارمند ثبت شده و منتظر تایید اولیه)
+    AwaitingProvinceApproval, // <<-- اضافه شد: در انتظار تأیید استان/مدیر ارشد
+    ProvinceRejected,         // <<-- اضافه شد: رد شده توسط استان/مدیر ارشد
     SubmittedToHotel,       // ارسال شده به هتل (پس از ثبت توسط مدیر/کاربر استان یا تایید اولیه درخواست کارمند)
     HotelApproved,          // تایید شده توسط هتل
     HotelRejected,          // رد شده توسط هتل

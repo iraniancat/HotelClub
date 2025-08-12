@@ -15,7 +15,8 @@ using HotelReservation.Application.Features.UserManagement.Commands.UpdateUser;
 using HotelReservation.Application.Features.UserManagement.Commands.SetUserPassword;
 using Microsoft.AspNetCore.Authorization;
 using HotelReservation.Application.DTOs.Common;
-using HotelReservation.Application.Features.UserManagement.Queries.SearchUsers; // برای StatusCodes
+using HotelReservation.Application.Features.UserManagement.Queries.SearchUsers;
+using HotelReservation.Application.Features.UserManagement.Queries.GetUserWithDependents; // برای StatusCodes
 
 namespace HotelReservation.Api.Controllers;
 
@@ -187,8 +188,8 @@ public class UserManagementController : ControllerBase
 
         return NoContent();
     }
-     [HttpGet("search")]
-     [Authorize(Roles = "SuperAdmin,ProvinceUser")]
+    [HttpGet("search")]
+    [Authorize(Roles = "SuperAdmin,ProvinceUser")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<UserWithDependentsDto>))]
     public async Task<IActionResult> SearchUsers([FromQuery] string term)
     {
@@ -196,9 +197,22 @@ public class UserManagementController : ControllerBase
         {
             return Ok(new List<UserWithDependentsDto>());
         }
-        
+
         var query = new SearchUsersQuery(term);
         var result = await _mediator.Send(query);
         return Ok(result);
+    }
+    // GET: api/management/users/details-with-dependents/{id}
+    [HttpGet("details-with-dependents/{id:guid}")]
+    [Authorize] // تمام کاربران احراز هویت شده می‌توانند اطلاعات خود را ببینند
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserWithDependentsDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetUserDetailsWithDependents(Guid id)
+    {
+        // TODO: در یک سناریوی واقعی، باید بررسی شود که آیا کاربر فقط به اطلاعات خودش دسترسی دارد یا خیر
+        // اما برای صفحه "رزرو شخصی" که کاربر اطلاعات خودش را می‌خواند، این کافی است.
+        var query = new GetUserWithDependentsQuery(id);
+        var result = await _mediator.Send(query);
+        return result != null ? Ok(result) : NotFound();
     }
 }

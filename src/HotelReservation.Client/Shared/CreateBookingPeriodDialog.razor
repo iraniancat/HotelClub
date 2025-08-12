@@ -59,8 +59,8 @@
     private bool _isFormValid;
     private bool _isProcessing = false;
     
-    private string _startDateString = ToPersianDateString(DateTime.Now);
-    private string _endDateString = ToPersianDateString(DateTime.Now.AddMonths(1));
+    private string _startDateString = Helper.ToPersianDateString(DateTime.Now);
+    private string _endDateString = Helper.ToPersianDateString(DateTime.Now.AddMonths(1));
 
     private async Task SubmitAsync()
     {
@@ -69,8 +69,8 @@
 
         try
         {
-            _createModel.StartDate = ToGregorianDateTime(_startDateString);
-            _createModel.EndDate = ToGregorianDateTime(_endDateString);
+            _createModel.StartDate = Helper.ToGregorianDateTime(_startDateString);
+            _createModel.EndDate = Helper.ToGregorianDateTime(_endDateString);
         }
         catch (Exception ex)
         {
@@ -102,48 +102,10 @@
 
     void Cancel() => MudDialog.Cancel();
     
-    private static string ToPersianDateString(DateTime dt)
-    {
-        var pc = new PersianCalendar();
-        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
-    }
+   
 
     // متد کمکی جدید برای تبدیل اعداد فارسی/عربی به انگلیسی
-    private static string ConvertPersianToEnglishNumerals(string persianStr)
-    {
-        if (string.IsNullOrWhiteSpace(persianStr))
-            return persianStr;
+   
 
-        return persianStr.Replace('۰', '0').Replace('۱', '1').Replace('۲', '2').Replace('۳', '3').Replace('۴', '4')
-                         .Replace('۵', '5').Replace('۶', '6').Replace('۷', '7').Replace('۸', '8').Replace('۹', '9')
-                         // همچنین اعداد عربی
-                         .Replace('٠', '0').Replace('١', '1').Replace('٢', '2').Replace('٣', '3').Replace('٤', '4')
-                         .Replace('٥', '5').Replace('٦', '6').Replace('٧', '7').Replace('٨', '8').Replace('٩', '9');
-    }
-
-    private static DateTime ToGregorianDateTime(string persianDate)
-    {
-        if (string.IsNullOrWhiteSpace(persianDate))
-        {
-            throw new ArgumentNullException(nameof(persianDate), "رشته تاریخ شمسی نمی‌تواند خالی باشد.");
-        }
-        
-        // ابتدا اعداد فارسی را به انگلیسی تبدیل می‌کنیم
-        string englishNumeralsDate = ConvertPersianToEnglishNumerals(persianDate);
-
-        var persianCulture = new CultureInfo("fa-IR")
-        {
-            DateTimeFormat = { Calendar = new PersianCalendar() }
-        };
-        
-        try
-        {
-            // استفاده از DateTime.Parse با CultureInfo برای تبدیل رشته شمسی به میلادی
-            return DateTime.Parse(englishNumeralsDate, persianCulture);
-        }
-        catch (FormatException ex)
-        {
-             throw new FormatException("فرمت تاریخ شمسی وارد شده نامعتبر است.", ex);
-        }
-    }
+   
 }

@@ -106,9 +106,9 @@
                                 {
                                     <tr>
                                         <td>@booking.TrackingCode</td>
-                                        <td>@ToPersianDateString(booking.CheckInDate)</td>
-                                        <td>@ToPersianDateString(booking.CheckOutDate)</td>
-                                        <td><MudChip Color="@GetStatusColor(booking.Status)" Size="Size.Small">@GetPersianStatus(booking.Status)</MudChip></td>
+                                        <td>@Helper.ToPersianDateString(booking.CheckInDate)</td>
+                                        <td>@Helper.ToPersianDateString(booking.CheckOutDate)</td>
+                                        <td><MudChip Color="@Helper.GetStatusColor(booking.Status)" Size="Size.Small">@Helper.GetPersianStatus(booking.Status)</MudChip></td>
                                     </tr>
                                 }
                             </tbody>
@@ -237,8 +237,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _bookingModel.CheckInDate = ToPersianDateString(DateTime.Now);
-        _bookingModel.CheckOutDate = ToPersianDateString(DateTime.Now.AddDays(1));
+        _bookingModel.CheckInDate = Helper.ToPersianDateString(DateTime.Now);
+        _bookingModel.CheckOutDate = Helper.ToPersianDateString(DateTime.Now.AddDays(1));
         
         try
         {
@@ -391,8 +391,8 @@
         DateTime checkInDateTime, checkOutDateTime;
         try
         {
-            checkInDateTime = ToGregorianDateTime(_bookingModel.CheckInDate);
-            checkOutDateTime = ToGregorianDateTime(_bookingModel.CheckOutDate);
+            checkInDateTime = Helper.ToGregorianDateTime(_bookingModel.CheckInDate);
+            checkOutDateTime = Helper.ToGregorianDateTime(_bookingModel.CheckOutDate);
         }
         catch (Exception ex)
         {
@@ -464,83 +464,5 @@
     }
 
 
-    private string ToPersianDateString(DateTime dt)
-    {
-        var pc = new PersianCalendar();
-        return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
-    }
-
-    private DateTime ToGregorianDateTime(string persianDate)
-    {
-        if (string.IsNullOrWhiteSpace(persianDate))
-        {
-            throw new ArgumentNullException(nameof(persianDate), "رشته تاریخ شمسی نمی‌تواند خالی باشد.");
-        }
-        
-        string englishNumeralsDate = ConvertPersianToEnglishNumerals(persianDate);
-
-        var persianCulture = new CultureInfo("fa-IR")
-        {
-            DateTimeFormat = { Calendar = new PersianCalendar() }
-        };
-        
-        try
-        {
-            return DateTime.Parse(englishNumeralsDate, persianCulture);
-        }
-        catch (FormatException ex)
-        {
-             throw new FormatException("فرمت تاریخ شمسی وارد شده نامعتبر است.", ex);
-        }
-    }
-
-    private static string ConvertPersianToEnglishNumerals(string persianStr)
-    {
-        if (string.IsNullOrWhiteSpace(persianStr))
-            return persianStr;
-
-        return persianStr.Replace('۰', '0').Replace('۱', '1').Replace('۲', '2').Replace('۳', '3').Replace('۴', '4')
-                         .Replace('۵', '5').Replace('۶', '6').Replace('۷', '7').Replace('۸', '8').Replace('۹', '9')
-                         .Replace('٠', '0').Replace('١', '1').Replace('٢', '2').Replace('٣', '3').Replace('٤', '4')
-                         .Replace('٥', '5').Replace('٦', '6').Replace('٧', '7').Replace('٨', '8').Replace('٩', '9');
-    }
-     private string GetPersianStatus(string status)
-    {
-        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
-        {
-            return GetPersianStatus(statusEnum);
-        }
-        return status;
-    }
-
-    private string GetPersianStatus(HotelReservation.Domain.Enums.BookingStatus status)
-    {
-        return status switch
-        {
-            HotelReservation.Domain.Enums.BookingStatus.Draft => "پیش‌نویس",
-            HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => "ارسال به هتل",
-            HotelReservation.Domain.Enums.BookingStatus.HotelApproved => "تأیید شده",
-            HotelReservation.Domain.Enums.BookingStatus.HotelRejected => "رد شده",
-            HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => "لغو شده",
-            HotelReservation.Domain.Enums.BookingStatus.Completed => "تکمیل شده",
-            HotelReservation.Domain.Enums.BookingStatus.AwaitingEmployeeApproval => "در انتظار تایید کارمند",
-            HotelReservation.Domain.Enums.BookingStatus.PaymentPending => "در انتظار پرداخت",
-            _ => status.ToString()
-        };
-    }
-      private Color GetStatusColor(string status)
-    {
-        if (Enum.TryParse<HotelReservation.Domain.Enums.BookingStatus>(status, true, out var statusEnum))
-        {
-            return statusEnum switch
-            {
-                HotelReservation.Domain.Enums.BookingStatus.HotelApproved => Color.Success,
-                HotelReservation.Domain.Enums.BookingStatus.HotelRejected => Color.Error,
-                HotelReservation.Domain.Enums.BookingStatus.CancelledByUser => Color.Warning,
-                HotelReservation.Domain.Enums.BookingStatus.SubmittedToHotel => Color.Info,
-                _ => Color.Default
-            };
-        }
-        return Color.Default;
-    }
+   
 }

@@ -32,8 +32,8 @@
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="نام دوره">@context.Name</MudTd>
-                <MudTd DataLabel="تاریخ شروع">@ToPersianDateString(context.StartDate)</MudTd>
-                <MudTd DataLabel="تاریخ پایان">@ToPersianDateString(context.EndDate)</MudTd>
+                <MudTd DataLabel="تاریخ شروع">@Helper.ToPersianDateString(context.StartDate)</MudTd>
+                <MudTd DataLabel="تاریخ پایان">@Helper.ToPersianDateString(context.EndDate)</MudTd>
                 <MudTd DataLabel="وضعیت">
                     @if (context.IsActive)
                     {
@@ -169,10 +169,10 @@
         }
     }
     
-    private string ToPersianDateString(DateTime dt)
+    @* private string ToPersianDateString(DateTime dt)
     {
         if (dt == default) return string.Empty;
         var pc = new System.Globalization.PersianCalendar();
         return $"{pc.GetYear(dt)}/{pc.GetMonth(dt):D2}/{pc.GetDayOfMonth(dt):D2}";
-    }
+    } *@
 }

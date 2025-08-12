@@ -92,6 +92,7 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
                 FullName = bookingRequest.RequestSubmitterUser.FullName, 
                 SystemUserId = bookingRequest.RequestSubmitterUser.SystemUserId 
             },
+            
             Guests = bookingRequest.Guests.Select(g => new BookingGuestDetailsDto
             {
                 Id = g.Id,
@@ -108,7 +109,14 @@ public class GetBookingRequestDetailsQueryHandler : IRequestHandler<GetBookingRe
                 UploadedDate = f.UploadedDate
             }).ToList()
         };
-
+ if (bookingRequest.Status == Domain.Enums.BookingStatus.ProvinceRejected || bookingRequest.Status == Domain.Enums.BookingStatus.HotelRejected)
+        {
+            var lastHistoryRecord = bookingRequest.StatusHistory
+                .OrderByDescending(h => h.ChangeDate)
+                .FirstOrDefault();
+            
+            detailsDto.RejectionReason = lastHistoryRecord?.Comments;
+        }
         return detailsDto;
     }
 }

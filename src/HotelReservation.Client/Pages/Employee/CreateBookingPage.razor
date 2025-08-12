@@ -1,0 +1,285 @@
+@page "/employee/create-booking"
+@attribute [Authorize] // تمام کاربران احراز هویت شده می‌توانند برای خودشان رزرو ثبت کنند
+
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject ILogger<CreateBookingPage> Logger
+@using System.Text.Json
+@using System.Globalization
+@using Blazor.PersianDatePicker
+@using HotelReservation.Application.Features.BookingRequests.Commands.SubmitByEmployee
+@using Microsoft.AspNetCore.Components.Forms
+
+<PageTitle>ثبت درخواست رزرو شخصی</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <EditForm Model="_uiBookingModel" OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+        <DataAnnotationsValidator />
+        <MudPaper Class="pa-4" Elevation="3">
+            <MudText Typo="Typo.h4" GutterBottom="true">فرم ثبت درخواست رزرو شخصی</MudText>
+            <MudText Class="mb-4">این درخواست پس از ثبت، برای تأیید به مدیر مربوطه ارسال خواهد شد.</MudText>
+            
+            <MudGrid Spacing="3">
+                <MudItem xs="12">
+                    @if(_isLoadingEmployee)
+                    {
+                        <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+                    }
+                    else if (_currentUserDetails != null)
+                    {
+                        <MudAlert Severity="Severity.Info" Variant="Variant.Outlined">
+                            درخواست برای: <strong>@_currentUserDetails.FullName</strong> | کد ملی: <strong>@_currentUserDetails.NationalCode</strong>
+                        </MudAlert>
+                    }
+                    else
+                    {
+                        <MudAlert Severity="Severity.Error">اطلاعات کاربری شما یافت نشد. لطفاً با پشتیبانی تماس بگیرید.</MudAlert>
+                    }
+                </MudItem>
+
+                <MudItem xs="12" sm="6" md="4">
+                    <MudSelect T="Guid" Label="انتخاب هتل" @bind-value="_uiBookingModel.HotelId"
+                               For="@(() => _uiBookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است.">
+                        @if (_hotels.Any())
+                        {
+                            @foreach (var hotel in _hotels)
+                            {
+                                <MudSelectItem Value="hotel.Id">@hotel.Name</MudSelectItem>
+                            }
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="12" sm="6" md="4">
+                     <MudSelect T="Guid" Label="دوره زمانی رزرو" @bind-value="_uiBookingModel.BookingPeriodId"
+                               For="@(() => _uiBookingModel.BookingPeriodId)" Required="true" RequiredError="انتخاب دوره زمانی الزامی است.">
+                        @foreach (var period in _activeBookingPeriods)
+                        {
+                            <MudSelectItem Value="period.Id">@period.Name</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                
+                <MudItem xs="12" sm="6" md="4">
+                    <MudTextField T="string" Label="توضیحات (اختیاری)" @bind-value="_uiBookingModel.Notes" Lines="1" />
+                </MudItem>
+                
+                <MudItem xs="12" sm="6">
+                    <div class="d-flex align-center">
+                        <span class="me-4">تاریخ ورود:</span>
+                        <InputPersianDatePicker @bind-Value="_uiBookingModel.CheckInDate" />
+                    </div>
+                </MudItem>
+                <MudItem xs="12" sm="6">
+                     <div class="d-flex align-center">
+                        <span class="me-4">تاریخ خروج:</span>
+                        <InputPersianDatePicker @bind-Value="_uiBookingModel.CheckOutDate" />
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudDivider Class="my-4" />
+                    <MudText Typo="Typo.h6">اطلاعات مهمانان</MudText>
+                    
+                    @if (_currentUserDetails != null && _currentUserDetails.Dependents.Any())
+                    {
+                        <MudText Class="mt-2 mb-2"><strong>افراد تحت تکفل (انتخابی):</strong></MudText>
+                        <MudPaper Class="pa-3" Outlined="true">
+                            <MudGrid>
+                                @foreach (var dependent in _currentUserDetails.Dependents)
+                                {
+                                    <MudItem xs="12" sm="6" md="4">
+                                        <MudCheckBox T="bool" Label="@($"{dependent.FullName} ({dependent.Relationship})")"
+                                                     Checked="@(_uiBookingModel.Guests.Any(g => g.NationalCode == dependent.NationalCode))"
+                                                     CheckedChanged="@((bool isChecked) => OnDependentSelectionChanged(isChecked, dependent))" />
+                                    </MudItem>
+                                }
+                            </MudGrid>
+                        </MudPaper>
+                    }
+                    
+                    <MudText Class="mt-4 mb-2"><strong>سایر همراهان (اختیاری):</strong></MudText>
+                    @foreach (var guest in _uiBookingModel.Guests.Where(g => g.RelationshipToEmployee != "خود کارمند" && (_currentUserDetails == null || !_currentUserDetails.Dependents.Any(d => d.NationalCode == g.NationalCode))))
+                    {
+                        <MudPaper Class="pa-3 mt-4" Outlined="true">
+                            <MudGrid Spacing="2" AlignItems="AlignItems.Center">
+                                <MudItem xs="12" sm="4">
+                                    <MudTextField T="string" Label="نام کامل همراه" @bind-value="guest.FullName" Required="true" Dense="true" Margin="Margin.Dense" />
+                                </MudItem>
+                                <MudItem xs="12" sm="3">
+                                    <MudTextField T="string" Label="کد ملی همراه" @bind-value="guest.NationalCode" Required="true" Dense="true" Margin="Margin.Dense" />
+                                </MudItem>
+                                <MudItem xs="12" sm="4">
+                                    <MudTextField T="string" Label="نسبت با کارمند" @bind-value="guest.RelationshipToEmployee" Required="true" Dense="true" Margin="Margin.Dense" HelperText="مثال: پدر، مادر، دوست" />
+                                </MudItem>
+                                <MudItem xs="12" sm="1">
+                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => RemoveGuest(guest))" />
+                                </MudItem>
+                            </MudGrid>
+                        </MudPaper>
+                    }
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="AddGuest" StartIcon="@Icons.Material.Filled.Add" Class="mt-4">افزودن همراه</MudButton>
+                </MudItem>
+                
+            </MudGrid>
+
+            <MudToolBar Class="mt-8">
+                <MudSpacer />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Disabled="_isProcessing || _isLoadingEmployee" Class="ms-2">
+                    @if (_isProcessing)
+                    {
+                        <MudProgressCircular Indeterminate="true" Size="Size.Small" />
+                    }
+                    else
+                    {
+                        <MudText>ثبت و ارسال برای تأیید</MudText>
+                    }
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" OnClick="@(() => NavigationManager.NavigateTo("/"))">انصراف</MudButton>
+            </MudToolBar>
+        </MudPaper>
+    </EditForm>
+</MudContainer>
+
+@code {
+    private class EmployeeBookingUIModel
+    {
+        [Required] public Guid BookingPeriodId { get; set; }
+        [Required] public Guid HotelId { get; set; }
+        public string? Notes { get; set; }
+        [Required] public string? CheckInDate { get; set; }
+        [Required] public string? CheckOutDate { get; set; }
+        [MinLength(1)] public List<BookingGuestInputDto> Guests { get; set; } = new();
+    }
+
+    private EmployeeBookingUIModel _uiBookingModel = new();
+    private UserWithDependentsDto? _currentUserDetails;
+    private bool _isProcessing = false;
+    private bool _isLoadingEmployee = true;
+    private List<HotelDto> _hotels = new();
+    private List<BookingPeriodDto> _activeBookingPeriods = new();
+
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateTask;
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated ?? false)
+        {
+            var userIdString = user.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (Guid.TryParse(userIdString, out var userId))
+            {
+                _currentUserDetails = await ApiClient.GetAsync<UserWithDependentsDto>($"api/management/users/details-with-dependents/{userId}");
+                if (_currentUserDetails != null)
+                {
+                    _uiBookingModel.Guests.Add(new BookingGuestInputDto 
+                    { 
+                        FullName = _currentUserDetails.FullName, 
+                        NationalCode = _currentUserDetails.NationalCode,
+                        RelationshipToEmployee = "خود کارمند"
+                    });
+                }
+            }
+        }
+        _isLoadingEmployee = false;
+        
+        _uiBookingModel.CheckInDate = Helper.ToPersianDateString(DateTime.Now);
+        _uiBookingModel.CheckOutDate = Helper.ToPersianDateString(DateTime.Now.AddDays(1));
+
+        try
+        {
+            var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+            var periodsTask = ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods/active");
+            await Task.WhenAll(hotelsTask, periodsTask);
+            var hotelsResult = await hotelsTask;
+            if (hotelsResult != null) _hotels = hotelsResult.ToList();
+            var periodsResult = await periodsTask;
+            if (periodsResult != null) _activeBookingPeriods = periodsResult.ToList();
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا در دریافت اطلاعات اولیه: {ex.Message}", Severity.Error);
+        }
+    }
+
+    private void OnDependentSelectionChanged(bool isChecked, DependentSlimDto dependent)
+    {
+        var existingGuest = _uiBookingModel.Guests.FirstOrDefault(g => g.NationalCode == dependent.NationalCode);
+        if (isChecked && existingGuest == null)
+        {
+            _uiBookingModel.Guests.Add(new BookingGuestInputDto 
+            {
+                FullName = dependent.FullName,
+                NationalCode = dependent.NationalCode,
+                RelationshipToEmployee = dependent.Relationship
+            });
+        }
+        else if (!isChecked && existingGuest != null)
+        {
+            _uiBookingModel.Guests.Remove(existingGuest);
+        }
+        StateHasChanged();
+    }
+
+    private void AddGuest()
+    {
+        _uiBookingModel.Guests.Add(new BookingGuestInputDto { RelationshipToEmployee = "همراه" });
+        StateHasChanged();
+    }
+
+    private void RemoveGuest(BookingGuestInputDto guest)
+    {
+        if (guest.RelationshipToEmployee == "خود کارمند")
+        {
+            Snackbar.Add("نمی‌توانید خود کارمند را از لیست مهمانان حذف کنید.", Severity.Warning);
+            return;
+        }
+        _uiBookingModel.Guests.Remove(guest);
+        StateHasChanged();
+    }
+
+    private void HandleInvalidSubmit()
+    {
+        Snackbar.Add("لطفاً تمام فیلدهای الزامی را پر کرده و خطاها را برطرف نمایید.", Severity.Warning);
+    }
+
+    private async Task HandleValidSubmit(EditContext context)
+    {
+        _isProcessing = true;
+        StateHasChanged();
+        try
+        {
+            var command = new SubmitBookingByEmployeeCommand
+            {
+                RequestingEmployeeNationalCode=_currentUserDetails.NationalCode,
+                BookingPeriodId = _uiBookingModel.BookingPeriodId,
+                HotelId = _uiBookingModel.HotelId,
+                Notes = _uiBookingModel.Notes,
+                Guests = _uiBookingModel.Guests,
+                CheckInDate = Helper.ToGregorianDateTime(_uiBookingModel.CheckInDate!),
+                CheckOutDate = Helper.ToGregorianDateTime(_uiBookingModel.CheckOutDate!)
+            };
+            var response = await ApiClient.PostAsync<SubmitBookingByEmployeeCommand, CreateBookingRequestResponseDto>("api/booking-requests/submit-by-employee", command);
+            if (response != null)
+            {
+                Snackbar.Add($"درخواست شما با کد رهگیری {response.TrackingCode} ثبت و برای تأیید ارسال شد.", Severity.Success);
+                NavigationManager.NavigateTo("/"); 
+            }
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطای پیش‌بینی نشده: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isProcessing = false;
+            StateHasChanged();
+        }
+    }
+    
+    
+}

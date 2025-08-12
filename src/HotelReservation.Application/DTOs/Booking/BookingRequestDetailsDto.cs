@@ -18,6 +18,7 @@ public class BookingRequestDetailsDto
     public int NumberOfNights { get; set; }
     public int TotalGuests { get; set; }
     public string Status { get; set; }
+    public string? RejectionReason { get; set; } // <<-- اضافه شد
     public DateTime SubmissionDate { get; set; }
     public DateTime LastStatusUpdateDate { get; set; }
     public string? Notes { get; set; }

@@ -21,6 +21,9 @@ using HotelReservation.Application.Features.BookingRequests.Commands.ApproveBook
 using HotelReservation.Application.Features.BookingRequests.Commands.RejectBookingRequest;
 using HotelReservation.Application.Features.BookingRequests.Queries.GetMyBookings;
 using HotelReservation.Application.Features.BookingRequests.Queries.GetEmployeeLastBookings;
+using HotelReservation.Application.Features.BookingRequests.Commands.InitialApprove;
+using HotelReservation.Application.Features.BookingRequests.Commands.SubmitByEmployee;
+using HotelReservation.Application.Features.BookingRequests.Commands.InitialReject;
 
 namespace HotelReservation.Api.Controllers;
 
@@ -36,6 +39,16 @@ public class BookingRequestsController : ControllerBase
     {
         _mediator = mediator;
         _logger = logger;
+    }
+
+    // POST: api/booking-requests/submit-by-employee
+    [HttpPost("submit-by-employee")]
+    [Authorize(Roles = "Employee,SuperAdmin,ProvinceUser")] // همه می‌توانند برای خودشان ثبت کنند     
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> SubmitByEmployee([FromBody] SubmitBookingByEmployeeCommand command)
+    {
+        var response = await _mediator.Send(command);
+        return CreatedAtAction(nameof(GetBookingRequestById), new { id = response.Id }, response);
     }
 
     [HttpPost]
@@ -124,7 +137,7 @@ public class BookingRequestsController : ControllerBase
         return CreatedAtAction(nameof(GetBookingRequestById), new { id = createResponse.Id }, createResponse);
     }
 
-[HttpGet("history/{employeeNationalCode}/{hotelId:guid}")]
+    [HttpGet("history/{employeeNationalCode}/{hotelId:guid}")]
     [Authorize(Roles = "SuperAdmin,ProvinceUser")] // فقط این نقش‌ها به این اطلاعات نیاز دارند
     public async Task<IActionResult> GetEmployeeBookingHistory(string employeeNationalCode, Guid hotelId)
     {
@@ -132,7 +145,7 @@ public class BookingRequestsController : ControllerBase
         var result = await _mediator.Send(query);
         return Ok(result);
     }
-    
+
     [HttpGet("{id:guid}", Name = "GetBookingRequestById")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BookingRequestDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -225,5 +238,25 @@ public class BookingRequestsController : ControllerBase
     {
         var result = await _mediator.Send(query);
         return Ok(result);
+    }
+    
+
+    // PUT: api/booking-requests/{id}/initial-approve
+    [HttpPut("{id:guid}/initial-approve")]
+    [Authorize(Roles = "SuperAdmin,ProvinceUser")]
+    public async Task<IActionResult> InitialApprove(Guid id)
+    {
+        await _mediator.Send(new InitialApproveCommand { BookingRequestId = id });
+        return NoContent();
+    }
+
+    // PUT: api/booking-requests/{id}/initial-reject
+     [HttpPut("{id:guid}/initial-reject")]
+    [Authorize(Roles = "SuperAdmin,ProvinceUser")]
+    public async Task<IActionResult> InitialReject(Guid id, [FromBody] InitialRejectDto dto)
+    {
+        var command = new InitialRejectCommand(id, dto.RejectionReason);
+        await _mediator.Send(command);
+        return NoContent();
     }
 }
