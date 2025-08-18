@@ -42,7 +42,9 @@ public class User
     // سازنده را نیز برای پذیرش PhoneNumber اصلاح کنید (اختیاری در سازنده)
     public User(
         string systemUserId, string fullName, string passwordHash,
-        Guid roleId, Role role, bool isActive = true,
+        Guid roleId,
+        Role role,
+        bool isActive = true,
         string? nationalCode = null, string? phoneNumber = null, // اضافه شدن phoneNumber
         string? provinceCode = null, Province? province = null, string? provinceName = null,
         string? departmentCode = null, Department? department = null, string? departmentName = null,
@@ -147,6 +149,7 @@ public class User
     }
     public void AssignToHotel(Guid hotelId, Hotel hotel)
     {
+        Console.WriteLine(this.Role?.Name);
         if (this.Role?.Name != "HotelUser") // بررسی نقش فعلی کاربر
             throw new InvalidOperationException("فقط کاربری با نقش کاربر هتل می‌تواند به هتل تخصیص داده شود.");
         if (hotelId == Guid.Empty) throw new ArgumentNullException(nameof(hotelId));

@@ -117,7 +117,7 @@ public class SubmitBookingByEmployeeCommandHandler : IRequestHandler<SubmitBooki
         // <<-- وضعیت اولیه: در انتظار تأیید استان -->>
         bookingRequest.UpdateStatus(BookingStatus.AwaitingProvinceApproval, currentUserId.Value, "درخواست توسط کارمند ثبت شد.");
 
-         // <<-- شروع منطق کلیدی: افزودن مهمانان و محاسبه تخفیف -->>
+        // <<-- شروع منطق کلیدی: افزودن مهمانان و محاسبه تخفیف -->>
         _logger.LogInformation("Processing {GuestCount} guests for the new personal booking request.", request.Guests.Count);
         foreach (var guestDto in request.Guests)
         {
@@ -139,6 +139,26 @@ public class SubmitBookingByEmployeeCommandHandler : IRequestHandler<SubmitBooki
 
         await _unitOfWork.BookingRequestRepository.AddAsync(bookingRequest);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        var mainEmployeeUser = await _unitOfWork.UserRepository.GetByNationalCodeAsync(bookingRequest.RequestingEmployeeNationalCode, true);
+        if (mainEmployeeUser != null && !string.IsNullOrEmpty(mainEmployeeUser.PhoneNumber))
+        {
+            try
+            {
+                string message = $@"درخواست رزرو شما با کد رهگیری {bookingRequest.TrackingCode} ثبت و به استان جهت تایید ارسال گردید:"
+                                + Environment.NewLine
+                                + $@"تاریخ ورود: {bookingRequest.CheckInDate}"
+                                + Environment.NewLine
+                                + $@"تاریخ خروج: {bookingRequest.CheckOutDate}"
+                                + Environment.NewLine
+                                + $@"تعداد مهمانان: {bookingRequest.TotalGuests}";
+                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber, message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send cancellation SMS for booking {TrackingCode}.", bookingRequest.TrackingCode);
+            }
+        }
 
         return new CreateBookingRequestResponseDto { Id = bookingRequest.Id, TrackingCode = bookingRequest.TrackingCode };
     }

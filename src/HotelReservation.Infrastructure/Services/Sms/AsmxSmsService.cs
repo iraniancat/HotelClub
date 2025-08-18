@@ -16,8 +16,8 @@ public class AsmxSmsService : ISmsService
     private readonly ILogger<AsmxSmsService> _logger;
 
     public AsmxSmsService(
-        HttpClient httpClient, 
-        IOptions<SmsGatewaySettings> settings, 
+        HttpClient httpClient,
+        IOptions<SmsGatewaySettings> settings,
         ILogger<AsmxSmsService> logger)
     {
         _httpClient = httpClient;
@@ -37,13 +37,28 @@ public class AsmxSmsService : ISmsService
     </sendsms>
   </soap:Body>
 </soap:Envelope>";
-
+        soapEnvelope = $@"<?xml version=""1.0"" encoding=""utf-8""?>
+<soap:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
+  <soap:Body>
+    <SendSMS_Single xmlns=""{_settings.SoapAction.Replace("/SendSMS_Single", "")}"">
+      <Message>{message}</Message>
+      <DestinationAddress>{mobileNumber}</DestinationAddress>
+      <Number>{SmsGatewaySettings.Number}</Number>
+      <userName>{SmsGatewaySettings.UserName}</userName>
+      <password>{SmsGatewaySettings.password}</password>
+      <IP_Send>{SmsGatewaySettings.IP}</IP_Send>
+      <Company>{SmsGatewaySettings.Company}</Company>
+      <IsFlash>{false}</IsFlash>
+    </SendSMS_Single>
+  </soap:Body>
+</soap:Envelope>";
         // ایجاد محتوای درخواست HTTP
         var content = new StringContent(soapEnvelope, Encoding.UTF8, "text/xml");
-        
+
         // افزودن هدر ضروری SOAPAction
         _httpClient.DefaultRequestHeaders.Clear();
         _httpClient.DefaultRequestHeaders.Add("SOAPAction", _settings.SoapAction);
+        _httpClient.DefaultRequestHeaders.Add("Host", _settings.Host);
 
         _logger.LogInformation("Sending REAL SMS to {MobileNumber} via ASMX service at {Url}", mobileNumber, _settings.AsmxServiceUrl);
 

@@ -3,17 +3,20 @@ using HotelReservation.Application.DTOs.Booking;
 using HotelReservation.Application.DTOs.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace HotelReservation.Application.Features.BookingRequests.Queries.GetAllBookingRequests;
 public class GetAllBookingRequestsQueryHandler : IRequestHandler<GetAllBookingRequestsQuery, PagedResult<BookingRequestSummaryDto>>
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICurrentUserService _currentUserService;
+    private readonly ILogger<GetAllBookingRequestsQueryHandler> _logger;
 
-    public GetAllBookingRequestsQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService)
+    public GetAllBookingRequestsQueryHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, ILogger<GetAllBookingRequestsQueryHandler> logger)
     {
         _unitOfWork = unitOfWork;
         _currentUserService = currentUserService;
+        _logger = logger;
     }
 
     public async Task<PagedResult<BookingRequestSummaryDto>> Handle(GetAllBookingRequestsQuery request, CancellationToken cancellationToken)
@@ -22,18 +25,28 @@ public class GetAllBookingRequestsQueryHandler : IRequestHandler<GetAllBookingRe
         var query = _unitOfWork.BookingRequestRepository.GetQueryable();
 
         // مرحله ۱: اعمال تمام فیلترها (WHERE clauses)
-        if (_currentUserService.IsInRole("ProvinceUser"))
+       if (_currentUserService.IsInRole("ProvinceUser"))
         {
             var provinceCode = _currentUserService.ProvinceCode;
-            query = query.Where(br => br.RequestingEmployee.ProvinceCode == provinceCode);
+            if (!string.IsNullOrWhiteSpace(provinceCode))
+            {
+                // کاربر استان، رزروهای مربوط به کارمندان استان خودش را می‌بیند
+                query = query.Where(br => br.RequestingEmployee.ProvinceCode == provinceCode);
+                _logger.LogInformation("Filtering bookings for ProvinceUser of province {ProvinceCode}", provinceCode);
+            }
         }
         else if (_currentUserService.IsInRole("HotelUser"))
         {
             var hotelId = _currentUserService.HotelId;
-            query = query.Where(br => br.HotelId == hotelId);
+            if (hotelId.HasValue)
+            {
+                // کاربر هتل، رزروهای مربوط به هتل خودش را می‌بیند
+                query = query.Where(br => br.HotelId == hotelId.Value);
+                _logger.LogInformation("Filtering bookings for HotelUser of hotel {HotelId}", hotelId.Value);
+            }
         }
         
-        if (!string.IsNullOrWhiteSpace(request.StatusFilter) && Enum.TryParse<Domain.Enums.BookingStatus>(request.StatusFilter, true, out var statusEnum))
+      if (!string.IsNullOrWhiteSpace(request.StatusFilter) && Enum.TryParse<Domain.Enums.BookingStatus>(request.StatusFilter, true, out var statusEnum))
         {
             query = query.Where(br => br.Status == statusEnum);
         }
@@ -41,26 +54,20 @@ public class GetAllBookingRequestsQueryHandler : IRequestHandler<GetAllBookingRe
         {
             var term = request.SearchTerm.ToLower();
             query = query.Where(br => br.TrackingCode.ToLower().Contains(term) 
-                                   || br.Hotel.Name.ToLower().Contains(term)
-                                   || br.RequestingEmployee.FullName.ToLower().Contains(term));
+                                   || (br.Hotel != null && br.Hotel.Name.ToLower().Contains(term))
+                                   || (br.RequestingEmployee != null && br.RequestingEmployee.FullName.ToLower().Contains(term)));
         }
 
-        // شمارش نتایج فیلتر شده برای صفحه‌بندی
         var totalCount = await query.CountAsync(cancellationToken);
 
-        // مرحله ۲: اعمال واکشی داده‌های مرتبط (Includes)، مرتب‌سازی و صفحه‌بندی
-        var items = await query
-            .Include(br => br.Hotel)
-            .Include(br => br.RequestingEmployee)
-            .Include(br => br.Guests)
-            .OrderByDescending(br => br.SubmissionDate)
+        var items = await query.OrderByDescending(br => br.SubmissionDate)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
             .Select(br => new BookingRequestSummaryDto {
                 Id = br.Id,
                 TrackingCode = br.TrackingCode,
-                RequestingEmployeeFullName = br.RequestingEmployee.FullName,
-                HotelName = br.Hotel.Name,
+                RequestingEmployeeFullName = br.RequestingEmployee != null ? br.RequestingEmployee.FullName : "نامشخص",
+                HotelName = br.Hotel != null ? br.Hotel.Name : "نامشخص",
                 CheckInDate = br.CheckInDate,
                 CheckOutDate = br.CheckOutDate,
                 Status = br.Status.ToString(),

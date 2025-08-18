@@ -21,12 +21,14 @@ public class RejectBookingRequestCommandHandler : IRequestHandler<RejectBookingR
     private readonly IUnitOfWork _unitOfWork;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILogger<RejectBookingRequestCommandHandler> _logger;
+    private readonly ISmsService _smsService;
 
-    public RejectBookingRequestCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, ILogger<RejectBookingRequestCommandHandler> logger)
+    public RejectBookingRequestCommandHandler(IUnitOfWork unitOfWork, ICurrentUserService currentUserService, ILogger<RejectBookingRequestCommandHandler> logger, ISmsService smsService)
     {
         _unitOfWork = unitOfWork;
         _currentUserService = currentUserService;
         _logger = logger;
+        _smsService = smsService;
     }
 
     public async Task Handle(RejectBookingRequestCommand request, CancellationToken cancellationToken)
@@ -43,11 +45,30 @@ public class RejectBookingRequestCommandHandler : IRequestHandler<RejectBookingR
         if (bookingRequest == null) throw new NotFoundException(nameof(BookingRequest), request.BookingRequestId);
         if (bookingRequest.HotelId != currentUserHotelId.Value) throw new ForbiddenAccessException("شما فقط می‌توانید درخواست‌های هتل خود را مدیریت کنید.");
         if (bookingRequest.Status != BookingStatus.SubmittedToHotel) throw new BadRequestException("این درخواست در وضعیت قابل رد کردن نیست.");
-        
+
         var reason = $"رد شده توسط هتل. دلیل: {request.RejectionReason}";
-        bookingRequest.UpdateStatus(BookingStatus.HotelRejected, currentUserId.Value, reason);
-        
+
+        var historyEntry = bookingRequest.UpdateStatus(BookingStatus.HotelRejected, currentUserId.Value, reason);
+
+        if (historyEntry != null)
+        {
+            await _unitOfWork.BookingStatusHistoryRepository.AddAsync(historyEntry);
+        }
+
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         _logger.LogInformation("BookingRequest {Id} rejected by User {UserId}", request.BookingRequestId, currentUserId.Value);
+         var mainEmployeeUser = await _unitOfWork.UserRepository.GetByNationalCodeAsync(bookingRequest.RequestingEmployeeNationalCode, true);
+         if (mainEmployeeUser != null && !string.IsNullOrEmpty(mainEmployeeUser.PhoneNumber))
+        {
+            try
+            {
+                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber,
+                     $"درخواست رزرو شما با کد رهگیری {bookingRequest.TrackingCode}  توسط هتل به علت {request.RejectionReason} رد شد.");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to send cancellation SMS for booking {TrackingCode}.", bookingRequest.TrackingCode);
+            }
+        }
     }
 }

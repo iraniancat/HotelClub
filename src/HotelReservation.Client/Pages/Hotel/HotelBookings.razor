@@ -6,6 +6,7 @@
 @inject NavigationManager NavigationManager
 @inject ILogger<HotelBookings> Logger
 @using System.Globalization
+@using HotelReservation.Domain.Enums
 
 <PageTitle>لیست درخواست‌های رزرو هتل</PageTitle>
 
@@ -80,7 +81,7 @@
 @code {
     private MudTable<BookingRequestSummaryDto> _table = new();
     private bool _isLoading = true;
-    
+
     private string? _searchTerm;
     private string? _statusFilter;
 
@@ -94,11 +95,11 @@
                 requestUri += $"&searchTerm={Uri.EscapeDataString(_searchTerm)}";
             if (!string.IsNullOrWhiteSpace(_statusFilter))
                 requestUri += $"&statusFilter={_statusFilter}";
-            
+
             var pagedResult = await ApiClient.GetAsync<PagedResult<BookingRequestSummaryDto>>(requestUri);
             if (pagedResult != null)
             {
-                return new TableData<BookingRequestSummaryDto>() { TotalItems = pagedResult.TotalCount, Items = pagedResult.Items };
+                return new TableData<BookingRequestSummaryDto>() { TotalItems = pagedResult.TotalCount, Items = pagedResult.Items.Where(p=>p.Status!=Domain.Enums.BookingStatus.AwaitingEmployeeApproval.ToString()&&p.Status!=BookingStatus.AwaitingProvinceApproval.ToString()&&p.Status!=BookingStatus.ProvinceRejected.ToString()&&p.Status!=BookingStatus.CancelledByUser.ToString()) };
             }
         }
         catch (Exception ex)

@@ -1,5 +1,5 @@
 @page "/employee/create-booking"
-@attribute [Authorize] // تمام کاربران احراز هویت شده می‌توانند برای خودشان رزرو ثبت کنند
+@attribute [Authorize(Roles = "SuperAdmin, ProvinceUser,Employee")] // تمام کاربران احراز هویت شده می‌توانند برای خودشان رزرو ثبت کنند
 
 @inject IApiClientService ApiClient
 @inject ISnackbar Snackbar

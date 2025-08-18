@@ -37,9 +37,22 @@ public class CreateNonEmployeeUserCommandHandler : IRequestHandler<CreateNonEmpl
         }
 
         // ۳. واکشی و اعتبارسنجی Role, Province, Department, Hotel
-        var role = await _unitOfWork.RoleRepository.GetByIdAsync(request.RoleId);
-        if (role == null) throw new BadRequestException($"نقش با شناسه '{request.RoleId}' یافت نشد.");
+        var role = await _unitOfWork.RoleRepository.GetByIdAsync(request.RoleId, asNoTracking: true);
+        if (role == null)
+        {
+            throw new BadRequestException($"نقش با شناسه '{request.RoleId}' یافت نشد.");
+        }
 
+        //Hotel? hotel = null;
+        // if (request.HotelId.HasValue)
+        // {
+        //     // <<-- اصلاح کلیدی: واکشی هتل با ردیابی فعال -->>
+        //     hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId.Value, asNoTracking: false);
+        //     if (hotel == null)
+        //     {
+        //         throw new BadRequestException($"هتل با شناسه '{request.HotelId.Value}' یافت نشد.");
+        //     }
+        // }
         Province? province = null;
         if (!string.IsNullOrEmpty(request.ProvinceCode))
         {
@@ -53,46 +66,72 @@ public class CreateNonEmployeeUserCommandHandler : IRequestHandler<CreateNonEmpl
             department = await _unitOfWork.DepartmentRepository.GetByStringIdAsync(request.DepartmentCode);
             if (department == null) throw new BadRequestException($"اداره/شعبه با کد '{request.DepartmentCode}' یافت نشد.");
         }
-        
-        Hotel? hotel = null;
-        if (role.Name == HotelUserRoleName)
+
+         Hotel? hotel = null;
+        if (role.Name.Equals("HotelUser", StringComparison.OrdinalIgnoreCase))
         {
-            if (!request.HotelId.HasValue || request.HotelId.Value == Guid.Empty)
+            if (!request.HotelId.HasValue)
             {
-                throw new BadRequestException($"برای نقش '{HotelUserRoleName}'، شناسه هتل الزامی است.");
+                throw new BadRequestException("برای نقش کاربر هتل، انتخاب هتل الزامی است.");
             }
-            hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId.Value);
-            if (hotel == null) throw new BadRequestException($"هتل با شناسه '{request.HotelId.Value}' یافت نشد.");
-        } else if (request.HotelId.HasValue) {
-             // اگر نقش کاربر هتل نیست اما شناسه هتل ارسال شده، می‌توان خطا داد یا آن را نادیده گرفت
-             // فعلا نادیده می‌گیریم و در سازنده User مدیریت می‌شود که HotelId فقط برای نقش HotelUser ست شود.
+
+            hotel = await _unitOfWork.HotelRepository.GetByIdAsync(request.HotelId.Value, asNoTracking: false);
+            if (hotel == null)
+            {
+                throw new BadRequestException($"هتل با شناسه '{request.HotelId.Value}' یافت نشد.");
+            }
+        }
+        else if (request.HotelId.HasValue)
+        {
+            throw new BadRequestException("فقط کاربری با نقش کاربر هتل می‌تواند به هتل تخصیص داده شود.");
         }
 
 
         // ۴. هش کردن رمز عبور
-        var hashedPassword = _passwordHasher.HashPassword(request.Password);
+        //  var hashedPassword = _passwordHasher.HashPassword(request.Password);
 
         // ۵. ایجاد موجودیت User
+        // var newUser = new User(
+        //     request.SystemUserId,
+        //     request.FullName,
+        //     hashedPassword,
+        //     request.RoleId,
+        //     role, // شیء Role واکشی شده
+        //     request.IsActive,
+        //     request.NationalCode,
+        //     request.PhoneNumber,
+        //     request.ProvinceCode,
+        //     province, // شیء Province واکشی شده
+        //     request.ProvinceName ?? province?.Name, // استفاده از نام ارسالی یا نام واکشی شده
+        //     request.DepartmentCode,
+        //     department, // شیء Department واکشی شده
+        //     request.DepartmentName ?? department?.Name, // مشابه استان
+        //     (role.Name == HotelUserRoleName) ? request.HotelId : null,
+        //     (role.Name == HotelUserRoleName) ? hotel : null
+        // );
+        var passwordHash = _passwordHasher.HashPassword(request.Password);
+
         var newUser = new User(
             request.SystemUserId,
             request.FullName,
-            hashedPassword,
+            passwordHash,
             request.RoleId,
-            role, // شیء Role واکشی شده
+            role,
             request.IsActive,
-            request.NationalCode,
+             request.NationalCode,
             request.PhoneNumber,
-            request.ProvinceCode,
-            province, // شیء Province واکشی شده
-            request.ProvinceName ?? province?.Name, // استفاده از نام ارسالی یا نام واکشی شده
-            request.DepartmentCode,
-            department, // شیء Department واکشی شده
-            request.DepartmentName ?? department?.Name, // مشابه استان
-            (role.Name == HotelUserRoleName) ? request.HotelId : null,
-            (role.Name == HotelUserRoleName) ? hotel : null
+            null, null, null, // Province info
+            null, null, null, // Department info
+            request.HotelId, // <<-- Pass HotelId directly
+            hotel // The full Hotel entity is not needed for creation
         );
+         //newUser.Role = role;
 
-        // ۶. افزودن به Repository و ذخیره تغییرات
+        // if (hotel != null)
+        // {
+        //     newUser.AssignToHotel(hotel.Id, hotel);
+        // }
+
         await _unitOfWork.UserRepository.AddAsync(newUser);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

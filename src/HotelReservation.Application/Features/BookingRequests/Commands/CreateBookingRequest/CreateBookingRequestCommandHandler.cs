@@ -171,8 +171,14 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             try
             {
-                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber,
-                     $"درخواست رزرو شما با کد رهگیری {bookingRequestEntity.TrackingCode} برای هتل {hotel.Name} در تاریخ {request.CheckInDate:yyyy/MM/dd} ثبت شد.");
+                string message = $@"درخواست رزرو شما با کد رهگیری {bookingRequestEntity.TrackingCode} برای هتل {bookingRequestEntity.Hotel.Name} توسط استان ثبت گردید."
+                                + Environment.NewLine
+                                + $@"تاریخ ورود: {bookingRequestEntity.CheckInDate}"
+                                + Environment.NewLine
+                                + $@"تاریخ خروج: {bookingRequestEntity.CheckOutDate}"
+                                + Environment.NewLine
+                                + $@"تعداد مهمانان: {bookingRequestEntity.TotalGuests}";
+                await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber,message);
             }
             catch (Exception ex)
             {

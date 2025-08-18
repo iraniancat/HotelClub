@@ -28,16 +28,16 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         services.AddTransient<IPasswordHasherService, PasswordHasherService>(); // یا AddTransient
-                                                                             // ...
+                                                                                // ...
         services.AddTransient<ISmsService, SmsService>(); // <<-- ثبت سرویس SMS
 
         // ثبت سرویس تولید توکن JWT
         services.AddScoped<IJwtTokenGenerator, JwtTokenGeneratorService>(); // <<-- اضافه شد
 
         services.AddScoped<IFileStorageService, FileSystemStorageService>();
-        
-         services.AddScoped<IBookingRequestRepository, BookingRequestRepository>();
-         services.AddScoped<IProvinceHotelQuotaRepository, ProvinceHotelQuotaRepository>();
+
+        services.AddScoped<IBookingRequestRepository, BookingRequestRepository>();
+        services.AddScoped<IProvinceHotelQuotaRepository, ProvinceHotelQuotaRepository>();
         // Repositoryهای اختصاصی هم به عنوان Scoped ثبت می‌شوند
         // (اگر UnitOfWork آن‌ها را نمونه‌سازی می‌کند، شاید نیازی به ثبت تک تک آن‌ها نباشد،
         // اما برای صراحت یا اگر مستقیماً تزریق می‌شوند، ثبتشان می‌کنیم)
@@ -55,11 +55,11 @@ public static class InfrastructureServiceRegistration
         // services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         // اما معمولاً از طریق UnitOfWork یا Repositoryهای اختصاصی به آن‌ها دسترسی پیدا می‌کنیم.
 
-         // ۱. کلاس تنظیمات را ثبت می‌کنیم
-        var smsSettings = configuration.GetSection(SmsGatewaySettings.SectionName).Get<SmsGatewaySettings>() 
-                          ?? new SmsGatewaySettings();
-        services.Configure<SmsGatewaySettings>(configuration.GetSection(SmsGatewaySettings.SectionName));
-
+        // ۱. کلاس تنظیمات را ثبت می‌کنیم
+        // var smsSettings = configuration.GetSection(SmsGatewaySettings.IP).Get<SmsGatewaySettings>() 
+        //                   ?? new SmsGatewaySettings();
+        // services.Configure<SmsGatewaySettings>(configuration.GetSection(SmsGatewaySettings.IP));
+        var smsSettings = new SmsGatewaySettings(); ;
         // ۲. بر اساس تنظیمات، سرویس مناسب را ثبت می‌کنیم
         if (smsSettings.UseFakeSmsService)
         {

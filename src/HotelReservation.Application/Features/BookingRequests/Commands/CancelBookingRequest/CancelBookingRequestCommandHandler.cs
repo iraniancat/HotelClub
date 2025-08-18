@@ -78,7 +78,8 @@ public class CancelBookingRequestCommandHandler : IRequestHandler<CancelBookingR
                        : $"لغو شده توسط کاربر. دلیل: {request.CancellationReason}";
 
         _logger.LogInformation("Step 5: Calling bookingRequest.UpdateStatus() to change status to CancelledByUser.");
-        bookingRequest.UpdateStatus(BookingStatus.CancelledByUser, currentUserId.Value, reason);
+         bookingRequest.UpdateStatus(BookingStatus.HotelRejected, currentUserId.Value, reason);
+         
         _logger.LogInformation("Step 6: bookingRequest.UpdateStatus() completed. New status in memory is {NewStatus}.", bookingRequest.Status);
         
         try
@@ -104,7 +105,7 @@ public class CancelBookingRequestCommandHandler : IRequestHandler<CancelBookingR
             try
             {
                 await _smsService.SendSmsAsync(mainEmployeeUser.PhoneNumber,
-                     $"درخواست رزرو شما با کد رهگیری {bookingRequest.TrackingCode} لغو گردید.");
+                     $"درخواست رزرو شما با کد رهگیری {bookingRequest.TrackingCode} توسط شما لغو گردید.");
             }
             catch (Exception ex)
             {
