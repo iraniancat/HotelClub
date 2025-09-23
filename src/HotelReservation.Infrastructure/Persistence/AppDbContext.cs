@@ -321,6 +321,7 @@ public class AppDbContext : DbContext
                  .HasForeignKey(br => br.RequestingEmployeeNationalCode)
                  .HasPrincipalKey(u => u.NationalCode) // به EF Core می‌گوییم که کلید اصلی در این رابطه، NationalCode در جدول Users است.
                  .OnDelete(DeleteBehavior.Restrict);
+       
     }
 
     private void ConfigureBookingStatusHistory(EntityTypeBuilder<BookingStatusHistory> builder) // بدون تغییر

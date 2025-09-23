@@ -39,24 +39,25 @@
                 </MudItem>
 
                 <MudItem xs="12" sm="6" md="4">
-                    <MudSelect T="Guid" Label="انتخاب هتل" @bind-value="_uiBookingModel.HotelId"
-                               For="@(() => _uiBookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است.">
+                    <MudSelect T="Guid?" Label="انتخاب هتل" @bind-value="_uiBookingModel.HotelId"
+                               For="@(() => _uiBookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است."
+                               Placeholder="یک هتل انتخاب کنید">
                         @if (_hotels.Any())
                         {
                             @foreach (var hotel in _hotels)
                             {
-                                <MudSelectItem Value="hotel.Id">@hotel.Name</MudSelectItem>
+                                <MudSelectItem T="Guid?" Value="hotel.Id">@hotel.Name</MudSelectItem>
                             }
                         }
                     </MudSelect>
                 </MudItem>
 
                 <MudItem xs="12" sm="6" md="4">
-                     <MudSelect T="Guid" Label="دوره زمانی رزرو" @bind-value="_uiBookingModel.BookingPeriodId"
-                               For="@(() => _uiBookingModel.BookingPeriodId)" Required="true" RequiredError="انتخاب دوره زمانی الزامی است.">
+                     <MudSelect T="Guid?" Label="دوره زمانی رزرو" @bind-value="_uiBookingModel.BookingPeriodId"
+                               For="@(() => _uiBookingModel.BookingPeriodId)" Required="true" RequiredError="انتخاب دوره زمانی الزامی است."  Placeholder="دوره زمانی مدنظر را انتخاب">
                         @foreach (var period in _activeBookingPeriods)
                         {
-                            <MudSelectItem Value="period.Id">@period.Name</MudSelectItem>
+                            <MudSelectItem T="Guid?" Value="period.Id">@period.Name</MudSelectItem>
                         }
                     </MudSelect>
                 </MudItem>
@@ -145,8 +146,8 @@
 @code {
     private class EmployeeBookingUIModel
     {
-        [Required] public Guid BookingPeriodId { get; set; }
-        [Required] public Guid HotelId { get; set; }
+        [Required(ErrorMessage=" دوره زمانی را انتخاب نمایید.")] public Guid? BookingPeriodId { get; set; }
+        [Required(ErrorMessage="هتل را انتخاب نمایید.")] public Guid? HotelId { get; set; }
         public string? Notes { get; set; }
         [Required] public string? CheckInDate { get; set; }
         [Required] public string? CheckOutDate { get; set; }
@@ -192,12 +193,12 @@
 
         try
         {
-            var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all");
-            var periodsTask = ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods/active");
-            await Task.WhenAll(hotelsTask, periodsTask);
-            var hotelsResult = await hotelsTask;
+            var hotelsResult =await ApiClient.GetListAsync<HotelDto>("api/hotels/all");
+          //  await Task.WhenAll(hotelsResult, periodsTask);
+          //  var hotelsResult =  hotelsTask;
             if (hotelsResult != null) _hotels = hotelsResult.ToList();
-            var periodsResult = await periodsTask;
+           // var periodsResult =  periodsTask;
+            var periodsResult =await ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods/active");
             if (periodsResult != null) _activeBookingPeriods = periodsResult.ToList();
         }
         catch (Exception ex)
@@ -256,8 +257,8 @@
             var command = new SubmitBookingByEmployeeCommand
             {
                 RequestingEmployeeNationalCode=_currentUserDetails.NationalCode,
-                BookingPeriodId = _uiBookingModel.BookingPeriodId,
-                HotelId = _uiBookingModel.HotelId,
+                BookingPeriodId = _uiBookingModel.BookingPeriodId.Value,
+                HotelId = _uiBookingModel.HotelId.Value,
                 Notes = _uiBookingModel.Notes,
                 Guests = _uiBookingModel.Guests,
                 CheckInDate = Helper.ToGregorianDateTime(_uiBookingModel.CheckInDate!),

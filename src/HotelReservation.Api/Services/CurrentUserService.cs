@@ -75,6 +75,8 @@ public class CurrentUserService : ICurrentUserService
 
     public string? ProvinceCode => User?.FindFirstValue(CustomClaimTypes.ProvinceCode);
 
+     public string? NationalCode => User?.FindFirstValue(CustomClaimTypes.NationalCode);
+
     public Guid? HotelId
     {
         get
@@ -84,7 +86,7 @@ public class CurrentUserService : ICurrentUserService
         }
     }
     
-    public string? DepartmentCode => User?.FindFirstValue("department_code");
+    public string? DepartmentCode => User?.FindFirstValue(CustomClaimTypes.DepartmentCode);
 
     public ClaimsPrincipal? GetUserPrincipal() => User;
 

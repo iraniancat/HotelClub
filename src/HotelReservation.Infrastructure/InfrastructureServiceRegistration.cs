@@ -21,7 +21,12 @@ public static class InfrastructureServiceRegistration
         // ثبت DbContext (این بخش را از Program.cs به اینجا منتقل می‌کنیم)
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
+           
+                //b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName),
+                sqlServerOptionsAction: sqlOptions=>{
+                    sqlOptions.UseCompatibilityLevel(120);
+                }
+                ));
 
         // ثبت UnitOfWork و Repositoryها
         // IUnitOfWork به عنوان Scoped ثبت می‌شود چون DbContext هم معمولاً Scoped است.

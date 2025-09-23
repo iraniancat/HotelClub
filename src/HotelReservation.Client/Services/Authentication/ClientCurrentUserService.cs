@@ -72,7 +72,9 @@ public class ClientCurrentUserService : ICurrentUserService
             return Guid.TryParse(hotelIdClaim, out var id) ? id : null;
         }
     }
-    public string? DepartmentCode => User.FindFirstValue("department_code");
+
+    public string? NationalCode => User?.FindFirstValue(CustomClaimTypes.NationalCode);
+    public string? DepartmentCode => User.FindFirstValue(CustomClaimTypes.DepartmentCode);
 
     public ClaimsPrincipal? GetUserPrincipal() => User;
     public bool IsInRole(string roleName) => User.IsInRole(roleName);

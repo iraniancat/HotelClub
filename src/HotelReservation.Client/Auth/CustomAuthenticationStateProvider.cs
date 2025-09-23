@@ -164,6 +164,22 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         var rawClaimsFromJwt = jwtToken.Claims.ToList(); // Claimهای خام از توکن
         var identityClaims = new List<Claim>(); // لیستی برای Claimهای نهایی که به ClaimsIdentity پاس داده می‌شود
 
+        var CustomClaims = new[]{
+            CustomClaimTypes.ProvinceCode,
+            CustomClaimTypes.DepartmentCode,
+            CustomClaimTypes.HotelId,
+            CustomClaimTypes.NationalCode
+        };
+
+        foreach (var claimType in CustomClaims)
+        {
+            var claimValue = jwtToken.Claims.FirstOrDefault(p => p.Type == claimType)?.Value;
+            if (!string.IsNullOrEmpty(claimValue))
+            {
+                identityClaims.Add(new Claim(claimType, claimValue));
+            }
+        }
+
         _logger.LogInformation("CreateClaimsPrincipalFromTokenObject: Processing {ClaimCount} raw claims from JWT:", rawClaimsFromJwt.Count);
         foreach (var claim in rawClaimsFromJwt)
         {

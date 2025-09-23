@@ -31,26 +31,31 @@ public class GetMyBookingsQueryHandler : IRequestHandler<GetMyBookingsQuery, Pag
             throw new UnauthorizedAccessException("کاربر احراز هویت نشده است.");
         }
 
-        var currentUser = await _unitOfWork.UserRepository.GetByIdAsync(currentUserId.Value, asNoTracking: true);
-        var currentUserNationalCode = currentUser?.NationalCode;
-        
+        //var currentUser = await _unitOfWork.UserRepository.GetByIdAsync(currentUserId.Value, asNoTracking: true);
+        //var currentUserNationalCode = currentUser?.NationalCode;
+        var currentUserNationalCode = _currentUserService.NationalCode;
+
         // <<-- لاگ‌های تشخیصی -->>
         _logger.LogInformation("GetMyBookings: CurrentUserId = {UserId}", currentUserId.Value);
         _logger.LogInformation("GetMyBookings: CurrentUserNationalCode = {NationalCode}", currentUserNationalCode ?? "NULL");
+        //Console.WriteLine("GetMyBookings: CurrentUserNationalCode = {NationalCode}", currentUserNationalCode ?? "NULL");
 
-        IQueryable<BookingRequest> query = _unitOfWork.BookingRequestRepository.GetQueryable()
-            .Include(br => br.Hotel)
-            .Include(br => br.RequestSubmitterUser); // برای نمایش نام ثبت کننده
+        IQueryable<BookingRequest> query = _unitOfWork.BookingRequestRepository.GetQueryable();
+        // برای نمایش نام ثبت کننده
 
         // فیلتر اصلی بر اساس شناسه ثبت‌کننده یا کد ملی کارمند اصلی
-        var filterExpression = PredicateBuilder.New<BookingRequest>(false);
-        filterExpression = filterExpression.Or(br => br.RequestSubmitterUserId == currentUserId.Value);
-        if (!string.IsNullOrWhiteSpace(currentUserNationalCode))
-        {
-            filterExpression = filterExpression.Or(br => br.RequestingEmployeeNationalCode == currentUserNationalCode);
-        }
-        query = query.Where(filterExpression);
-        
+        // var filterExpression = PredicateBuilder.New<BookingRequest>(false);
+        // filterExpression = filterExpression.Or(br => br.RequestSubmitterUserId == currentUserId.Value);
+        // if (!string.IsNullOrWhiteSpace(currentUserNationalCode))
+        // {
+        //     filterExpression = filterExpression.Or(br => br.RequestingEmployeeNationalCode == currentUserNationalCode);
+        // }
+        // query = query.Where(filterExpression);
+
+        query.Where(p => p.RequestSubmitterUserId == currentUserId.Value || (!string.IsNullOrEmpty(currentUserNationalCode) && p.RequestingEmployeeNationalCode == currentUserNationalCode));
+
+        var countAfterPrimaryFilter = await query.CountAsync(cancellationToken);
+        _logger.LogInformation("Found {Count} booking after primary filter (submitterId or NationalCode match)", countAfterPrimaryFilter);
         // اعمال فیلتر و جستجوی بیشتر
         if (!string.IsNullOrWhiteSpace(request.StatusFilter) && Enum.TryParse<BookingStatus>(request.StatusFilter, true, out var status))
         {
@@ -59,21 +64,29 @@ public class GetMyBookingsQueryHandler : IRequestHandler<GetMyBookingsQuery, Pag
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
             var term = request.SearchTerm.ToLower();
-            query = query.Where(br => br.TrackingCode.ToLower().Contains(term) || br.Hotel.Name.ToLower().Contains(term));
+            query = query.Where(br => (br.TrackingCode != null && br.TrackingCode.ToLower().Contains(term)) ||
+             (br.Hotel != null && br.Hotel.Name.ToLower().Contains(term)) ||
+             (br.RequestingEmployee != null && br.RequestingEmployee.FullName.ToLower().Contains(term)));
         }
 
         var totalCount = await query.CountAsync(cancellationToken);
         _logger.LogInformation("GetMyBookings: Found {Count} total matching bookings for user after all filters.", totalCount);
 
-        var items = await query.OrderByDescending(br => br.SubmissionDate)
+        var items = await query
+        .Include(br => br.Hotel)
+        .Include(br => br.RequestingEmployee)
+        .Include(br => br.RequestSubmitterUser)
+        .Include(br => br.Guests)
+        .OrderByDescending(br => br.SubmissionDate)
             .Skip((request.PageNumber - 1) * request.PageSize)
             .Take(request.PageSize)
-            .Select(br => new BookingRequestSummaryDto {
+            .Select(br => new BookingRequestSummaryDto
+            {
                 Id = br.Id,
                 TrackingCode = br.TrackingCode,
                 RequestingEmployeeNationalCode = br.RequestingEmployeeNationalCode,
                 RequestingEmployeeFullName = null, // این باید با Join یا واکشی جداگانه پر شود
-                HotelName = br.Hotel.Name,
+                HotelName = br.Hotel.Name ?? "نامشخص",
                 CheckInDate = br.CheckInDate,
                 CheckOutDate = br.CheckOutDate,
                 Status = br.Status.ToString(),
@@ -84,15 +97,15 @@ public class GetMyBookingsQueryHandler : IRequestHandler<GetMyBookingsQuery, Pag
             .ToListAsync(cancellationToken);
 
         // پر کردن نام کارمند اصلی برای نمایش در UI
-        var nationalCodes = items.Select(i => i.RequestingEmployeeNationalCode).Distinct().ToList();
-        if (nationalCodes.Any())
-        {
-            var employees = await _unitOfWork.UserRepository.GetAsync(u => nationalCodes.Contains(u.NationalCode));
-            foreach(var item in items)
-            {
-                item.RequestingEmployeeFullName = employees.FirstOrDefault(e => e.NationalCode == item.RequestingEmployeeNationalCode)?.FullName;
-            }
-        }
+        // var nationalCodes = items.Select(i => i.RequestingEmployeeNationalCode).Distinct().ToList();
+        // if (nationalCodes.Any())
+        // {
+        //     var employees = await _unitOfWork.UserRepository.GetAsync(u => nationalCodes.Contains(u.NationalCode));
+        //     foreach (var item in items)
+        //     {
+        //         item.RequestingEmployeeFullName = employees.FirstOrDefault(e => e.NationalCode == item.RequestingEmployeeNationalCode)?.FullName;
+        //     }
+        // }
 
         return new PagedResult<BookingRequestSummaryDto>(items, totalCount, request.PageNumber, request.PageSize);
     }

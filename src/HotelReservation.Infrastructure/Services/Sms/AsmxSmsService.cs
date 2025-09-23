@@ -43,11 +43,11 @@ public class AsmxSmsService : ISmsService
     <SendSMS_Single xmlns=""{_settings.SoapAction.Replace("/SendSMS_Single", "")}"">
       <Message>{message}</Message>
       <DestinationAddress>{mobileNumber}</DestinationAddress>
-      <Number>{SmsGatewaySettings.Number}</Number>
-      <userName>{SmsGatewaySettings.UserName}</userName>
-      <password>{SmsGatewaySettings.password}</password>
-      <IP_Send>{SmsGatewaySettings.IP}</IP_Send>
-      <Company>{SmsGatewaySettings.Company}</Company>
+      <Number>{_settings.Number}</Number>
+      <userName>{_settings.UserName}</userName>
+      <password>{_settings.password}</password>
+      <IP_Send>{_settings.IP}</IP_Send>
+      <Company>{_settings.Company}</Company>
       <IsFlash>{false}</IsFlash>
     </SendSMS_Single>
   </soap:Body>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fx02xuZTACA=",
+  "dgSpecHash": "ZFCRZ0Bl7E4=",
   "success": true,
   "projectFilePath": "C:\\Project\\HotelClub\\src\\HotelReservation.Client\\HotelReservation.Client.csproj",
   "expectedPackageFiles": [
@@ -94,8 +94,8 @@
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.jsinterop\\9.0.5\\microsoft.jsinterop.9.0.5.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.jsinterop.webassembly\\9.0.5\\microsoft.jsinterop.webassembly.9.0.5.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.net.http.headers\\2.3.0\\microsoft.net.http.headers.2.3.0.nupkg.sha512",
-    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.5\\microsoft.net.illink.tasks.9.0.5.nupkg.sha512",
-    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.5\\microsoft.net.sdk.webassembly.pack.9.0.5.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.9\\microsoft.net.illink.tasks.9.0.9.nupkg.sha512",
+    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.9\\microsoft.net.sdk.webassembly.pack.9.0.9.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.netcore.platforms\\2.0.0\\microsoft.netcore.platforms.2.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\microsoft.win32.registry\\4.5.0\\microsoft.win32.registry.4.5.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\mudblazor\\6.19.1\\mudblazor.6.19.1.nupkg.sha512",
@@ -116,7 +116,7 @@
     "C:\\Users\\BSI\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\BSI\\.nuget\\packages\\system.threading.tasks.extensions\\4.6.0\\system.threading.tasks.extensions.4.6.0.nupkg.sha512",
-    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.5\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.5.nupkg.sha512"
+    "C:\\Users\\BSI\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.9\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.9.nupkg.sha512"
   ],
   "logs": []
 }

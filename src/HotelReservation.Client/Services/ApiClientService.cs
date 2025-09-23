@@ -101,7 +101,7 @@ public class ApiClientService : IApiClientService
     }
     public async Task PostAsync<TRequest>(string requestUri, TRequest data)
     {
-         var response = await _httpClient.PutAsJsonAsync(requestUri, data, _jsonSerializerOptions);
+         var response = await _httpClient.PostAsJsonAsync(requestUri, data, _jsonSerializerOptions);
         if (!response.IsSuccessStatusCode)
         {
             await HandleErrorResponse(response);

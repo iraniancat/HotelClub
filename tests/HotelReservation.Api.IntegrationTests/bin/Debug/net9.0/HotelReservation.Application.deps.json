@@ -10,6 +10,8 @@
         "dependencies": {
           "FluentValidation.DependencyInjectionExtensions": "11.9.1",
           "HotelReservation.Domain": "1.0.0",
+          "Linq.PredicateBuilder": "1.1.0",
+          "LinqKit.Microsoft.EntityFrameworkCore": "9.0.8",
           "MediatR": "12.3.0",
           "Microsoft.AspNetCore": "2.3.0",
           "Microsoft.AspNetCore.Authorization": "9.0.5",
@@ -38,6 +40,34 @@
           "lib/netstandard2.1/FluentValidation.DependencyInjectionExtensions.dll": {
             "assemblyVersion": "11.0.0.0",
             "fileVersion": "11.9.1.0"
+          }
+        }
+      },
+      "Linq.PredicateBuilder/1.1.0": {
+        "runtime": {
+          "lib/netstandard2.0/Linq.PredicateBuilder.dll": {
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
+          }
+        }
+      },
+      "LinqKit.Core/1.2.8": {
+        "runtime": {
+          "lib/netstandard2.1/LinqKit.Core.dll": {
+            "assemblyVersion": "1.2.8.0",
+            "fileVersion": "1.2.8.0"
+          }
+        }
+      },
+      "LinqKit.Microsoft.EntityFrameworkCore/9.0.8": {
+        "dependencies": {
+          "LinqKit.Core": "1.2.8",
+          "Microsoft.EntityFrameworkCore": "9.0.5"
+        },
+        "runtime": {
+          "lib/net9.0/LinqKit.Microsoft.EntityFrameworkCore.dll": {
+            "assemblyVersion": "9.0.8.0",
+            "fileVersion": "9.0.8.0"
           }
         }
       },
@@ -836,6 +866,27 @@
       "sha512": "sha512-3jJbFcCWhiXhrCKFPjKihzccmosv+CleYewd2zEYS4aaUHx9zQSgOvkYbWUGTbDwJ5j2nDWE0Pr1EQ2xY4pryg==",
       "path": "fluentvalidation.dependencyinjectionextensions/11.9.1",
       "hashPath": "fluentvalidation.dependencyinjectionextensions.11.9.1.nupkg.sha512"
+    },
+    "Linq.PredicateBuilder/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Q5TgsyE6SPV0m/aI0Z0IbpbxGTKae7gK7/ic18fd3rziSIFLq5V86mKJpnPK0Kvycv0pJukPuGiyY4LXq5VYRA==",
+      "path": "linq.predicatebuilder/1.1.0",
+      "hashPath": "linq.predicatebuilder.1.1.0.nupkg.sha512"
+    },
+    "LinqKit.Core/1.2.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-F/ZGutPdat2u+nevwACsp09fT1z+fazu0UlZGVeAPSaGCdf/PuOv4hAyJ+7zCmqpADQLtmw9jEfJVPmgQy/8Cg==",
+      "path": "linqkit.core/1.2.8",
+      "hashPath": "linqkit.core.1.2.8.nupkg.sha512"
+    },
+    "LinqKit.Microsoft.EntityFrameworkCore/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9qVemq8r7eEih29EMTLCj68PeNq/+ZaLTXT9zPBhSdyOMNsdALzdExymKK3UqSMgJmUyOuzYww+kw2h7HlAvJQ==",
+      "path": "linqkit.microsoft.entityframeworkcore/9.0.8",
+      "hashPath": "linqkit.microsoft.entityframeworkcore.9.0.8.nupkg.sha512"
     },
     "MediatR/12.3.0": {
       "type": "package",

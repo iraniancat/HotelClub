@@ -12,7 +12,9 @@ public interface ICurrentUserService
     string? SystemUserId { get; } // نام کاربری (SystemUserId)
     string? FullName { get; }
     string? UserRole { get; } // نام نقش
-    
+
+    string? NationalCode { get; }
+
     // Claim های سفارشی
     string? ProvinceCode { get; }
     Guid? HotelId { get; }

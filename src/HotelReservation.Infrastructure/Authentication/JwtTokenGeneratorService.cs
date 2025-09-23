@@ -51,13 +51,13 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
         //     // سایر Claimهای استاندارد مانند Email اگر وجود دارد:
         //     // new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
         // };
-          var claims = new List<Claim>
+        var claims = new List<Claim>
            {
                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                // User.Id (Guid PK) را به عنوان NameIdentifier اصلی قرار دهید
                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
                // SystemUserId (نام کاربری برای ورود) را به عنوان Subject و Name قرار دهید
-               new Claim(JwtRegisteredClaimNames.Sub, user.SystemUserId), 
+               new Claim(JwtRegisteredClaimNames.Sub, user.SystemUserId),
                new Claim(ClaimTypes.Name, user.SystemUserId), // این معمولاً برای User.Identity.Name استفاده می‌شود
                new Claim(JwtRegisteredClaimNames.GivenName, user.FullName ?? string.Empty),
            };
@@ -74,6 +74,15 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
             // throw new InvalidOperationException($"نقش برای کاربر '{user.SystemUserId}' به درستی تنظیم نشده است.");
         }
 
+        if (!string.IsNullOrEmpty(user.NationalCode))
+        {
+            claims.Add(new Claim(CustomClaimTypes.NationalCode, user.NationalCode));
+        }
+        if (user.Department != null &&!string.IsNullOrEmpty(user.Department.Code))
+        {
+            claims.Add(new Claim(CustomClaimTypes.DepartmentCode, user.Department.Code));
+        }
+
         if (!string.IsNullOrEmpty(user.ProvinceCode))
         {
             claims.Add(new Claim(CustomClaimTypes.ProvinceCode, user.ProvinceCode));
@@ -83,7 +92,7 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
         {
             claims.Add(new Claim(CustomClaimTypes.HotelId, user.HotelId.Value.ToString()));
         }
-        
+
         if (!string.IsNullOrEmpty(user.DepartmentCode))
         {
             claims.Add(new Claim("department_code", user.DepartmentCode)); // نام Claim سفارشی برای کد دپارتمان
@@ -103,7 +112,7 @@ public class JwtTokenGeneratorService : IJwtTokenGenerator
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
         var tokenString = tokenHandler.WriteToken(securityToken);
 
-        _logger.LogInformation("JWT token generated for user {SystemUserId} with ID {UserId} and Role {RoleName}.", 
+        _logger.LogInformation("JWT token generated for user {SystemUserId} with ID {UserId} and Role {RoleName}.",
             user.SystemUserId, user.Id, user.Role?.Name ?? "N/A");
 
         return new LoginResponseDto

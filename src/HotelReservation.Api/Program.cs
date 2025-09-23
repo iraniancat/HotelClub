@@ -27,7 +27,7 @@ if (string.IsNullOrEmpty(allowedOrigin))
 {
     // اگر در appsettings تعریف نشده، یک مقدار پیش‌فرض برای توسعه در نظر بگیرید
     // این آدرس باید با آدرس برنامه Blazor WASM شما مطابقت داشته باشد.
-    allowedOrigin = "https://localhost:7001"; // <<-- این را با پورت کلاینت خود تنظیم کنید، یا پورت API اگر چیزی اشتباه است.
+    allowedOrigin = "https://localhost:5000"; // <<-- این را با پورت کلاینت خود تنظیم کنید، یا پورت API اگر چیزی اشتباه است.
                                               // معمولاً پورت کلاینت و API متفاوت است. مثلاً اگر API روی 7001 است، کلاینت ممکن است روی 7123 باشد.
     Console.WriteLine($"Warning: AllowedOrigins not configured in appsettings.json. Using default: {allowedOrigin}");
 }
@@ -151,13 +151,18 @@ var app = builder.Build();
 app.UseCustomExceptionHandler();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-    // TODO: در آینده، می‌توانیم یک Middleware برای Seed کردن داده‌های اولیه در اینجا قرار دهیم
-    // app.UseItToSeedData();
-}
+// TODO: در آینده، می‌توانیم یک Middleware برای Seed کردن داده‌های اولیه در اینجا قرار دهیم
+// app.UseItToSeedData();
+//}
+
+app.UseDefaultFiles();
+app.UseBlazorFrameworkFiles();
+app.UseStaticFiles();
+//app.UseRouting();
 
 // --- استفاده از Middleware CORS ---
 // این باید قبل از UseRouting (اگر صریحاً استفاده شده)، UseAuthentication، UseAuthorization و MapControllers باشد.
@@ -166,5 +171,10 @@ app.UseCors("AllowBlazorClient"); // <<-- استفاده از Policy که تعر
 
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
+
+app.MapFallbackToFile("index.html");
+
 app.Run();

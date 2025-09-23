@@ -69,7 +69,7 @@ public class UserManagementController : ControllerBase
 
     // GET: api/management/users/{id}
     [HttpGet("{id:guid}", Name = "GetUserForManagementById")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserManagementDetailsDto))]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetUserById(Guid id)

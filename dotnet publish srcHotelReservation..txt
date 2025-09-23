@@ -1,0 +1,7 @@
+dotnet publish src/HotelReservation.Client/HotelReservation.Client.csproj -c Release -o ./publish/client
+
+dotnet publish src/HotelReservation.Api/HotelReservation.Api.csproj -c Release -o ./publish/api
+
+
+dotnet ef migrations add AddRequestingEmployeeRelationToBookingRequest --project src/HotelReservation.Infrastructure --startup-project src/HotelReservation.Api  
+dotnet ef database update --project src/HotelReservation.Infrastructure --startup-project src/HotelReservation.Api

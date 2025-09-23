@@ -41,26 +41,26 @@
                 }
 
                 <MudItem xs="12" sm="6" md="4">
-                    <MudSelect T="Guid" Label="انتخاب هتل"
+                    <MudSelect  T="Guid?" Label="انتخاب هتل"
                      Value="_bookingModel.HotelId"
                                ValueChanged="OnHotelChanged"                     
-                               For="@(() => _bookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است.">
+                               For="@(() => _bookingModel.HotelId)" Required="true" RequiredError="انتخاب هتل الزامی است." Placeholder="یک هتل انتخاب کنید">
                         @if (_hotels.Any())
                         {
                             @foreach (var hotel in _hotels)
                             {
-                                <MudSelectItem Value="hotel.Id">@hotel.Name</MudSelectItem>
+                                <MudSelectItem T="Guid?" Value="hotel.Id">@hotel.Name</MudSelectItem>
                             }
                         }
                     </MudSelect>
                 </MudItem>
 
                 <MudItem xs="12" sm="6" md="4">
-                     <MudSelect T="Guid" Label="دوره زمانی رزرو" @bind-value="_bookingModel.BookingPeriodId"
-                               For="@(() => _bookingModel.BookingPeriodId)" Required="true" RequiredError="انتخاب دوره زمانی الزامی است.">
+                     <MudSelect T="Guid?" Label="دوره زمانی رزرو" @bind-value="_bookingModel.BookingPeriodId"
+                               For="@(() => _bookingModel.BookingPeriodId)" Required="true" RequiredError="انتخاب دوره زمانی الزامی است." Placeholder="دوره زمانی مدنظر را انتخاب">
                         @foreach (var period in _activeBookingPeriods)
                         {
-                            <MudSelectItem Value="period.Id">@period.Name</MudSelectItem>
+                            <MudSelectItem  T="Guid?" Value="period.Id">@period.Name</MudSelectItem>
                         }
                     </MudSelect>
                 </MudItem>
@@ -213,10 +213,10 @@
     private class CreateBookingModel
     {
         public string? RequestingEmployeeNationalCode { get; set; }
-        public Guid BookingPeriodId { get; set; }
+        public Guid? BookingPeriodId { get; set; }
         public string? CheckInDate { get; set; }
         public string? CheckOutDate { get; set; }
-        public Guid HotelId { get; set; }
+        public Guid? HotelId { get; set; }
         public string? Notes { get; set; }
         public List<BookingGuestInputDto> Guests { get; set; } = new List<BookingGuestInputDto>();
     }
@@ -242,14 +242,14 @@
         
         try
         {
+
+          //  await Task.WhenAll(hotelsTask, periodsTask);
+
             var hotelsTask = ApiClient.GetListAsync<HotelDto>("api/hotels/all");
-            var periodsTask = ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods/active");
-
-            await Task.WhenAll(hotelsTask, periodsTask);
-
             var hotelsResult = await hotelsTask;
             if (hotelsResult != null) _hotels = hotelsResult.ToList();
             
+            var periodsTask = ApiClient.GetListAsync<BookingPeriodDto>("api/booking-periods/active");
             var periodsResult = await periodsTask;
             if (periodsResult != null) _activeBookingPeriods = periodsResult.ToList();
         }
@@ -279,7 +279,7 @@
         await LoadBookingHistoryAsync();
     }
 
-    private async Task OnHotelChanged(Guid hotelId)
+    private async Task OnHotelChanged(Guid? hotelId)
     {
         _bookingModel.HotelId = hotelId;
         await LoadBookingHistoryAsync();
@@ -420,10 +420,10 @@
         var dtoToSend = new CreateBookingRequestDto
         {
             RequestingEmployeeNationalCode = _selectedEmployee.NationalCode,
-            BookingPeriodId = _bookingModel.BookingPeriodId,
+            BookingPeriodId = _bookingModel.BookingPeriodId.Value,
             CheckInDate = checkInDateTime,
             CheckOutDate = checkOutDateTime,
-            HotelId = _bookingModel.HotelId,
+            HotelId = _bookingModel.HotelId.Value,
             Notes = _bookingModel.Notes,
             Guests = _bookingModel.Guests
         };
