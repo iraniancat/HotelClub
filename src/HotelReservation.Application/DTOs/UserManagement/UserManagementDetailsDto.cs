@@ -20,7 +20,11 @@ public class UserManagementDetailsDto
 
     public Guid? HotelId { get; set; } // شناسه هتل برای Dropdown ویرایش
     public string? AssignedHotelName { get; set; }
+    public bool IsBlacklisted { get; set; }
 
+    public string? BlacklistReason { get; set; } // اگر IsBlacklisted=true باشد، این فیلد الزامی می‌شود.
+
+    public DateTime? BlacklistEndDate { get; set; } // تاریخ پایان محدودیت (می‌تواند null باشد)
     // در آینده می‌توان لیست وابستگان یا سایر اطلاعات مرتبط را نیز اضافه کرد
     // public List<DependentSlimDto> Dependents { get; set; } = new List<DependentSlimDto>();
 }

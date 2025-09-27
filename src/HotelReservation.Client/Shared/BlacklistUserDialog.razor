@@ -1,0 +1,98 @@
+
+
+@* 1. فایل جدید: src/HotelReservation.Client/Shared/BlacklistUserDialog.razor *@
+@* این دیالوگ، فرم مدیریت وضعیت لیست سیاه کاربر را نمایش می‌دهد. *@
+@inject IApiClientService ApiClient
+@inject ISnackbar Snackbar
+@using Blazor.PersianDatePicker
+@using System.Globalization
+
+<MudDialog>
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Icon="@Icons.Material.Filled.Block" Class="me-3"/> مدیریت لیست سیاه برای: @UserToUpdate.FullName
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form" @bind-IsValid="_isValid" Model="@_blacklistModel">
+            <DataAnnotationsValidator />
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudSwitch @bind-Checked="_blacklistModel.IsBlacklisted" Color="Color.Error">
+                        افزودن به لیست سیاه
+                    </MudSwitch>
+                </MudItem>
+                
+                @if (_blacklistModel.IsBlacklisted)
+                {
+                    <MudItem xs="12">
+                        <MudTextField T="string" Label="علت افزودن به لیست سیاه" 
+                                      @bind-value="_blacklistModel.Reason"
+                                      For="@(() => _blacklistModel.Reason)" 
+                                      Required="true" RequiredError="علت الزامی است." 
+                                      Lines="3" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <div class="d-flex align-center">
+                            <span class="me-4">تاریخ اتمام محدودیت (اختیاری):</span>
+                            <InputPersianDatePicker @bind-Value="_endDateString"  />
+                        </div>
+                    </MudItem>
+                }
+            </MudGrid>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">انصراف</MudButton>
+        <MudButton Color="Color.Primary" Variant="Variant.Filled" OnClick="SubmitAsync" Disabled="!_isValid || _isProcessing">
+            ذخیره تغییرات
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public UserManagementDetailsDto UserToUpdate { get; set; } = default!;
+
+    private BlacklistUserDto _blacklistModel = new();
+    private MudForm? _form;
+    private bool _isValid;
+    private bool _isProcessing = false;
+    private string? _endDateString;
+
+    protected override void OnInitialized()
+    {
+        _blacklistModel.IsBlacklisted = UserToUpdate.IsBlacklisted;
+        _blacklistModel.Reason = UserToUpdate.BlacklistReason;
+        _blacklistModel.EndDate = UserToUpdate.BlacklistEndDate;
+        _endDateString =!string.IsNullOrWhiteSpace(UserToUpdate.BlacklistEndDate.ToString())?Helper.ToPersianDateString(UserToUpdate.BlacklistEndDate.Value):null;
+    }
+
+    private async Task SubmitAsync()
+    {
+        await _form!.Validate();
+        if (!_isValid) return;
+
+        _isProcessing = true;
+        try
+        {
+            _blacklistModel.EndDate =Helper.ToGregorianDateTime(_endDateString);
+            await ApiClient.PutAsync($"api/management/users/{UserToUpdate.Id}/blacklist", _blacklistModel);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            Snackbar.Add($"خطا: {ex.Message}", Severity.Error);
+        }
+        finally
+        {
+            _isProcessing = false;
+        }
+    }
+    
+    void Cancel() => MudDialog.Cancel();
+
+    @* private string? ToPersianDateString1(DateTime? dt) => dt.HasValue ? new PersianCalendar().GetYear(dt.Value) + "/" + new PersianCalendar().GetMonth(dt.Value).ToString("D2") + "/" + new PersianCalendar().GetDayOfMonth(dt.Value).ToString("D2") : null; *@
+    @* private DateTime? ToGregorianDateTime1(string? persianDate) => !string.IsNullOrWhiteSpace(persianDate) ? PersianDate.Parse(persianDate).ToDateTime() : null; *@
+}
+

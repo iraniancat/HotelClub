@@ -108,6 +108,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFzc2lnblJvbGVEaWFsb2cucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Project/HotelClub/src/HotelReservation.Client/Shared/BlacklistUserDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJsYWNrbGlzdFVzZXJEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Project/HotelClub/src/HotelReservation.Client/Shared/BookingRequestDetailsPage.razor]
 build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJvb2tpbmdSZXF1ZXN0RGV0YWlsc1BhZ2UucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

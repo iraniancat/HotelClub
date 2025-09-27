@@ -36,6 +36,11 @@ public class User
     public virtual ICollection<BookingStatusHistory> StatusChangesByThisUser { get; private set; } = new List<BookingStatusHistory>();
 
 
+    public bool IsBlacklisted { get; private set; }
+    public string? BlacklistReason { get; private set; }
+    public DateTime? BlacklistEndDate { get; private set; }
+
+
     private User() { }
 
     // سازنده برای ایجاد کاربر جدید (مخصوصاً کاربران غیر سازمانی توسط مدیر ارشد)
@@ -78,6 +83,7 @@ public class User
             HotelId = null;
             AssignedHotel = null;
         }
+        IsBlacklisted = false; // مقدار پیش‌فرض
     }
 
     // متد برای به‌روزرسانی شماره تلفن (در صورت نیاز)
@@ -106,14 +112,14 @@ public class User
     public void ChangePassword(string newPasswordHash) { /* ... */ PasswordHash = newPasswordHash; }
     public void Activate() => IsActive = true;
     public void Deactivate() => IsActive = false;
-   public void ChangeRole(Guid newRoleId, Role newRole)
+    public void ChangeRole(Guid newRoleId, Role newRole)
     {
         if (newRoleId == Guid.Empty) throw new ArgumentNullException(nameof(newRoleId));
         if (newRole == null) throw new ArgumentNullException(nameof(newRole));
 
         RoleId = newRoleId;
         Role = newRole;
-        
+
         // اگر نقش جدید "کاربر هتل" نیست، تخصیص هتل را پاک کن
         if (newRole.Name != "HotelUser") // فرض بر نام نقش
         {
@@ -205,6 +211,26 @@ public class User
         else if (this.Role?.Name == "HotelUser" && newRole.Name != "HotelUser")
         {
             // ChangeRole باید این را مدیریت کند
+        }
+    }
+  public void UpdateBlacklistStatus(bool isBlacklisted, string? reason, DateTime? endDate)
+    {
+        IsBlacklisted = isBlacklisted;
+
+        if (isBlacklisted)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+            {
+                throw new ArgumentException("برای افزودن کاربر به لیست سیاه، ارائه دلیل الزامی است.");
+            }
+            BlacklistReason = reason;
+            BlacklistEndDate = endDate; // می‌تواند null باشد به معنی محدودیت دائمی
+        }
+        else
+        {
+            // اگر کاربر از لیست سیاه خارج می‌شود، دلیل و تاریخ را پاک می‌کنیم
+            BlacklistReason = null;
+            BlacklistEndDate = null;
         }
     }
 }

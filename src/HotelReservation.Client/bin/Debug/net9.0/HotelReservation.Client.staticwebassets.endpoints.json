@@ -1817,8 +1817,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.llbsew9bk1.wasm",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm",
+      "Route": "_framework/HotelReservation.Application.j1abaipk38.pdb",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1831,168 +1831,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "249109"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:23 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "llbsew9bk1"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Application.wasm"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.llbsew9bk1.wasm",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000011511719"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "86867"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "llbsew9bk1"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Application.wasm"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.llbsew9bk1.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "86867"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/wasm"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "llbsew9bk1"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Application.wasm.gz"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.pdb",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "81120"
+          "Value": "82392"
         },
         {
           "Name": "Content-Type",
@@ -2000,158 +1839,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw=\""
+          "Value": "\"l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:20:48 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.pdb",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000025045708"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "39926"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "39926"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Application.r05ce2kk6k.pdb",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "81120"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:20:48 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r05ce2kk6k"
+          "Value": "j1abaipk38"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw="
+          "Value": "sha256-l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM="
         },
         {
           "Name": "label",
@@ -2160,13 +1862,13 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.r05ce2kk6k.pdb",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb.gz",
+      "Route": "_framework/HotelReservation.Application.j1abaipk38.pdb",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000025045708"
+          "Quality": "0.000024718823"
         }
       ],
       "ResponseHeaders": [
@@ -2184,7 +1886,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39926"
+          "Value": "40454"
         },
         {
           "Name": "Content-Type",
@@ -2192,15 +1894,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY=\""
+          "Value": "\"j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw=\""
+          "Value": "W/\"l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
         },
         {
           "Name": "Vary",
@@ -2210,11 +1912,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r05ce2kk6k"
+          "Value": "j1abaipk38"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-lQWr2eoSp+WnC54kA7XUO6jV8lN0S8U/CbxoQvyDMyw="
+          "Value": "sha256-l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM="
         },
         {
           "Name": "label",
@@ -2223,8 +1925,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.r05ce2kk6k.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Application.r05ce2kk6k.pdb.gz",
+      "Route": "_framework/HotelReservation.Application.j1abaipk38.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2241,7 +1943,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39926"
+          "Value": "40454"
         },
         {
           "Name": "Content-Type",
@@ -2249,11 +1951,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY=\""
+          "Value": "\"j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
         },
         {
           "Name": "Vary",
@@ -2263,11 +1965,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "r05ce2kk6k"
+          "Value": "j1abaipk38"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-wFomDu8eDzeJjXApzx/z5/GSl/de6aA/v6SjFxfa+ZY="
+          "Value": "sha256-j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg="
         },
         {
           "Name": "label",
@@ -2276,8 +1978,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.wasm",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm",
+      "Route": "_framework/HotelReservation.Application.pdb",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2290,36 +1992,36 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "249109"
+          "Value": "82392"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "application/octet-stream"
         },
         {
           "Name": "ETag",
-          "Value": "\"RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0=\""
+          "Value": "\"l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:23 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0="
+          "Value": "sha256-l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Application.wasm",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm.gz",
+      "Route": "_framework/HotelReservation.Application.pdb",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000011511719"
+          "Quality": "0.000024718823"
         }
       ],
       "ResponseHeaders": [
@@ -2337,23 +2039,23 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "86867"
+          "Value": "40454"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "application/octet-stream"
         },
         {
           "Name": "ETag",
-          "Value": "\"zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8=\""
+          "Value": "\"j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0=\""
+          "Value": "W/\"l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
         },
         {
           "Name": "Vary",
@@ -2363,13 +2065,150 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RzjkzWE2rP+Kc/VwZi9pfFE1lFDdvR39bo8EcWzTkV0="
+          "Value": "sha256-l2nQOi55hFVh7sqYdesbQrSAIePSZUWVtZxcOH2K8HM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Application.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Application.j1abaipk38.pdb.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40454"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-j5PkM3vJuLn9Uocw0IoId0WhoyP6pnIAAyAOgdPFapg="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Application.wasm",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "253717"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 08:44:47 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Application.wasm",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011304289"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "88461"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Application.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Application.llbsew9bk1.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2386,7 +2225,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "86867"
+          "Value": "88461"
         },
         {
           "Name": "Content-Type",
@@ -2394,11 +2233,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8=\""
+          "Value": "\"D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
         },
         {
           "Name": "Vary",
@@ -2408,13 +2247,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-zXVTjvrQEX8ZdgLYAc+95HMVj3W1kOoF54E8Lf45DZ8="
+          "Value": "sha256-D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.cwywprk6g9.pdb",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb",
+      "Route": "_framework/HotelReservation.Application.ym8c21v7ax.wasm",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2427,305 +2266,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "271588"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:07 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "cwywprk6g9"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.cwywprk6g9.pdb",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000004538441"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "220339"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "cwywprk6g9"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.cwywprk6g9.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "220339"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "cwywprk6g9"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/HotelReservation.Client.pdb.gz"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.pdb",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "271588"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:07 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.pdb",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000004538441"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "220339"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-VMKROoq1tACwi0t/mkJmmXzGsizq6eM1pS7IcGimp0Q="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Client.cwywprk6g9.pdb.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "220339"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-hQlHGNFsqbRv+8PTfcin8MRMlzVsVrbAi+g1tRWnAak="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/HotelReservation.Client.qocaknfbrr.wasm",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "401685"
+          "Value": "253717"
         },
         {
           "Name": "Content-Type",
@@ -2733,21 +2274,182 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec=\""
+          "Value": "\"ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:08 GMT"
+          "Value": "Thu, 25 Sep 2025 08:44:47 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qocaknfbrr"
+          "Value": "ym8c21v7ax"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec="
+          "Value": "sha256-ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Application.wasm"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Application.ym8c21v7ax.wasm",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011304289"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "88461"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ym8c21v7ax"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ukx72T+vS7c30EJYLocq4iAM84Y6E8ipWWSUkHtC2Jo="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Application.wasm"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Application.ym8c21v7ax.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Application.ym8c21v7ax.wasm.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "88461"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 08:44:53 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ym8c21v7ax"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-D42HDimkPdehK+f1sAvMFZQTVT5MjEDePK6vjnflmu4="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Application.wasm.gz"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.mp0dddzayi.wasm",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "409365"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mp0dddzayi"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms="
         },
         {
           "Name": "label",
@@ -2756,13 +2458,13 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.qocaknfbrr.wasm",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm.gz",
+      "Route": "_framework/HotelReservation.Client.mp0dddzayi.wasm",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000007591804"
+          "Quality": "0.000007457733"
         }
       ],
       "ResponseHeaders": [
@@ -2780,7 +2482,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "131720"
+          "Value": "134088"
         },
         {
           "Name": "Content-Type",
@@ -2788,15 +2490,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8=\""
+          "Value": "\"ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec=\""
+          "Value": "W/\"JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
         },
         {
           "Name": "Vary",
@@ -2806,11 +2508,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qocaknfbrr"
+          "Value": "mp0dddzayi"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec="
+          "Value": "sha256-JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms="
         },
         {
           "Name": "label",
@@ -2819,8 +2521,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.qocaknfbrr.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm.gz",
+      "Route": "_framework/HotelReservation.Client.mp0dddzayi.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2837,7 +2539,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "131720"
+          "Value": "134088"
         },
         {
           "Name": "Content-Type",
@@ -2845,11 +2547,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8=\""
+          "Value": "\"ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
         },
         {
           "Name": "Vary",
@@ -2859,11 +2561,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qocaknfbrr"
+          "Value": "mp0dddzayi"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8="
+          "Value": "sha256-ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg="
         },
         {
           "Name": "label",
@@ -2872,8 +2574,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.wasm",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm",
+      "Route": "_framework/HotelReservation.Client.pdb",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2886,36 +2588,36 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "401685"
+          "Value": "277068"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "application/octet-stream"
         },
         {
           "Name": "ETag",
-          "Value": "\"ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec=\""
+          "Value": "\"VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:08 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:35 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec="
+          "Value": "sha256-VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Client.wasm",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm.gz",
+      "Route": "_framework/HotelReservation.Client.pdb",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000007591804"
+          "Quality": "0.000004446342"
         }
       ],
       "ResponseHeaders": [
@@ -2933,23 +2635,23 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "131720"
+          "Value": "224903"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "application/octet-stream"
         },
         {
           "Name": "ETag",
-          "Value": "\"ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8=\""
+          "Value": "\"3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec=\""
+          "Value": "W/\"VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
         },
         {
           "Name": "Vary",
@@ -2959,13 +2661,311 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ul6ChdTxA7B48fXkm+V5zMJOx8ZgQPsWeHqIN3kxJec="
+          "Value": "sha256-VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "224903"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.v3exdmfy2y.pdb",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "277068"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v3exdmfy2y"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.v3exdmfy2y.pdb",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000004446342"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "224903"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v3exdmfy2y"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VYXQKy7sIPnkEtaC4L1HhIjWKK+e77QnSRYSQuHQXx4="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.v3exdmfy2y.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Client.v3exdmfy2y.pdb.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "224903"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "v3exdmfy2y"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-3uNclaDbYTgWTdzPtwkGQD4fybjbbNmJTzmaY8pO2XQ="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/HotelReservation.Client.pdb.gz"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.wasm",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "409365"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/HotelReservation.Client.wasm",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000007457733"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134088"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JopHu6m0LtelF+cqsDEFnX+fkAnkwnzUeB4F3dTIjms="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Client.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Client.qocaknfbrr.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Client.mp0dddzayi.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2982,7 +2982,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "131720"
+          "Value": "134088"
         },
         {
           "Name": "Content-Type",
@@ -2990,11 +2990,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8=\""
+          "Value": "\"ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 09:17:10 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
         },
         {
           "Name": "Vary",
@@ -3004,13 +3004,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ktjwA/NVeCZtyhM+R1uj3SDAOVubKtUPC/U3tPC9Es8="
+          "Value": "sha256-ZyU158+zklXkHHM8lFuhILHiXnGVrVvwQosh38a/QAg="
         }
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm",
+      "Route": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3023,7 +3023,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "32533"
+          "Value": "33557"
         },
         {
           "Name": "Content-Type",
@@ -3031,21 +3031,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw=\""
+          "Value": "\"OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:23 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4au8t9i5r4"
+          "Value": "11q4ahh5ft"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw="
+          "Value": "sha256-OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50="
         },
         {
           "Name": "label",
@@ -3054,13 +3054,13 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm.gz",
+      "Route": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000075797772"
+          "Quality": "0.000073833432"
         }
       ],
       "ResponseHeaders": [
@@ -3078,7 +3078,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13192"
+          "Value": "13543"
         },
         {
           "Name": "Content-Type",
@@ -3086,15 +3086,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I=\""
+          "Value": "\"+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw=\""
+          "Value": "W/\"OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3104,11 +3104,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4au8t9i5r4"
+          "Value": "11q4ahh5ft"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw="
+          "Value": "sha256-OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50="
         },
         {
           "Name": "label",
@@ -3117,8 +3117,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm.gz",
+      "Route": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3135,7 +3135,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13192"
+          "Value": "13543"
         },
         {
           "Name": "Content-Type",
@@ -3143,11 +3143,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I=\""
+          "Value": "\"+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3157,11 +3157,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "4au8t9i5r4"
+          "Value": "11q4ahh5ft"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I="
+          "Value": "sha256-+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0="
         },
         {
           "Name": "label",
@@ -3170,8 +3170,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb",
+      "Route": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3184,7 +3184,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21492"
+          "Value": "21780"
         },
         {
           "Name": "Content-Type",
@@ -3192,21 +3192,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg=\""
+          "Value": "\"kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:20:47 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:16 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lqw7xg9krt"
+          "Value": "hoy4yhfe7m"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg="
+          "Value": "sha256-kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y="
         },
         {
           "Name": "label",
@@ -3215,13 +3215,13 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb.gz",
+      "Route": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000089142450"
+          "Quality": "0.000088198977"
         }
       ],
       "ResponseHeaders": [
@@ -3239,7 +3239,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11217"
+          "Value": "11337"
         },
         {
           "Name": "Content-Type",
@@ -3247,15 +3247,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU=\""
+          "Value": "\"La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg=\""
+          "Value": "W/\"kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3265,11 +3265,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lqw7xg9krt"
+          "Value": "hoy4yhfe7m"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg="
+          "Value": "sha256-kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y="
         },
         {
           "Name": "label",
@@ -3278,8 +3278,8 @@
       ]
     },
     {
-      "Route": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb.gz",
+      "Route": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3296,7 +3296,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11217"
+          "Value": "11337"
         },
         {
           "Name": "Content-Type",
@@ -3304,11 +3304,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU=\""
+          "Value": "\"La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3318,11 +3318,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "lqw7xg9krt"
+          "Value": "hoy4yhfe7m"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU="
+          "Value": "sha256-La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M="
         },
         {
           "Name": "label",
@@ -3332,7 +3332,7 @@
     },
     {
       "Route": "_framework/HotelReservation.Domain.pdb",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3345,7 +3345,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21492"
+          "Value": "21780"
         },
         {
           "Name": "Content-Type",
@@ -3353,28 +3353,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg=\""
+          "Value": "\"kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:20:47 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:16 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg="
+          "Value": "sha256-kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.pdb",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000089142450"
+          "Quality": "0.000088198977"
         }
       ],
       "ResponseHeaders": [
@@ -3392,7 +3392,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11217"
+          "Value": "11337"
         },
         {
           "Name": "Content-Type",
@@ -3400,15 +3400,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU=\""
+          "Value": "\"La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg=\""
+          "Value": "W/\"kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3418,13 +3418,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-g81OXNaxe3e5YTM14U8G/AttEN3ej32VlM8q6WErfHg="
+          "Value": "sha256-kT4Y8dytvjxylBKki2QViV9cawfqONKJvX1p9ZqXS0Y="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.pdb.gz",
-      "AssetFile": "_framework/HotelReservation.Domain.lqw7xg9krt.pdb.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.hoy4yhfe7m.pdb.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3441,7 +3441,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "11217"
+          "Value": "11337"
         },
         {
           "Name": "Content-Type",
@@ -3449,11 +3449,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU=\""
+          "Value": "\"La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:21:28 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3463,13 +3463,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-rcdVMDcaTVWXz15dzl5LTXUjgqkhRNnQY67yrnTKNQU="
+          "Value": "sha256-La/RagskQNSVviwzuDJ2e0euUbrIJAQR2bvyiKQLo1M="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.wasm",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3482,7 +3482,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "32533"
+          "Value": "33557"
         },
         {
           "Name": "Content-Type",
@@ -3490,28 +3490,28 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw=\""
+          "Value": "\"OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:23 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:34 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw="
+          "Value": "sha256-OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.wasm",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000075797772"
+          "Quality": "0.000073833432"
         }
       ],
       "ResponseHeaders": [
@@ -3529,7 +3529,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13192"
+          "Value": "13543"
         },
         {
           "Name": "Content-Type",
@@ -3537,15 +3537,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I=\""
+          "Value": "\"+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw=\""
+          "Value": "W/\"OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3555,13 +3555,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-tFOhiJ/17xep7dg8k/wP9amCBKg2416E7n/ZFzlMYbw="
+          "Value": "sha256-OyVtm2ZhEKC3IJirSEC8pRCwONDM6C0GISv1z07sC50="
         }
       ]
     },
     {
       "Route": "_framework/HotelReservation.Domain.wasm.gz",
-      "AssetFile": "_framework/HotelReservation.Domain.4au8t9i5r4.wasm.gz",
+      "AssetFile": "_framework/HotelReservation.Domain.11q4ahh5ft.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -3578,7 +3578,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "13192"
+          "Value": "13543"
         },
         {
           "Name": "Content-Type",
@@ -3586,11 +3586,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I=\""
+          "Value": "\"+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 07:08:35 GMT"
         },
         {
           "Name": "Vary",
@@ -3600,7 +3600,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-U0oQzQkF4D4xceIReoY8MKVUtdKrJ2eRvs9ZzLt6s4I="
+          "Value": "sha256-+14/SqT3xgFqUuYG3MuNukTO/dp6KooR4n6CchbfAh0="
         }
       ]
     },
@@ -79021,17 +79021,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Rw7K3msZVSyI3jwQaiUpusPb2w5m/ZuURfSrR41OqcI=\""
+          "Value": "\"7z5E/0NjPYgencv56HIuuCPEZjbHFZuhmjCpTHbpsKk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 23 Sep 2025 10:48:48 GMT"
+          "Value": "Thu, 25 Sep 2025 09:33:37 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Rw7K3msZVSyI3jwQaiUpusPb2w5m/ZuURfSrR41OqcI="
+          "Value": "sha256-7z5E/0NjPYgencv56HIuuCPEZjbHFZuhmjCpTHbpsKk="
         }
       ]
     },
@@ -79042,7 +79042,7 @@
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000059719319"
+          "Quality": "0.000059705057"
         }
       ],
       "ResponseHeaders": [
@@ -79060,7 +79060,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16744"
+          "Value": "16748"
         },
         {
           "Name": "Content-Type",
@@ -79068,15 +79068,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UlFxcD3IrGbDHHMn01DW9bQ7vkbHiuFNee7KKKL4yZk=\""
+          "Value": "\"vwTNJQE4YIlBWb8NRLenefeyH15L9OpeFC8hwsukM0w=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"Rw7K3msZVSyI3jwQaiUpusPb2w5m/ZuURfSrR41OqcI=\""
+          "Value": "W/\"7z5E/0NjPYgencv56HIuuCPEZjbHFZuhmjCpTHbpsKk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 23 Sep 2025 10:47:52 GMT"
+          "Value": "Thu, 25 Sep 2025 09:23:53 GMT"
         },
         {
           "Name": "Vary",
@@ -79086,7 +79086,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Rw7K3msZVSyI3jwQaiUpusPb2w5m/ZuURfSrR41OqcI="
+          "Value": "sha256-7z5E/0NjPYgencv56HIuuCPEZjbHFZuhmjCpTHbpsKk="
         }
       ]
     },
@@ -79109,7 +79109,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "16744"
+          "Value": "16748"
         },
         {
           "Name": "Content-Type",
@@ -79117,11 +79117,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"UlFxcD3IrGbDHHMn01DW9bQ7vkbHiuFNee7KKKL4yZk=\""
+          "Value": "\"vwTNJQE4YIlBWb8NRLenefeyH15L9OpeFC8hwsukM0w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 23 Sep 2025 10:47:52 GMT"
+          "Value": "Thu, 25 Sep 2025 09:23:53 GMT"
         },
         {
           "Name": "Vary",
@@ -79131,7 +79131,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-UlFxcD3IrGbDHHMn01DW9bQ7vkbHiuFNee7KKKL4yZk="
+          "Value": "sha256-vwTNJQE4YIlBWb8NRLenefeyH15L9OpeFC8hwsukM0w="
         }
       ]
     },
@@ -79273,6 +79273,167 @@
       ]
     },
     {
+      "Route": "_framework/dotnet.g4ekh6zsr7.js",
+      "AssetFile": "_framework/dotnet.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "40677"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g4ekh6zsr7"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.g4ekh6zsr7.js",
+      "AssetFile": "_framework/dotnet.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000078228898"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12782"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g4ekh6zsr7"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.g4ekh6zsr7.js.gz",
+      "AssetFile": "_framework/dotnet.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "12782"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "g4ekh6zsr7"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js.gz"
+        }
+      ]
+    },
+    {
       "Route": "_framework/dotnet.js",
       "AssetFile": "_framework/dotnet.js",
       "Selectors": [],
@@ -79295,17 +79456,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc=\""
+          "Value": "\"gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc="
+          "Value": "sha256-gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs="
         }
       ]
     },
@@ -79316,7 +79477,7 @@
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000078235018"
+          "Quality": "0.000078228898"
         }
       ],
       "ResponseHeaders": [
@@ -79334,7 +79495,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12781"
+          "Value": "12782"
         },
         {
           "Name": "Content-Type",
@@ -79342,15 +79503,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4=\""
+          "Value": "\"yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc=\""
+          "Value": "W/\"gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         },
         {
           "Name": "Vary",
@@ -79360,168 +79521,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.js.f3yjzao5wb.map",
-      "AssetFile": "_framework/dotnet.js.map",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "56573"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/plain"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "f3yjzao5wb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js.map"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.js.f3yjzao5wb.map",
-      "AssetFile": "_framework/dotnet.js.map.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000046939542"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21303"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/plain"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "f3yjzao5wb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js.map"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.js.f3yjzao5wb.map.gz",
-      "AssetFile": "_framework/dotnet.js.map.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "21303"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/plain"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "f3yjzao5wb"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js.map.gz"
+          "Value": "sha256-gD2XMSIt+vtDFirTg+LVASuuDVoOW3S7fY2a27Ou3Vs="
         }
       ]
     },
@@ -79544,7 +79544,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "12781"
+          "Value": "12782"
         },
         {
           "Name": "Content-Type",
@@ -79552,11 +79552,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4=\""
+          "Value": "\"yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         },
         {
           "Name": "Vary",
@@ -79566,7 +79566,168 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4="
+          "Value": "sha256-yviy6twY6oDK4k18ux3VzU3JQpOoriQTfOs97PFcCyE="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.js.h795qunhva.map",
+      "AssetFile": "_framework/dotnet.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "56573"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h795qunhva"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js.map"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.js.h795qunhva.map",
+      "AssetFile": "_framework/dotnet.js.map.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000046941745"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21302"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h795qunhva"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js.map"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.js.h795qunhva.map.gz",
+      "AssetFile": "_framework/dotnet.js.map.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21302"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "h795qunhva"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.js.map.gz"
         }
       ]
     },
@@ -79593,17 +79754,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs=\""
+          "Value": "\"IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs="
+          "Value": "sha256-IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo="
         }
       ]
     },
@@ -79614,7 +79775,7 @@
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000046939542"
+          "Quality": "0.000046941745"
         }
       ],
       "ResponseHeaders": [
@@ -79632,7 +79793,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21303"
+          "Value": "21302"
         },
         {
           "Name": "Content-Type",
@@ -79640,15 +79801,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw=\""
+          "Value": "\"f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs=\""
+          "Value": "W/\"IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         },
         {
           "Name": "Vary",
@@ -79658,7 +79819,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-paG5unbsYWj8xCRqLf4u2heb832NxJ/yuC9RQvqFqvs="
+          "Value": "sha256-IwCPMDwkWHz7KL51LHewflHuaaMBKJXaVNraKFCU7Fo="
         }
       ]
     },
@@ -79681,7 +79842,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "21303"
+          "Value": "21302"
         },
         {
           "Name": "Content-Type",
@@ -79689,11 +79850,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw=\""
+          "Value": "\"f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
+          "Value": "Tue, 19 Aug 2025 22:25:52 GMT"
         },
         {
           "Name": "Vary",
@@ -79703,13 +79864,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZwIDTLCxA+aYBlfUhYxxExurATFmX1TeHYZtp1CM1Mw="
+          "Value": "sha256-f7CEkPFA6/gEkHHbY0P+JhNDL5bU3IpeLHcSgDt1NY8="
         }
       ]
     },
     {
-      "Route": "_framework/dotnet.krzbht210g.js",
-      "AssetFile": "_framework/dotnet.js",
+      "Route": "_framework/dotnet.native.21mns4qp4i.wasm",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -79722,305 +79883,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "40677"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "krzbht210g"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.krzbht210g.js",
-      "AssetFile": "_framework/dotnet.js.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000078235018"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12781"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "krzbht210g"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-0C5th70x3cgwI6otbYfnZFNKiDFUEWeeGoJEdszlFRc="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.krzbht210g.js.gz",
-      "AssetFile": "_framework/dotnet.js.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "12781"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:04 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "krzbht210g"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-LnTpohuyB7qCHmU/gJEz5dlO6IH623+II5JrBSlu8b4="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.js.gz"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.native.js",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "145424"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:40 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.native.js",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000028552665"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "35022"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.native.js.gz",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "35022"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.native.swgexbmoy7.wasm",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "2977245"
+          "Value": "2977436"
         },
         {
           "Name": "Content-Type",
@@ -80028,21 +79891,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0=\""
+          "Value": "\"RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:40 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:28 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "swgexbmoy7"
+          "Value": "21mns4qp4i"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0="
+          "Value": "sha256-RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM="
         },
         {
           "Name": "label",
@@ -80051,13 +79914,13 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.swgexbmoy7.wasm",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm.gz",
+      "Route": "_framework/dotnet.native.21mns4qp4i.wasm",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000000834045"
+          "Quality": "0.000000833955"
         }
       ],
       "ResponseHeaders": [
@@ -80075,7 +79938,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1198975"
+          "Value": "1199105"
         },
         {
           "Name": "Content-Type",
@@ -80083,15 +79946,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U=\""
+          "Value": "\"jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0=\""
+          "Value": "W/\"RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80101,11 +79964,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "swgexbmoy7"
+          "Value": "21mns4qp4i"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0="
+          "Value": "sha256-RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM="
         },
         {
           "Name": "label",
@@ -80114,8 +79977,8 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.swgexbmoy7.wasm.gz",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm.gz",
+      "Route": "_framework/dotnet.native.21mns4qp4i.wasm.gz",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80132,7 +79995,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1198975"
+          "Value": "1199105"
         },
         {
           "Name": "Content-Type",
@@ -80140,11 +80003,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U=\""
+          "Value": "\"jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80154,11 +80017,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "swgexbmoy7"
+          "Value": "21mns4qp4i"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U="
+          "Value": "sha256-jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc="
         },
         {
           "Name": "label",
@@ -80167,8 +80030,8 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.uhsveqo9bs.js",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js",
+      "Route": "_framework/dotnet.native.9ih887ebfz.js",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80189,21 +80052,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0=\""
+          "Value": "\"oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:40 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:28 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uhsveqo9bs"
+          "Value": "9ih887ebfz"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
+          "Value": "sha256-oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w="
         },
         {
           "Name": "label",
@@ -80212,13 +80075,13 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.uhsveqo9bs.js",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js.gz",
+      "Route": "_framework/dotnet.native.9ih887ebfz.js",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000028552665"
+          "Quality": "0.000028551850"
         }
       ],
       "ResponseHeaders": [
@@ -80236,7 +80099,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "35022"
+          "Value": "35023"
         },
         {
           "Name": "Content-Type",
@@ -80244,15 +80107,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0=\""
+          "Value": "\"7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0=\""
+          "Value": "W/\"oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80262,11 +80125,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uhsveqo9bs"
+          "Value": "9ih887ebfz"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
+          "Value": "sha256-oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w="
         },
         {
           "Name": "label",
@@ -80275,8 +80138,8 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.uhsveqo9bs.js.gz",
-      "AssetFile": "_framework/dotnet.native.uhsveqo9bs.js.gz",
+      "Route": "_framework/dotnet.native.9ih887ebfz.js.gz",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80293,7 +80156,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "35022"
+          "Value": "35023"
         },
         {
           "Name": "Content-Type",
@@ -80301,11 +80164,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0=\""
+          "Value": "\"7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80315,11 +80178,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "uhsveqo9bs"
+          "Value": "9ih887ebfz"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-zJqkY/VaNC9384QQYfnWJavcdCmHHGZYYa4dsGuL1X0="
+          "Value": "sha256-7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk="
         },
         {
           "Name": "label",
@@ -80328,8 +80191,8 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.native.wasm",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm",
+      "Route": "_framework/dotnet.native.js",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80342,36 +80205,36 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2977245"
+          "Value": "145424"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0=\""
+          "Value": "\"oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:40 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:28 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0="
+          "Value": "sha256-oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w="
         }
       ]
     },
     {
-      "Route": "_framework/dotnet.native.wasm",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm.gz",
+      "Route": "_framework/dotnet.native.js",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000000834045"
+          "Quality": "0.000028551850"
         }
       ],
       "ResponseHeaders": [
@@ -80389,23 +80252,23 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1198975"
+          "Value": "35023"
         },
         {
           "Name": "Content-Type",
-          "Value": "application/wasm"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U=\""
+          "Value": "\"7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0=\""
+          "Value": "W/\"oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80415,13 +80278,150 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-HHqsNtcX76Ik012KVAobmCLooIZ2znhTFCqfijzEdi0="
+          "Value": "sha256-oS7IRiQoVt9ThQ7Y2UM3XoeY0JqPD02cg9IvRdufn2w="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.native.js.gz",
+      "AssetFile": "_framework/dotnet.native.9ih887ebfz.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "35023"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7JK5a/iJgdim8gh/wno80SZJbHFWpWETa6RwG8hJ8xk="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.native.wasm",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2977436"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:26:28 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM="
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.native.wasm",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000000833955"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1199105"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/wasm"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RtuwNrUOdAJ5A4aS4ZmceO4ySriaYqTdC7X++6yd9lM="
         }
       ]
     },
     {
       "Route": "_framework/dotnet.native.wasm.gz",
-      "AssetFile": "_framework/dotnet.native.swgexbmoy7.wasm.gz",
+      "AssetFile": "_framework/dotnet.native.21mns4qp4i.wasm.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80438,7 +80438,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1198975"
+          "Value": "1199105"
         },
         {
           "Name": "Content-Type",
@@ -80446,11 +80446,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U=\""
+          "Value": "\"jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:32 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80460,174 +80460,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-F7UN4/a/oyI8Ws0Eh+VySD4xt1Mj5BoOd5Rz1srLy2U="
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.runtime.5nhp1wfg9b.js",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "194766"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "5nhp1wfg9b"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.runtime.js"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.runtime.5nhp1wfg9b.js",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.000017782204"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "56235"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ=\""
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "5nhp1wfg9b"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.runtime.js"
-        }
-      ]
-    },
-    {
-      "Route": "_framework/dotnet.runtime.5nhp1wfg9b.js.gz",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "56235"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "5nhp1wfg9b"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ="
-        },
-        {
-          "Name": "label",
-          "Value": "_framework/dotnet.runtime.js.gz"
+          "Value": "sha256-jPid5Syq5kLsd7XIkLoNri22F2xv61gqo6CukmMlLQc="
         }
       ]
     },
     {
       "Route": "_framework/dotnet.runtime.js",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80648,23 +80487,23 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw=\""
+          "Value": "\"oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw="
+          "Value": "sha256-oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8="
         }
       ]
     },
     {
       "Route": "_framework/dotnet.runtime.js",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js.gz",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
@@ -80695,15 +80534,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ=\""
+          "Value": "\"aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw=\""
+          "Value": "W/\"oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80713,13 +80552,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-kTZbe5ESp04VMT22TnjRmFj88VbtEcohZfCm4og/IDw="
+          "Value": "sha256-oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8="
         }
       ]
     },
     {
       "Route": "_framework/dotnet.runtime.js.gz",
-      "AssetFile": "_framework/dotnet.runtime.5nhp1wfg9b.js.gz",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -80744,11 +80583,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ=\""
+          "Value": "\"aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 22 Sep 2025 07:06:33 GMT"
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
         },
         {
           "Name": "Vary",
@@ -80758,7 +80597,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-i/ieKoSIsEfcjibSDSUao0clzABnZuwK6zycugy2KUQ="
+          "Value": "sha256-aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA="
         }
       ]
     },
@@ -80785,17 +80624,17 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs=\""
+          "Value": "\"P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs="
+          "Value": "sha256-P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc="
         }
       ]
     },
@@ -80832,15 +80671,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M=\""
+          "Value": "\"7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs=\""
+          "Value": "W/\"P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         },
         {
           "Name": "Vary",
@@ -80850,7 +80689,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs="
+          "Value": "sha256-P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc="
         }
       ]
     },
@@ -80881,11 +80720,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M=\""
+          "Value": "\"7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         },
         {
           "Name": "Vary",
@@ -80895,12 +80734,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M="
+          "Value": "sha256-7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM="
         }
       ]
     },
     {
-      "Route": "_framework/dotnet.runtime.js.sw8h8rjm4u.map",
+      "Route": "_framework/dotnet.runtime.js.zbl9qys38n.map",
       "AssetFile": "_framework/dotnet.runtime.js.map",
       "Selectors": [],
       "ResponseHeaders": [
@@ -80922,21 +80761,21 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs=\""
+          "Value": "\"P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sw8h8rjm4u"
+          "Value": "zbl9qys38n"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs="
+          "Value": "sha256-P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc="
         },
         {
           "Name": "label",
@@ -80945,7 +80784,7 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.runtime.js.sw8h8rjm4u.map",
+      "Route": "_framework/dotnet.runtime.js.zbl9qys38n.map",
       "AssetFile": "_framework/dotnet.runtime.js.map.gz",
       "Selectors": [
         {
@@ -80977,15 +80816,15 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M=\""
+          "Value": "\"7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM=\""
         },
         {
           "Name": "ETag",
-          "Value": "W/\"XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs=\""
+          "Value": "W/\"P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         },
         {
           "Name": "Vary",
@@ -80995,11 +80834,11 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sw8h8rjm4u"
+          "Value": "zbl9qys38n"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-XEu8lNOUcA96eJfcacQg22EUi7l/lm5pPwxNMGX2WVs="
+          "Value": "sha256-P3ZPWa6Qo/AAAW3Ig5kk9qsoQWoZhgDFHpv3IRO/lkc="
         },
         {
           "Name": "label",
@@ -81008,7 +80847,7 @@
       ]
     },
     {
-      "Route": "_framework/dotnet.runtime.js.sw8h8rjm4u.map.gz",
+      "Route": "_framework/dotnet.runtime.js.zbl9qys38n.map.gz",
       "AssetFile": "_framework/dotnet.runtime.js.map.gz",
       "Selectors": [],
       "ResponseHeaders": [
@@ -81034,11 +80873,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M=\""
+          "Value": "\"7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 15 Apr 2025 18:13:10 GMT"
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
         },
         {
           "Name": "Vary",
@@ -81048,15 +80887,176 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "sw8h8rjm4u"
+          "Value": "zbl9qys38n"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-+50SWGZnXo43nreZeh39dFiihsE6JvkFMoxdp7GRa3M="
+          "Value": "sha256-7ns3yKMOmZV6uDQO0h/zXBmmiR+ng/agP5IbVV+YqSM="
         },
         {
           "Name": "label",
           "Value": "_framework/dotnet.runtime.js.map.gz"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.runtime.st3wwc8rqy.js",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "194766"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 19 Aug 2025 22:26:00 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "st3wwc8rqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.runtime.js"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.runtime.st3wwc8rqy.js",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000017782204"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "56235"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA=\""
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "st3wwc8rqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oBRKHAqZUsvCRnCzkQfB7zc45cpKLNq2NKyrG10IKx8="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.runtime.js"
+        }
+      ]
+    },
+    {
+      "Route": "_framework/dotnet.runtime.st3wwc8rqy.js.gz",
+      "AssetFile": "_framework/dotnet.runtime.st3wwc8rqy.js.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "56235"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 25 Sep 2025 05:27:26 GMT"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "st3wwc8rqy"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aUNfqy58wEkODkAXFq7hMAql0WlbUZwHyL4yEu6wkBA="
+        },
+        {
+          "Name": "label",
+          "Value": "_framework/dotnet.runtime.js.gz"
         }
       ]
     },

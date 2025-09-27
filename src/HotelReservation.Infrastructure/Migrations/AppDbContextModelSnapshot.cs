@@ -399,6 +399,12 @@ namespace HotelReservation.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("BlacklistEndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BlacklistReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("DepartmentCode")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -416,6 +422,9 @@ namespace HotelReservation.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsBlacklisted")
                         .HasColumnType("bit");
 
                     b.Property<string>("NationalCode")

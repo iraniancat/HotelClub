@@ -16,7 +16,8 @@ using HotelReservation.Application.Features.UserManagement.Commands.SetUserPassw
 using Microsoft.AspNetCore.Authorization;
 using HotelReservation.Application.DTOs.Common;
 using HotelReservation.Application.Features.UserManagement.Queries.SearchUsers;
-using HotelReservation.Application.Features.UserManagement.Queries.GetUserWithDependents; // برای StatusCodes
+using HotelReservation.Application.Features.UserManagement.Queries.GetUserWithDependents;
+using HotelReservation.Application.Features.UserManagement.Commands.UpdateUserBlacklist; // برای StatusCodes
 
 namespace HotelReservation.Api.Controllers;
 
@@ -215,4 +216,24 @@ public class UserManagementController : ControllerBase
         var result = await _mediator.Send(query);
         return result != null ? Ok(result) : NotFound();
     }
+    // PUT: api/management/users/{id}/blacklist
+    [HttpPut("{id:guid}/blacklist")]
+    [Authorize(Roles = "SuperAdmin")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> UpdateUserBlacklist(Guid id, [FromBody] BlacklistUserDto dto)
+    {
+        var command = new UpdateUserBlacklistCommand
+        {
+            UserId = id,
+            IsBlacklisted = dto.IsBlacklisted,
+            Reason = dto.Reason,
+            EndDate = dto.EndDate
+        };
+
+        await _mediator.Send(command);
+        return NoContent();
+    }
+
 }

@@ -71,6 +71,27 @@ public class CreateBookingRequestCommandHandler : IRequestHandler<CreateBookingR
         {
             throw new BadRequestException("اطلاعات استان برای کارمند اصلی درخواست یافت نشد.");
         }
+        
+        // <<-- شروع منطق جدید: بررسی لیست سیاه -->>
+        if (mainEmployee.IsBlacklisted)
+        {
+            // بررسی اینکه آیا محدودیت تاریخ دارد و آیا تاریخ آن گذشته است یا خیر
+            if (mainEmployee.BlacklistEndDate.HasValue && mainEmployee.BlacklistEndDate.Value < DateTime.UtcNow)
+            {
+                // محدودیت به پایان رسیده، ادامه می‌دهیم
+                _logger.LogInformation("Employee {NationalCode} was blacklisted, but the restriction period has ended.", mainEmployee.NationalCode);
+            }
+            else
+            {
+                _logger.LogWarning("Attempted to create a booking for a blacklisted employee: {NationalCode}", mainEmployee.NationalCode);
+                var expiryMessage = mainEmployee.BlacklistEndDate.HasValue 
+                    ? $"تا تاریخ {mainEmployee.BlacklistEndDate.Value:yyyy/MM/dd}" 
+                    : "به صورت دائمی";
+                throw new BadRequestException($"این کارمند به دلیل '{mainEmployee.BlacklistReason}' {expiryMessage} در لیست سیاه قرار دارد و امکان ثبت رزرو برای او وجود ندارد.");
+            }
+        }
+        // <<-- پایان منطق جدید -->>
+
         var existingActiveBookings = await _unitOfWork.BookingRequestRepository.GetAsync(
            b => b.RequestingEmployeeNationalCode == request.RequestingEmployeeNationalCode &&
                 (b.Status == BookingStatus.SubmittedToHotel || b.Status == BookingStatus.HotelApproved) &&

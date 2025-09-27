@@ -82,6 +82,8 @@
                         <MudMenuItem OnClick="@(() => OpenEditUserDialog(context.Id))">ویرایش</MudMenuItem>
                         <MudMenuItem OnClick="@(() => OpenAssignRoleDialog(context.Id))">تخصیص نقش</MudMenuItem>
                         <MudMenuItem OnClick="@(() => OpenSetPasswordDialog(context.Id))">تغییر رمز عبور</MudMenuItem>
+                              <MudDivider />
+        <MudMenuItem OnClick="@(() => OpenBlacklistDialog(context.Id))">مدیریت لیست سیاه</MudMenuItem> @* <<-- اضافه شد *@
                      </MudMenu>
                 </MudTd>
             </RowTemplate>
@@ -237,6 +239,21 @@
         if (result != null && !result.Cancelled)
         {
             Snackbar.Add("رمز عبور کاربر با موفقیت تغییر یافت.", Severity.Success);
+        }
+    }
+private async Task OpenBlacklistDialog(Guid userId)
+    {
+        var userDetails = await ApiClient.GetAsync<UserManagementDetailsDto>($"api/management/users/{userId}");
+        if (userDetails != null)
+        {
+            var parameters = new DialogParameters { ["UserToUpdate"] = userDetails };
+            var dialog = DialogService.Show<BlacklistUserDialog>("مدیریت لیست سیاه", parameters);
+            var result = await dialog.Result;
+            if (result != null && !result.Cancelled)
+            {
+                Snackbar.Add("وضعیت لیست سیاه کاربر با موفقیت به‌روز شد.", Severity.Success);
+                await _table.ReloadServerData();
+            }
         }
     }
 }

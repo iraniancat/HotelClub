@@ -51,6 +51,25 @@ public class SubmitBookingByEmployeeCommandHandler : IRequestHandler<SubmitBooki
             throw new BadRequestException("اطلاعات کارمندی شما برای ثبت درخواست ناقص است.");
         }
 
+        
+        // <<-- شروع منطق جدید: بررسی لیست سیاه برای کاربر فعلی -->>
+        if (currentUser.IsBlacklisted)
+        {
+            if (currentUser.BlacklistEndDate.HasValue && currentUser.BlacklistEndDate.Value < DateTime.UtcNow)
+            {
+                _logger.LogInformation("User {UserId} was blacklisted, but the restriction period has ended.", currentUserId);
+            }
+            else
+            {
+                _logger.LogWarning("A blacklisted user attempted to create a booking: {UserId}", currentUserId);
+                var expiryMessage = currentUser.BlacklistEndDate.HasValue 
+                    ? $"تا تاریخ {currentUser.BlacklistEndDate.Value:yyyy/MM/dd}" 
+                    : "به صورت دائمی";
+                throw new BadRequestException($"شما به دلیل '{currentUser.BlacklistReason}' {expiryMessage} در لیست سیاه قرار دارید و امکان ثبت رزرو برای شما وجود ندارد.");
+            }
+        }
+        // <<-- پایان منطق جدید -->>
+
         var mainEmployee = await _unitOfWork.UserRepository.GetByNationalCodeAsync(request.RequestingEmployeeNationalCode, asNoTracking: true);
         if (mainEmployee == null || string.IsNullOrWhiteSpace(mainEmployee.ProvinceCode))
         {
